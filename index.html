@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SelfPortfolio.com</title>
+	<meta name="description" content="Portfolio Muhammad Fawwaz Rayyan Khalish: Web Developer & UI/UX Designer. Proyek, pengalaman, studi kasus, layanan, dan kontak.">
+	<link rel="icon" type="image/svg+xml" href="https://media.licdn.com/dms/image/v2/D4E03AQHMEIiv5bGS0A/profile-displayphoto-scale_400_400/B4EZinhSwbHIAk-/0/1755157180108?e=1760572800&v=beta&t=Fe_neffhEJt1FrQfMviupqJrn1sfA8rPYG1AUy5zK9Y">
+	<style>
+		:root{
+			--primary:#60a5fa;
+			--primary-600:#3b82f6;
+			--accent:#f59e0b;
+			--text:#e5e7eb;
+			--muted:#94a3b8;
+			--bg:#0b0f1a;         /* dasar hitam kebiruan */
+			--bg-50:#0f172a;      /* panel gelap */
+			--bg-100:#111827;     /* panel lebih terang */
+			--border:#1f2937;     /* garis/border gelap */
+			--ring:rgba(96,165,250,.2);
+			--white: #ffffff;
+		}
+		*{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth}
+		body{
+			font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+			color:var(--text);
+			background:var(--bg);
+			line-height:1.6
+		}
+		.container{width:min(1200px,92%);margin:0 auto}
+		.header{
+			position:fixed;inset:0 0 auto 0;
+			background:rgba(15,23,42,.75);
+			backdrop-filter:blur(10px);
+			border-bottom:1px solid var(--border);
+			z-index:1000;transition:.25s
+		}
+		.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+		.logo{font-weight:800;color:var(--primary);text-decoration:none;font-size:20px}
+		.nav-links{display:flex;gap:18px;list-style:none}
+		.nav-links a{
+			padding:8px 12px;border-radius:10px;text-decoration:none;
+			color:var(--text);font-weight:600
+		}
+		.nav-links a:hover{background:rgba(96,165,250,.12);color:var(--primary)}
+		.nav-links a.active{background:var(--primary-600);color:#fff}
+		.section{padding:96px 0}
+		.section-title{font-size:36px;font-weight:800;text-align:center;margin-bottom:8px}
+		.section-sub{color:var(--muted);text-align:center;margin:0 auto 40px;max-width:720px}
+		/* HERO */
+		.hero{
+			min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;
+			background:
+				radial-gradient(800px 400px at -10% -10%, rgba(59,130,246,.25), transparent 60%),
+				radial-gradient(800px 400px at 110% 10%, rgba(96,165,250,.18), transparent 60%),
+				linear-gradient(135deg,#0b0f1a 0%,#0f172a 45%,#111827 100%);
+			border-bottom:1px solid var(--border);
+		}
+		.hero-inner{position:relative;z-index:1}
+		.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+		.hero h1{font-size:56px;line-height:1.1;color:#fff;margin-bottom:12px;font-weight:900}
+		.hero .lead{color:rgba(226,232,240,.9);font-size:18px;margin-bottom:24px}
+		.cta{display:flex;gap:12px;flex-wrap:wrap}
+		.btn{border:none;cursor:pointer;border-radius:12px;font-weight:700;text-decoration:none;display:inline-block}
+		.btn-primary{background:var(--primary-600);color:#fff;padding:12px 18px}
+		.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(59,130,246,.35)}
+		.btn-ghost{color:#fff;border:2px solid rgba(255,255,255,.75);padding:10px 16px;background:transparent}
+		.btn-ghost:hover{background:#fff;color:#0b0f1a}
+		.profile-card{
+			background:rgba(17,24,39,.55);
+			border:1px solid var(--border);
+			backdrop-filter:blur(16px);
+			padding:24px;border-radius:20px;text-align:center
+		}
+		.profile-card img{width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.85);margin-bottom:12px}
+		.profile-card .name{color:#fff;font-weight:800;font-size:20px}
+		.profile-card .role{color:var(--muted);font-size:14px;margin-bottom:12px}
+		.social{display:flex;justify-content:center;gap:10px}
+		.social a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(96,165,250,.18);color:#fff;text-decoration:none;border:1px solid var(--border)}
+		.social a:hover{background:#fff;color:#0b0f1a;transform:translateY(-2px)}
+		.badges{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+		.badge{background:rgba(96,165,250,.15);color:#cfe3ff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid var(--border)}
+		.stats{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+		.stat{background:rgba(17,24,39,.65);border:1px solid var(--border);border-radius:14px;padding:14px;color:#e5e7eb;text-align:center}
+		.stat .num{font-weight:900;font-size:22px;color:#fff}
+		.stat .lbl{opacity:.85}
+		.home-services{margin-top:40px}
+		.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+		.card{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.25s}
+		.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+		.card h3{margin-bottom:8px;color:#fff}
+		.card p{color:var(--muted)}
+		.features{margin-top:10px}
+		.features li{margin-left:18px;color:var(--muted)}
+		.testimonials{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+		.quote{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:18px;color:var(--text)}
+		.quote .who{margin-top:10px;font-weight:700;color:#fff}
+		/* ABOUT */
+		.timeline{margin-top:24px;border-left:3px solid var(--border);padding-left:16px;display:grid;gap:16px}
+		.timeline .item{position:relative}
+		.timeline .item:before{content:'';position:absolute;left:-12px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--primary-600)}
+		.values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+		.value{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:18px}
+		.value h4{color:#fff;margin-bottom:6px}
+		.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+		.skill{background:var(--bg-50);border:1px solid var(--border);border-radius:14px;padding:14px}
+		.skill strong{color:#fff}
+		.skill small{color:var(--muted)}
+		.meter{height:10px;background:#0b1220;border-radius:999px;overflow:hidden;margin-top:8px;border:1px solid var(--border)}
+		.meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--primary-600),var(--primary))}
+		.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+		.cert{background:var(--bg-50);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;color:var(--muted)}
+		/* PORTFOLIO */
+		.port-toolbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
+		.chip{border:1px solid var(--border);padding:8px 12px;border-radius:999px;background:var(--bg-50);color:var(--text);cursor:pointer}
+		.chip.active{background:var(--primary-600);color:#fff;border-color:var(--primary-600)}
+		.grid-portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+		.work{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+		.work .thumb{height:180px;background:linear-gradient(45deg,#1f2937,#0ea5e9);display:grid;place-items:center;color:#fff;font-size:40px}
+		.work .body{padding:16px}
+		.work .body h3{color:#fff}
+		.work .body p{color:var(--muted)}
+		.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+		.tag{background:#0b1220;border:1px solid var(--border);border-radius:999px;padding:4px 8px;color:var(--muted);font-size:12px}
+		.case{margin-top:40px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch}
+		.case .panel{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:18px}
+		.case .panel h3{color:#fff}
+		/* CONTACT */
+		.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+		.info{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:18px}
+		.info .row{display:flex;gap:12px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;color:var(--text)}
+		.info b{color:#fff}
+		.form{background:var(--bg-50);border:1px solid var(--border);border-radius:16px;padding:18px}
+		.form h3{color:#fff;margin-bottom:8px}
+		.form .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+		label{display:grid;gap:6px;font-weight:700;color:#e2e8f0}
+		input,textarea,select{
+			background:#0b1220;color:var(--text);
+			border:1px solid var(--border);border-radius:10px;padding:12px 14px;font:inherit
+		}
+		input::placeholder,textarea::placeholder{color:#6b7280}
+		input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary-600);box-shadow:0 0 0 3px var(--ring)}
+		.notice{display:none;margin-top:10px;color:#34d399;font-weight:800}
+		.plans{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+		.plan{background:var(--bg-50);border:2px solid var(--border);border-radius:16px;padding:18px}
+		.plan.highlight{border-color:var(--primary-600);box-shadow:0 12px 32px rgba(59,130,246,.25)}
+		.plan h4{color:#fff}
+		.plan .price{font-size:28px;font-weight:900;color:var(--primary);margin:6px 0}
+		.faq{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+		.q{background:var(--bg-50);border:1px solid var(--border);border-radius:12px;padding:12px;color:var(--text)}
+		.footer{background:#0b1220;border-top:1px solid var(--border);padding:28px 0;margin-top:40px;color:var(--muted);text-align:center}
+		/* Animations */
+		.fade-in{opacity:0;transform:translateY(24px);transition:.6s}
+		.fade-in.visible{opacity:1;transform:none}
+		.pendidikan{opacity:0;transform:translateY(24px);transition:.6s}
+		.pendidikan{opacity:1;transform:none}
+		/* Responsive */
+		@media (max-width:1024px){
+			.hero-grid,.case,.contact-wrap{grid-template-columns:1fr}
+			.stats{grid-template-columns:repeat(2,1fr)}
+			.cards,.grid-portfolio{grid-template-columns:repeat(2,1fr)}
+			.values,.skills-grid{grid-template-columns:repeat(2,1fr)}
+		}
+		@media (max-width:720px){
+			.nav-links{display:none}
+			.section{padding:80px 0}
+			.cards,.grid-portfolio,.values,.skills-grid,.plans,.testimonials,.faq{grid-template-columns:1fr}
+			.stats{grid-template-columns:1fr 1fr}
+			.hero h1{font-size:40px}
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<nav class="nav container">
+			<a href="#" class="logo">Muhammad Fawwaz Rayyan Khalish</a>
+			<ul class="nav-links">
+				<li><a href="#home" class="nav-link active">Home</a></li>
+				<li><a href="#about" class="nav-link">About</a></li>
+				<li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+				<li><a href="#contact" class="nav-link">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<section id="home" class="hero">
+		<div class="container hero-inner">
+			<div class="hero-grid">
+				<div>
+					<h1 class="fade-in">Membangun Produk Digital yang Cepat, Indah, dan Andal</h1>
+					<p class="lead fade-in">
+						Saya adalah developer dan desainer berfokus pada UX dan performa.
+						Lebih dari <b>4+ bulan</b> membantu startup dan brand mengubah ide menjadi solusi berdampak.
+					</p>
+					<div class="badges fade-in">
+						<span class="badge">Web Apps</span><span class="badge">UI/UX</span><span class="badge">Mobile</span>
+						<span class="badge">API</span><span class="badge">SEO</span><span class="badge">Cloud</span>
+					</div>
+					<div class="cta fade-in" style="margin-top:16px">
+						<a href="#portfolio" class="btn btn-primary">Lihat Karya</a>
+						<a href="#contact" class="btn btn-ghost">Mulai Proyek</a>
+					</div>
+					<div class="stats fade-in">
+						<div class="stat"><div class="num">40+</div><div class="lbl">Klien</div></div>
+						<div class="stat"><div class="num">120+</div><div class="lbl">Proyek</div></div>
+						<div class="stat"><div class="num">98%</div><div class="lbl">Kepuasan</div></div>
+						<div class="stat"><div class="num">5+ th</div><div class="lbl">Pengalaman</div></div>
+					</div>
+				</div>
+				<div class="fade-in">
+					<div class="profile-card">
+						<img src="https://media.licdn.com/dms/image/v2/D4E03AQHMEIiv5bGS0A/profile-displayphoto-scale_400_400/B4EZinhSwbHIAk-/0/1755157180108?e=1760572800&v=beta&t=Fe_neffhEJt1FrQfMviupqJrn1sfA8rPYG1AUy5zK9Y" alt="Foto Profil">
+						<div class="name">M. Fawwaz Rayyan K</div>
+						<div class="role">Full Stack Developer • UI/UX Designer</div>
+						<div class="social">
+							<a href="https://linktr.ee/wazrynn?fbclid=PAZXh0bgNhZW0CMTEAAaeY11dW5HgQL0lNODREppst6KykASP9bZO2GwaF-p3vczePY7wF6yVz5TKXxQ_aem_XdyYzAo2T_FKeoPLv2SXBw" target="_blank" title="Linktree">🔗</a>
+							<a href="https://www.linkedin.com/in/muhammad-fawwaz-rayyan-k-982b3832b/" target="_blank" title="LinkedIn">in</a>
+							<a href="https://github.com/wazrynn/Rayyan.git" target="_blank" title="GitHub">😺</a>
+							<a href="https://www.instagram.com/wazrynn/" target="_blank" title="Dribbble">🅾</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="home-services">
+				<h2 class="section-title fade-in">Layanan Unggulan</h2>
+				<p class="section-sub fade-in">Riset, desain, pengembangan, hingga scaling — satu alur terintegrasi.</p>
+				<div class="cards">
+					<div class="card fade-in">
+						<h3>Website & Web App</h3>
+						<p>Site dan app cepat, aman, SEO-ready dengan arsitektur modern.</p>
+						<ul class="features">
+							<li>SSR/SPA, aksesibilitas, performa A Lighthouse</li>
+							<li>Integrasi analitik dan SEO teknis</li>
+							<li>Headless CMS sesuai kebutuhan</li>
+						</ul>
+					</div>
+					<div class="card fade-in">
+						<h3>UI/UX & Design System</h3>
+						<p>Antarmuka konsisten, mudah digunakan, dan scalable lintas platform.</p>
+						<ul class="features">
+							<li>Riset pengguna & prototyping</li>
+							<li>Design system & dokumentasi</li>
+							<li>Hand-off rapi ke developer</li>
+						</ul>
+					</div>
+					<div class="card fade-in">
+						<h3>Mobile & API</h3>
+						<p>Aplikasi mobile dan API aman, terukur, mudah dirawat.</p>
+						<ul class="features">
+							<li>React Native / Flutter</li>
+							<li>REST/GraphQL, JWT/OAuth</li>
+							<li>CI/CD, testing & monitoring</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="testimonials">
+					<div class="quote fade-in">“Konversi naik 35% setelah redesign.”<div class="who">— Dina, Head of Marketing</div></div>
+					<div class="quote fade-in">“Backend andal, downtime hampir nol.”<div class="who">— Rafi, CTO Fintech</div></div>
+					<div class="quote fade-in">“Timeline terjaga, hasil di atas ekspektasi.”<div class="who">— Mira, Founder EduTech</div></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="section">
+		<div class="container">
+			<h2 class="section-title fade-in">Tentang Saya</h2>
+			<p class="section-sub fade-in">Cerita, pengalaman kerja, cara kerja, nilai, dan keahlian yang saya bawa di setiap proyek.</p>
+
+			<h3 class="fade-in" style="margin-top:28px">Pengalaman kerja</h3>
+			<div class="timeline">
+				<div class="item fade-in">
+					<h3>Juli 2025 – Sekarang • Hybrid</h3>
+					<p> Software Engineer - NexTeen</p>
+				</div>
+				<div class="item fade-in">
+					<h3>Mei 2025 – Sekarang • WFH</h3>
+					<p>Graphic Design - International Youth Goals</p>
+				</div>
+				<div class="item fade-in">
+					<h3>April 2025 – juli 2025 • WFO</h3>
+					<p> Junior Software Engineer - Bumindo Group</p>
+				</div>
+				<div class="item fade-in">
+					<h3>April 2025 – juli 2025 • WFO</h3>
+					<p> Social Media Analytics & Digital Marketing - Bumindo Kreasi Energi</p>
+				</div>
+			</div>
+
+			<h3 class="fade-in" style="margin-top:28px">Pendidikan Formal</h3>
+			<div class="timeline">
+				<div class="item fade-in"> 
+				<h3>2025 - Sekarang</h3>
+				<p>Bachelor Of Informatics Engineer - Universitas Gunadarma</p>
+			</div>
+			<div class="item fade-in">
+				<h3>2023 - 2025</h3>
+				<p>Senior High School Of Natural Science - SMA Muhammadiyah 8 Ciputat</p>
+			</div>
+			<div class="item fade-in">
+				<h3>2019 - 2023</h3>
+				<p>Junior High School Of Language - Pondok Pesantren U'lumul Qur'an</p>
+			</div>
+			
+			<h3 class="fade-in" style="margin-top:28px">Nilai yang Saya Junjung</h3>
+			<div class="values">
+				<div class="value fade-in"><h4>Kecepatan Bernilai</h4><p>Bergerak cepat tanpa mengorbankan kualitas. Fokus pada dampak tertinggi dulu.</p></div>
+				<div class="value fade-in"><h4>Kualitas Konsisten</h4><p>Kode bersih, mudah dirawat, dengan pengujian & dokumentasi memadai.</p></div>
+				<div class="value fade-in"><h4>Kolaborasi Terbuka</h4><p>Transparansi proses, komunikasi rutin, dan menerima masukan.</p></div>
+			</div>
+
+			<h3 class="fade-in" style="margin-top:28px">Keahlian</h3>
+			<div class="skills-grid">
+				<div class="skill fade-in"><strong>Frontend</strong><div class="meter"><span style="width:92%"></span></div><small>React, Vue, Next, Vite, Tailwind</small></div>
+				<div class="skill fade-in"><strong>Backend</strong><div class="meter"><span style="width:86%"></span></div><small>Node, Express, Nest, PostgreSQL</small></div>
+				<div class="skill fade-in"><strong>Mobile</strong><div class="meter"><span style="width:78%"></span></div><small>React Native, Flutter</small></div>
+				<div class="skill fade-in"><strong>UI/UX</strong><div class="meter"><span style="width:88%"></span></div><small>Figma, Prototyping, Design System</small></div>
+				<div class="skill fade-in"><strong>DevOps</strong><div class="meter"><span style="width:72%"></span></div><small>CI/CD, Docker, Monitoring</small></div>
+				<div class="skill fade-in"><strong>Testing</strong><div class="meter"><span style="width:74%"></span></div><small>Jest, Playwright, Cypress</small></div>
+			</div>
+
+			<h3 class="fade-in" style="margin-top:28px">Sertifikasi & Penghargaan</h3>
+			<div class="cert-grid">
+				<div class="cert fade-in"><a href="https://drive.google.com/file/d/1sl_1XXQogzNGXgd3dgqgHvL7p3FgUy7Z/view?usp=sharing" style="color: white;">Winner of the silver medal in the Indonesian science olympiad competition in mathematics organized by HIMA Physics Gajah Mada University</a></div>
+				<div class="cert fade-in"><a href="https://drive.google.com/file/d/1ItrJhhphoEYEfre2rtU0d7ER3qHIF5hf/view" style="color: white;">Bronze medal winner and received a grade "B" in the HMD Physics x One Achievement competition in the Mathematics competition fiel</a></div>
+				<div class="cert fade-in"><a href="https://drive.google.com/file/d/1fmsLaWM30FWSmXcfHAXxXAoJuKjTQfGc/view?usp=sharing" style="color: white;">The winner won the bronze medal and entered the 30 best students in the Arabic subject competition held by the Indonesian literature family association of the Indonesian university</a></div>
+				<div class="cert fade-in"><a href="https://drive.google.com/file/d/1Qb5bIccMeHS9_bo8OiGWbFkdNjbQO_yU/view" style="color: white;">Himap UB Certificate {Grade : B}</a></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="portfolio" class="section">
+		<div class="container">
+			<h2 class="section-title fade-in">Portfolio</h2>
+			<p class="section-sub fade-in">Karya terpilih, studi kasus, proses kerja, dan teknologi yang digunakan.</p>
+
+			<div class="port-toolbar fade-in">
+				<button class="chip active" data-filter="all">Semua</button>
+				<button class="chip" data-filter="web">Web</button>
+				<button class="chip" data-filter="mobile">Mobile</button>
+				<button class="chip" data-filter="design">Design</button>
+			</div>
+
+			<div class="grid-portfolio">
+				<div class="work fade-in" data-type="web">
+					<div class="thumb">🛒</div>
+					<div class="body"><h3>E‑Commerce Modern</h3><p>Checkout, inventory, dashboard.</p><div class="tags"><span class="tag">React</span><span class="tag">Node</span><span class="tag">Stripe</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="web">
+					<div class="thumb">📊</div>
+					<div class="body"><h3>Analytics Dashboard</h3><p>Monitoring real‑time interaktif.</p><div class="tags"><span class="tag">Vue</span><span class="tag">D3.js</span><span class="tag">WebSocket</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="mobile">
+					<div class="thumb">📱</div>
+					<div class="body"><h3>Banking App</h3><p>Transfer, bayar, investasi, biometrik.</p><div class="tags"><span class="tag">RN</span><span class="tag">Firebase</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="design">
+					<div class="thumb">🎨</div>
+					<div class="body"><h3>Design System</h3><p>Komponen konsisten & aksesibel.</p><div class="tags"><span class="tag">Figma</span><span class="tag">Storybook</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="web">
+					<div class="thumb">📰</div>
+					<div class="body"><h3>Media Portal</h3><p>Headless CMS, SEO, PageSpeed A.</p><div class="tags"><span class="tag">Next.js</span><span class="tag">Headless</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="mobile">
+					<div class="thumb">🚚</div>
+					<div class="body"><h3>Logistics Tracker</h3><p>Pelacakan armada & rute.</p><div class="tags"><span class="tag">Flutter</span><span class="tag">Maps</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="design">
+					<div class="thumb">🧭</div>
+					<div class="body"><h3>UX Research</h3><p>Riset & prototipe aplikasi edukasi.</p><div class="tags"><span class="tag">Research</span><span class="tag">Prototype</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="web">
+					<div class="thumb">🏨</div>
+					<div class="body"><h3>Booking Engine</h3><p>Hotel booking dynamic pricing.</p><div class="tags"><span class="tag">Nest</span><span class="tag">Postgres</span></div></div>
+				</div>
+				<div class="work fade-in" data-type="design">
+					<div class="thumb">🧩</div>
+					<div class="body"><h3>Brand Refresh</h3><p>Identitas visual B2B SaaS.</p><div class="tags"><span class="tag">Branding</span><span class="tag">Guidelines</span></div></div>
+				</div>
+			</div>
+
+			<div class="case">
+				<div class="panel fade-in">
+					<h3>Studi Kasus: E‑Commerce 35% Naik Konversi</h3>
+					<p style="margin-top:8px;color:var(--muted)">Masalah: checkout drop‑off tinggi & load lambat.</p>
+					<ul style="margin:10px 0 0 18px;color:var(--muted)">
+						<li>Audit funnel & heatmap</li>
+						<li>Refactor ke SSR, optimasi media & caching</li>
+						<li>Checkout satu halaman + metode bayar lokal</li>
+					</ul>
+					<p style="margin-top:10px"><b>Hasil:</b> +35% konversi, -42% LCP, +18% AOV.</p>
+				</div>
+				<div class="panel fade-in">
+					<h3>Proses Kerja & Teknologi</h3>
+					<div class="values" style="grid-template-columns:repeat(4,1fr);margin-top:12px">
+						<div class="value"><h4>Discover</h4><p>Riset & scope</p></div>
+						<div class="value"><h4>Design</h4><p>Wireframe & UI</p></div>
+						<div class="value"><h4>Build</h4><p>Kode & uji</p></div>
+						<div class="value"><h4>Launch</h4><p>Deploy & iterasi</p></div>
+					</div>
+					<h3 style="margin-top:16px;color:#fff">Teknologi</h3>
+					<div class="values" style="grid-template-columns:repeat(6,1fr)">
+						<div class="value">React</div><div class="value">Next</div><div class="value">Node</div>
+						<div class="value">Postgres</div><div class="value">Tailwind</div><div class="value">Figma</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<section id="contact" class="section" style="background:linear-gradient(180deg,#0b0f1a,#0f172a)">
+		<div class="container">
+			<h2 class="section-title fade-in">Hubungi Saya</h2>
+			<p class="section-sub fade-in">Ceritakan kebutuhan Anda — balasan dalam 1x24 jam.</p>
+
+			<div class="contact-wrap">
+				<div class="info fade-in">
+					<div class="row">📧 <div><b>Email</b><br><a href="novalrayan97@gmail.com" style="color:var(--primary)">novalrayan97@gmail.com</a></div></div>
+					<div class="row">📱 <div><b>WhatsApp</b><br><a href="https://wa.me/6285719562762" target="_blank" style="color:var(--primary)">+62 85719562762</a></div></div>
+					<div class="row">🔗 <div><b>LinkedIn</b><br><a href="https://www.linkedin.com/in/muhammad-fawwaz-rayyan-k-982b3832b/" target="_blank" style="color:var(--primary)">linkedin.com/in/muhammad-fawwaz-rayyan-k</a></div></div>
+					<div class="row">📍 <div><b>Lokasi</b><br><a href="https://www.google.com/maps/place/Jl.+Talas+II,+Pd.+Cabe+Ilir,+Kec.+Pamulang,+Kota+Tangerang+Selatan,+Banten+15418/@-6.3313176,106.7606926,15z/data=!4m9!1m2!2m1!1smaps!3m5!1s0x2e69efb020be69d3:0xdee4b360f608af76!8m2!3d-6.3312565!4d106.7605093!16s%2Fg%2F1hm2bb729?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color:var(--primary)"></a>Tangerang Selatan, Indonesia</div></div>
+
+					<h3 style="margin:16px 0 8px;color:#fff">Paket & Harga</h3>
+					<div class="plans">
+						<div class="plan fade-in">
+							<h4>Starter</h4><div class="price">Rp 1.5jt+</div>
+							<ul style="margin-left:18px;color:var(--muted)"><li>Basic SEO</li><li>Domain Name</li><li>Hosting Website</li></ul>
+						</div>
+						<div class="plan highlight fade-in">
+							<h4>Growth</h4><div class="price">Rp 5jt+</div>
+							<ul style="margin-left:18px;color:var(--muted)"><li>Website kustom</li><li>Integrasi API</li><li>Analytics</li></ul>
+						</div>
+						<div class="plan fade-in">
+							<h4>Scale</h4><div class="price">Rp 20jt+</div>
+							<ul style="margin-left:18px;color:var(--muted)"><li>Arsitektur skala</li><li>CI/CD</li><li>Monitoring</li></ul>
+						</div>
+					</div>
+
+					<h3 style="margin:16px 0 8px;color:#fff">FAQ Singkat</h3>
+					<div class="faq">
+						<div class="q fade-in"><b>Waktu pengerjaan?</b><br>Landing 1–2 minggu, app 4–8 minggu.</div>
+						<div class="q fade-in"><b>Metode pembayaran?</b><br>DP 30–50%, milestone.</div>
+						<div class="q fade-in"><b>Maintenance?</b><br>Opsional retainer bulanan.</div>
+						<div class="q fade-in"><b>Kontrak & NDA?</b><br>Tersedia sesuai kebutuhan.</div>
+					</div>
+				</div>
+
+				<div class="form fade-in">
+					<h3>Kirim Brief</h3>
+					<form id="contactForm">
+						<div class="form .grid">
+							<div class="grid">
+								<label>Nama<input type="text" name="name" required></label>
+								<label>Email<input type="email" name="email" required></label>
+							</div>
+						</div>
+						<label>Perusahaan<input type="text" name="company" placeholder="Opsional"></label>
+						<label>Layanan
+							<select name="service" required>
+								<option value="">Pilih layanan</option>
+								<option>Website / Web App</option>
+								<option>UI/UX Design</option>
+								<option>Mobile App</option>
+								<option>Konsultasi</option>
+							</select>
+						</label>
+						<label>Anggaran Perkiraan
+							<select name="budget" required>
+								<option value="">Pilih rentang</option>
+								<option>Rp 1.5jt</option>
+								<option>Rp 5-10jt</option>
+								<option>Rp 20–30jt</option>
+							</select>
+						</label>
+						<label>Pesan
+							<textarea name="message" rows="6" placeholder="Ceritakan tujuan, fitur utama, timeline..." required></textarea>
+						</label>
+						<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+							<button type="submit" class="btn btn-primary">Kirim</button>
+							<a href="mailto:you@example.com" class="btn btn-ghost">Email Langsung</a>
+						</div>
+						<div id="formStatus" class="notice">Terima kasih! Brief Anda sudah terkirim.</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="fade-in" style="margin-top:24px">
+				<h3 style="color:#fff">Lokasi</h3>
+				<p class="section-sub" style="margin-bottom:12px">Berbasis di Tangerang Selatan, tersedia untuk kerja remote dan on‑site.</p>
+				<div style="height:280px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(135deg,#0b1220,#111827);display:grid;place-items:center;color:var(--muted)"><a href="https://www.google.com/maps/@-6.331035,106.7606572,3a,75y,103.64h,85.13t/data=!3m7!1e1!3m5!1sARhT_pcNhIGkhoDGjhThIw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D4.874311257109881%26panoid%3DARhT_pcNhIGkhoDGjhThIw%26yaw%3D103.64185477450971!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D"><img src="https://www.google.com/maps/@-6.331035,106.7606572,3a,75y,103.64h,85.13t/data=!3m7!1e1!3m5!1sARhT_pcNhIGkhoDGjhThIw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D4.874311257109881%26panoid%3DARhT_pcNhIGkhoDGjhThIw%26yaw%3D103.64185477450971!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D" alt="https://maps.app.goo.gl/Udv4pCqHGGUuYi868"></a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="container">© <span id="year"></span> Muhammad Fawwaz Rayyan Khalish. Semua hak dilindungi.</div>
+		<div class="container"><span id="year">All information applies to Indonesia vehicles only</span></div>
+		<div class="container"><span id="year">Privacy Policy | Legal Cookie | Contact Us</span></div>
+	</footer>
+
+	<script>
+		// Active nav link on scroll
+		const sections = ['home','about','portfolio','contact'].map(id=>document.getElementById(id));
+		const links = Array.from(document.querySelectorAll('.nav-link'));
+		const setActive = () => {
+			let current = 'home';
+			const fromTop = window.scrollY + 120;
+			for (const sec of sections){ if (sec.offsetTop <= fromTop) current = sec.id; }
+			links.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+		};
+		window.addEventListener('scroll', setActive);
+
+		// Smooth anchors
+		document.querySelectorAll('a[href^="#"]').forEach(a=>{
+			a.addEventListener('click', e=>{
+				const target = document.querySelector(a.getAttribute('href'));
+				if (target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+			});
+		});
+
+		// Reveal animations
+		const obs = new IntersectionObserver((entries)=>{
+			for (const ent of entries){ if (ent.isIntersecting) ent.target.classList.add('visible'); }
+		},{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+		document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+		// Portfolio filter
+		const chips = document.querySelectorAll('.chip');
+		const works = document.querySelectorAll('.work');
+		chips.forEach(ch=>{
+			ch.addEventListener('click', ()=>{
+				chips.forEach(c=>c.classList.remove('active'));
+				ch.classList.add('active');
+				const f = ch.dataset.filter;
+				works.forEach(w=>{
+					const show = f==='all' || w.dataset.type===f;
+					w.style.display = show ? 'flex' : 'none';
+				});
+			});
+		});
+
+		// Contact form
+		document.getElementById('contactForm').addEventListener('submit', (e)=>{
+			e.preventDefault();
+			const status = document.getElementById('formStatus');
+			status.style.display = 'block';
+			e.target.reset();
+			setTimeout(()=>status.style.display='none', 5000);
+		});
+
+		// Header shadow/background on scroll
+		const header = document.querySelector('.header');
+		window.addEventListener('scroll', ()=>{
+			header.style.boxShadow = window.scrollY>8 ? '0 8px 24px rgba(0,0,0,.5)' : 'none';
+			header.style.background = window.scrollY>8 ? 'rgba(15,23,42,.92)' : 'rgba(15,23,42,.75)';
+		});
+
+		// Year
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+</body>
+</html>
