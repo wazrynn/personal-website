@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>fawwaz.id</title>
-    <meta name="description" content="Portofolio pribadi seorang Fawwaz yang menampilkan proyek, keahlian, dan perjalanan karir." />
+    <title>Fawwaz - Portofolio Pribadi</title>
+    <meta name="description" content="Portofolio pribadi seorang Junior Software Engineer yang menampilkan proyek, keahlian, dan perjalanan karir." />
     <style>
       :root {
-        --bg-dark: #0a0a0a; /* Changed to darker black */
-        --bg-darker: #121212; /* Changed to very dark grey */
+        --bg-dark: #0a0a0a;
+        --bg-darker: #121212;
         --accent-blue: #0f3460;
         --text-primary: #e0e0e0;
         --text-secondary: #9e9e9e;
         --highlight-blue: #007bff;
         --link-hover: #0056b3;
-        --card-bg: #1e1e2d; /* Adjusted for dark background */
-        --card-border: #33334c; /* Adjusted for dark background */
-        --shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        --card-bg: #1e1e2d;
+        --card-border: #33334c;
+        --shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
         --success: #28a745;
         --error: #dc3545;
       }
@@ -27,7 +27,7 @@
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-primary);
-        background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker)); /* Adjusted gradient */
+        background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
         line-height: 1.6;
         min-height: 100vh;
       }
@@ -39,13 +39,30 @@
         padding: 0 20px;
       }
 
+      /* Scroll Progress Indicator */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 5px;
+        background-color: var(--highlight-blue);
+        z-index: 1001;
+        transition: width 0.1s linear;
+      }
+
       /* Header & Nav */
       header {
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: rgba(18, 18, 18, 0.95); /* Adjusted header background */
+        background: rgba(18, 18, 18, 0.95);
         backdrop-filter: blur(10px);
+        box-shadow: none; /* Initially no shadow */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      header.scrolled {
+        background-color: rgba(18, 18, 18, 1); /* Solid on scroll */
         box-shadow: var(--shadow);
       }
       .nav {
@@ -83,7 +100,7 @@
       /* Sections */
       section {
         padding: 80px 0;
-        min-height: 80vh; /* Adjusted for more content */
+        min-height: 80vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -116,12 +133,13 @@
         margin-bottom: 30px;
         border: 4px solid var(--highlight-blue);
         box-shadow: var(--shadow);
+        transition: transform 0.5s ease-out;
       }
       #home .typewriter {
         font-size: 2.2em;
         color: var(--text-primary);
         margin-bottom: 40px;
-        min-height: 1.5em; /* Prevent layout shift */
+        min-height: 1.5em;
       }
       .cta-button {
         display: inline-block;
@@ -207,7 +225,7 @@
       .progress-bar {
         height: 100%;
         background-color: var(--highlight-blue);
-        width: 0%; /* Initial width for animation */
+        width: 0%;
         transition: width 1.5s ease-out;
         border-radius: 5px;
       }
@@ -233,6 +251,11 @@
         font-weight: bold;
         font-size: 0.9em;
         box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      .company-logo-placeholder:hover {
+        background-color: var(--link-hover);
+        transform: translateY(-3px);
       }
 
 
@@ -274,7 +297,7 @@
         padding: 0 20px;
       }
       .accordion-content.open {
-        max-height: 1000px; /* Increased max-height for longer content */
+        max-height: 1000px;
         padding: 20px;
       }
       .accordion-content h4 { color: var(--highlight-blue); margin-top: 10px; }
@@ -319,6 +342,14 @@
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: var(--shadow);
+
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .portfolio-item.is-visible { /* Changed to is-visible */
+        opacity: 1;
+        transform: translateY(0);
       }
       .portfolio-item:hover {
         transform: translateY(-5px);
@@ -374,8 +405,8 @@
         border: 1px solid var(--card-border);
         width: 80%;
         max-width: 900px;
-        max-height: 85vh; /* Added max-height for scrollable modal */
-        overflow-y: auto; /* Allow scrolling inside modal */
+        max-height: 85vh;
+        overflow-y: auto;
         border-radius: 10px;
         position: relative;
         box-shadow: var(--shadow);
@@ -433,6 +464,63 @@
         text-decoration: underline;
       }
 
+      /* Modal Image Gallery */
+      .modal-image-gallery {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .modal-image-gallery img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 8px;
+        display: block;
+      }
+      .gallery-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 10px;
+      }
+      .gallery-nav-btn {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5em;
+        line-height: 1;
+        transition: background-color 0.3s ease;
+      }
+      .gallery-nav-btn:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .modal-thumbnails {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        justify-content: center;
+      }
+      .modal-thumbnails img {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+      .modal-thumbnails img.active-thumbnail,
+      .modal-thumbnails img:hover {
+        border-color: var(--highlight-blue);
+      }
+
       /* Contact Section */
       #contact .contact-grid {
         display: grid;
@@ -449,6 +537,8 @@
       #contact .contact-info p {
         margin-bottom: 15px;
         color: var(--text-secondary);
+        display: flex;
+        align-items: center;
       }
       #contact .contact-info strong {
         color: var(--text-primary);
@@ -547,6 +637,62 @@
         color: var(--error);
         display: block;
       }
+      .form-field-error {
+        color: var(--error);
+        font-size: 0.8em;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .copy-btn {
+        background: none;
+        border: none;
+        color: var(--highlight-blue);
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 1em;
+        transition: color 0.3s ease;
+        padding: 0;
+        line-height: 1;
+      }
+      .copy-btn:hover {
+        color: var(--link-hover);
+      }
+      .copy-tooltip {
+        position: relative;
+        display: inline-block;
+      }
+      .copy-tooltip .tooltiptext {
+        visibility: hidden;
+        width: 100px;
+        background-color: var(--highlight-blue);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -50px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .copy-tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--highlight-blue) transparent transparent transparent;
+      }
+      .copy-tooltip.active .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
 
       /* Footer */
       footer {
@@ -584,6 +730,17 @@
         transform: translateY(-3px);
       }
 
+      /* Animations for content on scroll */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       /* Animations */
       @keyframes fadeIn {
         from { opacity: 0; }
@@ -616,6 +773,7 @@
         .close-button { font-size: 30px; top: 5px; right: 15px; }
         #backToTopBtn { width: 45px; height: 45px; font-size: 20px; line-height: 45px; bottom: 20px; right: 20px;}
         .skills-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+        .modal-image-gallery img { height: 250px; }
       }
 
       @media (max-width: 576px) {
@@ -627,13 +785,16 @@
         .skills-grid { grid-template-columns: 1fr; }
         .filter-buttons { justify-content: flex-start; }
         .company-grid { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }
+        .modal-image-gallery img { height: 180px; }
+        .modal-thumbnails img { width: 60px; height: 45px; }
       }
     </style>
   </head>
   <body>
-    <header>
+    <div id="scroll-progress"></div>
+    <header id="main-header">
       <div class="container nav">
-        <a href="#home" class="logo">M. Fawwaz Rayyan Khalish</a>
+        <a href="#home" class="logo">M. Fawwaz Rayyan K</a>
         <nav>
           <ul>
             <li><a href="#home">Home</a></li>
@@ -648,30 +809,32 @@
     <main>
       <!-- HOME SECTION -->
       <section id="home" class="container">
-        <img src="https://ugc.production.linktr.ee/e61e2d40-ead8-410d-9ca1-8e0407d16df3_1741262630030.jpeg?io=true&size=avatar-v3_0" alt="Foto Profil" class="profile-picture">
-        <h1><span style="color:var(--highlight-blue);">Muhammad Fawwaz Rayyan Khalish</span></h1>
-        <div class="typewriter"></div>
-        <p class="lead">
+        <img src="https://ugc.production.linktr.ee/e61e2d40-ead8-410d-9ca1-8e0407d16df3_1741262630030.jpeg?io=true&size=avatar-v3_0" alt="Foto Profil" class="profile-picture animate-on-scroll">
+        <h1 class="animate-on-scroll"><span style="color:var(--highlight-blue);">Muhammad Fawwaz Rayyan Khalish</span></h1>
+        <div class="typewriter animate-on-scroll"></div>
+        <p class="lead animate-on-scroll">
           Selamat datang di portofolio digital saya. Di sini, Anda akan menemukan perjalanan saya sebagai seorang Junior Software Engineer, melihat proyek-proyek yang telah saya kerjakan, dan mengenal lebih jauh tentang keahlian serta passion saya. Saya percaya pada kekuatan inovasi dan desain yang berpusat pada pengguna untuk menciptakan solusi yang berarti.
-          Dengan latar belakang yang solid di [bidang utama Anda, misal: pengembangan software dan desain antarmuka], saya selalu mencari peluang untuk berkontribusi pada proyek yang menantang dan berdampak positif.
+          Dengan latar belakang yang solid di pengembangan software dan desain UI & UX, saya selalu mencari peluang untuk berkontribusi pada proyek yang menantang dan berdampak positif.
         </p>
-        <a href="#portfolio" class="cta-button">Lihat Portofolio</a>
-        <a href="#contact" class="cta-button">Hubungi Saya</a>
+        <div class="animate-on-scroll">
+          <a href="#portfolio" class="cta-button">Lihat Portofolio</a>
+          <a href="#contact" class="cta-button">Hubungi Saya</a>
+        </div>
 
         <div style="height:50px;"></div>
-        <div class="card" style="text-align: left;">
+        <div class="card animate-on-scroll" style="text-align: left;">
           <h2>Mengapa Bekerja Sama dengan Saya?</h2>
           <p class="lead">Saya membawa kombinasi keahlian teknis, pemikiran inovatif, dan komitmen kuat untuk setiap proyek.</p>
           <div class="grid">
-            <div>
+            <div class="animate-on-scroll">
               <h3>Pengalaman Multidisiplin</h3>
               <p>Pengalaman saya mencakup berbagai fase pengembangan, mulai dari konseptualisasi ide, desain UI/UX, pengembangan frontend & backend, hingga deployment dan pemeliharaan. Ini memungkinkan saya untuk memahami proyek dari berbagai sudut pandang.</p>
             </div>
-            <div>
+            <div class="animate-on-scroll">
               <h3>Fokus pada Solusi</h3>
               <p>Prioritas utama saya adalah menciptakan solusi yang tidak hanya fungsional, tetapi juga memecahkan masalah nyata bagi pengguna atau bisnis. Saya menganalisis kebutuhan secara mendalam untuk memastikan setiap fitur memiliki tujuan yang jelas.</p>
             </div>
-            <div>
+            <div class="animate-on-scroll">
               <h3>Adaptabilitas & Pembelajaran</h3>
               <p>Dunia teknologi terus berkembang, dan saya selalu haus akan pengetahuan baru. Saya cepat beradaptasi dengan teknologi, framework, dan metodologi kerja yang berbeda, memastikan proyek Anda tetap relevan dan menggunakan praktik terbaik.</p>
             </div>
@@ -679,31 +842,31 @@
         </div>
 
         <div style="height:50px;"></div>
-        <div class="card" style="text-align: left;">
+        <div class="card animate-on-scroll" style="text-align: left;">
           <h2>Keunggulan Khas Saya</h2>
           <div class="feature-list">
-            <div class="feature">
+            <div class="feature animate-on-scroll">
               <span class="tick">💡</span>
               <div>
                 <strong>Inovasi Berorientasi Pengguna</strong>
                 <p style="margin:0;">Saya merancang dan mengembangkan dengan mempertimbangkan pengalaman pengguna akhir. Solusi saya intuitif, mudah digunakan, dan memecahkan masalah inti.</p>
               </div>
             </div>
-            <div class="feature">
+            <div class="feature animate-on-scroll">
               <span class="tick">⚙️</span>
               <div>
                 <strong>Kode Bersih & Skalabel</strong>
                 <p style="margin:0;">Saya berkomitmen pada penulisan kode yang bersih, terdokumentasi, dan mudah dipelihara, memastikan fondasi yang kokoh untuk pertumbuhan jangka panjang proyek Anda.</p>
               </div>
             </div>
-            <div class="feature">
+            <div class="feature animate-on-scroll">
               <span class="tick">🤝</span>
               <div>
                 <strong>Kolaborasi Efektif</strong>
                 <p style="margin:0;">Sebagai team player, saya mahir berkomunikasi dan bekerja sama dengan desainer, developer lain, dan pemangku kepentingan untuk mencapai tujuan bersama.</p>
               </div>
             </div>
-            <div class="feature">
+            <div class="feature animate-on-scroll">
               <span class="tick">📊</span>
               <div>
                 <strong>Pendekatan Berbasis Data</strong>
@@ -716,14 +879,14 @@
 
       <!-- ABOUT SECTION -->
       <section id="about" class="container">
-        <h2>About Me: Kisah Perjalanan Saya</h2>
+        <h2 class="animate-on-scroll">About Me: Kisah Perjalanan Saya</h2>
         <div class="grid-2">
-          <div>
+          <div class="animate-on-scroll">
             <div class="section-card bio-text">
               <h3>Siapa Saya?</h3>
               <p>
-                Saya Muhammad Fawwaz Rayyan Khalish, seorang Junior Software Engineer yang berdedikasi dengan pengalaman 6 bulan lebih di bidang Junior Software Engineer dan Graphic Design.
-                Perjalanan saya di dunia teknologi dimulai sejak April 2025 ketika saya pertama kali [cerita singkat pemicu minat, misal: mencoba membuat website sederhana dengan HTML/CSS atau memecahkan masalah coding pertama].
+                Saya [Nama Lengkap Anda], seorang [Profesi Anda] yang berdedikasi dengan pengalaman [jumlah] tahun lebih di bidang [bidang utama Anda, misal: pengembangan perangkat lunak full-stack, desain produk digital, atau analisis data tingkat lanjut].
+                Perjalanan saya di dunia teknologi dimulai sejak [tahun] ketika saya pertama kali [cerita singkat pemicu minat, misal: mencoba membuat website sederhana dengan HTML/CSS atau memecahkan masalah coding pertama].
                 Sejak saat itu, passion saya terhadap inovasi dan penciptaan solusi digital terus berkembang.
               </p>
               <p>
@@ -750,7 +913,7 @@
             </div>
           </div>
           <div>
-            <div class="section-card">
+            <div class="section-card animate-on-scroll">
               <h3>Keahlian Teknis & Teknologi</h3>
               <p>Daftar teknologi dan keahlian yang saya kuasai dan gunakan dalam proyek-proyek saya.</p>
               <div class="skills-grid">
@@ -792,7 +955,7 @@
               </div>
             </div>
 
-            <div class="section-card">
+            <div class="section-card animate-on-scroll">
               <h3>Perusahaan yang Pernah Bekerja Sama</h3>
               <p>Membangun produk dan solusi digital untuk berbagai klien dan perusahaan terkemuka.</p>
               <div class="company-grid">
@@ -807,7 +970,7 @@
               </div>
             </div>
 
-            <div class="section-card">
+            <div class="section-card animate-on-scroll">
               <h3>Pengalaman Profesional & Pendidikan Formal</h3>
               <div class="accordion">
                 <div class="accordion-item">
@@ -883,7 +1046,7 @@
                 </div>
               </div>
             </div>
-            <div class="section-card">
+            <div class="section-card animate-on-scroll">
               <h3>Nilai & Filosofi Kerja Saya</h3>
               <p>Sebagai seorang profesional, saya berpegang teguh pada prinsip-prinsip berikut:</p>
               <ul>
@@ -894,7 +1057,7 @@
                 <li><strong>Berorientasi Hasil:</strong> Fokus pada pencapaian tujuan dan memberikan nilai nyata.</li>
               </ul>
             </div>
-            <div class="section-card">
+            <div class="section-card animate-on-scroll">
               <h3>Hobi & Minat di Luar Kode</h3>
               <p>Di luar jam kerja, saya senang melakukan aktivitas yang membantu saya tetap segar dan inspiratif:</p>
               <ul>
@@ -911,12 +1074,12 @@
 
       <!-- PORTFOLIO SECTION -->
       <section id="portfolio" class="container">
-        <h2>My Portfolio: Karya Pilihan & Inovasi</h2>
-        <p class="lead">
+        <h2 class="animate-on-scroll">My Portfolio: Karya Pilihan & Inovasi</h2>
+        <p class="lead animate-on-scroll">
           Berikut adalah kompilasi proyek-proyek penting yang telah saya kerjakan, menunjukkan rentang keahlian dan passion saya dalam [bidang utama Anda]. Setiap proyek tidak hanya mewakili tantangan teknis yang menarik, tetapi juga kesempatan untuk menciptakan solusi yang fungsional dan berdampak.
         </p>
 
-        <div class="card" style="margin-bottom: 40px;">
+        <div class="card animate-on-scroll" style="margin-bottom: 40px;">
           <h3>Proyek Unggulan</h3>
           <p>Beberapa proyek yang paling saya banggakan dan menyoroti kemampuan inti saya.</p>
           <div class="grid-2">
@@ -943,8 +1106,8 @@
           </div>
         </div>
 
-        <h3>Jelajahi Berdasarkan Kategori</h3>
-        <div class="filter-buttons">
+        <h3 class="animate-on-scroll">Jelajahi Berdasarkan Kategori</h3>
+        <div class="filter-buttons animate-on-scroll">
           <button class="filter-btn active" data-category="all">Semua Proyek</button>
           <button class="filter-btn" data-category="web">Pengembangan Web</button>
           <button class="filter-btn" data-category="mobile">Aplikasi Mobile</button>
@@ -954,8 +1117,7 @@
         </div>
 
         <div class="portfolio-grid">
-          <!-- Portfolio Item 1 (Moved to Featured, kept for category filter) -->
-          <div class="portfolio-item" data-category="web" data-project-id="project1">
+          <div class="portfolio-item is-visible" data-category="web" data-project-id="project1">
             <img src="https://via.placeholder.com/400x200/007bff/ffffff?text=E-commerce+Platform" alt="Project 1">
             <div class="portfolio-item-content">
               <h3>Platform E-commerce Modern</h3>
@@ -966,8 +1128,7 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 2 -->
-          <div class="portfolio-item" data-category="mobile" data-project-id="project2">
+          <div class="portfolio-item is-visible" data-category="mobile" data-project-id="project2">
             <img src="https://via.placeholder.com/400x200/28a745/ffffff?text=Project+2+Image" alt="Project 2">
             <div class="portfolio-item-content">
               <h3>Aplikasi Manajemen Tugas (Mobile)</h3>
@@ -978,9 +1139,8 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 3 (Moved to Featured, kept for category filter) -->
-          <div class="portfolio-item" data-category="ui-ux" data-project-id="project3">
-            <img src="https://via.placeholder.com/400x200/ffc107/333333?text=Project+3+Image" alt="Project 3">
+          <div class="portfolio-item is-visible" data-category="ui-ux" data-project-id="project3">
+            <img src="https://via.placeholder.com/400x200/ffc107/333333?text=Analytics+Dashboard+Redesign" alt="Project 3">
             <div class="portfolio-item-content">
               <h3>Redesain Antarmuka Dashboard Analitik</h3>
               <p>Desain ulang UI/UX dashboard untuk visualisasi data yang lebih baik dan pengalaman pengguna yang intuitif.</p>
@@ -990,8 +1150,7 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 4 -->
-          <div class="portfolio-item" data-category="data" data-project-id="project4">
+          <div class="portfolio-item is-visible" data-category="data" data-project-id="project4">
             <img src="https://via.placeholder.com/400x200/17a2b8/ffffff?text=Project+4+Image" alt="Project 4">
             <div class="portfolio-item-content">
               <h3>Sistem Rekomendasi Film</h3>
@@ -1002,8 +1161,7 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 5 -->
-          <div class="portfolio-item" data-category="web" data-project-id="project5">
+          <div class="portfolio-item is-visible" data-category="web" data-project-id="project5">
             <img src="https://via.placeholder.com/400x200/fd7e14/ffffff?text=Project+5+Image" alt="Project 5">
             <div class="portfolio-item-content">
               <h3>Situs Portofolio Interaktif (Ini!)</h3>
@@ -1014,8 +1172,7 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 6 -->
-          <div class="portfolio-item" data-category="web" data-project-id="project6">
+          <div class="portfolio-item is-visible" data-category="web" data-project-id="project6">
             <img src="https://via.placeholder.com/400x200/6f42c1/ffffff?text=Project+6+Image" alt="Project 6">
             <div class="portfolio-item-content">
               <h3>Aplikasi Pengelola Blog (CMS)</h3>
@@ -1026,8 +1183,7 @@
             </div>
           </div>
 
-          <!-- Portfolio Item 7 -->
-          <div class="portfolio-item" data-category="ui-ux" data-project-id="project7">
+          <div class="portfolio-item is-visible" data-category="ui-ux" data-project-id="project7">
             <img src="https://via.placeholder.com/400x200/e83e8c/ffffff?text=Project+7+Image" alt="Project 7">
             <div class="portfolio-item-content">
               <h3>Desain Aplikasi Cuaca</h3>
@@ -1037,8 +1193,7 @@
               </div>
             </div>
           </div>
-          <!-- Portfolio Item 8 -->
-          <div class="portfolio-item" data-category="mobile" data-project-id="project8">
+          <div class="portfolio-item is-visible" data-category="mobile" data-project-id="project8">
             <img src="https://via.placeholder.com/400x200/6610f2/ffffff?text=Project+8+Image" alt="Project 8">
             <div class="portfolio-item-content">
               <h3>Aplikasi Pelacak Kebiasaan</h3>
@@ -1048,8 +1203,7 @@
               </div>
             </div>
           </div>
-          <!-- Portfolio Item 9 -->
-          <div class="portfolio-item" data-category="data" data-project-id="project9">
+          <div class="portfolio-item is-visible" data-category="data" data-project-id="project9">
             <img src="https://via.placeholder.com/400x200/20c997/ffffff?text=Project+9+Image" alt="Project 9">
             <div class="portfolio-item-content">
               <h3>Analisis Sentimen Media Sosial</h3>
@@ -1059,8 +1213,7 @@
               </div>
             </div>
           </div>
-          <!-- New Portfolio Item 10 -->
-          <div class="portfolio-item" data-category="backend" data-project-id="project10">
+          <div class="portfolio-item is-visible" data-category="backend" data-project-id="project10">
             <img src="https://via.placeholder.com/400x200/ff7f50/ffffff?text=Project+10+Image" alt="Project 10">
             <div class="portfolio-item-content">
               <h3>API Layanan Autentikasi OAuth2</h3>
@@ -1070,8 +1223,7 @@
               </div>
             </div>
           </div>
-          <!-- New Portfolio Item 11 -->
-          <div class="portfolio-item" data-category="web" data-project-id="project11">
+          <div class="portfolio-item is-visible" data-category="web" data-project-id="project11">
             <img src="https://via.placeholder.com/400x200/8a2be2/ffffff?text=Project+11+Image" alt="Project 11">
             <div class="portfolio-item-content">
               <h3>Website Event & Ticketing</h3>
@@ -1081,8 +1233,7 @@
               </div>
             </div>
           </div>
-          <!-- New Portfolio Item 12 -->
-          <div class="portfolio-item" data-category="data" data-project-id="project12">
+          <div class="portfolio-item is-visible" data-category="data" data-project-id="project12">
             <img src="https://via.placeholder.com/400x200/228b22/ffffff?text=Project+12+Image" alt="Project 12">
             <div class="portfolio-item-content">
               <h3>Prediksi Harga Rumah dengan Regresi</h3>
@@ -1094,12 +1245,49 @@
           </div>
         </div>
 
+        <div style="height:50px;"></div>
+        <div class="card animate-on-scroll" style="text-align: left;">
+          <h2>Proses Kerja Saya di Setiap Proyek</h2>
+          <p class="lead">Pendekatan terstruktur untuk memastikan hasil yang berkualitas dan sesuai harapan.</p>
+          <div class="design-process">
+            <div class="process-step animate-on-scroll">
+              <div class="icon">🔍</div>
+              <h4>1. Discovery & Analisis</h4>
+              <p>Memahami kebutuhan, tujuan, audiens, dan tantangan proyek. Ini melibatkan riset, wawancara, dan analisis data awal.</p>
+            </div>
+            <div class="process-step animate-on-scroll">
+              <div class="icon">💡</div>
+              <h4>2. Konseptualisasi & Desain</h4>
+              <p>Menerjemahkan ide menjadi konsep konkret melalui wireframe, mockups, prototipe, dan arsitektur sistem.</p>
+            </div>
+            <div class="process-step animate-on-scroll">
+              <div class="icon">💻</div>
+              <h4>3. Pengembangan & Implementasi</h4>
+              <p>Membangun solusi menggunakan teknologi yang tepat, dengan fokus pada kode bersih, performa, dan skalabilitas.</p>
+            </div>
+            <div class="process-step animate-on-scroll">
+              <div class="icon">🧪</div>
+              <h4>4. Pengujian & Iterasi</h4>
+              <p>Melakukan pengujian menyeluruh (unit, integrasi, UAT) dan mengumpulkan umpan balik untuk perbaikan berkelanjutan.</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Portfolio Modal -->
         <div id="portfolioModal" class="modal">
           <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2 id="modalProjectTitle"></h2>
-            <img id="modalProjectImage" src="" alt="Project Image">
+            <div class="modal-image-gallery">
+              <img id="modalProjectMainImage" src="" alt="Project Main Image">
+              <div class="gallery-controls">
+                <button id="prevImageBtn" class="gallery-nav-btn">&lt;</button>
+                <button id="nextImageBtn" class="gallery-nav-btn">&gt;</button>
+              </div>
+              <div id="modalThumbnails" class="modal-thumbnails">
+                <!-- Thumbnails will be injected here by JS -->
+              </div>
+            </div>
             <p id="modalProjectDescription"></p>
             <h3>Detail Proyek</h3>
             <ul id="modalProjectDetails"></ul>
@@ -1112,17 +1300,17 @@
 
       <!-- CONTACT SECTION -->
       <section id="contact" class="container">
-        <h2>Contact Me: Mari Berkolaborasi!</h2>
-        <p class="lead">
+        <h2 class="animate-on-scroll">Contact Me: Mari Berkolaborasi!</h2>
+        <p class="lead animate-on-scroll">
           Tertarik untuk berkolaborasi, mendiskusikan proyek baru, atau ingin sekadar menyapa? Saya selalu terbuka untuk peluang baru, diskusi menarik, dan membangun koneksi. Jangan ragu untuk menghubungi saya melalui formulir di bawah ini atau melalui saluran sosial media saya.
         </p>
 
         <div class="contact-grid">
-          <div class="contact-info">
+          <div class="contact-info animate-on-scroll">
             <h3>Informasi Kontak Lengkap</h3>
-            <p><strong>Email Utama:</strong> <a href="mailto:[Email Anda]" style="color:var(--highlight-blue);">[Email Anda]</a></p>
-            <p><strong>Email Cadangan:</strong> <a href="mailto:[Email Cadangan Anda]" style="color:var(--highlight-blue);">[Email Cadangan Anda, jika ada]</a></p>
-            <p><strong>Nomor Telepon:</strong> [Nomor Telepon Anda]</p>
+            <p><strong>Email Utama:</strong> <a href="mailto:[Email Anda]" style="color:var(--highlight-blue);">[Email Anda]</a> <span class="copy-tooltip"><button class="copy-btn" data-text="[Email Anda]" aria-label="Salin email">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
+            <p><strong>Email Cadangan:</strong> <a href="mailto:[Email Cadangan Anda]" style="color:var(--highlight-blue);">[Email Cadangan Anda, jika ada]</a> <span class="copy-tooltip"><button class="copy-btn" data-text="[Email Cadangan Anda]" aria-label="Salin email cadangan">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
+            <p><strong>Nomor Telepon:</strong> [Nomor Telepon Anda] <span class="copy-tooltip"><button class="copy-btn" data-text="[Nomor Telepon Anda]" aria-label="Salin nomor telepon">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
             <p><strong>Lokasi:</strong> [Kota, Negara]</p>
             <p><strong>Zona Waktu:</strong> [WIB/WITA/WIT]</p>
 
@@ -1172,21 +1360,24 @@
             </div>
           </div>
 
-          <div>
+          <div class="animate-on-scroll">
             <h3>Kirim Pesan Langsung kepada Saya</h3>
             <p>Gunakan formulir di bawah ini untuk mengirim pesan. Saya akan menghubungi Anda sesegera mungkin.</p>
-            <form id="contactForm">
+            <form id="contactForm" novalidate>
               <div>
                 <label for="name">Nama Lengkap Anda</label>
                 <input type="text" id="name" name="name" required placeholder="Contoh: Budi Santoso">
+                <div id="nameError" class="form-field-error"></div>
               </div>
               <div>
                 <label for="email">Email Anda</label>
                 <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+                <div id="emailError" class="form-field-error"></div>
               </div>
               <div>
                 <label for="subject">Subjek Pesan</label>
                 <input type="text" id="subject" name="subject" required placeholder="Contoh: Kolaborasi Proyek Web">
+                <div id="subjectError" class="form-field-error"></div>
               </div>
               <div>
                 <label for="projectType">Tipe Proyek/Kebutuhan</label>
@@ -1213,6 +1404,7 @@
               <div>
                 <label for="message">Pesan Anda</label>
                 <textarea id="message" name="message" required placeholder="Jelaskan secara singkat ide proyek, tujuan, dan bagaimana Anda berpikir saya bisa membantu..."></textarea>
+                <div id="messageError" class="form-field-error"></div>
               </div>
               <button type="submit" class="submit-button">Kirim Pesan</button>
               <div id="formStatus" class="form-message"></div>
@@ -1251,13 +1443,232 @@
     <footer>
       <div class="container">
         <p>&copy; <span id="currentYear"></span> Muhammad Fawwaz Rayyan Khalish. All rights reserved.</p>
-        <p>Didesain dan dikembangkan dengan ❤️ oleh Muhammad Fawwaz Rayyan Khalish.</p>
+        <p>Didesain dan dikembangkan dengan 🧑‍💻 oleh Fawwaz.</p>
       </div>
     </footer>
 
     <button onclick="topFunction()" id="backToTopBtn" title="Go to top">&#9650;</button>
 
     <script>
+      // Global Data for Projects (for modal content & image gallery)
+      const projectData = {
+        project1: {
+          title: 'Platform E-commerce Modern',
+          images: [
+            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+1',
+            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+2',
+            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+3'
+          ],
+          description: 'Mengembangkan platform e-commerce responsif dengan arsitektur MERN stack (MongoDB, Express.js, React, Node.js). Proyek ini berfokus pada pengalaman pengguna yang mulus dari penjelajahan produk hingga proses checkout yang aman dan cepat. Mengimplementasikan fitur pencarian real-time, filter produk kompleks, dan integrasi gateway pembayaran pihak ketiga yang aman (misal: Stripe/Midtrans). Tujuan utama proyek ini adalah menyediakan solusi belanja online yang efisien dan menarik bagi UMKM.',
+          details: [
+            'Frontend: Dibangun dengan React.js, menggunakan Redux Toolkit untuk state management, dan styling dengan Tailwind CSS. Responsif penuh untuk desktop, tablet, dan mobile.',
+            'Backend: Dibuat menggunakan Node.js dan Express.js untuk API RESTful. Mengimplementasikan autentikasi JWT dan middleware untuk otorisasi.',
+            'Database: MongoDB dengan Mongoose ORM untuk penyimpanan data produk, pengguna, pesanan, dan review.',
+            'Fitur Utama: Autentikasi dan otorisasi pengguna, manajemen produk (CRUD), keranjang belanja, proses checkout multi-langkah, review produk, dan dashboard admin untuk pelacakan pesanan dan laporan penjualan.',
+            'Integrasi: Gateway pembayaran (misal: Stripe/Midtrans), layanan pengiriman (misal: RajaOngkir), dan notifikasi email.',
+            'Testing: Unit tests dan integration tests menggunakan Jest dan Supertest.',
+            'Deployment: Di-deploy menggunakan Docker ke platform cloud seperti AWS EC2.',
+          ],
+          techStack: ['React', 'Redux', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS', 'Stripe API', 'Docker'],
+          link: '#'
+        },
+        project2: {
+          title: 'Aplikasi Manajemen Tugas (Mobile)',
+          images: [
+            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+1',
+            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+2',
+            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+3'
+          ],
+          description: 'Membangun aplikasi mobile cross-platform untuk manajemen tugas pribadi dan kolaborasi tim menggunakan React Native. Aplikasi ini dirancang untuk membantu pengguna melacak tugas harian, mengatur prioritas, menetapkan tenggat waktu, dan berkolaborasi dengan anggota tim lainnya. Notifikasi real-time memastikan pengguna selalu mendapatkan informasi terbaru tentang status tugas mereka. Fokus pada desain UI yang bersih, intuitif, dan minimalis untuk meningkatkan fokus dan produktivitas.',
+          details: [
+            'Platform: iOS & Android (Cross-platform) menggunakan React Native dan Expo CLI.',
+            'Backend & Database: Google Firebase digunakan untuk autentikasi pengguna (Firebase Auth), database real-time (Firestore) untuk penyimpanan data tugas dan proyek, serta Cloud Messaging untuk notifikasi push.',
+            'Fitur Utama: Pembuatan dan pengelolaan tugas, penetapan tenggat waktu, pengingat yang dapat disesuaikan, mode kolaborasi tim, kategori tugas, dan tampilan progres proyek.',
+            'User Experience: Desain antarmuka yang bersih dengan animasi transisi yang halus, gestur swipe untuk tindakan cepat, dan mode gelap/terang.',
+            'Offline-first: Kemampuan caching data lokal untuk fungsionalitas dasar tanpa koneksi internet.',
+          ],
+          techStack: ['React Native', 'Expo', 'Firebase Auth', 'Firestore', 'Firebase Cloud Messaging'],
+          link: '#'
+        },
+        project3: {
+          title: 'Redesain Antarmuka Dashboard Analitik',
+          images: [
+            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+1',
+            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+2',
+            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+3'
+          ],
+          description: 'Melakukan redesain UI/UX lengkap untuk dashboard analitik yang sudah ada, dengan tujuan utama meningkatkan keterbacaan data, navigasi, dan estetika keseluruhan. Proyek ini dimulai dengan riset pengguna mendalam, diikuti dengan wireframing, pembuatan prototipe interaktif, dan pengujian kegunaan. Hasilnya adalah dashboard yang lebih intuitif, efisien, dan menarik secara visual, memungkinkan pengguna untuk dengan cepat mendapatkan insight dari data bisnis mereka.',
+          details: [
+            'Proses Desain: Meliputi User Research (wawancara, survei), Analisis Pesaing, Pembuatan User Persona dan User Journey, Wireframing (low-fidelity & high-fidelity), Prototyping Interaktif, dan Usability Testing dengan pengguna nyata.',
+            'Tools Desain: Figma untuk seluruh proses desain visual, pembuatan Design System, dan prototyping interaktif. Miro untuk sesi brainstorming dan collaborative whiteboarding.',
+            'Output: Design System yang komprehensif, High-fidelity Mockups untuk berbagai skenario dan ukuran layar, Interactive Prototype yang menunjukkan alur pengguna, dan dokumentasi guideline UI/UX.',
+            'Fokus Utama: Visualisasi data yang jelas (penggunaan chart dan grafik yang tepat), hirarki informasi yang logis, konsistensi elemen UI, dan pengalaman pengguna yang menyenangkan serta efisien dalam mengakses informasi kritikal.',
+            'Dampak: Meningkatkan efisiensi pengguna dalam menganalisis data sebesar X% dan mengurangi waktu onboarding pengguna baru.',
+          ],
+          techStack: ['Figma', 'UI Design', 'UX Design', 'User Research', 'Prototyping', 'Design System'],
+          link: '#'
+        },
+        project4: {
+          title: 'Sistem Rekomendasi Film',
+          images: [
+            'https://via.placeholder.com/600x300/17a2b8/ffffff?text=Movie+Recommender+1',
+            'https://via.placeholder.com/600x300/17a2b8/ffffff?text=Movie+Recommender+2'
+          ],
+          description: 'Mengembangkan sistem rekomendasi film berbasis konten dan kolaboratif menggunakan Python dan pustaka data science populer. Proyek ini menganalisis preferensi pengguna berdasarkan film yang mereka tonton dan karakteristik film (genre, aktor, sutradara) untuk menyarankan judul-judul yang paling relevan. Data diambil dari dataset publik (MovieLens) dan melalui serangkaian proses preprocessing dan analisis. Hasilnya adalah model yang mampu memberikan rekomendasi personal, serta aplikasi web sederhana untuk mendemonstrasikan fungsionalitasnya.',
+          details: [
+            'Bahasa Pemrograman: Python, dengan fokus pada scripting untuk data processing dan model training.',
+            'Pustaka Data Science: Pandas untuk manipulasi dan analisis data, Scikit-learn untuk implementasi algoritma machine learning, Numpy untuk operasi numerik.',
+            'Algoritma Rekomendasi: Menggunakan kombinasi Collaborative Filtering (User-based & Item-based) dan Content-Based Filtering (Cosine Similarity berdasarkan fitur film) untuk rekomendasi yang lebih akurat.',
+            'Antarmuka Demo: Aplikasi web interaktif sederhana dibangun dengan Streamlit, memungkinkan pengguna memasukkan film yang disukai dan mendapatkan rekomendasi secara real-time.',
+            'Dataset: MovieLens 1M dataset, berisi rating film dari jutaan pengguna.',
+            'Metodologi: Data Collection, Data Cleaning & Preprocessing, Feature Engineering, Model Training, Model Evaluation, Deployment (via Streamlit).',
+          ],
+          techStack: ['Python', 'Machine Learning', 'Pandas', 'Scikit-learn', 'Numpy', 'Streamlit'],
+          link: '#'
+        },
+        project5: {
+          title: 'Situs Portofolio Interaktif (Ini!)',
+          images: [
+            'https://via.placeholder.com/600x300/fd7e14/ffffff?text=Interactive+Portfolio+1',
+            'https://via.placeholder.com/600x300/fd7e14/ffffff?text=Interactive+Portfolio+2'
+          ],
+          description: 'Situs portofolio pribadi ini dirancang dan dikembangkan dari nol menggunakan HTML, CSS, dan JavaScript murni. Tujuan utamanya adalah untuk memamerkan proyek-proyek saya dengan cara yang menarik dan interaktif, menonjolkan kemampuan saya dalam pengembangan frontend, desain responsif, dan penggunaan JavaScript untuk efek dinamis. Setiap elemen dirancang untuk memberikan pengalaman pengguna yang mulus dan informatif.',
+          details: [
+            'Teknologi Frontend: HTML5 untuk struktur semantik, CSS3 untuk styling modern (termasuk variabel CSS dan transisi), JavaScript (Vanilla JS) untuk semua interaktivitas.',
+            'Responsivitas: Sepenuhnya responsif, memastikan tampilan optimal di berbagai perangkat, dari desktop hingga smartphone, menggunakan media queries dan flexible layout.',
+            'Fitur Interaktif: Efek ketik otomatis pada judul utama (typewriter effect), penyorotan tautan navigasi aktif berdasarkan posisi scroll, animasi progress bar untuk keahlian, akordeon untuk detail pengalaman, filter proyek portofolio, dan modal pop-up untuk detail proyek.',
+            'Desain: Minimalis, bersih, dengan skema warna gelap yang profesional dan aksen warna highlight untuk fokus pada konten dan navigasi yang mudah.',
+            'Optimasi: Kode bersih dan terstruktur untuk pemeliharaan yang mudah dan waktu loading yang cepat.',
+          ],
+          techStack: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'Vanilla JS'],
+          link: '#'
+        },
+        project6: {
+          title: 'Aplikasi Pengelola Blog (CMS)',
+          images: [
+            'https://via.placeholder.com/600x300/6f42c1/ffffff?text=Blog+CMS+1',
+            'https://via.placeholder.com/600x300/6f42c1/ffffff?text=Blog+CMS+2'
+          ],
+          description: 'Pengembangan sistem manajemen konten (CMS) sederhana dan intuitif untuk blog pribadi atau proyek kecil, memungkinkan pengguna untuk membuat, mengedit, dan menghapus postingan blog, mengelola kategori, dan melihat komentar. Aplikasi ini dibangun dengan Vue.js untuk frontend yang reaktif, Express.js untuk API backend yang kuat, dan PostgreSQL sebagai database relasional yang andal. Desain fokus pada kemudahan penggunaan untuk admin dan pembaca.',
+          details: [
+            'Frontend: Antarmuka pengguna yang dinamis dan reaktif dibangun dengan Vue.js, Vue Router untuk navigasi, dan Vuex untuk state management. Styling menggunakan SCSS dan komponen kustom.',
+            'Backend: RESTful API yang kuat dikembangkan dengan Express.js dan Node.js. Mengimplementasikan autentikasi JWT untuk admin dan manajemen API key untuk interaksi publik.',
+            'Database: PostgreSQL sebagai database relasional utama untuk menyimpan postingan, kategori, pengguna, dan komentar.',
+            'Fitur Utama: Dashboard Admin (CRUD untuk postingan, kategori, komentar), autentikasi admin yang aman, fitur pencarian dan filter postingan, tampilan komentar bersarang, dan editor rich-text untuk postingan.',
+            'Deployment: Aplikasi di-deploy dalam container Docker untuk portabilitas dan skalabilitas yang mudah, dengan integrasi CI/CD dasar.',
+          ],
+          techStack: ['Vue.js', 'Vuex', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Docker'],
+          link: '#'
+        },
+        project7: {
+          title: 'Desain Aplikasi Cuaca',
+          images: [
+            'https://via.placeholder.com/600x300/e83e8c/ffffff?text=Weather+App+Design+1',
+            'https://via.placeholder.com/600x300/e83e8c/ffffff?text=Weather+App+Design+2'
+          ],
+          description: 'Konsep desain UI/UX lengkap untuk aplikasi cuaca mobile yang menawarkan visualisasi data intuitif dan pengalaman pengguna yang menarik. Fokus utama adalah pada kemudahan penggunaan, kejelasan informasi, dan estetika modern. Proses desain melibatkan riset pengguna, wireframing, dan pembuatan prototipe interaktif yang menunjukkan bagaimana pengguna akan berinteraksi dengan aplikasi.',
+          details: [
+            'Tools Desain: Adobe XD digunakan untuk wireframing, high-fidelity mockups, dan pembuatan prototipe interaktif. Penggunaan LottieFiles untuk animasi mikro.',
+            'Fitur Utama: Prakiraan cuaca 7 hari, informasi detail cuaca (suhu, kelembaban, kecepatan angin, tekanan, UV Index), peta radar interaktif, notifikasi cuaca buruk, dan tampilan historis data cuaca.',
+            'Desain Visual: Estetika bersih dan modern dengan ikonografi kustom, ilustrasi cuaca yang dinamis, dan palet warna yang adaptif sesuai kondisi cuaca (misal: cerah, berawan, hujan).',
+            'User Experience: Alur navigasi yang intuitif, gestur sentuh untuk detail lebih lanjut, dan personalisasi lokasi.',
+          ],
+          techStack: ['Adobe XD', 'UI Design', 'UX Research', 'Prototyping', 'Interaction Design'],
+          link: '#'
+        },
+        project8: {
+          title: 'Aplikasi Pelacak Kebiasaan',
+          images: [
+            'https://via.placeholder.com/600x300/6610f2/ffffff?text=Habit+Tracker+App+1',
+            'https://via.placeholder.com/600x300/6610f2/ffffff?text=Habit+Tracker+App+2'
+          ],
+          description: 'Aplikasi mobile lintas platform untuk membantu pengguna membangun dan melacak kebiasaan positif secara efektif. Aplikasi ini menyediakan fitur untuk menetapkan tujuan, melacak kemajuan harian, dan mendapatkan laporan mingguan atau bulanan tentang kebiasaan mereka. Dirancang untuk memotivasi pengguna melalui visualisasi progres dan sistem streak.',
+          details: [
+            'Framework: Flutter untuk pengembangan aplikasi mobile lintas platform (iOS dan Android).',
+            'Bahasa Pemrograman: Dart.',
+            'Database: SQLite untuk penyimpanan data lokal yang efisien dan cepat, memastikan aplikasi berfungsi dengan baik bahkan tanpa koneksi internet.',
+            'Fitur Utama: Pembuatan kebiasaan kustom, pelacakan harian dengan "check-in", sistem streak untuk memotivasi, pengingat yang dapat disesuaikan, visualisasi progres mingguan/bulanan (grafik), dan fitur journaling sederhana.',
+            'Desain UI: Material Design yang bersih dan intuitif, dengan fokus pada kemudahan penggunaan dan feedback visual yang jelas.',
+          ],
+          techStack: ['Flutter', 'Dart', 'SQLite', 'Mobile Development'],
+          link: '#'
+        },
+        project9: {
+          title: 'Analisis Sentimen Media Sosial',
+          images: [
+            'https://via.placeholder.com/600x300/20c997/ffffff?text=Social+Sentiment+Analysis+1',
+            'https://via.placeholder.com/600x300/20c997/ffffff?text=Social+Sentiment+Analysis+2'
+          ],
+          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
+          details: [
+            'Bahasa Pemrograman: Python.',
+            'Pustaka: Tweepy (untuk mengakses Twitter API dan mengumpulkan data tweet), NLTK (Natural Language Toolkit) untuk pre-processing teks (tokenisasi, stemming, stopwords removal), TextBlob untuk analisis sentimen cepat.',
+            'Visualisasi: Matplotlib dan Seaborn untuk membuat grafik statis, serta Streamlit untuk membangun dashboard web interaktif yang memungkinkan pengguna memfilter dan melihat hasil analisis secara dinamis.',
+            'Metodologi: Pengumpulan data (data scraping dari Twitter), pre-processing teks (membersihkan data dari noise, emoji, dll.), analisis sentimen (menggunakan model VADER atau TextBlob), visualisasi hasil, dan interpretasi insight.',
+            'Dampak: Memberikan insight berharga untuk strategi komunikasi, identifikasi krisis, atau evaluasi kampanye pemasaran.',
+          ],
+          techStack: ['Python', 'NLP', 'Sentiment Analysis', 'Tweepy', 'NLTK', 'TextBlob', 'Streamlit', 'Data Visualization'],
+          link: '#'
+        },
+        project10: {
+          title: 'API Layanan Autentikasi OAuth2',
+          images: [
+            'https://via.placeholder.com/600x300/ff7f50/ffffff?text=OAuth2+API+1',
+            'https://via.placeholder.com/600x300/ff7f50/ffffff?text=OAuth2+API+2'
+          ],
+          description: 'Pengembangan layanan API backend yang berdiri sendiri khusus untuk manajemen autentikasi dan otorisasi pengguna menggunakan standar OAuth2 dan JSON Web Tokens (JWT). API ini dirancang untuk dapat digunakan oleh berbagai aplikasi frontend (web, mobile, desktop) sebagai single source of truth untuk keamanan. Fokus pada keamanan, skalabilitas, dan kepatuhan standar industri.',
+          details: [
+            'Teknologi Backend: Node.js dengan framework Express.js.',
+            'Standar Keamanan: Implementasi penuh OAuth2 Grant Types (misal: Authorization Code Flow) dan penggunaan JSON Web Tokens (JWT) untuk sesi stateless dan otorisasi berbasis token.',
+            'Database: MongoDB untuk menyimpan data pengguna dan client aplikasi. Redis untuk caching token atau daftar blacklist token.',
+            'Fitur Utama: Pendaftaran pengguna, login, refresh token, revocable tokens, manajemen client aplikasi, dan endpoint untuk verifikasi token.',
+            'Testing: Unit dan Integration tests untuk semua endpoint API menggunakan Jest dan Supertest.',
+            'Dokumentasi API: Menggunakan Swagger/OpenAPI untuk dokumentasi API yang jelas dan interaktif.',
+          ],
+          techStack: ['Node.js', 'Express.js', 'OAuth2', 'JWT', 'MongoDB', 'Redis', 'Swagger'],
+          link: '#'
+        },
+        project11: {
+          title: 'Website Event & Ticketing',
+          images: [
+            'https://via.placeholder.com/600x300/8a2be2/ffffff?text=Event+Ticketing+Website+1',
+            'https://via.placeholder.com/600x300/8a2be2/ffffff?text=Event+Ticketing+Website+2'
+          ],
+          description: 'Pengembangan website modern untuk manajemen acara, penjualan tiket online, dan verifikasi tiket menggunakan QR code. Dibangun dengan Next.js untuk performa frontend yang optimal, Tailwind CSS untuk styling cepat, dan integrasi dengan Stripe API untuk pembayaran yang aman. Fitur termasuk daftar acara, detail acara, pembelian tiket, dan dashboard admin untuk manajemen acara dan laporan penjualan.',
+          details: [
+            'Frontend Framework: Next.js untuk Server-Side Rendering (SSR) dan Static Site Generation (SSG), memastikan performa cepat dan SEO-friendly.',
+            'Styling: Tailwind CSS untuk pengembangan UI yang cepat dan desain yang responsif.',
+            'Pembayaran: Integrasi aman dengan Stripe API untuk proses pembayaran tiket. Mendukung berbagai metode pembayaran.',
+            'Backend (API): API Route di Next.js untuk mengelola data acara, pesanan, dan verifikasi tiket.',
+            'Database: PostgreSQL (atau MongoDB) untuk menyimpan data acara, tiket, dan pengguna.',
+            'Fitur Utama: Pencarian dan filter acara, detail acara lengkap, proses pembelian tiket, pembuatan QR code untuk tiket, dashboard admin (manajemen acara, tiket, pengguna, laporan penjualan), verifikasi tiket on-site.',
+          ],
+          techStack: ['Next.js', 'React', 'Tailwind CSS', 'Stripe API', 'PostgreSQL', 'Node.js'],
+          link: '#'
+        },
+        project12: {
+          title: 'Prediksi Harga Rumah dengan Regresi',
+          images: [
+            'https://via.placeholder.com/600x300/228b22/ffffff?text=House+Price+Prediction+1',
+            'https://via.placeholder.com/600x300/228b22/ffffff?text=House+Price+Prediction+2'
+          ],
+          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
+          details: [
+            'Bahasa Pemrograman: Python.',
+            'Pustaka: Pandas dan Numpy untuk manipulasi data, Matplotlib dan Seaborn untuk visualisasi data, Scikit-learn untuk implementasi model Machine Learning (Linear Regression, Random Forest, Gradient Boosting).',
+            'Alat: Jupyter Notebook untuk eksplorasi data, analisis, dan pengembangan model.',
+            'Metodologi: Data Collection (dataset publik), Data Cleaning (penanganan missing values, outliers), Feature Engineering (membuat fitur baru dari data yang ada), Model Training (cross-validation, hyperparameter tuning), Model Evaluation (RMSE, MAE, R-squared), Deployment sederhana (misal: Flask API).',
+            'Dataset: Kaggle House Price Prediction dataset atau dataset serupa.',
+            'Dampak: Membantu individu dan agen properti dalam membuat keputusan harga yang lebih terinformasi.',
+          ],
+          techStack: ['Python', 'Machine Learning', 'Scikit-learn', 'Pandas', 'Numpy', 'Jupyter', 'Data Visualization'],
+          link: '#'
+        }
+      };
+
+      let currentImageIndex = 0;
+      let currentProjectImages = [];
+
       // Smooth Scroll & Active Nav Link Highlighting
       document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -1274,7 +1685,7 @@
       const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.2 // Adjusted threshold for longer sections
+        threshold: 0.2
       };
 
       const sectionObserver = new IntersectionObserver((entries, observer) => {
@@ -1295,7 +1706,7 @@
       });
 
       // Typewriter Effect
-      const typewriterText = "Junior Software Engineer, Graphic Design, Digital Marketing, Social Media Specialist"; // Customize this!
+      const typewriterText = "Junior Software Engineer, Design Graphic, Social Media Specialist, Digital Marketing, Videographer, & Finance...";
       const typewriterElement = document.querySelector('.typewriter');
       let charIndex = 0;
 
@@ -1303,23 +1714,9 @@
         if (charIndex < typewriterText.length) {
           typewriterElement.textContent += typewriterText.charAt(charIndex);
           charIndex++;
-          setTimeout(typeWriter, 70); // Typing speed
-        } else {
-          // Optional: Clear and re-type after a delay
-          // setTimeout(eraseText, 3000);
+          setTimeout(typeWriter, 70);
         }
       }
-
-      function eraseText() {
-        if (charIndex > 0) {
-          typewriterElement.textContent = typewriterText.substring(0, charIndex - 1);
-          charIndex--;
-          setTimeout(eraseText, 50); // Erasing speed
-        } else {
-          setTimeout(typeWriter, 1000); // Wait before re-typing
-        }
-      }
-
       document.addEventListener('DOMContentLoaded', typeWriter);
 
       // Dynamic Year in Footer
@@ -1327,7 +1724,7 @@
 
       // Skills Progress Bar Animation
       const progressBars = document.querySelectorAll('.progress-bar');
-      const skillsSection = document.getElementById('about'); // The section containing the progress bars
+      const skillsSection = document.getElementById('about');
 
       const progressBarObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -1337,13 +1734,12 @@
               bar.style.setProperty('--progress-width', `${progress}%`);
               bar.classList.add('animate');
             });
-            observer.unobserve(entry.target); // Stop observing once animated
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+      }, { threshold: 0.5 });
 
       progressBarObserver.observe(skillsSection);
-
 
       // Accordion for Experience & Education
       const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -1356,14 +1752,13 @@
             content.classList.remove('open');
             content.style.maxHeight = 0;
           } else {
-            // Close other open accordions
             document.querySelectorAll('.accordion-content.open').forEach(openContent => {
               openContent.classList.remove('open');
               openContent.style.maxHeight = 0;
               openContent.previousElementSibling.classList.remove('active');
             });
             content.classList.add('open');
-            content.style.maxHeight = content.scrollHeight + 'px'; // Set max-height to content height
+            content.style.maxHeight = content.scrollHeight + 'px';
           }
         });
       });
@@ -1374,9 +1769,7 @@
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Remove active class from all buttons
           filterBtns.forEach(b => b.classList.remove('active'));
-          // Add active class to clicked button
           btn.classList.add('active');
 
           const category = btn.dataset.category;
@@ -1395,187 +1788,43 @@
       const portfolioModal = document.getElementById('portfolioModal');
       const closeButton = document.querySelector('.modal .close-button');
       const modalProjectTitle = document.getElementById('modalProjectTitle');
-      const modalProjectImage = document.getElementById('modalProjectImage');
+      const modalProjectMainImage = document.getElementById('modalProjectMainImage');
       const modalProjectDescription = document.getElementById('modalProjectDescription');
       const modalProjectDetails = document.getElementById('modalProjectDetails');
       const modalTechStack = document.getElementById('modalTechStack');
       const modalProjectLink = document.getElementById('modalProjectLink');
+      const modalThumbnails = document.getElementById('modalThumbnails');
+      const prevImageBtn = document.getElementById('prevImageBtn');
+      const nextImageBtn = document.getElementById('nextImageBtn');
 
-      const projectData = {
-        project1: {
-          title: 'Platform E-commerce Modern',
-          image: 'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform',
-          description: 'Mengembangkan platform e-commerce responsif dengan arsitektur MERN stack (MongoDB, Express.js, React, Node.js). Proyek ini berfokus pada pengalaman pengguna yang mulus dari penjelajahan produk hingga proses checkout yang aman dan cepat. Mengimplementasikan fitur pencarian real-time, filter produk kompleks, dan integrasi gateway pembayaran pihak ketiga yang aman (misal: Stripe/Midtrans). Tujuan utama proyek ini adalah menyediakan solusi belanja online yang efisien dan menarik bagi UMKM.',
-          details: [
-            'Frontend: Dibangun dengan React.js, menggunakan Redux Toolkit untuk state management, dan styling dengan Tailwind CSS. Responsif penuh untuk desktop, tablet, dan mobile.',
-            'Backend: Dibuat menggunakan Node.js dan Express.js untuk API RESTful. Mengimplementasikan autentikasi JWT dan middleware untuk otorisasi.',
-            'Database: MongoDB dengan Mongoose ORM untuk penyimpanan data produk, pengguna, pesanan, dan review.',
-            'Fitur Utama: Autentikasi dan otorisasi pengguna, manajemen produk (CRUD), keranjang belanja, proses checkout multi-langkah, review produk, dan dashboard admin untuk pelacakan pesanan dan laporan penjualan.',
-            'Integrasi: Gateway pembayaran (misal: Stripe/Midtrans), layanan pengiriman (misal: RajaOngkir), dan notifikasi email.',
-            'Testing: Unit tests dan integration tests menggunakan Jest dan Supertest.',
-            'Deployment: Di-deploy menggunakan Docker ke platform cloud seperti AWS EC2.',
-          ],
-          techStack: ['React', 'Redux', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS', 'Stripe API', 'Docker'],
-          link: '#' // Replace with actual project link
-        },
-        project2: {
-          title: 'Aplikasi Manajemen Tugas (Mobile)',
-          image: 'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App',
-          description: 'Membangun aplikasi mobile cross-platform untuk manajemen tugas pribadi dan kolaborasi tim menggunakan React Native. Aplikasi ini dirancang untuk membantu pengguna melacak tugas harian, mengatur prioritas, menetapkan tenggat waktu, dan berkolaborasi dengan anggota tim lainnya. Notifikasi real-time memastikan pengguna selalu mendapatkan informasi terbaru tentang status tugas mereka. Fokus pada desain UI yang bersih, intuitif, dan minimalis untuk meningkatkan fokus dan produktivitas.',
-          details: [
-            'Platform: iOS & Android (Cross-platform) menggunakan React Native dan Expo CLI.',
-            'Backend & Database: Google Firebase digunakan untuk autentikasi pengguna (Firebase Auth), database real-time (Firestore) untuk penyimpanan data tugas dan proyek, serta Cloud Messaging untuk notifikasi push.',
-            'Fitur Utama: Pembuatan dan pengelolaan tugas, penetapan tenggat waktu, pengingat yang dapat disesuaikan, mode kolaborasi tim, kategori tugas, dan tampilan progres proyek.',
-            'User Experience: Desain antarmuka yang bersih dengan animasi transisi yang halus, gestur swipe untuk tindakan cepat, dan mode gelap/terang.',
-            'Offline-first: Kemampuan caching data lokal untuk fungsionalitas dasar tanpa koneksi internet.',
-          ],
-          techStack: ['React Native', 'Expo', 'Firebase Auth', 'Firestore', 'Firebase Cloud Messaging'],
-          link: '#' // Replace with actual project link
-        },
-        project3: {
-          title: 'Redesain Antarmuka Dashboard Analitik',
-          image: 'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+Redesign',
-          description: 'Melakukan redesain UI/UX lengkap untuk dashboard analitik yang sudah ada, dengan tujuan utama meningkatkan keterbacaan data, navigasi, dan estetika keseluruhan. Proyek ini dimulai dengan riset pengguna mendalam, diikuti dengan wireframing, pembuatan prototipe interaktif, dan pengujian kegunaan. Hasilnya adalah dashboard yang lebih intuitif, efisien, dan menarik secara visual, memungkinkan pengguna untuk dengan cepat mendapatkan insight dari data bisnis mereka.',
-          details: [
-            'Proses Desain: Meliputi User Research (wawancara, survei), Analisis Pesaing, Pembuatan User Persona dan User Journey, Wireframing (low-fidelity & high-fidelity), Prototyping Interaktif, dan Usability Testing dengan pengguna nyata.',
-            'Tools Desain: Figma untuk seluruh proses desain visual, pembuatan Design System, dan prototyping interaktif. Miro untuk sesi brainstorming dan collaborative whiteboarding.',
-            'Output: Design System yang komprehensif, High-fidelity Mockups untuk berbagai skenario dan ukuran layar, Interactive Prototype yang menunjukkan alur pengguna, dan dokumentasi guideline UI/UX.',
-            'Fokus Utama: Visualisasi data yang jelas (penggunaan chart dan grafik yang tepat), hirarki informasi yang logis, konsistensi elemen UI, dan pengalaman pengguna yang menyenangkan serta efisien dalam mengakses informasi kritikal.',
-            'Dampak: Meningkatkan efisiensi pengguna dalam menganalisis data sebesar X% dan mengurangi waktu onboarding pengguna baru.',
-          ],
-          techStack: ['Figma', 'UI Design', 'UX Design', 'User Research', 'Prototyping', 'Design System'],
-          link: '#' // Replace with actual project link (e.g., Figma prototype link)
-        },
-        project4: {
-          title: 'Sistem Rekomendasi Film',
-          image: 'https://via.placeholder.com/600x300/17a2b8/ffffff?text=Movie+Recommender',
-          description: 'Mengembangkan sistem rekomendasi film berbasis konten dan kolaboratif menggunakan Python dan pustaka data science populer. Proyek ini menganalisis preferensi pengguna berdasarkan film yang mereka tonton dan karakteristik film (genre, aktor, sutradara) untuk menyarankan judul-judul yang relevan. Data diambil dari dataset publik (MovieLens) dan melalui serangkaian proses preprocessing dan analisis. Hasilnya adalah model yang mampu memberikan rekomendasi personal, serta aplikasi web sederhana untuk mendemonstrasikan fungsionalitasnya.',
-          details: [
-            'Bahasa Pemrograman: Python, dengan fokus pada scripting untuk data processing dan model training.',
-            'Pustaka Data Science: Pandas untuk manipulasi dan analisis data, Scikit-learn untuk implementasi algoritma machine learning, Numpy untuk operasi numerik.',
-            'Algoritma Rekomendasi: Menggunakan kombinasi Collaborative Filtering (User-based & Item-based) dan Content-Based Filtering (Cosine Similarity berdasarkan fitur film) untuk rekomendasi yang lebih akurat.',
-            'Antarmuka Demo: Aplikasi web interaktif sederhana dibangun dengan Streamlit, memungkinkan pengguna memasukkan film yang disukai dan mendapatkan rekomendasi secara real-time.',
-            'Dataset: MovieLens 1M dataset, berisi rating film dari jutaan pengguna.',
-            'Metodologi: Data Collection, Data Cleaning & Preprocessing, Feature Engineering, Model Training, Model Evaluation, Deployment (via Streamlit).',
-          ],
-          techStack: ['Python', 'Machine Learning', 'Pandas', 'Scikit-learn', 'Numpy', 'Streamlit'],
-          link: '#' // Replace with actual project link (e.g., GitHub repo with code)
-        },
-        project5: {
-          title: 'Situs Portofolio Interaktif (Ini!)',
-          image: 'https://via.placeholder.com/600x300/fd7e14/ffffff?text=Interactive+Portfolio',
-          description: 'Situs portofolio pribadi ini dirancang dan dikembangkan dari nol menggunakan HTML, CSS, dan JavaScript murni. Tujuan utamanya adalah untuk memamerkan proyek-proyek saya dengan cara yang menarik dan interaktif, menonjolkan kemampuan saya dalam pengembangan frontend, desain responsif, dan penggunaan JavaScript untuk efek dinamis. Setiap elemen dirancang untuk memberikan pengalaman pengguna yang mulus dan informatif.',
-          details: [
-            'Teknologi Frontend: HTML5 untuk struktur semantik, CSS3 untuk styling modern (termasuk variabel CSS dan transisi), JavaScript (Vanilla JS) untuk semua interaktivitas.',
-            'Responsivitas: Sepenuhnya responsif, memastikan tampilan optimal di berbagai perangkat, dari desktop hingga smartphone, menggunakan media queries dan flexible layout.',
-            'Fitur Interaktif: Efek ketik otomatis pada judul utama (typewriter effect), penyorotan tautan navigasi aktif berdasarkan posisi scroll, animasi progress bar untuk keahlian, akordeon untuk detail pengalaman, filter proyek portofolio, dan modal pop-up untuk detail proyek.',
-            'Desain: Minimalis, bersih, dengan skema warna gelap yang profesional dan aksen warna highlight untuk fokus pada konten dan navigasi yang mudah.',
-            'Optimasi: Kode bersih dan terstruktur untuk pemeliharaan yang mudah dan waktu loading yang cepat.',
-          ],
-          techStack: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'Vanilla JS'],
-          link: '#' // Replace with actual project link, perhaps a link to its GitHub repo
-        },
-        project6: {
-          title: 'Aplikasi Pengelola Blog (CMS)',
-          image: 'https://via.placeholder.com/600x300/6f42c1/ffffff?text=Blog+CMS',
-          description: 'Pengembangan sistem manajemen konten (CMS) sederhana dan intuitif untuk blog pribadi atau proyek kecil, memungkinkan pengguna untuk membuat, mengedit, dan menghapus postingan blog, mengelola kategori, dan melihat komentar. Aplikasi ini dibangun dengan Vue.js untuk frontend yang reaktif, Express.js untuk API backend yang kuat, dan PostgreSQL sebagai database relasional yang andal. Desain fokus pada kemudahan penggunaan untuk admin dan pembaca.',
-          details: [
-            'Frontend: Antarmuka pengguna yang dinamis dan reaktif dibangun dengan Vue.js, Vue Router untuk navigasi, dan Vuex untuk state management. Styling menggunakan SCSS dan komponen kustom.',
-            'Backend: RESTful API yang kuat dikembangkan dengan Express.js dan Node.js. Mengimplementasikan autentikasi JWT untuk admin dan manajemen API key untuk interaksi publik.',
-            'Database: PostgreSQL sebagai database relasional utama untuk menyimpan postingan, kategori, pengguna, dan komentar.',
-            'Fitur Utama: Dashboard Admin (CRUD untuk postingan, kategori, komentar), autentikasi admin yang aman, fitur pencarian dan filter postingan, tampilan komentar bersarang, dan editor rich-text untuk postingan.',
-            'Deployment: Aplikasi di-deploy dalam container Docker untuk portabilitas dan skalabilitas yang mudah, dengan integrasi CI/CD dasar.',
-          ],
-          techStack: ['Vue.js', 'Vuex', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Docker'],
-          link: '#' // Replace with actual project link
-        },
-        project7: {
-          title: 'Desain Aplikasi Cuaca',
-          image: 'https://via.placeholder.com/600x300/e83e8c/ffffff?text=Weather+App+Design',
-          description: 'Konsep desain UI/UX lengkap untuk aplikasi cuaca mobile yang menawarkan visualisasi data intuitif dan pengalaman pengguna yang menarik. Fokus utama adalah pada kemudahan penggunaan, kejelasan informasi, dan estetika modern. Proses desain melibatkan riset pengguna, wireframing, dan pembuatan prototipe interaktif yang menunjukkan bagaimana pengguna akan berinteraksi dengan aplikasi.',
-          details: [
-            'Tools Desain: Adobe XD digunakan untuk wireframing, high-fidelity mockups, dan pembuatan prototipe interaktif. Penggunaan LottieFiles untuk animasi mikro.',
-            'Fitur Utama: Prakiraan cuaca 7 hari, informasi detail cuaca (suhu, kelembaban, kecepatan angin, tekanan, UV Index), peta radar interaktif, notifikasi cuaca buruk, dan tampilan historis data cuaca.',
-            'Desain Visual: Estetika bersih dan modern dengan ikonografi kustom, ilustrasi cuaca yang dinamis, dan palet warna yang adaptif sesuai kondisi cuaca (misal: cerah, berawan, hujan).',
-            'User Experience: Alur navigasi yang intuitif, gestur sentuh untuk detail lebih lanjut, dan personalisasi lokasi.',
-          ],
-          techStack: ['Adobe XD', 'UI Design', 'UX Research', 'Prototyping', 'Interaction Design'],
-          link: '#'
-        },
-        project8: {
-          title: 'Aplikasi Pelacak Kebiasaan',
-          image: 'https://via.placeholder.com/600x300/6610f2/ffffff?text=Habit+Tracker+App',
-          description: 'Aplikasi mobile lintas platform untuk membantu pengguna membangun dan melacak kebiasaan positif secara efektif. Aplikasi ini menyediakan fitur untuk menetapkan tujuan, melacak kemajuan harian, dan mendapatkan laporan mingguan atau bulanan tentang kebiasaan mereka. Dirancang untuk memotivasi pengguna melalui visualisasi progres dan sistem streak.',
-          details: [
-            'Framework: Flutter untuk pengembangan aplikasi mobile lintas platform (iOS dan Android).',
-            'Bahasa Pemrograman: Dart.',
-            'Database: SQLite untuk penyimpanan data lokal yang efisien dan cepat, memastikan aplikasi berfungsi dengan baik bahkan tanpa koneksi internet.',
-            'Fitur Utama: Pembuatan kebiasaan kustom, pelacakan harian dengan "check-in", sistem streak untuk memotivasi, pengingat yang dapat disesuaikan, visualisasi progres mingguan/bulanan (grafik), dan fitur journaling sederhana.',
-            'Desain UI: Material Design yang bersih dan intuitif, dengan fokus pada kemudahan penggunaan dan feedback visual yang jelas.',
-          ],
-          techStack: ['Flutter', 'Dart', 'SQLite', 'Mobile Development'],
-          link: '#'
-        },
-        project9: {
-          title: 'Analisis Sentimen Media Sosial',
-          image: 'https://via.placeholder.com/600x300/20c997/ffffff?text=Social+Sentiment+Analysis',
-          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
-          details: [
-            'Bahasa Pemrograman: Python.',
-            'Pustaka: Tweepy (untuk mengakses Twitter API dan mengumpulkan data tweet), NLTK (Natural Language Toolkit) untuk pre-processing teks (tokenisasi, stemming, stopwords removal), TextBlob untuk analisis sentimen cepat.',
-            'Visualisasi: Matplotlib dan Seaborn untuk membuat grafik statis, serta Streamlit untuk membangun dashboard web interaktif yang memungkinkan pengguna memfilter dan melihat hasil analisis secara dinamis.',
-            'Metodologi: Pengumpulan data (data scraping dari Twitter), pre-processing teks (membersihkan data dari noise, emoji, dll.), analisis sentimen (menggunakan model VADER atau TextBlob), visualisasi hasil, dan interpretasi insight.',
-            'Dampak: Memberikan insight berharga untuk strategi komunikasi, identifikasi krisis, atau evaluasi kampanye pemasaran.',
-          ],
-          techStack: ['Python', 'NLP', 'Sentiment Analysis', 'Tweepy', 'NLTK', 'TextBlob', 'Streamlit', 'Data Visualization'],
-          link: '#'
-        },
-        project10: {
-          title: 'API Layanan Autentikasi OAuth2',
-          image: 'https://via.placeholder.com/600x300/ff7f50/ffffff?text=OAuth2+API',
-          description: 'Pengembangan layanan API backend yang berdiri sendiri khusus untuk manajemen autentikasi dan otorisasi pengguna menggunakan standar OAuth2 dan JSON Web Tokens (JWT). API ini dirancang untuk dapat digunakan oleh berbagai aplikasi frontend (web, mobile, desktop) sebagai single source of truth untuk keamanan. Fokus pada keamanan, skalabilitas, dan kepatuhan standar industri.',
-          details: [
-            'Teknologi Backend: Node.js dengan framework Express.js.',
-            'Standar Keamanan: Implementasi penuh OAuth2 Grant Types (misal: Authorization Code Flow) dan penggunaan JSON Web Tokens (JWT) untuk sesi stateless dan otorisasi berbasis token.',
-            'Database: MongoDB untuk menyimpan data pengguna dan client aplikasi. Redis untuk caching token atau daftar blacklist token.',
-            'Fitur Utama: Pendaftaran pengguna, login, refresh token, revocable tokens, manajemen client aplikasi, dan endpoint untuk verifikasi token.',
-            'Testing: Unit dan Integration tests untuk semua endpoint API menggunakan Jest dan Supertest.',
-            'Dokumentasi API: Menggunakan Swagger/OpenAPI untuk dokumentasi API yang jelas dan interaktif.',
-          ],
-          techStack: ['Node.js', 'Express.js', 'OAuth2', 'JWT', 'MongoDB', 'Redis', 'Swagger'],
-          link: '#'
-        },
-        project11: {
-          title: 'Website Event & Ticketing',
-          image: 'https://via.placeholder.com/600x300/8a2be2/ffffff?text=Event+Ticketing+Website',
-          description: 'Pengembangan website modern untuk manajemen acara, penjualan tiket online, dan verifikasi tiket menggunakan QR code. Dibangun dengan Next.js untuk performa frontend yang optimal, Tailwind CSS untuk styling cepat, dan integrasi dengan Stripe API untuk pembayaran yang aman. Fitur termasuk daftar acara, detail acara, pembelian tiket, dan dashboard admin untuk manajemen acara dan laporan penjualan.',
-          details: [
-            'Frontend Framework: Next.js untuk Server-Side Rendering (SSR) dan Static Site Generation (SSG), memastikan performa cepat dan SEO-friendly.',
-            'Styling: Tailwind CSS untuk pengembangan UI yang cepat dan desain yang responsif.',
-            'Pembayaran: Integrasi aman dengan Stripe API untuk proses pembayaran tiket. Mendukung berbagai metode pembayaran.',
-            'Backend (API): API Route di Next.js untuk mengelola data acara, pesanan, dan verifikasi tiket.',
-            'Database: PostgreSQL (atau MongoDB) untuk menyimpan data acara, tiket, dan pengguna.',
-            'Fitur Utama: Pencarian dan filter acara, detail acara lengkap, proses pembelian tiket, pembuatan QR code untuk tiket, dashboard admin (manajemen acara, tiket, pengguna, laporan penjualan), verifikasi tiket on-site.',
-          ],
-          techStack: ['Next.js', 'React', 'Tailwind CSS', 'Stripe API', 'PostgreSQL', 'Node.js'],
-          link: '#'
-        },
-        project12: {
-          title: 'Prediksi Harga Rumah dengan Regresi',
-          image: 'https://via.placeholder.com/600x300/228b22/ffffff?text=House+Price+Prediction',
-          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
-          details: [
-            'Bahasa Pemrograman: Python.',
-            'Pustaka: Pandas dan Numpy untuk manipulasi data, Matplotlib dan Seaborn untuk visualisasi data, Scikit-learn untuk implementasi model Machine Learning (Linear Regression, Random Forest, Gradient Boosting).',
-            'Alat: Jupyter Notebook untuk eksplorasi data, analisis, dan pengembangan model.',
-            'Metodologi: Data Collection (dataset publik), Data Cleaning (penanganan missing values, outliers), Feature Engineering (membuat fitur baru dari data yang ada), Model Training (cross-validation, hyperparameter tuning), Model Evaluation (RMSE, MAE, R-squared), Deployment sederhana (misal: Flask API).',
-            'Dataset: Kaggle House Price Prediction dataset atau dataset serupa.',
-            'Dampak: Membantu individu dan agen properti dalam membuat keputusan harga yang lebih terinformasi.',
-          ],
-          techStack: ['Python', 'Machine Learning', 'Scikit-learn', 'Pandas', 'Numpy', 'Jupyter', 'Data Visualization'],
-          link: '#'
+      function updateGallery() {
+        if (currentProjectImages.length > 0) {
+          modalProjectMainImage.src = currentProjectImages[currentImageIndex];
+          modalProjectMainImage.alt = `Project Image ${currentImageIndex + 1}`;
+        } else {
+          modalProjectMainImage.src = 'https://via.placeholder.com/600x300/cccccc/000000?text=No+Image';
+          modalProjectMainImage.alt = 'No image available';
         }
-      };
+
+
+        modalThumbnails.querySelectorAll('img').forEach((img, index) => {
+          if (index === currentImageIndex) {
+            img.classList.add('active-thumbnail');
+          } else {
+            img.classList.remove('active-thumbnail');
+          }
+        });
+      }
+
+      prevImageBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentProjectImages.length - 1;
+        updateGallery();
+      });
+
+      nextImageBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex < currentProjectImages.length - 1) ? currentImageIndex + 1 : 0;
+        updateGallery();
+      });
 
 
       portfolioItems.forEach(item => {
@@ -1585,10 +1834,30 @@
 
           if (data) {
             modalProjectTitle.textContent = data.title;
-            modalProjectImage.src = data.image;
             modalProjectDescription.textContent = data.description;
 
-            // Clear previous details
+            currentProjectImages = data.images || [];
+            currentImageIndex = 0;
+            modalThumbnails.innerHTML = '';
+
+            if (currentProjectImages.length > 0) {
+              currentProjectImages.forEach((src, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.alt = `Thumbnail ${index + 1}`;
+                thumb.addEventListener('click', () => {
+                  currentImageIndex = index;
+                  updateGallery();
+                });
+                modalThumbnails.appendChild(thumb);
+              });
+              updateGallery();
+            } else {
+              modalProjectMainImage.src = 'https://via.placeholder.com/600x300/cccccc/000000?text=No+Image';
+              modalProjectMainImage.alt = 'No image available';
+            }
+
+
             modalProjectDetails.innerHTML = '';
             data.details.forEach(detail => {
               const li = document.createElement('li');
@@ -1596,7 +1865,6 @@
               modalProjectDetails.appendChild(li);
             });
 
-            // Clear previous tech stack
             modalTechStack.innerHTML = '';
             data.techStack.forEach(tech => {
               const span = document.createElement('span');
@@ -1621,78 +1889,138 @@
         }
       });
 
+      // Keyboard navigation for modal
+      document.addEventListener('keydown', (e) => {
+        if (portfolioModal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') {
+            prevImageBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            nextImageBtn.click();
+          } else if (e.key === 'Escape') {
+            closeButton.click();
+          }
+        }
+      });
+
+
       // Contact Form Validation & Submission
       const contactForm = document.getElementById('contactForm');
       const formStatus = document.getElementById('formStatus');
 
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const subjectInput = document.getElementById('subject');
+      const messageInput = document.getElementById('message');
 
-        // Basic validation
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const subject = document.getElementById('subject').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const projectType = document.getElementById('projectType').value;
-        const budget = document.getElementById('budget').value;
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const subjectError = document.getElementById('subjectError');
+      const messageError = document.getElementById('messageError');
 
-
-        if (!name || !email || !subject || !message) {
-          formStatus.className = 'form-message error';
-          formStatus.textContent = 'Nama, Email, Subjek, dan Pesan wajib diisi.';
-          return;
-        }
-
-        if (!validateEmail(email)) {
-          formStatus.className = 'form-message error';
-          formStatus.textContent = 'Format email tidak valid.';
-          return;
-        }
-
-        // Simulate form submission
-        formStatus.className = 'form-message success';
-        formStatus.textContent = 'Pesan Anda telah terkirim! Terima kasih atas minat Anda.';
-        contactForm.reset(); // Clear the form
-        setTimeout(() => {
-            formStatus.style.display = 'none';
-        }, 7000); // Hide message after 7 seconds
-
-        // In a real application, you would send this data to a backend server:
-        // const formData = { name, email, subject, projectType, budget, message };
-        // fetch('/api/contact', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(formData),
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //   if (data.success) {
-        //     formStatus.className = 'form-message success';
-        //     formStatus.textContent = 'Pesan Anda telah terkirim! Terima kasih.';
-        //     contactForm.reset();
-        //   } else {
-        //     formStatus.className = 'form-message error';
-        //     formStatus.textContent = 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.';
-        //   }
-        // })
-        // .catch(error => {
-        //   formStatus.className = 'form-message error';
-        //   formStatus.textContent = 'Terjadi kesalahan jaringan. Silakan coba lagi.';
-        //   console.error('Error:', error);
-        // });
-      });
+      function clearErrors() {
+          nameError.style.display = 'none';
+          emailError.style.display = 'none';
+          subjectError.style.display = 'none';
+          messageError.style.display = 'none';
+          formStatus.style.display = 'none';
+      }
 
       function validateEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
       }
 
+      function validateField(inputElement, errorElement, validationFn) {
+          clearErrors(); // Clear all errors on individual field interaction
+          let isValid = true;
+          const value = inputElement.value.trim();
+
+          if (!value) {
+              errorElement.textContent = `${inputElement.previousElementSibling.textContent.replace(' Anda', '').replace(':', '')} wajib diisi.`;
+              errorElement.style.display = 'block';
+              isValid = false;
+          } else if (validationFn && !validationFn(value)) {
+              errorElement.textContent = `Format ${inputElement.previousElementSibling.textContent.replace(' Anda', '').replace(':', '')} tidak valid.`;
+              errorElement.style.display = 'block';
+              isValid = false;
+          } else {
+              errorElement.style.display = 'none';
+          }
+          return isValid;
+      }
+
+      // Live validation on blur
+      nameInput.addEventListener('blur', () => validateField(nameInput, nameError));
+      emailInput.addEventListener('blur', () => validateField(emailInput, emailError, validateEmail));
+      subjectInput.addEventListener('blur', () => validateField(subjectInput, subjectError));
+      messageInput.addEventListener('blur', () => validateField(messageInput, messageError));
+
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearErrors();
+
+        let formIsValid = true;
+        formIsValid = validateField(nameInput, nameError) && formIsValid;
+        formIsValid = validateField(emailInput, emailError, validateEmail) && formIsValid;
+        formIsValid = validateField(subjectInput, subjectError) && formIsValid;
+        formIsValid = validateField(messageInput, messageError) && formIsValid;
+
+        if (!formIsValid) {
+            formStatus.className = 'form-message error';
+            formStatus.textContent = 'Mohon perbaiki kesalahan di atas.';
+            return;
+        }
+
+        formStatus.className = 'form-message success';
+        formStatus.textContent = 'Pesan Anda telah terkirim! Terima kasih atas minat Anda.';
+        contactForm.reset();
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 7000);
+      });
+
+      // Copy to Clipboard Functionality
+      document.querySelectorAll('.copy-btn').forEach(button => {
+          button.addEventListener('click', async () => {
+              const textToCopy = button.dataset.text;
+              try {
+                  await navigator.clipboard.writeText(textToCopy);
+                  const tooltip = button.closest('.copy-tooltip');
+                  tooltip.classList.add('active');
+                  setTimeout(() => {
+                      tooltip.classList.remove('active');
+                  }, 2000);
+              } catch (err) {
+                  console.error('Failed to copy text: ', err);
+                  const textArea = document.createElement("textarea");
+                  textArea.value = textToCopy;
+                  document.body.appendChild(textArea);
+                  textArea.focus();
+                  textArea.select();
+                  try {
+                      document.execCommand('copy');
+                      const tooltip = button.closest('.copy-tooltip');
+                      tooltip.classList.add('active');
+                      setTimeout(() => {
+                          tooltip.classList.remove('active');
+                      }, 2000);
+                  } catch (err) {
+                      console.error('Fallback: Oops, unable to copy', err);
+                  }
+                  document.body.removeChild(textArea);
+              }
+          });
+      });
+
+
       // Back to Top Button
       const backToTopBtn = document.getElementById("backToTopBtn");
 
-      window.onscroll = function() {scrollFunction()};
+      window.onscroll = function() {
+        scrollFunction();
+        updateScrollProgress();
+        dynamicHeaderStyling();
+      };
 
       function scrollFunction() {
         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
@@ -1703,9 +2031,47 @@
       }
 
       function topFunction() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
       }
+
+      // Scroll Progress Indicator
+      function updateScrollProgress() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("scroll-progress").style.width = scrolled + "%";
+      }
+
+      // Dynamic Header Styling on Scroll
+      const mainHeader = document.getElementById('main-header');
+      function dynamicHeaderStyling() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+              mainHeader.classList.add('scrolled');
+          } else {
+              mainHeader.classList.remove('scrolled');
+          }
+      }
+
+      // Animate elements on scroll using IntersectionObserver
+      const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+      const animateObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            animateObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      animateOnScrollElements.forEach(element => {
+        animateObserver.observe(element);
+      });
+
     </script>
   </body>
 </html>
