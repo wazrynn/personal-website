@@ -1,2077 +1,1039 @@
 <!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fawwaz - Portofolio Pribadi</title>
-    <meta name="description" content="Portofolio pribadi seorang Junior Software Engineer yang menampilkan proyek, keahlian, dan perjalanan karir." />
-    <style>
-      :root {
-        --bg-dark: #0a0a0a;
-        --bg-darker: #121212;
-        --accent-blue: #0f3460;
-        --text-primary: #e0e0e0;
-        --text-secondary: #9e9e9e;
-        --highlight-blue: #007bff;
-        --link-hover: #0056b3;
-        --card-bg: #1e1e2d;
-        --card-border: #33334c;
-        --shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-        --success: #28a745;
-        --error: #dc3545;
-      }
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text-primary);
-        background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
-        line-height: 1.6;
-        min-height: 100vh;
-      }
+  <title>Muhammad Fawwaz Rayyan Khalish - Personal Website</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+    <link href="https://media.licdn.com/dms/image/v2/D4E03AQGEQfy5fw9_8g/profile-displayphoto-scale_400_400/B4EZoaJ0Z0IIAg-/0/1761375373833?e=1765411200&v=beta&t=0O34w-6z5O2kkX-H8O2bzMWQsxBGnAjHDn-bcyL0PzM" rel="icon">
+  <link href="https://faridandika.github.io/assets/img/farid-mac.png" rel="apple-touch-icon">
 
-      /* Scroll Progress Indicator */
-      #scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 5px;
-        background-color: var(--highlight-blue);
-        z-index: 1001;
-        transition: width 0.1s linear;
-      }
+    <link href="Farid%20Andika%20-%20Personal%20Website_files/css.css" rel="stylesheet">
 
-      /* Header & Nav */
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(18, 18, 18, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: none; /* Initially no shadow */
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      }
-      header.scrolled {
-        background-color: rgba(18, 18, 18, 1); /* Solid on scroll */
-        box-shadow: var(--shadow);
-      }
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 0;
-      }
-      .logo {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: var(--highlight-blue);
-        text-decoration: none;
-      }
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 25px;
-        margin: 0;
-        padding: 0;
-      }
-      nav a {
-        color: var(--text-primary);
-        text-decoration: none;
-        font-weight: 500;
-        padding: 8px 12px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      nav a:hover, nav a.active {
-        background-color: var(--accent-blue);
-        color: var(--highlight-blue);
-      }
+    <link href="Farid%20Andika%20-%20Personal%20Website_files/bootstrap.min.css" rel="stylesheet">
+  <link href="Farid%20Andika%20-%20Personal%20Website_files/bootstrap-icons.css" rel="stylesheet">
+  <link href="Farid%20Andika%20-%20Personal%20Website_files/boxicons.min.css" rel="stylesheet">
+  <link href="Farid%20Andika%20-%20Personal%20Website_files/glightbox.min.css" rel="stylesheet">
+  <link href="Farid%20Andika%20-%20Personal%20Website_files/remixicon.css" rel="stylesheet">
+  <link href="Farid%20Andika%20-%20Personal%20Website_files/swiper-bundle.min.css" rel="stylesheet">
 
-      /* Sections */
-      section {
-        padding: 80px 0;
-        min-height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      section:nth-of-type(even) {
-        background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
-      }
-      h1, h2, h3 {
-        color: var(--highlight-blue);
-        margin-top: 0;
-        margin-bottom: 20px;
-      }
-      h1 { font-size: 3.5em; line-height: 1.2; }
-      h2 { font-size: 2.5em; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; margin-bottom: 30px;}
-      h3 { font-size: 1.8em; margin-bottom: 15px; }
-      p { color: var(--text-secondary); margin-bottom: 1em; }
-      .lead { font-size: 1.2em; color: var(--text-primary); margin-bottom: 30px; }
+    <link href="Farid%20Andika%20-%20Personal%20Website_files/style.css" rel="stylesheet">
 
-      /* Home Section */
-      #home {
-        text-align: center;
-        padding-top: 150px;
-        padding-bottom: 150px;
-      }
-      #home .profile-picture {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 30px;
-        border: 4px solid var(--highlight-blue);
-        box-shadow: var(--shadow);
-        transition: transform 0.5s ease-out;
-      }
-      #home .typewriter {
-        font-size: 2.2em;
-        color: var(--text-primary);
-        margin-bottom: 40px;
-        min-height: 1.5em;
-      }
-      .cta-button {
-        display: inline-block;
-        background-color: var(--highlight-blue);
-        color: #ffffff;
-        padding: 15px 30px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 1.1em;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        margin: 10px;
-        box-shadow: var(--shadow);
-      }
-      .cta-button:hover {
-        background-color: var(--link-hover);
-        transform: translateY(-3px);
-      }
+</head>
 
-      /* About Section */
-      #about .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 40px;
-        align-items: flex-start;
-      }
-      #about .bio-text { margin-bottom: 20px; }
-      #about .section-card {
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 10px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow);
-      }
-      #about .profile-details ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      #about .profile-details li {
-        margin-bottom: 10px;
-        color: var(--text-secondary);
-      }
-      #about .profile-details strong {
-        color: var(--text-primary);
-        margin-right: 5px;
-      }
+<body>
 
-      /* Skills & Expertise */
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 15px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-      }
-      .skill-item {
-        background-color: var(--accent-blue);
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-        color: var(--text-primary);
-        font-weight: 500;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        font-size: 0.95em;
-      }
-      .skill-progress {
-        margin-top: 30px;
-      }
-      .skill-progress h4 {
-        margin-bottom: 10px;
-        color: var(--text-primary);
-        font-size: 1.1em;
-      }
-      .progress-bar-container {
-        background-color: var(--card-border);
-        border-radius: 5px;
-        height: 10px;
-        margin-bottom: 15px;
-        overflow: hidden;
-      }
-      .progress-bar {
-        height: 100%;
-        background-color: var(--highlight-blue);
-        width: 0%;
-        transition: width 1.5s ease-out;
-        border-radius: 5px;
-      }
-      .progress-bar[data-progress].animate {
-        width: var(--progress-width);
-      }
+    <header id="header" class="header-top">
+    <div class="container">
 
-      /* Company Worked With */
-      .company-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
-      }
-      .company-logo-placeholder {
-        height: 80px;
-        background-color: var(--accent-blue);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-primary);
-        font-weight: bold;
-        font-size: 0.9em;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        transition: background-color 0.3s ease, transform 0.2s ease;
-      }
-      .company-logo-placeholder:hover {
-        background-color: var(--link-hover);
-        transform: translateY(-3px);
-      }
+      <h1><a href="https://faridandika.github.io/index.html">M.Fawwaz</a></h1>
+                  <h2>I'm a <span>Software Engineer @ NexTeen</span> living in South Tangerang, Indonesia 🇮🇩.</h2>
 
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link" href="#header">Home</a></li>
+          <li><a class="nav-link active" href="#about">About</a></li>
+          <li><a href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" target="_blank"> <span>Resume</span></a></li>
+          <li><a class="nav-link" href="#education">Education</a></li>
+          <li><a class="nav-link" href="#services">Certifications</a></li>
+          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
 
-      /* Accordion */
-      .accordion-item {
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 8px;
-        margin-bottom: 10px;
-        overflow: hidden;
-        box-shadow: var(--shadow);
-      }
-      .accordion-header {
-        background-color: var(--accent-blue);
-        padding: 15px 20px;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: bold;
-        color: var(--text-primary);
-        transition: background-color 0.3s ease;
-      }
-      .accordion-header:hover {
-        background-color: var(--link-hover);
-      }
-      .accordion-header .icon {
-        font-size: 1.2em;
-        transition: transform 0.3s ease;
-      }
-      .accordion-header.active .icon {
-        transform: rotate(90deg);
-      }
-      .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-out;
-        background-color: var(--card-bg);
-        padding: 0 20px;
-      }
-      .accordion-content.open {
-        max-height: 1000px;
-        padding: 20px;
-      }
-      .accordion-content h4 { color: var(--highlight-blue); margin-top: 10px; }
-      .accordion-content ul { list-style: disc; margin-left: 20px; }
-      .accordion-content p { margin-bottom: 10px; }
+      </nav>            
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@onlyfark" class="tiktok"><i class="bi bi-tiktok"></i></a>
+        <a href="https://www.instagram.com/fardikha/" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.goodreads.com/user/show/167939189-farid" class="goodreads"><i class="bi bi-book"></i></a>
+        <a href="https://developers.google.com/profile/u/faridandika" class="google"><i class="bi bi-google"></i></a>
+        <a href="https://github.com/faridandika" class="github"><i class="bi bi-github"></i></a>
+        <a href="https://id.linkedin.com/in/faridandika" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+      
+      
+      
 
-      /* Portfolio Section */
-      #portfolio .filter-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 30px;
-        justify-content: center;
-      }
-      #portfolio .filter-btn {
-        background-color: var(--accent-blue);
-        color: var(--text-primary);
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        transition: background-color 0.3s ease;
-      }
-      #portfolio .filter-btn:hover {
-        background-color: var(--link-hover);
-      }
-      #portfolio .filter-btn.active {
-        background-color: var(--highlight-blue);
-        color: #ffffff;
-      }
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-      }
-      .portfolio-item {
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: var(--shadow);
+    </div>
+  </header>    <section id="about" class="about section-show">
 
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      }
-      .portfolio-item.is-visible { /* Changed to is-visible */
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .portfolio-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-      }
-      .portfolio-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        display: block;
-      }
-      .portfolio-item-content {
-        padding: 20px;
-      }
-      .portfolio-item-content h3 {
-        color: var(--highlight-blue);
-        margin-bottom: 10px;
-        font-size: 1.4em;
-      }
-      .portfolio-item-content p {
-        color: var(--text-secondary);
-        font-size: 0.9em;
-      }
-      .project-tags span {
-        display: inline-block;
-        background-color: var(--accent-blue);
-        color: var(--text-primary);
-        font-size: 0.8em;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-right: 5px;
-        margin-top: 10px;
-      }
+        <div class="about-me container">
 
-      /* Modal */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1001;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.8);
-        padding-top: 60px;
-        animation: fadeIn 0.3s;
-      }
-      .modal-content {
-        background-color: var(--bg-dark);
-        margin: 5% auto;
-        padding: 30px;
-        border: 1px solid var(--card-border);
-        width: 80%;
-        max-width: 900px;
-        max-height: 85vh;
-        overflow-y: auto;
-        border-radius: 10px;
-        position: relative;
-        box-shadow: var(--shadow);
-        animation: slideIn 0.3s;
-      }
-      .close-button {
-        color: var(--text-secondary);
-        font-size: 35px;
-        font-weight: bold;
-        position: absolute;
-        top: 10px;
-        right: 25px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-      }
-      .close-button:hover, .close-button:focus {
-        color: var(--highlight-blue);
-        text-decoration: none;
-        cursor: pointer;
-      }
-      .modal-content h2 {
-        color: var(--highlight-blue);
-        border-bottom: 1px solid var(--accent-blue);
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-      }
-      .modal-content p, .modal-content ul {
-        color: var(--text-secondary);
-        margin-bottom: 15px;
-      }
-      .modal-content img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 20px;
-      }
-      .modal-content .tech-stack span {
-        display: inline-block;
-        background-color: var(--accent-blue);
-        color: var(--text-primary);
-        font-size: 0.85em;
-        padding: 6px 12px;
-        border-radius: 6px;
-        margin-right: 8px;
-        margin-bottom: 8px;
-      }
-      .modal-link {
-        color: var(--highlight-blue);
-        text-decoration: none;
-        font-weight: bold;
-        margin-top: 15px;
-        display: inline-block;
-      }
-      .modal-link:hover {
-        text-decoration: underline;
-      }
+      <div class="section-title">
+        <h2>About</h2>
+      </div>
 
-      /* Modal Image Gallery */
-      .modal-image-gallery {
-        position: relative;
-        margin-bottom: 20px;
-      }
-      .modal-image-gallery img {
-        width: 100%;
-        height: 350px;
-        object-fit: cover;
-        border-radius: 8px;
-        display: block;
-      }
-      .gallery-controls {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        transform: translateY(-50%);
-        padding: 0 10px;
-      }
-      .gallery-nav-btn {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.5em;
-        line-height: 1;
-        transition: background-color 0.3s ease;
-      }
-      .gallery-nav-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-      .modal-thumbnails {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-        justify-content: center;
-      }
-      .modal-thumbnails img {
-        width: 80px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 5px;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: border-color 0.3s ease;
-      }
-      .modal-thumbnails img.active-thumbnail,
-      .modal-thumbnails img:hover {
-        border-color: var(--highlight-blue);
-      }
+      <div class="row">
+        <div class="col-lg-4" data-aos="fade-right">
+          <img src="https://media.licdn.com/dms/image/v2/D4E03AQGEQfy5fw9_8g/profile-displayphoto-scale_400_400/B4EZoaJ0Z0IIAg-/0/1761375373833?e=1765411200&v=beta&t=0O34w-6z5O2kkX-H8O2bzMWQsxBGnAjHDn-bcyL0PzM" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+          <h3>Muhammad Fawwaz Rayyan Khalish</h3>
+          <p>
+           Co-Chief Executive Officer of @NexTeen | Full Stack Engineer | Silver Medal in the Indonesian Science Olympiad Mathematics organized by HIMA Physic Gajah Mada University 
+          </p>
 
-      /* Contact Section */
-      #contact .contact-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-      }
-      #contact .contact-info {
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: var(--shadow);
-      }
-      #contact .contact-info p {
-        margin-bottom: 15px;
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-      }
-      #contact .contact-info strong {
-        color: var(--text-primary);
-      }
-      #contact .social-links a {
-        color: var(--highlight-blue);
-        font-size: 1.8em;
-        margin-right: 15px;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-      #contact .social-links a:hover {
-        color: var(--link-hover);
-      }
-      .map-placeholder {
-        width: 100%;
-        height: 200px;
-        background-color: var(--accent-blue);
-        border-radius: 8px;
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-primary);
-        font-size: 1.2em;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      }
+          <p>
+         I am a person with a strong interest in computer science, with a focus on: [software, artificial intelligence, cybersecurity, or data analysis] development. Experienced in using various programming languages ​such as Python, Java, and C++, and accustomed to working with modern tools and frameworks. I enjoy solving problems through a logical and efficient approach, and continue to learn to keep up with the latest technology developments. My commitment is to create digital solutions that are functional, scalable, and useful for users.
+          </p>
 
-      #contact form {
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 10px;
-        padding: 30px;
-        display: grid;
-        gap: 15px;
-        box-shadow: var(--shadow);
-      }
-      #contact form label {
-        display: block;
-        margin-bottom: 5px;
-        color: var(--text-primary);
-        font-weight: 500;
-      }
-      #contact form input,
-      #contact form textarea,
-      #contact form select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid var(--card-border);
-        border-radius: 8px;
-        background-color: var(--bg-darker);
-        color: var(--text-primary);
-        font-size: 1em;
-        transition: border-color 0.3s ease;
-      }
-      #contact form input:focus,
-      #contact form textarea:focus,
-      #contact form select:focus {
-        outline: none;
-        border-color: var(--highlight-blue);
-      }
-      #contact form textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-      #contact form .submit-button {
-        background-color: var(--highlight-blue);
-        color: #ffffff;
-        padding: 15px 25px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1.1em;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        width: auto;
-      }
-      #contact form .submit-button:hover {
-        background-color: var(--link-hover);
-        transform: translateY(-2px);
-      }
-      .form-message {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 0.9em;
-        display: none;
-      }
-      .form-message.success {
-        background-color: rgba(40, 167, 69, 0.2);
-        color: var(--success);
-        display: block;
-      }
-      .form-message.error {
-        background-color: rgba(220, 53, 69, 0.2);
-        color: var(--error);
-        display: block;
-      }
-      .form-field-error {
-        color: var(--error);
-        font-size: 0.8em;
-        margin-top: 5px;
-        display: none;
-      }
+          <p>
+          In 2023, I joined Bangkit Academy led by Google, GoTo, and 
+Traveloka, focusing on Android development with Kotlin. The following 
+year, I had the opportunity to expand into the Apple ecosystem through 
+the Apple Developer Academy @Infinite Learning, where I built several 
+iOS apps and a Unity game while deepening my skills in Swift, SwiftUI, 
+and Apple frameworks.
+          </p>
 
-      .copy-btn {
-        background: none;
-        border: none;
-        color: var(--highlight-blue);
-        cursor: pointer;
-        margin-left: 10px;
-        font-size: 1em;
-        transition: color 0.3s ease;
-        padding: 0;
-        line-height: 1;
-      }
-      .copy-btn:hover {
-        color: var(--link-hover);
-      }
-      .copy-tooltip {
-        position: relative;
-        display: inline-block;
-      }
-      .copy-tooltip .tooltiptext {
-        visibility: hidden;
-        width: 100px;
-        background-color: var(--highlight-blue);
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -50px;
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .copy-tooltip .tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: var(--highlight-blue) transparent transparent transparent;
-      }
-      .copy-tooltip.active .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-      }
+          <p>
+          After graduating from the Academy, I stepped into the 
+professional world as an iOS Developer at AO Plus Asia in Singapore, 
+where I developed and published native iOS apps, including an expense 
+tracker powered by SwiftUI, CloudKit, CoreData, Vision, and GPT-based 
+OCR. Today, I’m working remotely as a Mobile Developer &amp; Front-End 
+Engineer at OneByOne Logistical Pty Ltd in Australia, contributing to 
+projects that span across iOS, Flutter, and React. 
+          I enjoy building applications that are not only functional but
+ also intuitive and delightful to use. For me, technology is a way to 
+solve problems, create meaningful experiences, and connect with people 
+around the world.
+          </p>
+        
+        </div>
+      </div>
+
+    </div>        <div class="interests container">
+
+      <div class="section-title">
+        <h2>Skills</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>iOS</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <a href="https://www.swift.org/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>SwiftUI</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>UIKit</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>AVFoundation</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>ARKit</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>VisionKit</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>TipKit</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://developer.apple.com/documentation/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-apple-fill" style="color: #ffffff;"></i>
+              <h3>Core Data</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://d.android.com/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-android-fill" style="color: #1c7d32;"></i>
+              <h3>Android</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://kotlinlang.org/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-code-s-slash-line" style="color: #5578ff;"></i>
+              <h3>Kotlin</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://docs.oracle.com/en/java/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-code-s-slash-line" style="color: #e80368;"></i>
+              <h3>Java</h3>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mt-4">
+          <a href="https://github.com/" target="_blank" style="text-decoration: none;">
+            <div class="icon-box">
+              <i class="ri-github-fill" style="color: #aac5e4a8;"></i>
+              <h3>Github</h3>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>        <div class="testimonials container">
+
+      <div class="section-title">
+        <h2>Testimonials</h2>
+      </div>
+
+      <div class="testimonials-slider swiper swiper-initialized swiper-horizontal swiper-backface-hidden" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper" id="swiper-wrapper-d845c342103ddb95f" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-4600px, 0px, 0px); transition-delay: 0ms;">
+
+                                                                  <div class="swiper-slide swiper-slide-next" style="width: 900px; margin-right: 20px;" role="group" aria-label="3 / 6" data-swiper-slide-index="2">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+
+                What sets Muhammad Fawwaz Rayyan Khalish apart is not just his technical capabilities, but also his willingness to share
+                knowledge and experiences with others. He is humble and always open to learning new things, constantly
+                pushing himself to grow. His low-profile demeanor, combined with a strong drive to help those around
+                him, makes him an invaluable team player.
+                I highly recommend **Muhammad Fawwaz Rayyan Khalish** to anyone looking for a highly dedicated, organized, and growth-oriented
+                individual.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/aminishaq.png" class="testimonial-img" alt="">
+              <h3>Amin Ishaq</h3>
+              <h4>Bangkit Academy 2023 H2 Graduate | Mobile Developer | UI/UX Designer</h4>
+            </div>
+
+        </div><div class="swiper-slide" style="width: 900px; margin-right: 20px;" role="group" aria-label="4 / 6" data-swiper-slide-index="3">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              His academic performance is very good, as evidenced by his consistent increase in knowledge in the field
+              of Software Development. He is diligent, consistent, and always willing to learn new things in this
+              area. Additionally, he interacts very well with other students
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pakfaisal.png" class="testimonial-img" alt="">
+            <h3> Prof. Ir. Muhammad Faisal, S.SI.,M.T., Ph.D.,IPM </h3>
+            <h4>Researcher and Lecturer at Universitas Muhammadiyah Makassar</h4>
+          </div>
+        </div><div class="swiper-slide" style="width: 900px; margin-right: 20px;" role="group" aria-label="5 / 6" data-swiper-slide-index="4">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Muhammad Fawwaz Rayyan Khalish was one of the most dedicated and motivated 
+students I had the privilege of mentoring during Bangkit Academy 2023 
+Batch 2. Their enthusiasm for mobile development and ability to tackle 
+challenges head-on truly stood out.
+                It was a pleasure working with **Muhammad Fawwaz Rayyan Khalish**, and I’m excited to
+ see what amazing things they’ll achieve in the future!
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/robert-theo.png" class="testimonial-img" alt="">
+              <h3>Robert Theo</h3>
+              <h4>Backend Engineer |  Apple Developer Academy @Binus 
+Cohort 7 | Former GDSC Lead @Matana University | Bangkit Academy 
+Graduate '22</h4>
+            </div>
+          </div><div class="swiper-slide" style="width: 900px; margin-right: 20px;" role="group" aria-label="6 / 6" data-swiper-slide-index="5">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Worked with Muhammad Fawwaz Rayyan Khalish on a few iOS projects and really 
+enjoyed the experience. He’s solid with Swift, knows his way around iOS 
+architecture, and always delivers clean, reliable code.
+
+                Muhammad Fawwaz Rayyan Khalish’s easy to work with, communicates well, and never 
+shies away from solving tough problems. Definitely someone you’d want on
+ your dev team.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/rajesh.png" class="testimonial-img" alt="">
+              <h3>Rajesh Triadi Noftarizal</h3>
+              <h4>iOS Engineer @ Triv |  Apple Developer Academy @ IL </h4>
+            </div>
+          </div><div class="swiper-slide swiper-slide-prev" style="width: 900px; margin-right: 20px;" role="group" aria-label="1 / 6" data-swiper-slide-index="0">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                I had the opportunity to collaborate with Muhammad Fawwaz Rayyan Khalish on an iOS app development project during our internship
+                at Apple Developer Academy @IL. Muhammad Fawwaz Rayyan Khalish is incredibly talented in design and graphics, and his work always
+                brought a creative edge to our project. Beyond his technical skills, Muhammad Fawwaz Rayyan Khalish is an exceptional
+                collaborator, consistently working with the team to achieve our goals. He’s always open to discussion
+                and willingly shares his insights and experiences. I highly recommend **Muhammad Fawwaz Rayyan Khalish** to any team looking for a
+                dedicated designer with strong teamwork and collaboration skills.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/kelvinkelvin.png" class="testimonial-img" alt="">
+              <h3>Kelvin Kelvin</h3>
+              <h4>Apple Developer Academy @ Infinite Learning C24 | Application Developer at Blue Silo | Graduated
+                Student of Information Systems at Batam International University | Experience Front-End Developer at
+                Altrovis</h4>
+            </div>
+          
+          </div><div class="swiper-slide swiper-slide-active" style="width: 900px; margin-right: 20px;" role="group" aria-label="2 / 6" data-swiper-slide-index="1">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                I know Muhammad Fawwaz Rayyan Khalish very well as a student of great integrity. In every opportunity, **Muhammad Fawwaz Rayyan Khalish** consistently
+                demonstrates a commitment to ethics, honesty, and a high sense of responsibility, along with strong
+                critical and analytical thinking skills.
+
+                Furthermore, Muhammad Fawwaz Rayyan Khalish is very exploratory in seeking solutions; he never hesitates to try new approaches or
+                explore innovative ideas. His enthusiasm for learning sets him apart among his peers.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/ibusry.png" class="testimonial-img" alt="">
+              <h3>Sry Yunarti, S.H., M.Cs.</h3>
+              <h4>Researcher and Lecturer at STMIK Profesional Makassar</h4>
+            </div>
+          </div></div>
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span></div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+
+      <div class="owl-carousel testimonials-carousel">
+
+      </div>
+
+    </div>  </section>    <section id="resume" class="resume">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Resume</h2>
+        <p>Check My Resume</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <h3 class="resume-title">Sumary</h3>
+          <div class="resume-item pb-0">
+            <h4>Alice Barkley</h4>
+            <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing
+                user-centered digital/print marketing material from initial concept to final, polished deliverable.</em>
+            </p>
+            <p>
+            </p><ul>
+              <li>Portland par 127,Orlando, FL</li>
+              <li>(123) 456-7891</li>
+              <li>alice.barkley@example.com</li>
+            </ul>
+            <p></p>
+          </div>
+
+          <h3 class="resume-title">Education</h3>
+          <div class="resume-item">
+            <h4>Master of Fine Arts &amp; Graphic Design</h4>
+            <h5>2015 - 2016</h5>
+            <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
+            <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui
+              ut dignissimos deleniti nerada porti sand markend</p>
+          </div>
+          <div class="resume-item">
+            <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
+            <h5>2010 - 2014</h5>
+            <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
+            <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius
+              unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="resume-title">Professional Experience</h3>
+          <div class="resume-item">
+            <h4>Senior graphic design specialist</h4>
+            <h5>2019 - Present</h5>
+            <p><em>Experion, New York, NY </em></p>
+            <p>
+            </p><ul>
+              <li>Lead in the design, development, and implementation of the graphic, layout, and production
+                communication materials</li>
+              <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project.
+              </li>
+              <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the
+                design</li>
+              <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
+            </ul>
+            <p></p>
+          </div>
+          <div class="resume-item">
+            <h4>Graphic design specialist</h4>
+            <h5>2017 - 2018</h5>
+            <p><em>Stepping Stone Advertising, New York, NY</em></p>
+            <p>
+            </p><ul>
+              <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and
+                advertisements).</li>
+              <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
+              <li>Recommended and consulted with clients on the most appropriate graphic design</li>
+              <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
+            </ul>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>    <section id="services" class="portfolio">
+
+    <div class="container">
+
+      <div class="">
+        <div class="section-title">
+          <h2>Professional Certifications</h2>
+        </div>
+
+              <div class="row portfolio-container d-flex align-items-stretch" style="position: relative; height: 251.633px;">
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position: absolute; left: 0px; top: 0px;">
+            <div class="portfolio-wrap">
+              <img src="https://media.licdn.com/dms/image/v2/D4E2DAQHXDx4IJtMHhw/profile-treasury-document-cover-images_480/B4EZcMr6GNHQAw-/0/1748264527842?e=1764154800&v=beta&t=EHTa4h1g6HEXy_U-dZZ5zAepbklzT7gWmb_BE8p4VsQ" class="img-thumbnail" alt="">
+              <div class="portfolio-info">
+                <h3> HMD Mathematic  &amp; Certificate {Grade : B}</h3>
+                <div class="portfolio-links">
+                  <a href= "https://drive.google.com/file/d/1ItrJhhphoEYEfre2rtU0d7ER3qHIF5hf/view?usp=sharing" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                  <a href="https://drive.google.com/file/d/1ItrJhhphoEYEfre2rtU0d7ER3qHIF5hf/view?usp=sharing" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                </div>
+            </div>
+          </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position: absolute; left: 308px; top: 0px;">
+            <div class="portfolio-wrap">
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/linkedincertif-github.webp" class="img-thumbnail" alt="">
+              <div class="portfolio-info">
+                <h3>LinkedIn &amp; Github - Career Essential in Github</h3>
+                <div class="portfolio-links">
+                  <a href="https://faridandika.github.io/assets/img/certifications/linkedincertif-github.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                  <a href="https://www.linkedin.com/learning/certificates/792bc8bc6e713a5de92612547ab8b1d30c9bda320c9e0b619d93945ccb6683ed" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                </div>
+            </div>
+          </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="position: absolute; left: 616px; top: 0px;">
+            <div class="portfolio-wrap">
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/juniorgraphicdesigner.webp" class="img-thumbnail" alt="">
+              <div class="portfolio-info">
+                <h3>Junior Graphic Designer</h3>
+                <div class="portfolio-links">
+                  <a href="https://faridandika.github.io/assets/img/certifications/juniorgraphicdesigner.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                  <a href="https://drive.google.com/file/d/1XowmdK0EONUyHH_mJ9wxo8OR_nsn-8RO/view?usp=sharing" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>Certifications</h2>
+      </div>
+      <div class="row portfolio-container d-flex align-items-stretch">
+        
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/AppleDeveloperAcademyCompletion024.JPG" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Apple - Developer Academy @ Infinite Learning</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/AppleDeveloperAcademyCompletion024.JPG" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                              </div>
+            </div>
+          </div>
+        </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Certificate%20of%20Apple%20Search%20Ads%20-%20Farid.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Apple - Apple Search ADS</h3>
+
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Certificate%20of%20Apple%20Search%20Ads%20-%20Farid.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://certification-searchads.apple.com/certificate/dKT2OALT2D" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+            
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Certificate%2520of%2520Recognition%2520-%2520Apple%2520Teacher%2520Fari.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Apple - Apple Teacher</h3>
+
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Certificate%20of%20Recognition%20-%20Apple%20Teacher%20Farid%20Andika.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/14War-68D8hz_WO9xPP_LSCXxGW5AQU5S/view" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/bangkitdistinction-farid.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Bangkit Academy - Certificate Distinction Graduate</h3>
+              
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/bangkitdistinction-farid.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/1rmmO6i8RXRvnbAM8DIwpXiNqak6bGrxs/view?usp=sharing" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Certificate%2520-%2520The%2520British%2520Institute%2520-%2520Eng%2520for.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>The British Institute - English Certificate</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Certificate%20-%20The%20British%20Institute%20-%20Eng%20for%20Business%20Communcation%20.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/1Cfu6z5hBRu5j9dHefxz2nGBGMk98NZ-S/view?usp=sharing" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/certificate-incoacademy.jpg" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>INCO Acacemy - Green Digital Certificate</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/certificate-incoacademy.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/1w8f7y_tW-Xz8E1eY5T9d_xJ-sN_L8n3p/view?usp=sharing" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        <!-- Grab Academy Marketing -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Mastercard%2520Strive%2520Community%2520Certificate%2520-%2520Marketi.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Grab Academy - Marketing</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Mastercard%20Strive%20Community%20Certificate%20-%20Marketing%20at%20GrabAcademy.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/15xh49KdEVrD-YVtjYuOvliplGxULGkvd/view?usp=drive_link" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grab Starting a Business Retail at Grab -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Mastercard%2520Strive%2520Community%2520Certificate%2520-%2520Startin.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Grab Academy -Starting a Business Retail</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Mastercard%20Strive%20Community%20Certificate%20-%20Starting%20a%20Business%20-%20Retail%20at%20GrabAcademy.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://www.dicoding.com/certificates/2VX36KK9NXYQ" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grab Academy - Financial Planning -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/Mastercard%2520Strive%2520Community%2520Certificate%2520-%2520Financi.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Grab Academy - Financial Planning</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/Mastercard%20Strive%20Community%20Certificate%20-%20Financial%20Planning%20at%20GrabAcademy.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://drive.google.com/file/d/1RzgglnxBo-PnkGx7c43WRe3mFztukl8q/view?usp=drive_link" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Memulai Pemrograman Dengan Kotlin -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/kotlinprogramming.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Dicoding - Memulai Pemrograman Dengan Kotlin</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/kotlinprogramming.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://www.dicoding.com/certificates/QLZ9QJW79Z5D" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dicoding - Git dan Github -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/gitdangithub.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Dicoding - Git dan Github</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/gitdangithub.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://www.dicoding.com/certificates/2VX36WM34XYQ" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Belajar Prinsip Pemrograman SOLID -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/solidprogramming.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>Dicoding - Belajar Prinsip Pemrograman SOLID</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/solidprogramming.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://www.dicoding.com/certificates/EYX4YV0WJZDL" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Memulai Pemrograman Dengan Swift -->
+       <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="portfolio-wrap">
+          <img src="Farid%20Andika%20-%20Personal%20Website_files/swiftbasic.webp" class="img-thumbnail" alt="">
+          <div class="portfolio-info">
+            <h3>Dicoding - Memulai Pemrograman Dengan Swift</h3>
+            <div class="portfolio-links">
+              <a href="https://faridandika.github.io/assets/img/certifications/swiftbasic.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+              <a href="https://www.dicoding.com/certificates/QLZ9QJW79Z5D" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+            </div>
+          </div>
+        </div>
+       </div>
+
+     <!-- EF SET -->
+       <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                  <img src="Farid%20Andika%20-%20Personal%20Website_files/Certificate%2520of%2520English%2520Level%2520from%2520EF%2520SET%2520-%2520.webp" class="img-thumbnail" alt="">
+                  <div class="portfolio-info">
+                    <h3>EF SET English Certificate - C1</h3>
+      
+                    <div class="portfolio-links">
+                      <a href="https://faridandika.github.io/assets/img/certifications/Certificate%20of%20English%20Level%20from%20EF%20SET%20-%20C1%20Proficient%20-%20Farid.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                      <a href="https://cert.efset.org/3FejRc" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+                    </div>
+                  </div>
+                </div>
+       </div>
 
 
-      /* Footer */
-      footer {
-        text-align: center;
-        padding: 30px 20px;
-        background-color: var(--bg-darker);
-        border-top: 1px solid var(--accent-blue);
-        color: var(--text-secondary);
-        font-size: 0.9em;
-      }
+      </div>
+      
+      <div class="section-title">
+        <h2>Awards</h2>
+      </div>
 
-      /* Back to Top Button */
-      #backToTopBtn {
-        display: none;
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 99;
-        font-size: 24px;
-        width: 50px;
-        height: 50px;
-        background-color: var(--highlight-blue);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        padding: 0;
-        line-height: 50px;
-        text-align: center;
-        box-shadow: var(--shadow);
-        transition: background-color 0.3s ease, transform 0.2s ease;
-      }
-      #backToTopBtn:hover {
-        background-color: var(--link-hover);
-        transform: translateY(-3px);
-      }
+      <div class="row portfolio-container" style="height: 319px;">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <!-- Sertif awards - KPPS -->
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/kpu2020-farid.webp" class="img-thumbnail" alt="">
+            <div class="portfolio-info">
+              <h3>KPU Makassar - Panitia KPPS</h3>
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/assets/img/certifications/kpu2020-farid.webp" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-zoom-in"></i></a>
+                <a href="https://www.dicoding.com/certificates/2VX36KK9NXYQ" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link "></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      /* Animations for content on scroll */
-      .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      }
-      .animate-on-scroll.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    <div class="row portfolio-container" style="height: auto;">
 
-      /* Animations */
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      @keyframes slideIn {
-        from { transform: translateY(-50px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-      }
+  </div></div></section><!-- End Services Section -->
 
-      /* Responsive Design */
-      @media (max-width: 992px) {
-        .nav { flex-direction: column; gap: 15px; }
-        nav ul { flex-wrap: wrap; justify-content: center; }
-        #home h1 { font-size: 2.8em; }
-        #home .typewriter { font-size: 1.8em; }
-        #about .grid-2 { grid-template-columns: 1fr; }
-        #contact .contact-grid { grid-template-columns: 1fr; }
-        .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .company-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
-      }
+  <!-- ======= Education Section ======= -->
+  <section id="education" class="education">
+    <div class="container">
+      <div class="section-title">
+        <h2>Formal Education</h2>
+      </div>
 
-      @media (max-width: 768px) {
-        h1 { font-size: 2.5em; }
-        h2 { font-size: 2em; }
-        .lead { font-size: 1.1em; }
-        nav a { padding: 6px 10px; font-size: 0.9em; }
-        .cta-button { padding: 12px 25px; font-size: 1em; }
-        .modal-content { width: 95%; margin: 2% auto; padding: 20px; }
-        .close-button { font-size: 30px; top: 5px; right: 15px; }
-        #backToTopBtn { width: 45px; height: 45px; font-size: 20px; line-height: 45px; bottom: 20px; right: 20px;}
-        .skills-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-        .modal-image-gallery img { height: 250px; }
-      }
+      <div class="row">
+        <div class="col-lg-12 d-flex" data-aos="fade-up">
+          <div class="col-md-4 mt-4 mt-md-0 icon-box bg blue" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://2.bp.blogspot.com/-4vOJMrCoB0Q/U81sXznw8FI/AAAAAAAAAHU/gvVu62CiXg0/s1600/K1008_DEX_view-01.jpg" class="img-fluid" alt="">
+            <h5><a href="https://www.gunadarma.ac.id/" target="_blank">Gunadarma University</a></h5>
+            <h6>2025 - 2029</h6>
+            <p><em>Bachelor's Degree in Informatic Engineering</em></p>
+            <p>GPA: -</p>
+          </div>
 
-      @media (max-width: 576px) {
-        #home h1 { font-size: 2em; }
-        #home .typewriter { font-size: 1.5em; }
-        #home .profile-picture { width: 140px; height: 140px; }
-        section { padding: 60px 0; }
-        nav ul { gap: 10px; }
-        .skills-grid { grid-template-columns: 1fr; }
-        .filter-buttons { justify-content: flex-start; }
-        .company-grid { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }
-        .modal-image-gallery img { height: 180px; }
-        .modal-thumbnails img { width: 60px; height: 45px; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="scroll-progress"></div>
-    <header id="main-header">
-      <div class="container nav">
-        <a href="#home" class="logo">Junior Software Engineer</a>
-        <nav>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+          <div class="col-md-4 mt-4 mt-md-0 icon-box bg-blue" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://static.wixstatic.com/media/ab5dd5_74c3fa06d6c44120addb0c3df87f7dbc~mv2.png/v1/fill/w_1280,h_720,al_c/ab5dd5_74c3fa06d6c44120addb0c3df87f7dbc~mv2.png" class="img-fluid" alt="">
+            <!-- <h5><a href="https://drive.google.com/file/d/1yikKDcZrRftKOccfAxYodpXt0PJjHvWG/view?usp=sharing target="_blank">Telkom University (71 credits)</a></h5> -->
+            <h5><a href="https://www.revou.co/" target="_blank">RevoU | Indonesia’s Largest Professional Skilling</a></h5>
+            <h6>2014 - 2025</h6>
+            <p><em>Software Engineer Course, Software Engineering</em></p>
+            <p>GPA: 95 (A - Excelent)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-title mt-5">
+        <h2>Additional Education</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 d-flex" data-aos="fade-up">
+          <div class="col-md-4 mt-4 mt-md-0 icon-box bg-grey" data-aos="fade-up" data-aos-delay="200">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/adaIL2.webp" class="img-fluid" alt="">
+            <h5><a href="https://www.developeracademy.infinitelearning.id/" target="_blank">Apple Developer Academy
+                @IL</a></h5>
+            <h6>February 2024 - Desember 2024</h6>
+            <p><em>Tech Learner | Focusing on iOS App Development</em></p>
+            <p>Graduation Status: Graduated</p>
+          </div>
+
+          <div class="col-md-4 mt-4 mt-md-0 icon-box bg-grey" data-aos="fade-up" data-aos-delay="200">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/bangkit2.webp" class="img-fluid" alt="">
+            <h5><a href="https://grow.google/intl/id_id/bangkit/?tab=machine-learning" target="_blank">Bangkit Academy
+                2023 Batch 2</a></h5>
+            <h6>Augustus - January 2023</h6>
+            <p><em>Mobile Development Cohort | Kotlin &amp; Jetpack Compose</em></p>
+            <p>Graduate Status: Distinction Graduate</p>
+          </div>
+
+          <div class="col-md-4 mt-4 mt-md-0 icon-box bg-grey" data-aos="fade-up" data-aos-delay="200">
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/lead.webp" class="img-fluid" alt="">
+            <h5><a href="https://www.telkom.co.id/sites/berita/id_ID/news/inagurasi-lead-by-indihome,-telkom-siapkan-atlet-esport-terbaik-1569" target="_blank">Limitless Esport Academy</a></h5>
+            <h6>Januari 2022 - February 2022</h6>
+            <p><em>Esport Akademia | League of Legends: WildRift</em></p>
+            <p>Graduate Status: Graduated</p>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+  </section><!-- End Education Section -->
+
+
+
+  <!-- ======= Portfolio Section ======= -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Portfolio</h2>
+        <p>Projects</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">iOS</li>
+            <li data-filter=".filter-card">Android</li>
+            <li data-filter=".filter-web">Desktop</li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </header>
 
-    <main>
-      <!-- HOME SECTION -->
-      <section id="home" class="container">
-        <img src="https://mir-s3-cdn-cf.behance.net/user/230/bbe1792062998985.690c0e498e2fa.jpg" alt="Foto Profil" class="profile-picture animate-on-scroll">
-        <h1 class="animate-on-scroll"><span style="color:var(--highlight-blue);">Muhammad Fawwaz Rayyan Khalish</span></h1>
-        <div class="typewriter animate-on-scroll"></div>
-        <p class="lead animate-on-scroll">
-          Selamat datang di portofolio digital saya. Di sini, Anda akan menemukan perjalanan saya sebagai seorang Junior Software Engineer, melihat proyek-proyek yang telah saya kerjakan, dan mengenal lebih jauh tentang keahlian serta passion saya. Saya percaya pada kekuatan inovasi dan desain yang berpusat pada pengguna untuk menciptakan solusi yang berarti.
-          Dengan latar belakang yang solid di pengembangan software dan desain UI & UX, saya selalu mencari peluang untuk berkontribusi pada proyek yang menantang dan berdampak positif.
-        </p>
-        <div class="animate-on-scroll">
-          <a href="#portfolio" class="cta-button">Lihat Portofolio</a>
-          <a href="#contact" class="cta-button">Hubungi Saya</a>
-        </div>
+      <div class="row portfolio-container">
 
-        <div style="height:50px;"></div>
-        <div class="card animate-on-scroll" style="text-align: left;">
-          <h2>Mengapa Bekerja Sama dengan Saya?</h2>
-          <p class="lead">Saya membawa kombinasi keahlian teknis, pemikiran inovatif, dan komitmen kuat untuk setiap proyek.</p>
-          <div class="grid">
-            <div class="animate-on-scroll">
-              <h3>Pengalaman Multidisiplin</h3>
-              <p>Pengalaman saya mencakup berbagai fase pengembangan, mulai dari konseptualisasi ide, desain UI/UX, pengembangan frontend & backend, hingga deployment dan pemeliharaan. Ini memungkinkan saya untuk memahami proyek dari berbagai sudut pandang.</p>
-            </div>
-            <div class="animate-on-scroll">
-              <h3>Fokus pada Solusi</h3>
-              <p>Prioritas utama saya adalah menciptakan solusi yang tidak hanya fungsional, tetapi juga memecahkan masalah nyata bagi pengguna atau bisnis. Saya menganalisis kebutuhan secara mendalam untuk memastikan setiap fitur memiliki tujuan yang jelas.</p>
-            </div>
-            <div class="animate-on-scroll">
-              <h3>Adaptabilitas & Pembelajaran</h3>
-              <p>Dunia teknologi terus berkembang, dan saya selalu haus akan pengetahuan baru. Saya cepat beradaptasi dengan teknologi, framework, dan metodologi kerja yang berbeda, memastikan proyek Anda tetap relevan dan menggunakan praktik terbaik.</p>
-            </div>
-          </div>
-        </div>
+        <div class="row portfolio-container">
 
-        <div style="height:50px;"></div>
-        <div class="card animate-on-scroll" style="text-align: left;">
-          <h2>Keunggulan Khas Saya</h2>
-          <div class="feature-list">
-            <div class="feature animate-on-scroll">
-              <span class="tick">💡</span>
-              <div>
-                <strong>Inovasi Berorientasi Pengguna</strong>
-                <p style="margin:0;">Saya merancang dan mengembangkan dengan mempertimbangkan pengalaman pengguna akhir. Solusi saya intuitif, mudah digunakan, dan memecahkan masalah inti.</p>
-              </div>
-            </div>
-            <div class="feature animate-on-scroll">
-              <span class="tick">⚙️</span>
-              <div>
-                <strong>Kode Bersih & Skalabel</strong>
-                <p style="margin:0;">Saya berkomitmen pada penulisan kode yang bersih, terdokumentasi, dan mudah dipelihara, memastikan fondasi yang kokoh untuk pertumbuhan jangka panjang proyek Anda.</p>
-              </div>
-            </div>
-            <div class="feature animate-on-scroll">
-              <span class="tick">🤝</span>
-              <div>
-                <strong>Kolaborasi Efektif</strong>
-                <p style="margin:0;">Sebagai team player, saya mahir berkomunikasi dan bekerja sama dengan desainer, developer lain, dan pemangku kepentingan untuk mencapai tujuan bersama.</p>
-              </div>
-            </div>
-            <div class="feature animate-on-scroll">
-              <span class="tick">📊</span>
-              <div>
-                <strong>Pendekatan Berbasis Data</strong>
-                <p style="margin:0;">Keputusan desain dan pengembangan sering kali didukung oleh analisis data dan umpan balik pengguna, memastikan efektivitas solusi yang dibangun.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ABOUT SECTION -->
-      <section id="about" class="container">
-        <h2 class="animate-on-scroll">About Me: Kisah Perjalanan Saya</h2>
-        <div class="grid-2">
-          <div class="animate-on-scroll">
-            <div class="section-card bio-text">
-              <h3>Siapa Saya?</h3>
-              <p>
-                Saya Muhammad Fawwaz Rayyan Khalish, seorang Junior Software Engineer yang berdedikasi dengan pengalaman 6 bulan lebih di bidang pengembangan perangkat lunak full-stack, desain produk digital, dan analisis data tingkat lanjut.
-                Perjalanan saya di dunia teknologi dimulai sejak April 2025 ketika saya pertama kali mencoba membuat website sederhana dengan HTML/CSS dan memecahkan masalah coding pertama.
-                Sejak saat itu, passion saya terhadap inovasi dan penciptaan solusi digital terus berkembang.
-              </p>
-              <p>
-                Saya memiliki keyakinan kuat bahwa teknologi adalah alat yang ampuh untuk memecahkan masalah kompleks dan meningkatkan kualitas hidup. Oleh karena itu, saya selalu antusias mempelajari teknologi baru, framework terbaru, dan metodologi terbaik (seperti Agile/Scrum) untuk memastikan bahwa saya dapat memberikan solusi yang paling relevan dan efisien. Saya juga seorang pembelajar seumur hidup yang selalu mencari cara untuk meningkatkan diri, baik dalam hard skills maupun soft skills.
-              </p>
-              <p>
-                Sepanjang karir saya, saya telah terlibat dalam berbagai jenis proyek, mulai dari mengembangkan prototipe untuk startup kecil, membangun fitur-fitur penting untuk aplikasi enterprise berskala besar, hingga merancang pengalaman pengguna yang intuitif untuk platform konsumen.
-                Pengalaman multidisiplin ini telah mengasah kemampuan saya dalam berpikir kritis, menyelesaikan masalah secara kreatif, dan bekerja secara efektif baik sebagai individu maupun sebagai bagian integral dari tim yang dinamis.
-              </p>
-            </div>
-            <div class="section-card profile-details">
-              <h3>Detail Pribadi & Kontak</h3>
-              <ul>
-                <li><strong>Nama Lengkap:</strong> Muhammad Fawwaz Rayyan Khalish</li>
-                <li><strong>Tanggal Lahir:</strong> 14 Maret 2007</li>
-                <li><strong>Email:</strong> <a href="mailto:novalrayan97@gmail.com" style="color:var(--highlight-blue);">novalrayan97@gmail.com</a></li>
-                <li><strong>Telepon:</strong> 085719562762</li>
-                <li><strong>Domisili:</strong> Tangerang Selatan, Indonesia</li>
-                <li><strong>Status:</strong> Tersedia untuk proyek/kolaborasi</li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" style="color:var(--highlight-blue);">M. Fawwaz Rayyan Khalish</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/wazrynn" target="_blank" style="color:var(--highlight-blue);">Muhammad Fawwaz Rayyan Khalish</a></li>
-                <li><strong>Website:</strong> <a href="https://linktr.ee/wazrynn?fbclid=PAZXh0bgNhZW0CMTEAAaextUIFSDyxGd3XTJmtIA13HEr9EJxgbs6KUSmdwbLIX0jab2RvEYeLgv4f5g_aem_3bQRWECt8WMQArBqIIkD2A" target="_blank" style="color:var(--highlight-blue);">wazrynn</a></li>
-              </ul>
-            </div>
-          </div>
-          <div>
-            <div class="section-card animate-on-scroll">
-              <h3>Keahlian Teknis & Teknologi</h3>
-              <p>Daftar teknologi dan keahlian yang saya kuasai dan gunakan dalam proyek-proyek saya.</p>
-              <div class="skills-grid">
-                <div class="skill-item">HTML5</div>
-                <div class="skill-item">CSS3 (Sass/Less)</div>
-                <div class="skill-item">JavaScript (ES6+)</div>
-                <div class="skill-item">TypeScript</div>
-                <div class="skill-item">React.js</div>
-                <div class="skill-item">Vue.js</div>
-                <div class="skill-item">Node.js</div>
-                <div class="skill-item">Express.js</div>
-                <div class="skill-item">Python</div>
-                <div class="skill-item">Django/Flask</div>
-                <div class="skill-item">SQL (PostgreSQL/MySQL)</div>
-                <div class="skill-item">NoSQL (MongoDB)</div>
-                <div class="skill-item">Git/GitHub</div>
-                <div class="skill-item">RESTful APIs</div>
-                <div class="skill-item">Docker</div>
-                <div class="skill-item">AWS/GCP Basics</div>
-                <div class="skill-item">UI/UX Design</div>
-                <div class="skill-item">Figma</div>
-                <div class="skill-item">Adobe XD</div>
-                <div class="skill-item">Responsive Design</div>
-              </div>
-              <div class="skill-progress">
-                <h4>Tingkat Penguasaan Keahlian</h4>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="95"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">JavaScript & Frontend Development</p>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="90"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">React.js & Single Page Applications</p>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="85"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">Node.js & Backend Development</p>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="80"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">UI/UX Design & Prototyping</p>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="75"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">Database Management (SQL/NoSQL)</p>
-                <div class="progress-bar-container"><div class="progress-bar" data-progress="70"></div></div>
-                <p style="text-align: right; margin-top: -10px; font-size: 0.8em;">Cloud Computing (AWS/GCP)</p>
-              </div>
-            </div>
-
-            <div class="section-card animate-on-scroll">
-              <h3>Perusahaan yang Pernah Bekerja Sama</h3>
-              <p>Membangun produk dan solusi digital untuk berbagai klien dan perusahaan terkemuka.</p>
-              <div class="company-grid">
-                <div class="company-logo-placeholder">TechCorp</div>
-                <div class="company-logo-placeholder">InnovateX</div>
-                <div class="company-logo-placeholder">Global Solutions</div>
-                <div class="company-logo-placeholder">Creative Hub</div>
-                <div class="company-logo-placeholder">Startup A</div>
-                <div class="company-logo-placeholder">Enterprise B</div>
-                <div class="company-logo-placeholder">FinTech Co.</div>
-                <div class="company-logo-placeholder">EduTech Inc.</div>
-              </div>
-            </div>
-
-            <div class="section-card animate-on-scroll">
-              <h3>Pengalaman Profesional & Pendidikan Formal</h3>
-              <div class="accordion">
-                <div class="accordion-item">
-                  <div class="accordion-header">
-                    Pengalaman Kerja
-                    <span class="icon">&#9658;</span>
-                  </div>
-                  <div class="accordion-content">
-                    <h4>[Posisi Anda] - [Nama Perusahaan] ([Tahun Mulai] - [Tahun Selesai/Sekarang])</h4>
-                    <p>
-                      Sebagai [Posisi Anda] di [Nama Perusahaan], saya bertanggung jawab penuh atas [deskripsi singkat tanggung jawab utama, misal: seluruh siklus pengembangan aplikasi web kritikal, mulai dari perancangan arsitektur, implementasi fitur-fitur kompleks, hingga optimasi performa dan deployment].
-                      Saya berperan penting dalam [pencapaian kunci, misal: memimpin tim kecil untuk meluncurkan produk baru yang meningkatkan revenue sebesar X% atau mengimplementasikan sistem yang mengurangi bug report hingga Y%].
-                      Saya aktif berkolaborasi dengan tim produk dan desainer UX untuk menerjemahkan kebutuhan bisnis menjadi solusi teknis yang solid dan user-friendly.
-                    </p>
-                    <ul>
-                      <li>Mengembangkan dan memelihara aplikasi web berskala besar menggunakan [Teknologi 1, Teknologi 2, Teknologi 3].</li>
-                      <li>Memimpin inisiatif code review, menetapkan standar kualitas kode, dan mentorship untuk junior developer.</li>
-                      <li>Merancang dan mengimplementasikan API RESTful yang aman dan skalabel.</li>
-                      <li>Berhasil memimpin migrasi sistem dari [teknologi lama] ke [teknologi baru], yang menghasilkan [hasil positif konkret, misal: peningkatan kecepatan sistem 30% dan penurunan biaya operasional 15%].</li>
-                    </ul>
-                    <h4>[Posisi Sebelumnya] - [Nama Perusahaan Sebelumnya] ([Tahun Mulai] - [Tahun Selesai])</h4>
-                    <p>
-                      Fokus pada [area fokus, misal: pengembangan frontend atau backend] untuk [jenis proyek].
-                      Mempelajari praktik terbaik dalam [praktik terbaik, misal: code maintainability dan version control dengan Git].
-                      [Tambahkan detail relevan lain, misal: Mengembangkan modul-modul inti untuk sistem ERP internal].
-                    </p>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <div class="accordion-header">
-                    Pendidikan Formal
-                    <span class="icon">&#9658;</span>
-                  </div>
-                  <div class="accordion-content">
-                    <h4>[Gelar Anda] - [Nama Universitas] ([Tahun Masuk] - [Tahun Lulus])</h4>
-                    <p>
-                      Jurusan [Jurusan Anda], dengan fokus studi pada [area fokus, misal: Rekayasa Perangkat Lunak, Kecerdasan Buatan, atau Sistem Informasi].
-                      Lulus dengan predikat [predikat, misal: Cum Laude] dengan IPK [IPK Anda].
-                    </p>
-                    <ul>
-                      <li>Mata kuliah relevan: Algoritma dan Struktur Data, Desain dan Analisis Sistem, Basis Data Lanjut, Pemrograman Berorientasi Objek, Machine Learning.</li>
-                      <li>Proyek akhir/Skripsi: "[Judul Proyek Akhir/Skripsi]" - [Deskripsi Singkat Proyek Akhir Anda dan dampaknya].</li>
-                      <li>Aktif di organisasi kemahasiswaan: [Nama Organisasi, posisi, dan peran singkat].</li>
-                    </ul>
-                    <h4>[Pendidikan Sebelumnya] - [Institusi Sebelumnya] ([Tahun Masuk] - [Tahun Lulus])</h4>
-                    <p>
-                      [Deskripsi singkat pendidikan sebelumnya, jika relevan].
-                    </p>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <div class="accordion-header">
-                    Sertifikasi & Kursus Tambahan
-                    <span class="icon">&#9658;</span>
-                  </div>
-                  <div class="accordion-content">
-                    <h4>[Nama Sertifikasi/Kursus 1] - [Penyedia] ([Tahun])</h4>
-                    <p>
-                      Mempelajari [Topik utama yang dipelajari, misal: Pengembangan Web Full-Stack dengan MERN, Desain UX Lanjutan].
-                      [Tambahkan detail tentang proyek atau skill yang dikuasai].
-                    </p>
-                    <h4>[Nama Sertifikasi/Kursus 2] - [Penyedia] ([Tahun])</h4>
-                    <p>
-                      [Topik utama yang dipelajari].
-                    </p>
-                    <h4>[Nama Sertifikasi/Kursus 3] - [Penyedia] ([Tahun])</h4>
-                    <p>
-                      [Topik utama yang dipelajari].
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="section-card animate-on-scroll">
-              <h3>Nilai & Filosofi Kerja Saya</h3>
-              <p>Sebagai seorang profesional, saya berpegang teguh pada prinsip-prinsip berikut:</p>
-              <ul>
-                <li><strong>Integritas:</strong> Kejujuran dan etika dalam setiap aspek pekerjaan.</li>
-                <li><strong>Inovasi:</strong> Selalu mencari cara baru dan lebih baik untuk menyelesaikan masalah.</li>
-                <li><strong>Kolaborasi:</strong> Percaya pada kekuatan tim dan komunikasi terbuka.</li>
-                <li><strong>Pembelajaran Berkelanjutan:</strong> Antusias untuk terus mengembangkan diri dan menguasai teknologi terbaru.</li>
-                <li><strong>Berorientasi Hasil:</strong> Fokus pada pencapaian tujuan dan memberikan nilai nyata.</li>
-              </ul>
-            </div>
-            <div class="section-card animate-on-scroll">
-              <h3>Hobi & Minat di Luar Kode</h3>
-              <p>Di luar jam kerja, saya senang melakukan aktivitas yang membantu saya tetap segar dan inspiratif:</p>
-              <ul>
-                <li><strong>[Hobi 1, misal: Fotografi]:</strong> Membantu saya melihat detail dan komposisi, yang seringkali saya terapkan dalam desain UI.</li>
-                <li><strong>[Hobi 2, misal: Membaca Fiksi Ilmiah]:</strong> Memicu imajinasi dan mendorong saya untuk berpikir di luar kotak dalam memecahkan masalah.</li>
-                <li><strong>[Hobi 3, misal: Bermain Alat Musik (Gitar/Piano)]</strong>: Mengasah disiplin dan kesabaran, serta menjadi sarana relaksasi yang efektif.</li>
-                <li><strong>[Hobi 4, misal: Mendaki Gunung / Olahraga Lari]:</strong> Menjaga kesehatan fisik dan mental, serta mengajarkan ketahanan dan perencanaan.</li>
-              </ul>
-              <p>Aktivitas-aktivitas ini tidak hanya mengisi waktu luang saya, tetapi juga memberikan perspektif baru dan energi positif yang saya bawa kembali ke meja kerja.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PORTFOLIO SECTION -->
-      <section id="portfolio" class="container">
-        <h2 class="animate-on-scroll">My Portfolio: Karya Pilihan & Inovasi</h2>
-        <p class="lead animate-on-scroll">
-          Berikut adalah kompilasi proyek-proyek penting yang telah saya kerjakan, menunjukkan rentang keahlian dan passion saya dalam [bidang utama Anda]. Setiap proyek tidak hanya mewakili tantangan teknis yang menarik, tetapi juga kesempatan untuk menciptakan solusi yang fungsional dan berdampak.
-        </p>
-
-        <div class="card animate-on-scroll" style="margin-bottom: 40px;">
-          <h3>Proyek Unggulan</h3>
-          <p>Beberapa proyek yang paling saya banggakan dan menyoroti kemampuan inti saya.</p>
-          <div class="grid-2">
-            <div class="portfolio-item" data-category="web" data-project-id="project1">
-              <img src="https://via.placeholder.com/400x200/007bff/ffffff?text=E-commerce+Platform" alt="Platform E-commerce Modern">
-              <div class="portfolio-item-content">
-                <h3>Platform E-commerce Modern</h3>
-                <p>Pengembangan platform e-commerce responsif dengan fitur keranjang belanja, checkout, dan manajemen produk.</p>
-                <div class="project-tags">
-                  <span>React</span><span>Node.js</span><span>MongoDB</span>
-                </div>
-              </div>
-            </div>
-            <div class="portfolio-item" data-category="ui-ux" data-project-id="project3">
-              <img src="https://via.placeholder.com/400x200/ffc107/333333?text=Analytics+Dashboard+Redesign" alt="Redesain Antarmuka Dashboard Analitik">
-              <div class="portfolio-item-content">
-                <h3>Redesain Antarmuka Dashboard Analitik</h3>
-                <p>Desain ulang UI/UX dashboard untuk visualisasi data yang lebih baik dan pengalaman pengguna yang intuitif.</p>
-                <div class="project-tags">
-                  <span>Figma</span><span>UI/UX</span><span>Prototyping</span>
+          <!-- Pixshoot -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <h4>Pixshoot</h4>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-pixshoot.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <div class="portfolio-links">
+                  <a href="https://faridandika.github.io/pfdetail-pixshoot.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <h3 class="animate-on-scroll">Jelajahi Berdasarkan Kategori</h3>
-        <div class="filter-buttons animate-on-scroll">
-          <button class="filter-btn active" data-category="all">Semua Proyek</button>
-          <button class="filter-btn" data-category="web">Pengembangan Web</button>
-          <button class="filter-btn" data-category="mobile">Aplikasi Mobile</button>
-          <button class="filter-btn" data-category="ui-ux">UI/UX Design</button>
-          <button class="filter-btn" data-category="data">Data Science & ML</button>
-          <button class="filter-btn" data-category="backend">Backend & API</button>
-        </div>
-
-        <div class="portfolio-grid">
-          <div class="portfolio-item is-visible" data-category="web" data-project-id="project1">
-            <img src="https://via.placeholder.com/400x200/007bff/ffffff?text=E-commerce+Platform" alt="Project 1">
-            <div class="portfolio-item-content">
-              <h3>Platform E-commerce Modern</h3>
-              <p>Pengembangan platform e-commerce responsif dengan fitur keranjang belanja, checkout, dan manajemen produk.</p>
-              <div class="project-tags">
-                <span>React</span><span>Node.js</span><span>MongoDB</span>
+  
+          <!-- FIND CIMIS HOUSE -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <h4>Find Cimi's House</h4>
+              <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-findcimishouse0.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <div class="portfolio-links">
+                  <a href="https://faridandika.github.io/pfdetail-findcimishose.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="portfolio-item is-visible" data-category="mobile" data-project-id="project2">
-            <img src="https://via.placeholder.com/400x200/28a745/ffffff?text=Project+2+Image" alt="Project 2">
-            <div class="portfolio-item-content">
-              <h3>Aplikasi Manajemen Tugas (Mobile)</h3>
-              <p>Aplikasi mobile untuk melacak tugas harian, mengatur prioritas, dan kolaborasi tim.</p>
-              <div class="project-tags">
-                <span>React Native</span><span>Firebase</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="portfolio-item is-visible" data-category="ui-ux" data-project-id="project3">
-            <img src="https://via.placeholder.com/400x200/ffc107/333333?text=Analytics+Dashboard+Redesign" alt="Project 3">
-            <div class="portfolio-item-content">
-              <h3>Redesain Antarmuka Dashboard Analitik</h3>
-              <p>Desain ulang UI/UX dashboard untuk visualisasi data yang lebih baik dan pengalaman pengguna yang intuitif.</p>
-              <div class="project-tags">
-                <span>Figma</span><span>UI/UX</span><span>Prototyping</span>
-              </div>
-            </div>
-          </div>
+        <!-- Cognivy-->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <h4>Cognify</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-cognivy1.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
 
-          <div class="portfolio-item is-visible" data-category="data" data-project-id="project4">
-            <img src="https://via.placeholder.com/400x200/17a2b8/ffffff?text=Project+4+Image" alt="Project 4">
-            <div class="portfolio-item-content">
-              <h3>Sistem Rekomendasi Film</h3>
-              <p>Membangun sistem rekomendasi film menggunakan algoritma machine learning dan dataset besar.</p>
-              <div class="project-tags">
-                <span>Python</span><span>Pandas</span><span>Scikit-learn</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item is-visible" data-category="web" data-project-id="project5">
-            <img src="https://via.placeholder.com/400x200/fd7e14/ffffff?text=Project+5+Image" alt="Project 5">
-            <div class="portfolio-item-content">
-              <h3>Situs Portofolio Interaktif (Ini!)</h3>
-              <p>Mengembangkan situs portofolio personal yang responsif dan kaya interaksi JavaScript.</p>
-              <div class="project-tags">
-                <span>HTML</span><span>CSS</span><span>JavaScript</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item is-visible" data-category="web" data-project-id="project6">
-            <img src="https://via.placeholder.com/400x200/6f42c1/ffffff?text=Project+6+Image" alt="Project 6">
-            <div class="portfolio-item-content">
-              <h3>Aplikasi Pengelola Blog (CMS)</h3>
-              <p>Sistem manajemen konten sederhana untuk mengelola postingan blog, kategori, dan komentar.</p>
-              <div class="project-tags">
-                <span>Vue.js</span><span>Express.js</span><span>PostgreSQL</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item is-visible" data-category="ui-ux" data-project-id="project7">
-            <img src="https://via.placeholder.com/400x200/e83e8c/ffffff?text=Project+7+Image" alt="Project 7">
-            <div class="portfolio-item-content">
-              <h3>Desain Aplikasi Cuaca</h3>
-              <p>Konsep desain UI/UX untuk aplikasi cuaca dengan visualisasi data interaktif.</p>
-              <div class="project-tags">
-                <span>Adobe XD</span><span>UI Design</span><span>Weather API</span>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-item is-visible" data-category="mobile" data-project-id="project8">
-            <img src="https://via.placeholder.com/400x200/6610f2/ffffff?text=Project+8+Image" alt="Project 8">
-            <div class="portfolio-item-content">
-              <h3>Aplikasi Pelacak Kebiasaan</h3>
-              <p>Aplikasi mobile untuk membantu pengguna membangun dan melacak kebiasaan positif.</p>
-              <div class="project-tags">
-                <span>Flutter</span><span>Dart</span><span>SQLite</span>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-item is-visible" data-category="data" data-project-id="project9">
-            <img src="https://via.placeholder.com/400x200/20c997/ffffff?text=Project+9+Image" alt="Project 9">
-            <div class="portfolio-item-content">
-              <h3>Analisis Sentimen Media Sosial</h3>
-              <p>Proyek analisis sentimen data Twitter untuk memahami persepsi publik terhadap suatu topik.</p>
-              <div class="project-tags">
-                <span>Python</span><span>NLP</span><span>Streamlit</span>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-item is-visible" data-category="backend" data-project-id="project10">
-            <img src="https://via.placeholder.com/400x200/ff7f50/ffffff?text=Project+10+Image" alt="Project 10">
-            <div class="portfolio-item-content">
-              <h3>API Layanan Autentikasi OAuth2</h3>
-              <p>Pengembangan layanan API backend untuk autentikasi pengguna menggunakan standar OAuth2 dan JWT.</p>
-              <div class="project-tags">
-                <span>Node.js</span><span>Express.js</span><span>OAuth2</span><span>JWT</span>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-item is-visible" data-category="web" data-project-id="project11">
-            <img src="https://via.placeholder.com/400x200/8a2be2/ffffff?text=Project+11+Image" alt="Project 11">
-            <div class="portfolio-item-content">
-              <h3>Website Event & Ticketing</h3>
-              <p>Pengembangan website untuk manajemen acara, penjualan tiket online, dan verifikasi QR code.</p>
-              <div class="project-tags">
-                <span>Next.js</span><span>Tailwind CSS</span><span>Stripe API</span>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-item is-visible" data-category="data" data-project-id="project12">
-            <img src="https://via.placeholder.com/400x200/228b22/ffffff?text=Project+12+Image" alt="Project 12">
-            <div class="portfolio-item-content">
-              <h3>Prediksi Harga Rumah dengan Regresi</h3>
-              <p>Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti.</p>
-              <div class="project-tags">
-                <span>Python</span><span>Scikit-learn</span><span>Jupyter</span>
+                <a href="https://faridandika.github.io/pfdetail-cognivy.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
               </div>
             </div>
           </div>
         </div>
 
-        <div style="height:50px;"></div>
-        <div class="card animate-on-scroll" style="text-align: left;">
-          <h2>Proses Kerja Saya di Setiap Proyek</h2>
-          <p class="lead">Pendekatan terstruktur untuk memastikan hasil yang berkualitas dan sesuai harapan.</p>
-          <div class="design-process">
-            <div class="process-step animate-on-scroll">
-              <div class="icon">🔍</div>
-              <h4>1. Discovery & Analisis</h4>
-              <p>Memahami kebutuhan, tujuan, audiens, dan tantangan proyek. Ini melibatkan riset, wawancara, dan analisis data awal.</p>
-            </div>
-            <div class="process-step animate-on-scroll">
-              <div class="icon">💡</div>
-              <h4>2. Konseptualisasi & Desain</h4>
-              <p>Menerjemahkan ide menjadi konsep konkret melalui wireframe, mockups, prototipe, dan arsitektur sistem.</p>
-            </div>
-            <div class="process-step animate-on-scroll">
-              <div class="icon">💻</div>
-              <h4>3. Pengembangan & Implementasi</h4>
-              <p>Membangun solusi menggunakan teknologi yang tepat, dengan fokus pada kode bersih, performa, dan skalabilitas.</p>
-            </div>
-            <div class="process-step animate-on-scroll">
-              <div class="icon">🧪</div>
-              <h4>4. Pengujian & Iterasi</h4>
-              <p>Melakukan pengujian menyeluruh (unit, integrasi, UAT) dan mengumpulkan umpan balik untuk perbaikan berkelanjutan.</p>
+        <!-- Toolis -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <h4>Toolis</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-toolis.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetail-toolis.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Portfolio Modal -->
-        <div id="portfolioModal" class="modal">
-          <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2 id="modalProjectTitle"></h2>
-            <div class="modal-image-gallery">
-              <img id="modalProjectMainImage" src="" alt="Project Main Image">
-              <div class="gallery-controls">
-                <button id="prevImageBtn" class="gallery-nav-btn">&lt;</button>
-                <button id="nextImageBtn" class="gallery-nav-btn">&gt;</button>
-              </div>
-              <div id="modalThumbnails" class="modal-thumbnails">
-                <!-- Thumbnails will be injected here by JS -->
+        <!-- FITS -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <h4>FITS</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-fits.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetail-fits.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
               </div>
             </div>
-            <p id="modalProjectDescription"></p>
-            <h3>Detail Proyek</h3>
-            <ul id="modalProjectDetails"></ul>
-            <h3>Teknologi Digunakan</h3>
-            <div id="modalTechStack" class="tech-stack"></div>
-            <a id="modalProjectLink" href="#" target="_blank" class="cta-button modal-link" style="background-color:var(--accent-blue);">Lihat Proyek (GitHub/Demo)</a>
           </div>
         </div>
-      </section>
 
-      <!-- CONTACT SECTION -->
-      <section id="contact" class="container">
-        <h2 class="animate-on-scroll">Contact Me: Mari Berkolaborasi!</h2>
-        <p class="lead animate-on-scroll">
-          Tertarik untuk berkolaborasi, mendiskusikan proyek baru, atau ingin sekadar menyapa? Saya selalu terbuka untuk peluang baru, diskusi menarik, dan membangun koneksi. Jangan ragu untuk menghubungi saya melalui formulir di bawah ini atau melalui saluran sosial media saya.
-        </p>
+        <!-- Website Wisata Makassar -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+          <div class="portfolio-wrap">
+            <h4>Makassar Tourist Web</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-web-wisata.webp" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
 
-        <div class="contact-grid">
-          <div class="contact-info animate-on-scroll">
-            <h3>Informasi Kontak Lengkap</h3>
-            <p><strong>Email Utama:</strong> <a href="mailto:[Email Anda]" style="color:var(--highlight-blue);">[Email Anda]</a> <span class="copy-tooltip"><button class="copy-btn" data-text="[Email Anda]" aria-label="Salin email">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
-            <p><strong>Email Cadangan:</strong> <a href="mailto:[Email Cadangan Anda]" style="color:var(--highlight-blue);">[Email Cadangan Anda, jika ada]</a> <span class="copy-tooltip"><button class="copy-btn" data-text="[Email Cadangan Anda]" aria-label="Salin email cadangan">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
-            <p><strong>Nomor Telepon:</strong> [Nomor Telepon Anda] <span class="copy-tooltip"><button class="copy-btn" data-text="[Nomor Telepon Anda]" aria-label="Salin nomor telepon">&#128203;</button><span class="tooltiptext">Disalin!</span></span></p>
-            <p><strong>Lokasi:</strong> [Kota, Negara]</p>
-            <p><strong>Zona Waktu:</strong> [WIB/WITA/WIT]</p>
+                <a href="https://faridandika.github.io/pfdetail-websitewisata.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <h3>Temukan & Ikuti Saya di Sosial Media</h3>
+        <!-- Farid's Calculator -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <h4>Farid's Calculator</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-faridscalculator.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetail-faridscalculator.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Find Graveyar -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <h4>Find Graveyard</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-findgraveyard.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetail-findgraveyard.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gym Guide -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+          <div class="portfolio-wrap">
+            <h4>Gym Guide</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-gymguide.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetail-gymguide.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Android Pemula -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <h4>Android Pemula</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-androidpemula.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/pfdetails-androidpemula.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Untitled -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+          <div class="portfolio-wrap">
+            <h4>Untitled</h4>
+            <img src="Farid%20Andika%20-%20Personal%20Website_files/pf-dummy-ios.png" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://faridandika.github.io/detailsAndroidIntermediet.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-zoom-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+  </div></section><!-- End Portfolio Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Contact Me</p>
+      </div>
+
+      <div class="row mt-2">
+
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-map"></i>
+            <h3>Current Address</h3>
+            <p>South Tangerang, Indonesia</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-share-alt"></i>
+            <h3>Linkedin</h3>
+            <p>M. Fawwaz Rayyan Khalish </p>
             <div class="social-links">
-              <a href="[Link LinkedIn Anda]" target="_blank" title="LinkedIn">LinkedIn</a> |
-              <a href="[Link GitHub Anda]" target="_blank" title="GitHub">GitHub</a> |
-              <a href="[Link Twitter/X Anda]" target="_blank" title="Twitter/X">Twitter/X</a> |
-              <a href="[Link Instagram Anda]" target="_blank" title="Instagram">Instagram</a> |
-              <a href="[Link Medium/Blog Anda]" target="_blank" title="Medium/Blog">Medium/Blog</a>
-            </div>
-
-            <div style="margin-top: 30px;">
-              <h3>Jam Respons & Ketersediaan</h3>
-              <p>Saya berkomitmen untuk merespons semua pertanyaan dan proposal dalam waktu maksimal <strong>1-2 hari kerja</strong>. Untuk proyek-proyek mendesak, mohon sebutkan di subjek pesan.</p>
-              <p><strong>Jam Kerja (Konsultasi & Proyek):</strong></p>
-              <ul>
-                <li><strong>Senin - Jumat:</strong> 09:00 - 17:00 WIB</li>
-                <li><strong>Sabtu:</strong> 10:00 - 14:00 WIB (Fleksibel untuk diskusi singkat)</li>
-                <li><strong>Minggu:</strong> Tutup (Kecuali untuk kasus darurat atau kesepakatan khusus)</li>
-              </ul>
-              <p>
-                Saya juga tersedia untuk sesi konsultasi video singkat jika Anda ingin membahas ide proyek lebih lanjut secara langsung. Mohon kirim email untuk menjadwalkan waktu.
-              </p>
-            </div>
-
-            <div style="margin-top: 30px;">
-              <h3>Mengenai Kolaborasi & Proyek</h3>
-              <p>
-                Saya sangat tertarik pada proyek yang berorientasi pada inovasi, memiliki dampak sosial atau bisnis yang jelas, serta memberikan tantangan teknis yang menarik. Keahlian saya dapat diaplikasikan dalam berbagai bentuk, meliputi:
-              </p>
-              <ul>
-                <li>Pengembangan aplikasi web (full-stack, frontend, backend)</li>
-                <li>Desain dan prototipe UI/UX</li>
-                <li>Konsultasi arsitektur perangkat lunak</li>
-                <li>Integrasi API dan layanan pihak ketiga</li>
-                <li>Optimasi performa dan skalabilitas aplikasi</li>
-                <li>Pengembangan tools internal atau otomatisasi</li>
-              </ul>
-              <p>
-                Ketika mengirim pesan, mohon berikan detail sebanyak mungkin tentang ide proyek Anda, tujuan yang ingin dicapai, timeline yang diharapkan, dan anggaran yang tersedia. Semakin lengkap informasi yang Anda berikan, semakin baik saya dapat memahami visi Anda dan menyusun respons yang relevan.
-              </p>
-            </div>
-
-            <div class="map-placeholder">
-              <p>Placeholder Peta Lokasi Kantor/Domisili</p>
-            </div>
-          </div>
-
-          <div class="animate-on-scroll">
-            <h3>Kirim Pesan Langsung kepada Saya</h3>
-            <p>Gunakan formulir di bawah ini untuk mengirim pesan. Saya akan menghubungi Anda sesegera mungkin.</p>
-            <form id="contactForm" novalidate>
-              <div>
-                <label for="name">Nama Lengkap Anda</label>
-                <input type="text" id="name" name="name" required placeholder="Contoh: Budi Santoso">
-                <div id="nameError" class="form-field-error"></div>
-              </div>
-              <div>
-                <label for="email">Email Anda</label>
-                <input type="email" id="email" name="email" required placeholder="contoh@email.com">
-                <div id="emailError" class="form-field-error"></div>
-              </div>
-              <div>
-                <label for="subject">Subjek Pesan</label>
-                <input type="text" id="subject" name="subject" required placeholder="Contoh: Kolaborasi Proyek Web">
-                <div id="subjectError" class="form-field-error"></div>
-              </div>
-              <div>
-                <label for="projectType">Tipe Proyek/Kebutuhan</label>
-                <select id="projectType" name="projectType">
-                  <option value="">Pilih...</option>
-                  <option value="web-dev">Pengembangan Web (Frontend/Backend/Fullstack)</option>
-                  <option value="mobile-dev">Pengembangan Aplikasi Mobile</option>
-                  <option value="ui-ux">Desain UI/UX</option>
-                  <option value="data-ml">Data Science / Machine Learning</option>
-                  <option value="consultation">Konsultasi Teknis</option>
-                  <option value="other">Lainnya</option>
-                </select>
-              </div>
-              <div>
-                <label for="budget">Rentang Anggaran (Opsional)</label>
-                <select id="budget" name="budget">
-                  <option value="">Pilih Rentang</option>
-                  <option value="<10jt">&lt; Rp 10.000.000</option>
-                  <option value="10-50jt">Rp 10.000.000 - Rp 50.000.000</option>
-                  <option value="50-100jt">Rp 50.000.000 - Rp 100.000.000</option>
-                  <option value=">100jt">&gt; Rp 100.000.000</option>
-                </select>
-              </div>
-              <div>
-                <label for="message">Pesan Anda</label>
-                <textarea id="message" name="message" required placeholder="Jelaskan secara singkat ide proyek, tujuan, dan bagaimana Anda berpikir saya bisa membantu..."></textarea>
-                <div id="messageError" class="form-field-error"></div>
-              </div>
-              <button type="submit" class="submit-button">Kirim Pesan</button>
-              <div id="formStatus" class="form-message"></div>
-            </form>
-
-            <div style="margin-top: 30px;">
-              <h3>Pertanyaan Umum Seputar Kolaborasi</h3>
-              <div class="faq">
-                <details>
-                  <summary>Berapa lama waktu yang dibutuhkan untuk sebuah proyek?</summary>
-                  <p>Estimasi waktu sangat bervariasi tergantung kompleksitas dan ruang lingkup proyek. Setelah Anda mengirimkan detail proyek, saya akan memberikan estimasi yang lebih akurat.</p>
-                </details>
-                <details>
-                  <summary>Bagaimana proses pembayaran proyek?</summary>
-                  <p>Biasanya, pembayaran dibagi menjadi beberapa tahapan: uang muka (down payment), pembayaran di tengah proyek (milestone-based), dan pembayaran akhir setelah proyek selesai dan disetujui. Detail akan dibahas di kontrak.</p>
-                </details>
-                <details>
-                  <summary>Apakah saya akan mendapatkan dukungan setelah proyek selesai?</summary>
-                  <p>Ya, untuk sebagian besar proyek, saya menyediakan periode garansi bug dan dukungan teknis awal. Perjanjian dukungan jangka panjang bisa dinegosiasikan secara terpisah.</p>
-                </details>
-                <details>
-                  <summary>Bagaimana saya bisa melihat demo atau kode proyek Anda?</summary>
-                  <p>Beberapa proyek di portofolio saya memiliki tautan ke demo langsung atau repositori GitHub publik. Untuk proyek privat, saya dapat memberikan walk-through jika relevan dengan kebutuhan Anda.</p>
-                </details>
-                <details>
-                  <summary>Apakah Anda bersedia bekerja dengan tim yang sudah ada?</summary>
-                  <p>Tentu! Saya memiliki pengalaman bekerja dalam tim yang sudah ada dan beradaptasi dengan alur kerja serta tool yang digunakan.</p>
-                </details>
-              </div>
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
-      </section>
-    </main>
 
-    <footer>
-      <div class="container">
-        <p>&copy; <span id="currentYear"></span> Muhammad Fawwaz Rayyan Khalish. All rights reserved.</p>
-        <p>Didesain dan dikembangkan dengan 🧑‍💻 oleh Fawwaz.</p>
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-envelope"></i>
+            <h3>Email Me</h3>
+            <p>novalrayan@gmail.com</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-phone-call"></i>
+            <h3>WhatsApp</h3>
+            <p>+62 857 1956 2762</p>
+          </div>
+        </div>
       </div>
-    </footer>
 
-    <button onclick="topFunction()" id="backToTopBtn" title="Go to top">&#9650;</button>
-
-    <script>
-      // Global Data for Projects (for modal content & image gallery)
-      const projectData = {
-        project1: {
-          title: 'Platform E-commerce Modern',
-          images: [
-            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+1',
-            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+2',
-            'https://via.placeholder.com/600x300/007bff/ffffff?text=E-commerce+Platform+3'
-          ],
-          description: 'Mengembangkan platform e-commerce responsif dengan arsitektur MERN stack (MongoDB, Express.js, React, Node.js). Proyek ini berfokus pada pengalaman pengguna yang mulus dari penjelajahan produk hingga proses checkout yang aman dan cepat. Mengimplementasikan fitur pencarian real-time, filter produk kompleks, dan integrasi gateway pembayaran pihak ketiga yang aman (misal: Stripe/Midtrans). Tujuan utama proyek ini adalah menyediakan solusi belanja online yang efisien dan menarik bagi UMKM.',
-          details: [
-            'Frontend: Dibangun dengan React.js, menggunakan Redux Toolkit untuk state management, dan styling dengan Tailwind CSS. Responsif penuh untuk desktop, tablet, dan mobile.',
-            'Backend: Dibuat menggunakan Node.js dan Express.js untuk API RESTful. Mengimplementasikan autentikasi JWT dan middleware untuk otorisasi.',
-            'Database: MongoDB dengan Mongoose ORM untuk penyimpanan data produk, pengguna, pesanan, dan review.',
-            'Fitur Utama: Autentikasi dan otorisasi pengguna, manajemen produk (CRUD), keranjang belanja, proses checkout multi-langkah, review produk, dan dashboard admin untuk pelacakan pesanan dan laporan penjualan.',
-            'Integrasi: Gateway pembayaran (misal: Stripe/Midtrans), layanan pengiriman (misal: RajaOngkir), dan notifikasi email.',
-            'Testing: Unit tests dan integration tests menggunakan Jest dan Supertest.',
-            'Deployment: Di-deploy menggunakan Docker ke platform cloud seperti AWS EC2.',
-          ],
-          techStack: ['React', 'Redux', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS', 'Stripe API', 'Docker'],
-          link: '#'
-        },
-        project2: {
-          title: 'Aplikasi Manajemen Tugas (Mobile)',
-          images: [
-            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+1',
-            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+2',
-            'https://via.placeholder.com/600x300/28a745/ffffff?text=Task+Manager+App+3'
-          ],
-          description: 'Membangun aplikasi mobile cross-platform untuk manajemen tugas pribadi dan kolaborasi tim menggunakan React Native. Aplikasi ini dirancang untuk membantu pengguna melacak tugas harian, mengatur prioritas, menetapkan tenggat waktu, dan berkolaborasi dengan anggota tim lainnya. Notifikasi real-time memastikan pengguna selalu mendapatkan informasi terbaru tentang status tugas mereka. Fokus pada desain UI yang bersih, intuitif, dan minimalis untuk meningkatkan fokus dan produktivitas.',
-          details: [
-            'Platform: iOS & Android (Cross-platform) menggunakan React Native dan Expo CLI.',
-            'Backend & Database: Google Firebase digunakan untuk autentikasi pengguna (Firebase Auth), database real-time (Firestore) untuk penyimpanan data tugas dan proyek, serta Cloud Messaging untuk notifikasi push.',
-            'Fitur Utama: Pembuatan dan pengelolaan tugas, penetapan tenggat waktu, pengingat yang dapat disesuaikan, mode kolaborasi tim, kategori tugas, dan tampilan progres proyek.',
-            'User Experience: Desain antarmuka yang bersih dengan animasi transisi yang halus, gestur swipe untuk tindakan cepat, dan mode gelap/terang.',
-            'Offline-first: Kemampuan caching data lokal untuk fungsionalitas dasar tanpa koneksi internet.',
-          ],
-          techStack: ['React Native', 'Expo', 'Firebase Auth', 'Firestore', 'Firebase Cloud Messaging'],
-          link: '#'
-        },
-        project3: {
-          title: 'Redesain Antarmuka Dashboard Analitik',
-          images: [
-            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+1',
-            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+2',
-            'https://via.placeholder.com/600x300/ffc107/333333?text=Analytics+Dashboard+3'
-          ],
-          description: 'Melakukan redesain UI/UX lengkap untuk dashboard analitik yang sudah ada, dengan tujuan utama meningkatkan keterbacaan data, navigasi, dan estetika keseluruhan. Proyek ini dimulai dengan riset pengguna mendalam, diikuti dengan wireframing, pembuatan prototipe interaktif, dan pengujian kegunaan. Hasilnya adalah dashboard yang lebih intuitif, efisien, dan menarik secara visual, memungkinkan pengguna untuk dengan cepat mendapatkan insight dari data bisnis mereka.',
-          details: [
-            'Proses Desain: Meliputi User Research (wawancara, survei), Analisis Pesaing, Pembuatan User Persona dan User Journey, Wireframing (low-fidelity & high-fidelity), Prototyping Interaktif, dan Usability Testing dengan pengguna nyata.',
-            'Tools Desain: Figma untuk seluruh proses desain visual, pembuatan Design System, dan prototyping interaktif. Miro untuk sesi brainstorming dan collaborative whiteboarding.',
-            'Output: Design System yang komprehensif, High-fidelity Mockups untuk berbagai skenario dan ukuran layar, Interactive Prototype yang menunjukkan alur pengguna, dan dokumentasi guideline UI/UX.',
-            'Fokus Utama: Visualisasi data yang jelas (penggunaan chart dan grafik yang tepat), hirarki informasi yang logis, konsistensi elemen UI, dan pengalaman pengguna yang menyenangkan serta efisien dalam mengakses informasi kritikal.',
-            'Dampak: Meningkatkan efisiensi pengguna dalam menganalisis data sebesar X% dan mengurangi waktu onboarding pengguna baru.',
-          ],
-          techStack: ['Figma', 'UI Design', 'UX Design', 'User Research', 'Prototyping', 'Design System'],
-          link: '#'
-        },
-        project4: {
-          title: 'Sistem Rekomendasi Film',
-          images: [
-            'https://via.placeholder.com/600x300/17a2b8/ffffff?text=Movie+Recommender+1',
-            'https://via.placeholder.com/600x300/17a2b8/ffffff?text=Movie+Recommender+2'
-          ],
-          description: 'Mengembangkan sistem rekomendasi film berbasis konten dan kolaboratif menggunakan Python dan pustaka data science populer. Proyek ini menganalisis preferensi pengguna berdasarkan film yang mereka tonton dan karakteristik film (genre, aktor, sutradara) untuk menyarankan judul-judul yang paling relevan. Data diambil dari dataset publik (MovieLens) dan melalui serangkaian proses preprocessing dan analisis. Hasilnya adalah model yang mampu memberikan rekomendasi personal, serta aplikasi web sederhana untuk mendemonstrasikan fungsionalitasnya.',
-          details: [
-            'Bahasa Pemrograman: Python, dengan fokus pada scripting untuk data processing dan model training.',
-            'Pustaka Data Science: Pandas untuk manipulasi dan analisis data, Scikit-learn untuk implementasi algoritma machine learning, Numpy untuk operasi numerik.',
-            'Algoritma Rekomendasi: Menggunakan kombinasi Collaborative Filtering (User-based & Item-based) dan Content-Based Filtering (Cosine Similarity berdasarkan fitur film) untuk rekomendasi yang lebih akurat.',
-            'Antarmuka Demo: Aplikasi web interaktif sederhana dibangun dengan Streamlit, memungkinkan pengguna memasukkan film yang disukai dan mendapatkan rekomendasi secara real-time.',
-            'Dataset: MovieLens 1M dataset, berisi rating film dari jutaan pengguna.',
-            'Metodologi: Data Collection, Data Cleaning & Preprocessing, Feature Engineering, Model Training, Model Evaluation, Deployment (via Streamlit).',
-          ],
-          techStack: ['Python', 'Machine Learning', 'Pandas', 'Scikit-learn', 'Numpy', 'Streamlit'],
-          link: '#'
-        },
-        project5: {
-          title: 'Situs Portofolio Interaktif (Ini!)',
-          images: [
-            'https://via.placeholder.com/600x300/fd7e14/ffffff?text=Interactive+Portfolio+1',
-            'https://via.placeholder.com/600x300/fd7e14/ffffff?text=Interactive+Portfolio+2'
-          ],
-          description: 'Situs portofolio pribadi ini dirancang dan dikembangkan dari nol menggunakan HTML, CSS, dan JavaScript murni. Tujuan utamanya adalah untuk memamerkan proyek-proyek saya dengan cara yang menarik dan interaktif, menonjolkan kemampuan saya dalam pengembangan frontend, desain responsif, dan penggunaan JavaScript untuk efek dinamis. Setiap elemen dirancang untuk memberikan pengalaman pengguna yang mulus dan informatif.',
-          details: [
-            'Teknologi Frontend: HTML5 untuk struktur semantik, CSS3 untuk styling modern (termasuk variabel CSS dan transisi), JavaScript (Vanilla JS) untuk semua interaktivitas.',
-            'Responsivitas: Sepenuhnya responsif, memastikan tampilan optimal di berbagai perangkat, dari desktop hingga smartphone, menggunakan media queries dan flexible layout.',
-            'Fitur Interaktif: Efek ketik otomatis pada judul utama (typewriter effect), penyorotan tautan navigasi aktif berdasarkan posisi scroll, animasi progress bar untuk keahlian, akordeon untuk detail pengalaman, filter proyek portofolio, dan modal pop-up untuk detail proyek.',
-            'Desain: Minimalis, bersih, dengan skema warna gelap yang profesional dan aksen warna highlight untuk fokus pada konten dan navigasi yang mudah.',
-            'Optimasi: Kode bersih dan terstruktur untuk pemeliharaan yang mudah dan waktu loading yang cepat.',
-          ],
-          techStack: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'Vanilla JS'],
-          link: '#'
-        },
-        project6: {
-          title: 'Aplikasi Pengelola Blog (CMS)',
-          images: [
-            'https://via.placeholder.com/600x300/6f42c1/ffffff?text=Blog+CMS+1',
-            'https://via.placeholder.com/600x300/6f42c1/ffffff?text=Blog+CMS+2'
-          ],
-          description: 'Pengembangan sistem manajemen konten (CMS) sederhana dan intuitif untuk blog pribadi atau proyek kecil, memungkinkan pengguna untuk membuat, mengedit, dan menghapus postingan blog, mengelola kategori, dan melihat komentar. Aplikasi ini dibangun dengan Vue.js untuk frontend yang reaktif, Express.js untuk API backend yang kuat, dan PostgreSQL sebagai database relasional yang andal. Desain fokus pada kemudahan penggunaan untuk admin dan pembaca.',
-          details: [
-            'Frontend: Antarmuka pengguna yang dinamis dan reaktif dibangun dengan Vue.js, Vue Router untuk navigasi, dan Vuex untuk state management. Styling menggunakan SCSS dan komponen kustom.',
-            'Backend: RESTful API yang kuat dikembangkan dengan Express.js dan Node.js. Mengimplementasikan autentikasi JWT untuk admin dan manajemen API key untuk interaksi publik.',
-            'Database: PostgreSQL sebagai database relasional utama untuk menyimpan postingan, kategori, pengguna, dan komentar.',
-            'Fitur Utama: Dashboard Admin (CRUD untuk postingan, kategori, komentar), autentikasi admin yang aman, fitur pencarian dan filter postingan, tampilan komentar bersarang, dan editor rich-text untuk postingan.',
-            'Deployment: Aplikasi di-deploy dalam container Docker untuk portabilitas dan skalabilitas yang mudah, dengan integrasi CI/CD dasar.',
-          ],
-          techStack: ['Vue.js', 'Vuex', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Docker'],
-          link: '#'
-        },
-        project7: {
-          title: 'Desain Aplikasi Cuaca',
-          images: [
-            'https://via.placeholder.com/600x300/e83e8c/ffffff?text=Weather+App+Design+1',
-            'https://via.placeholder.com/600x300/e83e8c/ffffff?text=Weather+App+Design+2'
-          ],
-          description: 'Konsep desain UI/UX lengkap untuk aplikasi cuaca mobile yang menawarkan visualisasi data intuitif dan pengalaman pengguna yang menarik. Fokus utama adalah pada kemudahan penggunaan, kejelasan informasi, dan estetika modern. Proses desain melibatkan riset pengguna, wireframing, dan pembuatan prototipe interaktif yang menunjukkan bagaimana pengguna akan berinteraksi dengan aplikasi.',
-          details: [
-            'Tools Desain: Adobe XD digunakan untuk wireframing, high-fidelity mockups, dan pembuatan prototipe interaktif. Penggunaan LottieFiles untuk animasi mikro.',
-            'Fitur Utama: Prakiraan cuaca 7 hari, informasi detail cuaca (suhu, kelembaban, kecepatan angin, tekanan, UV Index), peta radar interaktif, notifikasi cuaca buruk, dan tampilan historis data cuaca.',
-            'Desain Visual: Estetika bersih dan modern dengan ikonografi kustom, ilustrasi cuaca yang dinamis, dan palet warna yang adaptif sesuai kondisi cuaca (misal: cerah, berawan, hujan).',
-            'User Experience: Alur navigasi yang intuitif, gestur sentuh untuk detail lebih lanjut, dan personalisasi lokasi.',
-          ],
-          techStack: ['Adobe XD', 'UI Design', 'UX Research', 'Prototyping', 'Interaction Design'],
-          link: '#'
-        },
-        project8: {
-          title: 'Aplikasi Pelacak Kebiasaan',
-          images: [
-            'https://via.placeholder.com/600x300/6610f2/ffffff?text=Habit+Tracker+App+1',
-            'https://via.placeholder.com/600x300/6610f2/ffffff?text=Habit+Tracker+App+2'
-          ],
-          description: 'Aplikasi mobile lintas platform untuk membantu pengguna membangun dan melacak kebiasaan positif secara efektif. Aplikasi ini menyediakan fitur untuk menetapkan tujuan, melacak kemajuan harian, dan mendapatkan laporan mingguan atau bulanan tentang kebiasaan mereka. Dirancang untuk memotivasi pengguna melalui visualisasi progres dan sistem streak.',
-          details: [
-            'Framework: Flutter untuk pengembangan aplikasi mobile lintas platform (iOS dan Android).',
-            'Bahasa Pemrograman: Dart.',
-            'Database: SQLite untuk penyimpanan data lokal yang efisien dan cepat, memastikan aplikasi berfungsi dengan baik bahkan tanpa koneksi internet.',
-            'Fitur Utama: Pembuatan kebiasaan kustom, pelacakan harian dengan "check-in", sistem streak untuk memotivasi, pengingat yang dapat disesuaikan, visualisasi progres mingguan/bulanan (grafik), dan fitur journaling sederhana.',
-            'Desain UI: Material Design yang bersih dan intuitif, dengan fokus pada kemudahan penggunaan dan feedback visual yang jelas.',
-          ],
-          techStack: ['Flutter', 'Dart', 'SQLite', 'Mobile Development'],
-          link: '#'
-        },
-        project9: {
-          title: 'Analisis Sentimen Media Sosial',
-          images: [
-            'https://via.placeholder.com/600x300/20c997/ffffff?text=Social+Sentiment+Analysis+1',
-            'https://via.placeholder.com/600x300/20c997/ffffff?text=Social+Sentiment+Analysis+2'
-          ],
-          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
-          details: [
-            'Bahasa Pemrograman: Python.',
-            'Pustaka: Tweepy (untuk mengakses Twitter API dan mengumpulkan data tweet), NLTK (Natural Language Toolkit) untuk pre-processing teks (tokenisasi, stemming, stopwords removal), TextBlob untuk analisis sentimen cepat.',
-            'Visualisasi: Matplotlib dan Seaborn untuk membuat grafik statis, serta Streamlit untuk membangun dashboard web interaktif yang memungkinkan pengguna memfilter dan melihat hasil analisis secara dinamis.',
-            'Metodologi: Pengumpulan data (data scraping dari Twitter), pre-processing teks (membersihkan data dari noise, emoji, dll.), analisis sentimen (menggunakan model VADER atau TextBlob), visualisasi hasil, dan interpretasi insight.',
-            'Dampak: Memberikan insight berharga untuk strategi komunikasi, identifikasi krisis, atau evaluasi kampanye pemasaran.',
-          ],
-          techStack: ['Python', 'NLP', 'Sentiment Analysis', 'Tweepy', 'NLTK', 'TextBlob', 'Streamlit', 'Data Visualization'],
-          link: '#'
-        },
-        project10: {
-          title: 'API Layanan Autentikasi OAuth2',
-          images: [
-            'https://via.placeholder.com/600x300/ff7f50/ffffff?text=OAuth2+API+1',
-            'https://via.placeholder.com/600x300/ff7f50/ffffff?text=OAuth2+API+2'
-          ],
-          description: 'Pengembangan layanan API backend yang berdiri sendiri khusus untuk manajemen autentikasi dan otorisasi pengguna menggunakan standar OAuth2 dan JSON Web Tokens (JWT). API ini dirancang untuk dapat digunakan oleh berbagai aplikasi frontend (web, mobile, desktop) sebagai single source of truth untuk keamanan. Fokus pada keamanan, skalabilitas, dan kepatuhan standar industri.',
-          details: [
-            'Teknologi Backend: Node.js dengan framework Express.js.',
-            'Standar Keamanan: Implementasi penuh OAuth2 Grant Types (misal: Authorization Code Flow) dan penggunaan JSON Web Tokens (JWT) untuk sesi stateless dan otorisasi berbasis token.',
-            'Database: MongoDB untuk menyimpan data pengguna dan client aplikasi. Redis untuk caching token atau daftar blacklist token.',
-            'Fitur Utama: Pendaftaran pengguna, login, refresh token, revocable tokens, manajemen client aplikasi, dan endpoint untuk verifikasi token.',
-            'Testing: Unit dan Integration tests untuk semua endpoint API menggunakan Jest dan Supertest.',
-            'Dokumentasi API: Menggunakan Swagger/OpenAPI untuk dokumentasi API yang jelas dan interaktif.',
-          ],
-          techStack: ['Node.js', 'Express.js', 'OAuth2', 'JWT', 'MongoDB', 'Redis', 'Swagger'],
-          link: '#'
-        },
-        project11: {
-          title: 'Website Event & Ticketing',
-          images: [
-            'https://via.placeholder.com/600x300/8a2be2/ffffff?text=Event+Ticketing+Website+1',
-            'https://via.placeholder.com/600x300/8a2be2/ffffff?text=Event+Ticketing+Website+2'
-          ],
-          description: 'Pengembangan website modern untuk manajemen acara, penjualan tiket online, dan verifikasi tiket menggunakan QR code. Dibangun dengan Next.js untuk performa frontend yang optimal, Tailwind CSS untuk styling cepat, dan integrasi dengan Stripe API untuk pembayaran yang aman. Fitur termasuk daftar acara, detail acara, pembelian tiket, dan dashboard admin untuk manajemen acara dan laporan penjualan.',
-          details: [
-            'Frontend Framework: Next.js untuk Server-Side Rendering (SSR) dan Static Site Generation (SSG), memastikan performa cepat dan SEO-friendly.',
-            'Styling: Tailwind CSS untuk pengembangan UI yang cepat dan desain yang responsif.',
-            'Pembayaran: Integrasi aman dengan Stripe API untuk proses pembayaran tiket. Mendukung berbagai metode pembayaran.',
-            'Backend (API): API Route di Next.js untuk mengelola data acara, pesanan, dan verifikasi tiket.',
-            'Database: PostgreSQL (atau MongoDB) untuk menyimpan data acara, tiket, dan pengguna.',
-            'Fitur Utama: Pencarian dan filter acara, detail acara lengkap, proses pembelian tiket, pembuatan QR code untuk tiket, dashboard admin (manajemen acara, tiket, pengguna, laporan penjualan), verifikasi tiket on-site.',
-          ],
-          techStack: ['Next.js', 'React', 'Tailwind CSS', 'Stripe API', 'PostgreSQL', 'Node.js'],
-          link: '#'
-        },
-        project12: {
-          title: 'Prediksi Harga Rumah dengan Regresi',
-          images: [
-            'https://via.placeholder.com/600x300/228b22/ffffff?text=House+Price+Prediction+1',
-            'https://via.placeholder.com/600x300/228b22/ffffff?text=House+Price+Prediction+2'
-          ],
-          description: 'Proyek Machine Learning untuk memprediksi harga rumah berdasarkan berbagai fitur properti seperti luas tanah, jumlah kamar, lokasi, dan fasilitas. Model regresi dikembangkan menggunakan Python dan pustaka Scikit-learn, dengan tahapan mulai dari eksplorasi data, preprocessing, pemilihan fitur, hingga pelatihan dan evaluasi model. Bertujuan untuk memberikan estimasi harga yang akurat bagi pembeli atau penjual properti.',
-          details: [
-            'Bahasa Pemrograman: Python.',
-            'Pustaka: Pandas dan Numpy untuk manipulasi data, Matplotlib dan Seaborn untuk visualisasi data, Scikit-learn untuk implementasi model Machine Learning (Linear Regression, Random Forest, Gradient Boosting).',
-            'Alat: Jupyter Notebook untuk eksplorasi data, analisis, dan pengembangan model.',
-            'Metodologi: Data Collection (dataset publik), Data Cleaning (penanganan missing values, outliers), Feature Engineering (membuat fitur baru dari data yang ada), Model Training (cross-validation, hyperparameter tuning), Model Evaluation (RMSE, MAE, R-squared), Deployment sederhana (misal: Flask API).',
-            'Dataset: Kaggle House Price Prediction dataset atau dataset serupa.',
-            'Dampak: Membantu individu dan agen properti dalam membuat keputusan harga yang lebih terinformasi.',
-          ],
-          techStack: ['Python', 'Machine Learning', 'Scikit-learn', 'Pandas', 'Numpy', 'Jupyter', 'Data Visualization'],
-          link: '#'
-        }
-      };
-
-      let currentImageIndex = 0;
-      let currentProjectImages = [];
-
-      // Smooth Scroll & Active Nav Link Highlighting
-      document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-
-      const sections = document.querySelectorAll('main section');
-      const navLinks = document.querySelectorAll('nav a');
-
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2
-      };
-
-      const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${entry.target.id}`) {
-                link.classList.add('active');
-              }
-            });
-          }
-        });
-      }, observerOptions);
-
-      sections.forEach(section => {
-        sectionObserver.observe(section);
-      });
-
-      // Typewriter Effect
-      const typewriterText = "Junior Software Engineer, Design Graphic, Social Media Specialist, Digital Marketing, Videographer, & Finance...";
-      const typewriterElement = document.querySelector('.typewriter');
-      let charIndex = 0;
-
-      function typeWriter() {
-        if (charIndex < typewriterText.length) {
-          typewriterElement.textContent += typewriterText.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeWriter, 70);
-        }
-      }
-      document.addEventListener('DOMContentLoaded', typeWriter);
-
-      // Dynamic Year in Footer
-      document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-      // Skills Progress Bar Animation
-      const progressBars = document.querySelectorAll('.progress-bar');
-      const skillsSection = document.getElementById('about');
-
-      const progressBarObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            progressBars.forEach(bar => {
-              const progress = bar.dataset.progress;
-              bar.style.setProperty('--progress-width', `${progress}%`);
-              bar.classList.add('animate');
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      progressBarObserver.observe(skillsSection);
-
-      // Accordion for Experience & Education
-      const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-      accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-          const content = header.nextElementSibling;
-          header.classList.toggle('active');
-          if (content.classList.contains('open')) {
-            content.classList.remove('open');
-            content.style.maxHeight = 0;
-          } else {
-            document.querySelectorAll('.accordion-content.open').forEach(openContent => {
-              openContent.classList.remove('open');
-              openContent.style.maxHeight = 0;
-              openContent.previousElementSibling.classList.remove('active');
-            });
-            content.classList.add('open');
-            content.style.maxHeight = content.scrollHeight + 'px';
-          }
-        });
-      });
-
-      // Portfolio Filter
-      const filterBtns = document.querySelectorAll('#portfolio .filter-btn');
-      const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const category = btn.dataset.category;
-
-          portfolioItems.forEach(item => {
-            if (category === 'all' || item.dataset.category === category) {
-              item.style.display = 'block';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // Portfolio Modal
-      const portfolioModal = document.getElementById('portfolioModal');
-      const closeButton = document.querySelector('.modal .close-button');
-      const modalProjectTitle = document.getElementById('modalProjectTitle');
-      const modalProjectMainImage = document.getElementById('modalProjectMainImage');
-      const modalProjectDescription = document.getElementById('modalProjectDescription');
-      const modalProjectDetails = document.getElementById('modalProjectDetails');
-      const modalTechStack = document.getElementById('modalTechStack');
-      const modalProjectLink = document.getElementById('modalProjectLink');
-      const modalThumbnails = document.getElementById('modalThumbnails');
-      const prevImageBtn = document.getElementById('prevImageBtn');
-      const nextImageBtn = document.getElementById('nextImageBtn');
-
-      function updateGallery() {
-        if (currentProjectImages.length > 0) {
-          modalProjectMainImage.src = currentProjectImages[currentImageIndex];
-          modalProjectMainImage.alt = `Project Image ${currentImageIndex + 1}`;
-        } else {
-          modalProjectMainImage.src = 'https://via.placeholder.com/600x300/cccccc/000000?text=No+Image';
-          modalProjectMainImage.alt = 'No image available';
-        }
-
-
-        modalThumbnails.querySelectorAll('img').forEach((img, index) => {
-          if (index === currentImageIndex) {
-            img.classList.add('active-thumbnail');
-          } else {
-            img.classList.remove('active-thumbnail');
-          }
-        });
-      }
-
-      prevImageBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentProjectImages.length - 1;
-        updateGallery();
-      });
-
-      nextImageBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex < currentProjectImages.length - 1) ? currentImageIndex + 1 : 0;
-        updateGallery();
-      });
-
-
-      portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const projectId = item.dataset.projectId;
-          const data = projectData[projectId];
-
-          if (data) {
-            modalProjectTitle.textContent = data.title;
-            modalProjectDescription.textContent = data.description;
-
-            currentProjectImages = data.images || [];
-            currentImageIndex = 0;
-            modalThumbnails.innerHTML = '';
-
-            if (currentProjectImages.length > 0) {
-              currentProjectImages.forEach((src, index) => {
-                const thumb = document.createElement('img');
-                thumb.src = src;
-                thumb.alt = `Thumbnail ${index + 1}`;
-                thumb.addEventListener('click', () => {
-                  currentImageIndex = index;
-                  updateGallery();
-                });
-                modalThumbnails.appendChild(thumb);
-              });
-              updateGallery();
-            } else {
-              modalProjectMainImage.src = 'https://via.placeholder.com/600x300/cccccc/000000?text=No+Image';
-              modalProjectMainImage.alt = 'No image available';
-            }
-
-
-            modalProjectDetails.innerHTML = '';
-            data.details.forEach(detail => {
-              const li = document.createElement('li');
-              li.textContent = detail;
-              modalProjectDetails.appendChild(li);
-            });
-
-            modalTechStack.innerHTML = '';
-            data.techStack.forEach(tech => {
-              const span = document.createElement('span');
-              span.textContent = tech;
-              modalTechStack.appendChild(span);
-            });
-
-            modalProjectLink.href = data.link;
-
-            portfolioModal.style.display = 'block';
-          }
-        });
-      });
-
-      closeButton.addEventListener('click', () => {
-        portfolioModal.style.display = 'none';
-      });
-
-      window.addEventListener('click', (event) => {
-        if (event.target === portfolioModal) {
-          portfolioModal.style.display = 'none';
-        }
-      });
-
-      // Keyboard navigation for modal
-      document.addEventListener('keydown', (e) => {
-        if (portfolioModal.style.display === 'block') {
-          if (e.key === 'ArrowLeft') {
-            prevImageBtn.click();
-          } else if (e.key === 'ArrowRight') {
-            nextImageBtn.click();
-          } else if (e.key === 'Escape') {
-            closeButton.click();
-          }
-        }
-      });
-
-
-      // Contact Form Validation & Submission
-      const contactForm = document.getElementById('contactForm');
-      const formStatus = document.getElementById('formStatus');
-
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      const subjectInput = document.getElementById('subject');
-      const messageInput = document.getElementById('message');
-
-      const nameError = document.getElementById('nameError');
-      const emailError = document.getElementById('emailError');
-      const subjectError = document.getElementById('subjectError');
-      const messageError = document.getElementById('messageError');
-
-      function clearErrors() {
-          nameError.style.display = 'none';
-          emailError.style.display = 'none';
-          subjectError.style.display = 'none';
-          messageError.style.display = 'none';
-          formStatus.style.display = 'none';
-      }
-
-      function validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-      }
-
-      function validateField(inputElement, errorElement, validationFn) {
-          clearErrors(); // Clear all errors on individual field interaction
-          let isValid = true;
-          const value = inputElement.value.trim();
-
-          if (!value) {
-              errorElement.textContent = `${inputElement.previousElementSibling.textContent.replace(' Anda', '').replace(':', '')} wajib diisi.`;
-              errorElement.style.display = 'block';
-              isValid = false;
-          } else if (validationFn && !validationFn(value)) {
-              errorElement.textContent = `Format ${inputElement.previousElementSibling.textContent.replace(' Anda', '').replace(':', '')} tidak valid.`;
-              errorElement.style.display = 'block';
-              isValid = false;
-          } else {
-              errorElement.style.display = 'none';
-          }
-          return isValid;
-      }
-
-      // Live validation on blur
-      nameInput.addEventListener('blur', () => validateField(nameInput, nameError));
-      emailInput.addEventListener('blur', () => validateField(emailInput, emailError, validateEmail));
-      subjectInput.addEventListener('blur', () => validateField(subjectInput, subjectError));
-      messageInput.addEventListener('blur', () => validateField(messageInput, messageError));
-
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        clearErrors();
-
-        let formIsValid = true;
-        formIsValid = validateField(nameInput, nameError) && formIsValid;
-        formIsValid = validateField(emailInput, emailError, validateEmail) && formIsValid;
-        formIsValid = validateField(subjectInput, subjectError) && formIsValid;
-        formIsValid = validateField(messageInput, messageError) && formIsValid;
-
-        if (!formIsValid) {
-            formStatus.className = 'form-message error';
-            formStatus.textContent = 'Mohon perbaiki kesalahan di atas.';
-            return;
-        }
-
-        formStatus.className = 'form-message success';
-        formStatus.textContent = 'Pesan Anda telah terkirim! Terima kasih atas minat Anda.';
-        contactForm.reset();
-        setTimeout(() => {
-            formStatus.style.display = 'none';
-        }, 7000);
-      });
-
-      // Copy to Clipboard Functionality
-      document.querySelectorAll('.copy-btn').forEach(button => {
-          button.addEventListener('click', async () => {
-              const textToCopy = button.dataset.text;
-              try {
-                  await navigator.clipboard.writeText(textToCopy);
-                  const tooltip = button.closest('.copy-tooltip');
-                  tooltip.classList.add('active');
-                  setTimeout(() => {
-                      tooltip.classList.remove('active');
-                  }, 2000);
-              } catch (err) {
-                  console.error('Failed to copy text: ', err);
-                  const textArea = document.createElement("textarea");
-                  textArea.value = textToCopy;
-                  document.body.appendChild(textArea);
-                  textArea.focus();
-                  textArea.select();
-                  try {
-                      document.execCommand('copy');
-                      const tooltip = button.closest('.copy-tooltip');
-                      tooltip.classList.add('active');
-                      setTimeout(() => {
-                          tooltip.classList.remove('active');
-                      }, 2000);
-                  } catch (err) {
-                      console.error('Fallback: Oops, unable to copy', err);
-                  }
-                  document.body.removeChild(textArea);
-              }
-          });
-      });
-
-
-      // Back to Top Button
-      const backToTopBtn = document.getElementById("backToTopBtn");
-
-      window.onscroll = function() {
-        scrollFunction();
-        updateScrollProgress();
-        dynamicHeaderStyling();
-      };
-
-      function scrollFunction() {
-        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-          backToTopBtn.style.display = "block";
-        } else {
-          backToTopBtn.style.display = "none";
-        }
-      }
-
-      function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-      }
-
-      // Scroll Progress Indicator
-      function updateScrollProgress() {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.getElementById("scroll-progress").style.width = scrolled + "%";
-      }
-
-      // Dynamic Header Styling on Scroll
-      const mainHeader = document.getElementById('main-header');
-      function dynamicHeaderStyling() {
-          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-              mainHeader.classList.add('scrolled');
-          } else {
-              mainHeader.classList.remove('scrolled');
-          }
-      }
-
-      // Animate elements on scroll using IntersectionObserver
-      const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-
-      const animateObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            animateObserver.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-      });
-
-      animateOnScrollElements.forEach(element => {
-        animateObserver.observe(element);
-      });
-
-    </script>
-  </body>
-</html>
+      <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required="">
+          </div>
+          <div class="col-md-6 form-group mt-3 mt-md-0">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="">
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
+        </div>
+        <div class="form-group mt-3">
+          <textarea class="form-control" name="message" rows="5" placeholder="Message" required=""></textarea>
+        </div>
+        <div class="my-3">
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your message has been sent. Thank you!</div>
+        </div>
+        <div class="text-center"><button type="submit">Send Message</button></div>
+      </form>
+
+    </div>
+  </section><!-- End Contact Section -->
+
+  <div class="credits">
+
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/purecounter_vanilla.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/bootstrap.bundle.min.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/glightbox.min.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/isotope.pkgd.min.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/swiper-bundle.min.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/noframework.waypoints.js"></script>
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="Farid%20Andika%20-%20Personal%20Website_files/main.js"></script>
+
+
+
+</body></html>
