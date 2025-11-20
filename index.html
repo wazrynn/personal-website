@@ -22,6 +22,7 @@
         .container {
             width: 90%;
             margin: auto;
+            text-align: center;
             max-width: 1200px;
         }
 
@@ -37,6 +38,18 @@
             --card-bg: #222;
         }
 
+        /* ANIAMASI SAAT SCROLL (Fade-in) */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animated-section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* HEADER AND NAVBAR */
         #header {
             background-color: rgba(17, 17, 17, 0.95); 
@@ -45,6 +58,13 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Animasi untuk navbar */
+        }
+        
+        /* Style untuk saat navbar di-scroll */
+        #header.scrolled {
+            background-color: rgba(17, 17, 17, 1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
         .header-content {
@@ -59,6 +79,7 @@
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
+            transition: color 0.3s;
         }
 
         .navbar ul {
@@ -77,7 +98,7 @@
             color: #ccc;
             font-weight: 500;
             padding: 5px 0;
-            transition: color 0.3s;
+            transition: color 0.3s, border-bottom 0.3s;
         }
 
         .navbar a:hover, .navbar a.active { /* Menggunakan a.active untuk JS */
@@ -89,6 +110,15 @@
         .section-title {
             margin-bottom: 40px;
             padding-top: 80px; 
+            /* Tambahkan animasi untuk Judul */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .section-title.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title h2 {
@@ -145,6 +175,43 @@
             font-size: 0.9em;
         }
 
+        /* BUTTON ANIMATIONS */
+        .btn-primary {
+            background-color: var(--primary-color); 
+            color: #111; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-right: 15px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 128, 0.5);
+        }
+        
+        .btn-secondary {
+            background-color: transparent; 
+            color: var(--primary-color); 
+            border: 2px solid var(--primary-color); 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: #111;
+            transform: translateY(-2px);
+        }
+
+
         /* --- ABOUT SECTION --- */
         #about {
             padding-top: 150px; 
@@ -158,6 +225,18 @@
             align-items: center;
         }
         
+        .about-image {
+            /* Tambahkan animasi awal */
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animated-section.animate .about-image {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         .about-image img {
             max-width: 300px;
             border-radius: 8px;
@@ -191,11 +270,12 @@
             color: #fff;
             font-size: 1.5em;
             margin-right: 15px;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.2s;
         }
 
         .social-links a:hover {
             color: var(--primary-color);
+            transform: scale(1.1); /* Efek zoom ringan */
         }
 
         /* --- EDUCATION & CERTIFICATIONS --- */
@@ -211,6 +291,18 @@
             overflow-x: auto; /* Memungkinkan scroll horizontal */
             gap: 20px;
             padding-bottom: 20px;
+            /* Scrollbar styling (opsional) */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) #111;
+        }
+        
+        .cert-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .cert-container::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 4px;
         }
         
         .cert-card {
@@ -231,7 +323,21 @@
             overflow: hidden;
             box-shadow: 0 0 25px rgba(0, 255, 128, 0.5);
             cursor: default; /* Non-interaktif */
+            text-align: center; /* Untuk menengahkan overlay */
+            /* Animasi untuk tampilan sertifikat utama */
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
+        
+        .main-cert-display.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        
+        .main-cert-display.fade-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+
 
         .main-cert-display img {
             width: 100%;
@@ -248,6 +354,13 @@
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
             text-align: center;
+            /* Animasi overlay */
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .main-cert-display:hover .overlay-info {
+            transform: translateY(0);
         }
 
         .overlay-info h4 {
@@ -276,6 +389,8 @@
 
         .portfolio-filter {
             margin-bottom: 30px;
+            /* Animasi saat filter diklik */
+            transition: opacity 0.3s;
         }
 
         .portfolio-filter button {
@@ -286,13 +401,14 @@
             margin: 0 5px;
             cursor: pointer;
             border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
         }
 
         .portfolio-filter button.active, .portfolio-filter button:hover {
             background-color: var(--primary-color);
             color: #111;
             font-weight: bold;
+            transform: translateY(-2px);
         }
 
         .project-card {
@@ -300,16 +416,33 @@
             overflow: hidden;
             display: block; 
             border: none;
+            /* Animasi project card saat filter */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .project-card:not(.hidden):hover img {
+            opacity: 0.8;
         }
 
         .project-card img {
             width: 100%;
             height: auto;
             display: block;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.5s;
+        }
+        
+        .project-card:not(.hidden):hover img {
+            transform: scale(1.05);
         }
 
         .project-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            width: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             display: none !important; /* Gunakan !important untuk memastikan override grid */
         }
         
@@ -320,151 +453,49 @@
         }
         
         /* --- CONTACT --- */
-        .contact-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
         .contact-item {
-            background-color: #333; 
-            padding: 20px;
-            border-radius: 8px;
-            color: #fff;
-            display: flex;
-            align-items: center;
+            /* Tambahkan efek hover */
+            transition: transform 0.3s, background-color 0.3s;
         }
         
-        .contact-item i {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-
-        .contact-item h4 {
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 1.1em;
-        }
-        .contact-item p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background-color: #333;
-            color: #fff;
-        }
-
-        .contact-form .name-email-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .contact-form .name-email-row input {
-            flex: 1;
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background-color: #444;
         }
         
-        .contact-form button {
-            background-color: var(--primary-color); 
-            color: #111; 
-            font-weight: bold;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .contact-form button:hover {
-            background-color: var(--secondary-color);
+        .contact-form input:focus, .contact-form textarea:focus {
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 5px var(--primary-color);
+            outline: none;
         }
 
-        /* --- FOOTER STYLES --- */
-        #footer {
-            background: #0a0a0a; 
-            color: #f8f9fa; 
-            padding: 30px 0;
-            font-size: 14px;
-            text-align: center;
-        }
-        
         /* --- TIMELINE STYLES (Untuk Resume/About Detail) --- */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background-color: #333;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
         .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
+            /* Animasi Timeline */
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
-        .timeline-item.left {
-            left: 0;
-        }
-
+        
         .timeline-item.right {
-            left: 50%;
+             transform: translateX(50px);
         }
-
+        
+        .timeline-item.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
         .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            right: -8px;
-            background-color: var(--primary-color);
-            border: 4px solid #111;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-item.right::after {
-            left: -8px;
-        }
-
-        .timeline-item.right {
-            text-align: left;
+            transition: transform 0.3s;
         }
         
-        .timeline-item.left {
-            text-align: right;
+        .timeline-item:hover::after {
+            transform: scale(1.2);
         }
 
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: var(--card-bg);
-            position: relative;
-            border-radius: 6px;
-        }
-        
-        .timeline-content h4 {
-            color: var(--primary-color);
-        }
+        /* Media Queries yang ada tetap dipertahankan */
 
-        /* --- MEDIA QUERIES --- */
         @media (max-width: 992px) {
             .about-main-content {
                 flex-direction: column;
@@ -486,6 +517,10 @@
             .timeline-item.right, .timeline-item.left {
                 left: 0;
                 text-align: left;
+                transform: translateX(0); /* Matikan animasi X untuk tampilan kecil */
+            }
+            .timeline-item.animate { /* Pastikan tetap berlaku */
+                transform: translateX(0);
             }
             .timeline-item::after {
                 left: 12px;
@@ -497,6 +532,26 @@
             
             .main-cert-display {
                 width: 90%; 
+            }
+            
+            .header-content {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+
+            .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar li {
+                margin: 5px 10px;
+            }
+
+            .contact-form .name-email-row {
+                flex-direction: column;
+                text-align: ;
+                gap: 0;
             }
         }
     </style>
@@ -512,8 +567,8 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link active" href="#about">Home</a></li>
-                    <li><a class="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view">Resume</a></li> 
-                    <li><a class="nav-link" href="#education">Education</a></li> 
+                    <li><a class="download-link" href="https://drive.usercontent.google.com/u/0/uc?id=1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI&export=download" target="https://drive.usercontent.google.com/u/0/uc?id=1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI&export=download">Resume</a></li> 
+                    
                     <li><a class="nav-link" href="#certifications">Certifications</a></li>
                     <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
                     <li><a class="nav-link" href="#contact">Contact</a></li>
@@ -522,7 +577,7 @@
         </div>
     </header>
 
-    <section id="about">
+    <section id="about" class="animated-section">
         <div class="container">
             <div class="about-main-content">
                 <div class="about-image">
@@ -539,33 +594,32 @@
                     </p>
                     
                     <div style="margin-top: 25px;">
-                        <button id="resume-btn" style="background-color: var(--primary-color); color: #111; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-right: 15px;"><i class="fas fa-download"></i> Download Resume</button>
-                        <button id="contact-btn" style="background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer;"><i class="fas fa-envelope"></i> Hubungi Saya</button>
+                        <button id="resume-btn" class="btn-primary"><i class="fas fa-download"></i> Download Resume</button>
+                        <button id="contact-btn" class="btn-secondary"><i class="fas fa-envelope"></i> Hubungi Saya</button>
                     </div>
 
                     <div class="social-links" style="margin-top: 20px;">
-                        <a href="https://wa.me/6285719562762" target="https://api.whatsapp.com/send/?phone=6285719562762&text&type=phone_number&app_absent=0" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/websoftindonesia" target="https://github.com/websoftindonesia" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/wazrynn/" target="https://www.instagram.com/wazrynn/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6285719562762" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/websoftindonesia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/wazrynn/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="resume">
+    <section id="resume" class="animated-section">
         <div class="container">
             <div class="section-title">
                 <p>SUMMARY</p>
-                <link rel="stylesheet" href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view">
                 <div class="divider"></div>
-                <h2>RESUME</h2>
+                <h2>Work Experience</h2>
             </div>
             
             <div class="timeline">
                 <div class="timeline-item left">
-                    <div class="timeline-content">
+                    <div class="timeline-content card">
                         <h4>2025 - Sekarang</h4>
                         <p><strong>Co-Chief Executive Officer & Full Stack Engineer</strong></p>
                         <p>@NexTeen</p>
@@ -574,7 +628,7 @@
                 </div>
                 
                 <div class="timeline-item right">
-                    <div class="timeline-content">
+                    <div class="timeline-content card">
                         <h4>2024 - 2025</h4>
                         <p><strong>Mobile Developer Intern</strong></p>
                         <p>PT Tech Global</p>
@@ -583,7 +637,7 @@
                 </div>
 
                 <div class="timeline-item left">
-                    <div class="timeline-content">
+                    <div class="timeline-content card">
                         <h4>2023</h4>
                         <p><strong>Silver Medalist - Indonesian Science Olympiad</strong></p>
                         <p>HIMA Physic Gajah Mada University</p>
@@ -592,7 +646,7 @@
                 </div>
                 
                 <div class="timeline-item right">
-                    <div class="timeline-content">
+                    <div class="timeline-content card">
                         <h4>2025 - 2029</h4>
                         <p><strong>S1 Teknik Informatika</strong></p>
                         <p>Gunadarma University</p>
@@ -603,7 +657,7 @@
         </div>
     </section>
 
-    <section id="education">
+    <section id="education" class="animated-section">
         <div class="container">
             <div class="section-title">
                 <p>EDUCATION</p>
@@ -628,8 +682,10 @@
                 </div>
             </div>
 
-            <h2 style="margin-top: 40px;">ADDITIONAL EDUCATION</h2>
-            <div class="divider" style="background-color: var(--primary-color);"></div>
+            <div class="section-title">
+                <h2 style="margin-top: 40px;">ADDITIONAL EDUCATION</h2>
+                <div class="divider"></div>
+            </div>
 
             <div class="grid-container" style="margin-top: 30px;">
                 <div class="card education-card">
@@ -651,7 +707,7 @@
         </div>
     </section>
     
-    <section id="certifications">
+    <section id="certifications" class="animated-section">
         <div class="container">
             <div class="section-title">
                 <p>CERTIFICATIONS</p>
@@ -663,38 +719,53 @@
                 </div>
 
             <div class="cert-container" id="cert-thumbnail-container">
-                <div class="card cert-card" data-cert-id="cert-hmd">
+                <div class="card cert-card active-thumb" data-cert-id="cert-hmd" 
+                    data-src="https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU" 
+                    data-title="HMD Mathematic Competition" 
+                    data-org="HIMA Physic Gajah Mada University">
                     <img src="https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU" alt="HMD Cert">
                     <p>HMD Mathematic</p>
                 </div>
-                <div class="card cert-card" data-cert-id="cert-linkedin">
+                <div class="card cert-card" data-cert-id="cert-linkedin" 
+                    data-src="https://i.ibb.co/wB08h5h/cert-linkedin.jpg" 
+                    data-title="React.js Essential Training" 
+                    data-org="LinkedIn Learning">
                     <img src="https://i.ibb.co/wB08h5h/cert-linkedin.jpg" alt="LinkedIn Cert">
                     <p>LinkedIn Certification</p>
                 </div>
-                <div class="card cert-card" data-cert-id="cert-apple">
+                <div class="card cert-card" data-cert-id="cert-apple" 
+                    data-src="https://i.ibb.co/V9512hK/cert-apple.jpg" 
+                    data-title="iOS App Development with SwiftUI" 
+                    data-org="Apple Developer Academy">
                     <img src="https://i.ibb.co/V9512hK/cert-apple.jpg" alt="Apple Cert">
                     <p>Apple Certification</p>
                 </div>
-                <div class="card cert-card" data-cert-id="cert-bangkit">
+                <div class="card cert-card" data-cert-id="cert-bangkit" 
+                    data-src="https://i.ibb.co/8Yj0z3w/cert-bangkit.jpg" 
+                    data-title="Mobile Development Path" 
+                    data-org="Bangkit Academy (Google, GoTo, Traveloka)">
                     <img src="https://i.ibb.co/8Yj0z3w/cert-bangkit.jpg" alt="Bangkit Cert">
                     <p>Bangkit Distinction Graduate</p>
                 </div>
             </div>
 
-            <h2 style="margin-top: 40px;">TECHNOLOGIES</h2>
-            <div class="divider" style="background-color: var(--primary-color);"></div>
+            <div class="section-title">
+                <h2 style="margin-top: 40px;">TECHNOLOGIES</h2>
+                <div class="divider"></div>
+            </div>
+            
             <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); text-align: center; margin-top: 30px;">
-                <div class="tech-icon"><i class="fab fa-react" style="color: #61DAFB; font-size: 3em;"></i><p>React</p></div>
-                <div class="tech-icon"><i class="fab fa-js-square" style="color: #F7DF1E; font-size: 3em;"></i><p>JavaScript</p></div>
-                <div class="tech-icon"><i class="fab fa-html5" style="color: #E34F26; font-size: 3em;"></i><p>HTML5</p></div>
-                <div class="tech-icon"><i class="fab fa-css3-alt" style="color: #1572B6; font-size: 3em;"></i><p>CSS3</p></div>
-                <div class="tech-icon"><i class="fab fa-github" style="color: #fff; font-size: 3em;"></i><p>GitHub</p></div>
-                <div class="tech-icon"><i class="fas fa-database" style="color: #4DB33D; font-size: 3em;"></i><p>MongoDB</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-react" style="color: #61DAFB; font-size: 3em;"></i><p>React</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-js-square" style="color: #F7DF1E; font-size: 3em;"></i><p>JavaScript</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-html5" style="color: #E34F26; font-size: 3em;"></i><p>HTML5</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-css3-alt" style="color: #1572B6; font-size: 3em;"></i><p>CSS3</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-github" style="color: #fff; font-size: 3em;"></i><p>GitHub</p></div>
+                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fas fa-database" style="color: #4DB33D; font-size: 3em;"></i><p>MongoDB</p></div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio">
+    <section id="portfolio" class="animated-section">
         <div class="container">
             <div class="section-title">
                 <p>PORTFOLIO</p>
@@ -756,7 +827,7 @@
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="animated-section">
         <div class="container">
             <div class="section-title">
                 <p>CONTACT</p>
@@ -765,28 +836,28 @@
             </div>
             
             <div class="contact-info-grid">
-                <div class="contact-item">
+                <div class="contact-item card">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <h4>Current Address</h4>
                         <p>South Tangerang, Indonesia</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item card">
                     <i class="fab fa-linkedin"></i>
                     <div>
                         <h4>LinkedIn</h4>
                         <p>M. Fawwaz Rayyan Khalish</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item card">
                     <i class="fas fa-envelope"></i>
                     <div>
                         <h4>Email Me</h4>
                         <p>novalrayan97@gmail.com</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item card">
                     <i class="fab fa-whatsapp"></i>
                     <div>
                         <h4>WhatsApp</h4>
@@ -795,13 +866,14 @@
                 </div>
             </div>
             
+            <div id="form-message"></div> 
             <form class="contact-form" id="contact-form">
                 <div class="name-email-row">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" id="contact-name" placeholder="Your Name" required>
+                    <input type="email" id="contact-email" placeholder="Your Email" required>
                 </div>
-                <input type="text" placeholder="Subject" required>
-                <textarea placeholder="Message" rows="5" required></textarea>
+                <input type="text" id="contact-subject" placeholder="Subject" required>
+                <textarea id="contact-message" placeholder="Message" rows="5" required></textarea>
                 <button type="submit">Send Message</button>
             </form>
         </div>
@@ -821,184 +893,245 @@
     </footer>
     
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.getElementById('header');
-            const navLinks = document.querySelectorAll('#navbar .nav-link');
-            const sections = document.querySelectorAll('section');
-
-            // --- 1. Navbar Active State & Smooth Scroll ---
-            function onScroll() {
-                let current = 'about';
-                const scrollY = window.scrollY;
-
-                // Navbar Active State (Scroll Spy)
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    // Tentukan section yang sedang dilihat (offset dikurangi sedikit agar transisi lebih cepat)
-                    if (scrollY >= sectionTop - 150) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    let linkHref = link.getAttribute('href').substring(1);
-
-                    if (linkHref === current) {
-                        link.classList.add('active');
-                    }
-                });
+        // Data Sertifikat
+        const certData = {
+            'cert-hmd': {
+                src: "https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU",
+                title: "HMD Mathematic Competition",
+                org: "HIMA Physic Gajah Mada University"
+            },
+            'cert-linkedin': {
+                src: "https://i.ibb.co/wB08h5h/cert-linkedin.jpg",
+                title: "React.js Essential Training",
+                org: "LinkedIn Learning"
+            },
+            'cert-apple': {
+                src: "https://i.ibb.co/V9512hK/cert-apple.jpg",
+                title: "iOS App Development with SwiftUI",
+                org: "Apple Developer Academy"
+            },
+            'cert-bangkit': {
+                src: "https://i.ibb.co/8Yj0z3w/cert-bangkit.jpg",
+                title: "Mobile Development Path",
+                org: "Bangkit Academy (Google, GoTo, Traveloka)"
             }
+        };
 
-            window.addEventListener('load', onScroll);
-            document.addEventListener('scroll', onScroll);
-
-            // Smooth Scroll Handler
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80, // Offset untuk header sticky
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+        const certDisplayContainer = document.getElementById('cert-display-container');
+        const certThumbnails = document.querySelectorAll('.cert-card');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+        const header = document.getElementById('header');
+        const resumeBtn = document.getElementById('resume-btn');
+        const contactBtn = document.getElementById('contact-btn');
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
 
 
-            // --- 2. Portfolio Filtering ---
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const projectCards = document.querySelectorAll('.project-card');
+        // --- Fungsionalitas Sertifikat ---
+        function renderMainCert(certId) {
+            const data = certData[certId];
+            if (!data) return;
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    const filterValue = button.getAttribute('data-filter');
-
-                    projectCards.forEach(card => {
-                        const cardCategory = card.getAttribute('data-category');
-                        
-                        if (filterValue === 'all' || cardCategory === filterValue) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                });
-            });
-
-            // --- 3. Contact Form Submission Handling (Simulasi) ---
-            const contactForm = document.getElementById('contact-form');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault(); 
-                    alert('Pesan berhasil terkirim! Terima kasih telah menghubungi M.Fawwaz.');
-                    contactForm.reset(); 
-                });
-            }
+            // Tambahkan animasi fade-out sebelum mengganti konten
+            certDisplayContainer.innerHTML = `
+                <div class="main-cert-display fade-out">
+                    <img src="${data.src}" alt="${data.title}">
+                    <div class="overlay-info">
+                        <h4>${data.title}</h4>
+                        <p>${data.org}</p>
+                    </div>
+                </div>
+            `;
             
-            
-            // --- 4. Interaksi Gallery Sertifikasi ---
-            
-            const certContainer = document.querySelector('#cert-display-container'); 
-            const thumbnailItems = document.querySelectorAll('.cert-card');
-            
-            // Data Detail Sertifikasi
-            const certificationDetails = {
-                'cert-hmd': {
-                    title: 'HMD Mathematic & Certificate',
-                    detail: 'Grade: B',
-                    imgSrc: 'https://i.ibb.co/mF9J7qL/cert-hmd.jpg'
-                },
-                'cert-linkedin': {
-                    title: 'Professional Skill Certificate',
-                    detail: 'LinkedIn Certification (UX/UI, Project Management, dll.)',
-                    imgSrc: 'https://i.ibb.co/wB08h5h/cert-linkedin.jpg'
-                },
-                'cert-apple': {
-                    title: 'Apple Certification',
-                    detail: 'iOS Development or App Marketing',
-                    imgSrc: 'https://i.ibb.co/V9512hK/cert-apple.jpg'
-                },
-                'cert-bangkit': {
-                    title: 'Bangkit Distinction Graduate',
-                    detail: 'Mobile Development Path',
-                    imgSrc: 'https://i.ibb.co/8Yj0z3w/cert-bangkit.jpg'
-                }
-            };
-            
-            // Fungsi untuk mengganti sertifikat utama
-            const updateMainCert = (certId) => {
-                const details = certificationDetails[certId];
-                if (details) {
-                    certContainer.innerHTML = `
-                        <div class="main-cert-display">
-                            <img src="${details.imgSrc}" alt="${details.title}">
-                            <div class="overlay-info">
-                                <h4>${details.title}</h4>
-                                <p>${details.detail}</p>
-                            </div>
-                        </div>
-                    `;
-                    // Atur kelas aktif pada thumbnail
-                    thumbnailItems.forEach(t => t.classList.remove('active-thumb'));
-                    const activeThumb = document.querySelector(`.cert-card[data-cert-id="${certId}"]`);
-                    if (activeThumb) {
-                        activeThumb.classList.add('active-thumb');
-                    }
-                }
-            };
-
-            // Tambahkan event listener ke setiap thumbnail
-            thumbnailItems.forEach(thumb => {
-                const certId = thumb.getAttribute('data-cert-id');
-                thumb.addEventListener('click', () => updateMainCert(certId));
-            });
-            
-            // Tampilkan sertifikat pertama secara default saat load
-            // Menggunakan setTimeout untuk memastikan DOM sudah ter-render, walau DOMContentLoaded harusnya cukup
+            // Hapus fade-out dan tambahkan fade-in setelah sedikit delay
             setTimeout(() => {
-                updateMainCert('cert-hmd');
-            }, 100);
-            
-            
-            // --- 5. Interaksi Tombol CTA ---
-            const resumeBtn = document.getElementById('resume-btn');
-            const contactBtn = document.getElementById('contact-btn');
-            
-            if (resumeBtn) {
-                resumeBtn.addEventListener('click', () => {
-                    // Scroll ke bagian Resume
-                    const targetElement = document.querySelector('#resume');
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, 
-                        behavior: 'smooth'
-                    });
-                    // Di sini Anda bisa menambahkan window.open('path/to/your/resume.pdf', '_blank');
-                    alert('Simulasi: Mengarahkan Resume.');
-                    open('https://drive.usercontent.google.com/u/0/uc?id=1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI&export=download', 'blank');
-                });
-            }
+                const display = certDisplayContainer.querySelector('.main-cert-display');
+                if (display) {
+                    display.classList.remove('fade-out');
+                    display.classList.add('fade-in');
+                }
+            }, 50); // Delay kecil untuk memicu transisi
+        }
 
-            if (contactBtn) {
-                contactBtn.addEventListener('click', () => {
-                    // Scroll ke bagian Contact
-                    const targetElement = document.querySelector('#contact');
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, 
-                        behavior: 'smooth'
-                    });
+        function handleCertClick(event) {
+            const card = event.currentTarget;
+            const certId = card.getAttribute('data-cert-id');
+
+            // Hapus kelas active dari semua thumbnail
+            certThumbnails.forEach(t => t.classList.remove('active-thumb'));
+
+            // Tambahkan kelas active ke thumbnail yang diklik
+            card.classList.add('active-thumb');
+
+            // Render sertifikat utama
+            renderMainCert(certId);
+        }
+
+        // Event listener untuk thumbnail sertifikat
+        certThumbnails.forEach(card => {
+            card.addEventListener('click', handleCertClick);
+        });
+
+        // Tampilkan sertifikat pertama saat halaman dimuat
+        if (certThumbnails.length > 0) {
+            const firstCertId = certThumbnails[0].getAttribute('data-cert-id');
+            renderMainCert(firstCertId);
+        }
+
+        // --- Fungsionalitas Filter Portfolio ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioGrid = document.getElementById('portfolio-grid');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+
+                // Hapus active dari semua tombol dan tambahkan ke tombol yang diklik
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter proyek
+                const projectCards = portfolioGrid.querySelectorAll('.project-card');
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    // Gunakan setTimeout dengan delay untuk transisi yang lebih halus
+                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    
+                    if (filter === 'all' || category === filter) {
+                        card.classList.remove('hidden');
+                        card.style.opacity = 1;
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.style.opacity = 0;
+                        card.style.transform = 'scale(0.8)';
+                        // Sembunyikan setelah transisi selesai
+                        setTimeout(() => {
+                            card.classList.add('hidden');
+                        }, 300); 
+                    }
                 });
+            });
+        });
+
+        // --- Fungsionalitas Kontak dan Tombol Cepat ---
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formMessage.classList.remove('success', 'error');
+            formMessage.style.display = 'block';
+
+            // Simulasi pengiriman form
+            // Di lingkungan nyata, Anda akan menggunakan AJAX (fetch/XMLHttpRequest) di sini.
+            
+            setTimeout(() => {
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                
+                if (name && email) {
+                    formMessage.classList.add('success');
+                    formMessage.innerHTML = `<i class="fas fa-check-circle"></i> Pesan Anda telah terkirim, ${name}! Saya akan segera membalas.`;
+                    contactForm.reset();
+                } else {
+                    formMessage.classList.add('error');
+                    formMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> Harap lengkapi semua bidang yang wajib diisi.`;
+                }
+
+                // Animasi fade out pesan setelah 5 detik
+                setTimeout(() => {
+                    formMessage.style.opacity = 0;
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                        formMessage.style.opacity = 1; // Reset opacity
+                    }, 500);
+                }, 5000);
+
+            }, 500);
+        });
+
+        // Tombol cepat "Download Resume" (sudah ada href-nya di HTML, ini untuk tombol di About)
+        resumeBtn.addEventListener('click', () => {
+            const resumeLink = document.querySelector('.download-link');
+            if (resumeLink) {
+                window.open(resumeLink.href, '_blank');
             }
         });
+
+        // Tombol cepat "Hubungi Saya"
+        contactBtn.addEventListener('click', () => {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        
+        // --- Interaksi Scroll (Header dan Active Nav Link) ---
+        window.addEventListener('scroll', () => {
+            // Animasi Header
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Active Nav Link saat Scroll
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - header.offsetHeight - 50; // Sesuaikan offset
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+            
+            // Animasi Section saat Scroll (Reveal Animation)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        // Animasi tambahan untuk elemen di dalamnya
+                        if (entry.target.id === 'resume') {
+                             // Animasi Timeline
+                            const timelineItems = entry.target.querySelectorAll('.timeline-item');
+                            timelineItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('animate');
+                                }, index * 200); // Delay 200ms per item
+                            });
+                        }
+                        
+                        // Animasi Section Title
+                        const sectionTitle = entry.target.querySelector('.section-title');
+                        if (sectionTitle) {
+                             sectionTitle.classList.add('animate');
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animated-section').forEach(section => {
+                observer.observe(section);
+            });
+            
+        });
+        
+        // Panggil saat dimuat untuk memeriksa posisi awal
+        window.dispatchEvent(new Event('scroll'));
+        
+        
     </script>
 </body>
 </html>
