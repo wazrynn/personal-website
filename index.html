@@ -905,6 +905,7 @@
     </footer>
     
     <script>
+        
         // Data Sertifikat
         const certData = {
             'cert-hmd': {
@@ -955,6 +956,429 @@
                     </div>
                 </div>
             `;
+
+            // 1. Mobile Menu Toggle
+const mobileMenuToggle = document.createElement('div');
+mobileMenuToggle.className = 'mobile-menu-toggle';
+mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+header.querySelector('.header-content').appendChild(mobileMenuToggle);
+
+const navbar = document.getElementById('navbar');
+mobileMenuToggle.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+    mobileMenuToggle.innerHTML = navbar.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+});
+
+// Tambahkan CSS untuk mobile menu
+const mobileMenuCSS = `
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.95);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .navbar.active {
+        max-height: 400px;
+    }
+    
+    .navbar ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .navbar li {
+        margin: 10px 0;
+    }
+}
+`;
+
+const mobileMenuStyle = document.createElement('style');
+mobileMenuStyle.textContent = mobileMenuCSS;
+document.head.appendChild(mobileMenuStyle);
+
+// 2. Back to Top Button
+const backToTopBtn = document.createElement('button');
+backToTopBtn.id = 'back-to-top';
+backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+document.body.appendChild(backToTopBtn);
+
+// Tambahkan CSS untuk back to top button
+const backToTopCSS = `
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: #111;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 999;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: var(--secondary-color);
+}
+`;
+
+const backToTopStyle = document.createElement('style');
+backToTopStyle.textContent = backToTopCSS;
+document.head.appendChild(backToTopStyle);
+
+// Show/hide back to top button based on scroll position
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+// Scroll to top when button is clicked
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// 3. Typing Animation for Hero Text
+const heroTitle = document.querySelector('.about-text h1');
+const heroSubtitle = document.querySelector('.about-text h3');
+const originalTitle = heroTitle.textContent;
+const originalSubtitle = heroSubtitle.textContent;
+
+// Reset text
+heroTitle.textContent = '';
+heroSubtitle.textContent = '';
+
+// Typing animation function
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Start typing animation when page loads
+window.addEventListener('load', () => {
+    typeWriter(heroTitle, originalTitle, 70);
+    setTimeout(() => {
+        typeWriter(heroSubtitle, originalSubtitle, 50);
+    }, originalTitle.length * 70);
+});
+
+// 4. Progress Bars for Skills/Technologies
+const techIcons = document.querySelectorAll('.tech-icon');
+techIcons.forEach(icon => {
+    const techName = icon.querySelector('p').textContent;
+    const progressBar = document.createElement('div');
+    progressBar.className = 'tech-progress';
+    
+    // Set progress percentage based on technology (example values)
+    let progress = 0;
+    switch(techName) {
+        case 'React': progress = 85; break;
+        case 'JavaScript': progress = 90; break;
+        case 'HTML5': progress = 95; break;
+        case 'CSS3': progress = 90; break;
+        case 'GitHub': progress = 80; break;
+        case 'MongoDB': progress = 75; break;
+        default: progress = 70;
+    }
+    
+    progressBar.innerHTML = `
+        <div class="tech-progress-bar" style="width: 0%">
+            <span>${progress}%</span>
+        </div>
+    `;
+    
+    icon.appendChild(progressBar);
+});
+
+// CSS for progress bars
+const progressCSS = `
+.tech-icon {
+    position: relative;
+    padding-bottom: 30px !important;
+}
+
+.tech-progress {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.tech-progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: width 1.5s ease;
+    position: relative;
+}
+
+.tech-progress-bar span {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    font-size: 0.7rem;
+    color: #ccc;
+}
+`;
+
+const progressStyle = document.createElement('style');
+progressStyle.textContent = progressCSS;
+document.head.appendChild(progressStyle);
+
+// Animate progress bars when they come into view
+const techSection = document.querySelector('#certifications');
+const techObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const progressBars = entry.target.querySelectorAll('.tech-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.textContent;
+                bar.style.width = width;
+            });
+            techObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+techObserver.observe(techSection);
+
+// 5. Modal/Lightbox for Portfolio Projects
+const portfolioCards = document.querySelectorAll('.project-card');
+portfolioCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const imgSrc = card.querySelector('img').src;
+        const title = card.querySelector('h4').textContent;
+        const description = card.querySelector('p').textContent;
+        
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'project-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <img src="${imgSrc}" alt="${title}">
+                <div class="modal-info">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    <div class="modal-buttons">
+                        <button class="btn-primary">View Project</button>
+                        <button class="btn-secondary">View Code</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Close modal when clicking X or outside modal
+        const closeModal = () => {
+            modal.remove();
+        };
+        
+        modal.querySelector('.close-modal').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+});
+
+// CSS for modal
+const modalCSS = `
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 255, 128, 0.3);
+    transform: scale(0.8);
+    animation: scaleIn 0.3s forwards;
+}
+
+@keyframes scaleIn {
+    to { transform: scale(1); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.modal-info {
+    padding: 20px;
+}
+
+.modal-info h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+`;
+
+const modalStyle = document.createElement('style');
+modalStyle.textContent = modalCSS;
+document.head.appendChild(modalStyle);
+
+// 6. Dark/Light Mode Toggle
+const themeToggle = document.createElement('button');
+themeToggle.id = 'theme-toggle';
+themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+header.querySelector('.header-content').appendChild(themeToggle);
+
+// CSS for theme toggle
+const themeCSS = `
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+    transition: transform 0.3s;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+body.light-mode {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+body.light-mode #header {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+body.light-mode .card {
+    background-color: #fff;
+    color: #333;
+}
+
+body.light-mode .navbar a {
+    color: #333;
+}
+
+body.light-mode .about-text h1,
+body.light-mode .about-text h3 {
+    color: #333;
+}
+
+body.light-mode .about-text p {
+    color: #555;
+}
+
+body.light-mode .project-info {
+    background-color: #fff;
+}
+
+body.light-mode .modal-content {
+    background-color: #fff;
+}
+`;
+
+const themeStyle = document.createElement('style');
+themeStyle.textContent = themeCSS;
+document.head.appendChild(themeStyle);
+
+// Toggle theme
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const icon = themeToggle.querySelector('i');
+    if (document.body.classList.contains('light-mode')) {
+        icon.className = 'fas fa-sun';
+    } else {
+        icon.className = 'fas fa-moon';
+    }
+    
+    // Save theme preference to localStorage
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+});
+
+// Load saved theme preference
+if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.querySelector('i').className = 'fas fa-sun';
+}
             
             // Hapus fade-out dan tambahkan fade-in setelah sedikit delay
             setTimeout(() => {
@@ -1142,8 +1566,7 @@
         
         // Panggil saat dimuat untuk memeriksa posisi awal
         window.dispatchEvent(new Event('scroll'));
-        
-        
+
     </script>
 </body>
 </html>
