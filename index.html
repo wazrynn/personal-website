@@ -1,1572 +1,1075 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>M.Fawwaz - Personal Website</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wazrynn.blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* GLOBAL STYLES */
+        /* ================================================= */
+        /* BASE STYLES & COLOR PALETTE (Hitam & Neon Biru) */
+        /* ================================================= */
+        :root {
+            /* TEMA DEFAULT: NEON BLUE */
+            --bg-color: #000000;
+            --main-color: #00BFFF; /* Deep Sky Blue (Neon Blue) */
+            --accent-color: #00FFFF; /* Aqua/Cyan (Brighter Neon) */
+            --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+        }
+
+        /* TEMA BARU: NEON PURPLE */
+        .theme-purple {
+            --main-color: #A020F0; /* Purple */
+            --accent-color: #EE82EE; /* Violet */
+            --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+        }
+
         body {
-            background-color: #111; /* Latar Belakang Hitam */
-            font-family: 'Arial', sans-serif;
+            font-family: 'Consolas', monospace;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-color); 
+            color: var(--main-color);
             scroll-behavior: smooth;
-            color: #f8f9fa; /* Teks Putih/Terang */
-            transition: background-color 0.3s;
+            transition: all 0.5s ease; /* Transisi untuk perubahan tema */
         }
 
-        .container {
-            width: 90%;
-            margin: auto;
-            text-align: center;
-            max-width: 1200px;
-        }
-
-        section {
-            padding: 60px 0;
-            min-height: 80vh;
-        }
-
-        /* HIGHLIGHT COLOR (Hijau Neon) */
-        :root {
-            --primary-color: #00ff80; 
-            --secondary-color: #00cc66; 
-            --card-bg: #222;
-        }
-
-        /* ANIAMASI SAAT SCROLL (Fade-in) */
-        .animated-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .animated-section.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* HEADER AND NAVBAR */
-        #header {
-            background-color: rgba(17, 17, 17, 0.95); 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Animasi untuk navbar */
+        /* Efek Neon Glow pada Teks Utama */
+        h1, h2, h3, .logo, .nav-links a, .section-title {
+            text-shadow: var(--glow-shadow);
         }
         
-        /* Style untuk saat navbar di-scroll */
-        #header.scrolled {
-            background-color: rgba(17, 17, 17, 1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        /* Containers */
+        .content-section, .hero {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .header-content {
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        /* ================================================= */
+        /* NAVBAR STYLES */
+        /* ================================================= */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 15px 40px;
+            box-shadow: 0 0 10px var(--main-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--main-color);
+            transition: all 0.5s ease;
         }
-
-        .logo a {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--primary-color);
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+            color: var(--accent-color);
+        }
+        .nav-links { 
+            list-style: none; 
+            display: flex; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .nav-links li { 
+            margin-left: 30px; 
+        }
+        .nav-links a {
+            color: var(--main-color);
             text-decoration: none;
-            transition: color 0.3s;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            position: relative;
         }
-
-        .navbar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        .navbar li {
-            margin-left: 30px;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: #ccc;
-            font-weight: 500;
-            padding: 5px 0;
-            transition: color 0.3s, border-bottom 0.3s;
-        }
-
-        .navbar a:hover, .navbar a.active { /* Menggunakan a.active untuk JS */
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        /* SECTION TITLES */
-        .section-title {
-            margin-bottom: 40px;
-            padding-top: 80px; 
-            /* Tambahkan animasi untuk Judul */
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-color);
         }
         
-        .section-title.animate {
-            opacity: 1;
-            transform: translateY(0);
+        /* Pengubah Tema */
+        #theme-toggle {
+            position: absolute;
+            top: 25px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--main-color);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--glow-shadow);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        #theme-toggle:hover {
+             box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
         }
 
-        .section-title h2 {
-            font-size: 2.5em;
-            color: #fff;
-            margin: 0;
+        /* ================================================= */
+        /* HOME SECTION (HERO) */
+        /* ================================================= */
+        .hero {
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 { 
+            font-size: 4em; 
+            margin: 0 0 10px 0; 
+            color: var(--accent-color);
+            overflow: hidden; 
+        }
+        .hero h1 .slide-in-text {
+            cursor: pointer; 
+        }
+
+        /* STYLE FOTO PROFIL */
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px 0;
+            border: 3px solid var(--main-color);
+            box-shadow: 0 0 10px var(--main-color), 0 0 20px var(--accent-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease; 
+        }
+
+        /* Kelas yang ditambahkan JS untuk efek neon pada foto */
+        .profile-picture.glow {
+            box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--main-color);
+            border-color: var(--accent-color);
+        }
+
+        #typing-text { 
+            color: var(--main-color); 
+            min-height: 50px; 
+            font-size: 2em;
+            border-right: 4px solid var(--main-color);
+            animation: blink-caret 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
             display: inline-block;
         }
-
-        .section-title p {
-            font-size: 0.9em;
-            color: var(--primary-color);
-            margin-top: 5px;
-            text-transform: uppercase;
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--main-color); }
+        }
+        .profile-bio { 
+            max-width: 800px; 
+            margin-top: 30px; 
+            font-size: 1.2em; 
+            line-height: 1.8; 
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        .section-title .divider {
-            height: 2px;
-            background-color: var(--primary-color);
-            width: 80px;
-            margin-bottom: 15px;
+        /* SOCIAL LINKS STYLES */
+        .social-links {
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+
+        .social-links a {
+            color: var(--main-color);
+            font-size: 2.5em;
+            margin: 0 15px;
+            transition: color 0.3s, text-shadow 0.3s;
+            text-shadow: var(--glow-shadow);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+            transform: scale(1.1);
+        }
+
+
+        /* ANIMASI SLIDE-IN TEKS */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100px); 
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0); 
+                opacity: 1;
+            }
+        }
+
+        .slide-in-text {
+            display: inline-block; 
+            opacity: 0;
+            animation: slideInFromLeft 1s ease-out forwards;
+            animation-delay: 0.5s; 
         }
         
-        /* GRID LAYOUT */
-        .grid-container {
+        /* ================================================= */
+        /* TAB CONTENT (SKILLS & CERTS) */
+        /* ================================================= */
+        .tabs-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--main-color);
+        }
+        .tab-btn {
+            background-color: #111;
+            color: var(--main-color);
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            text-shadow: none;
+        }
+        .tab-btn:hover {
+            background-color: #333;
+        }
+        .tab-btn.active-tab {
+            background-color: var(--main-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            text-shadow: none;
+            box-shadow: 0 0 10px var(--main-color);
+        }
+        .tab-content {
+            padding: 20px;
+            border: 1px solid var(--main-color);
+            background-color: #050505;
+            min-height: 150px;
+        }
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .skill-item {
+            background-color: #111;
+            padding: 10px 15px;
+            border: 1px dashed var(--accent-color);
+            border-radius: 5px;
+            font-size: 1em;
+            transition: transform 0.2s;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        /* ================================================= */
+        /* PORTFOLIO SECTION - Detail Proyek Expandable */
+        /* ================================================= */
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-        
-        /* CARD STYLES */
-        .card {
-            background-color: var(--card-bg);
+        .project-card {
+            background-color: #0d0d0d;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 3px solid transparent; 
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); 
+            transition: transform 0.3s ease, opacity 0.5s ease;
+            border: 1px solid var(--main-color);
+            opacity: 0;
+            transform: translateY(20px);
         }
-
-        .card:hover {
+        .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-            border-left: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--accent-color);
         }
         
-        .card h4 {
-            color: var(--primary-color);
-            margin-top: 0;
+        /* Konten Proyek Tersembunyi */
+        .project-detail-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            border-top: 1px dashed rgba(0, 191, 255, 0.3);
+            margin-top: 15px;
         }
-        
-        .card p {
-            color: #ccc;
-            font-size: 0.9em;
+        .project-card.expanded .project-detail-content {
+            max-height: 500px; 
+            padding-top: 15px;
+        }
+        .project-card.expanded .toggle-detail i {
+            transform: rotate(180deg);
         }
 
-        /* BUTTON ANIMATIONS */
-        .btn-primary {
-            background-color: var(--primary-color); 
-            color: #111; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            margin-right: 15px;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 255, 128, 0.5);
-        }
-        
-        .btn-secondary {
-            background-color: transparent; 
-            color: var(--primary-color); 
-            border: 2px solid var(--primary-color); 
-            padding: 10px 20px; 
-            border-radius: 4px; 
-            font-weight: bold; 
+        .toggle-detail {
+            display: block;
+            text-align: right;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 10px;
+            transition: color 0.3s;
+        }
+        .toggle-detail i {
+            transition: transform 0.3s;
+            margin-left: 5px;
+        }
+        .toggle-detail:hover {
+            color: var(--main-color);
         }
 
-        .btn-secondary:hover {
-            background-color: var(--primary-color);
-            color: #111;
-            transform: translateY(-2px);
+        /* ================================================= */
+        /* CONTACT SECTION */
+        /* ================================================= */
+        #contact-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #contact-form input, #contact-form textarea {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--main-color);
+            background-color: #111;
+            color: var(--main-color);
+            font-size: 1em;
+            text-shadow: none;
+        }
+        .submit-btn {
+            background-color: var(--main-color);
+            color: var(--bg-color);
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            border-radius: 5px;
+            text-shadow: none;
+        }
+        .submit-btn:hover { 
+            background-color: var(--accent-color); 
+            box-shadow: var(--glow-shadow);
+        }
+        .error-message { color: #ff0000; }
+        .success-message { color: var(--accent-color); }
+
+        /* ================================================= */
+        /* SCROLL TO TOP BUTTON (Dinamika Glow) */
+        /* ================================================= */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--main-color);
+            color: var(--bg-color);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            box-shadow: var(--glow-shadow);
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
-
-        /* --- ABOUT SECTION --- */
-        #about {
-            padding-top: 150px; 
-            text-align: left;
-            min-height: 100vh; 
+        #scrollToTopBtn:hover {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
         }
 
-        .about-main-content {
-            display: flex;
-            gap: 50px;
+        /* ================================================= */
+        /* FOOTER (Perapihan Tata Letak) */
+        /* ================================================= */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #050505;
+            margin-top: 40px;
+            border-top: 3px double var(--main-color); /* Perubahan border */
+            color: var(--main-color);
+            display: flex; /* Menggunakan Flexbox untuk centering */
+            flex-direction: column;
             align-items: center;
         }
-        
-        .about-image {
-            /* Tambahkan animasi awal */
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .animated-section.animate .about-image {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .about-image img {
-            max-width: 300px;
-            border-radius: 8px;
-            filter: grayscale(100%); 
-            transition: filter 0.5s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 128, 0.3); /* Cahaya neon tipis */
-        }
-        
-        .about-image img:hover {
-            filter: grayscale(0%);
-        }
-        
-        .about-text h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        
-        .about-text h3 {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            margin-top: 0;
-        }
-        
-        .about-text p {
+        .footer-motto {
+            font-style: italic;
+            color: var(--accent-color);
+            text-shadow: var(--glow-shadow);
+            margin-bottom: 20px; /* Jarak lebih besar */
+            max-width: 800px;
             line-height: 1.6;
-            color: #ddd;
+            font-size: 1.1em;
         }
-        
-        /* Social Links */
-        .social-links a {
-            color: #fff;
-            font-size: 1.5em;
-            margin-right: 15px;
-            transition: color 0.3s, transform 0.2s;
+        .footer-copy {
+            border-top: 1px solid rgba(0, 191, 255, 0.2); /* Perubahan border */
+            padding-top: 15px;
+            font-size: 0.85em;
+            width: 100%; /* Mengisi lebar penuh footer */
         }
-
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: scale(1.1); /* Efek zoom ringan */
-        }
-
-        /* --- EDUCATION & CERTIFICATIONS --- */
-        .education-card img, .cert-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-        
-        .cert-container {
-            display: flex;
-            overflow-x: auto; /* Memungkinkan scroll horizontal */
-            gap: 20px;
-            padding-bottom: 20px;
-            /* Scrollbar styling (opsional) */
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) #111;
-        }
-        
-        .cert-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .cert-container::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 4px;
-        }
-        
-        .cert-card {
-            min-width: 200px;
-            flex: 0 0 auto;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer; /* Menandakan bisa diklik */
-        }
-
-        /* Gaya untuk Display Sertifikat Utama */
-        .main-cert-display {
-            position: relative;
-            width: 60%; /* Sesuaikan ukuran sesuai keinginan */
-            max-width: 500px;
-            border: 5px solid var(--primary-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 25px rgba(0, 255, 128, 0.5);
-            cursor: default; /* Non-interaktif */
-            text-align: center; /* Untuk menengahkan overlay */
-            /* Animasi untuk tampilan sertifikat utama */
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-        
-        .main-cert-display.fade-out {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        
-        .main-cert-display.fade-in {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-
-        .main-cert-display img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: brightness(0.7); /* Agar overlay lebih jelas */
-        }
-
-        .overlay-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            text-align: center;
-            /* Animasi overlay */
-            transform: translateY(100%);
-            transition: transform 0.3s ease-out;
-        }
-        
-        .main-cert-display:hover .overlay-info {
-            transform: translateY(0);
-        }
-
-        .overlay-info h4 {
-            color: #fff;
-            margin: 0 0 5px 0;
-            font-size: 1.2em;
-        }
-
-        .overlay-info p {
-            color: var(--primary-color);
-            margin: 0;
-        }
-        
-        /* Gaya untuk Thumbnail Aktif */
-        .cert-card.active-thumb {
-            border: 3px solid var(--primary-color); /* Highlight yang sedang dipilih */
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.7);
-            transform: scale(1.05);
-        }
-
-
-        /* --- PORTFOLIO --- */
-        #portfolio {
-            text-align: center;
-        }
-
-        .portfolio-filter {
-            margin-bottom: 30px;
-            /* Animasi saat filter diklik */
-            transition: opacity 0.3s;
-        }
-
-        .portfolio-filter button {
-            background-color: var(--card-bg);
-            color: #fff;
-            border: 1px solid var(--primary-color);
-            padding: 10px 20px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s, transform 0.2s;
-        }
-
-        .portfolio-filter button.active, .portfolio-filter button:hover {
-            background-color: var(--primary-color);
-            color: #111;
+        .footer-copy span {
+            color: var(--accent-color);
             font-weight: bold;
-            transform: translateY(-2px);
         }
 
-        .project-card {
-            padding: 0;
-            overflow: hidden;
-            display: block; 
-            border: none;
-            /* Animasi project card saat filter */
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .project-card:not(.hidden):hover img {
-            opacity: 0.8;
-        }
-
-        .project-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: opacity 0.3s, transform 0.5s;
-        }
-        
-        .project-card:not(.hidden):hover img {
-            transform: scale(1.05);
-        }
-
-        .project-card.hidden {
-            opacity: 0;
-            transform: scale(0.9);
-            width: 0;
-            height: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: none !important; /* Gunakan !important untuk memastikan override grid */
-        }
-        
-        .project-info {
-            padding: 15px;
-            text-align: left;
-            background-color: var(--card-bg);
-        }
-        
-        /* --- CONTACT --- */
-        .contact-item {
-            /* Tambahkan efek hover */
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        
-        .contact-item:hover {
-            transform: translateY(-5px);
-            background-color: #444;
-        }
-        
-        .contact-form input:focus, .contact-form textarea:focus {
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 0 5px var(--primary-color);
-            outline: none;
-        }
-
-        /* --- TIMELINE STYLES (Untuk Resume/About Detail) --- */
-        .timeline-item {
-            /* Animasi Timeline */
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .timeline-item.right {
-             transform: translateX(50px);
-        }
-        
-        .timeline-item.animate {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .timeline-item::after {
-            transition: transform 0.3s;
-        }
-        
-        .timeline-item:hover::after {
-            transform: scale(1.2);
-        }
-
-        /* Media Queries yang ada tetap dipertahankan */
-
-        @media (max-width: 992px) {
-            .about-main-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .about-text h1 {
-                font-size: 2.5em;
-            }
-            /* Timeline */
-            .timeline::before {
-                left: 20px;
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 60px;
-                padding-right: 15px;
-            }
-            .timeline-item.right, .timeline-item.left {
-                left: 0;
-                text-align: left;
-                transform: translateX(0); /* Matikan animasi X untuk tampilan kecil */
-            }
-            .timeline-item.animate { /* Pastikan tetap berlaku */
-                transform: translateX(0);
-            }
-            .timeline-item::after {
-                left: 12px;
-                right: auto;
-            }
-            .timeline-item.right::after {
-                left: 12px;
-            }
-            
-            .main-cert-display {
-                width: 90%; 
-            }
-            
-            .header-content {
-                flex-direction: column;
-                padding: 10px 0;
-            }
-
-            .navbar ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .navbar li {
-                margin: 5px 10px;
-            }
-
-            .contact-form .name-email-row {
-                flex-direction: column;
-                gap: 0;
-            }
-        }
     </style>
 </head>
+<body class="theme-blue">
 
-<body>
-    
-    <header id="header">
-        <div class="container header-content">
-            <div class="logo">
-                <a href="#about">M.Fawwaz Rayyan Khalish</a>
-            </div>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link active" href="#about">Home</a></li>
-                    <li><a class="download-link" href="https://drive.usercontent.google.com/u/0/uc?id=1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI&export=download" target="https://drive.usercontent.google.com/u/0/uc?id=1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI&export=download">Resume</a></li> 
-                    <li><a class="nav-link" href="#certifications">Certifications</a></li>
-                    <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-terminal"></i> M.Fawwaz Rayyan K
         </div>
-    </header>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" target="_blank" class="nav-link">Resume</a></li>
+            <li><a href="#certifications" class="nav-link">Certifications</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" title="Ubah Tema Neon"><i class="fas fa-palette"></i></button>
+    </nav>
+    <hr style="border-color: rgba(0, 191, 255, 0.2);">
 
-    <section id="about" class="animated-section">
-        <div class="container">
-            <div class="about-main-content">
-                <div class="about-image">
-                    <img src="https://avatars.githubusercontent.com/u/214500685?v=4" alt="Muhammad Fawwaz Rayyan Khalish">
+    <main>
+        <section id="home" class="hero">
+            <h1 class="animate-on-scroll">
+                <span class="slide-in-text" id="hero-name-text">HALO, SAYA <span style="color: var(--accent-color);">Muhammad Fawwaz Rayyan Khalish</span></span>
+            </h1>
+            
+            <img 
+                src="https://media.licdn.com/dms/image/v2/D4E03AQEsbMXq979LIg/profile-displayphoto-scale_400_400/B4EZq0WkHuHgAg-/0/1763962406835?e=1766620800&v=beta&t=PslxMWvbvbDh3VNhLj_N_wWMaUOwUsUbEjJIYJshdoA" 
+                alt="Foto Profile Muhammad Fawwaz Rayyan Khalish" 
+                class="profile-picture animate-on-scroll"
+                id="profile-picture"
+            >
+
+            <p id="typing-text"></p>
+            <p class="profile-bio animate-on-scroll">
+                Seorang pengembang dengan fokus pada menciptakan solusi web yang efisien dan interaktif. Saya senang bereksplorasi di antara desain front-end yang menarik dan arsitektur back-end yang kuat. Prinsip utama saya adalah simplicity, scalability, and performance.
+            </p>
+
+            <div class="social-links animate-on-scroll">
+                <a href="https://github.com/websoftindonesia" target="https://github.com/websoftindonesia" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/wazrynn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=6285719562762" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a> 
+                <a href="https://www.tiktok.com/@wazryn_" target="_blank" title="Tiktok"><i class="fab fa-tiktok"></i></a> 
+                <a href="https://linktr.ee/wazrynn" target="_blank" title="Link"><i class="fab fa-link"></i></a>
+            </div>
+            </section>
+
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
+
+        <section id="certifications" class="content-section animate-on-scroll">
+            <h2 class="section-title">01. CERTIFICATIONS & TRAINING</h2>
+            
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn cert-btn active-tab" data-tab="programming">Programming</button>
+                    <button class="tab-btn cert-btn" data-tab="cloud">Cloud & DevOps</button>
+                    <button class="tab-btn cert-btn" data-tab="design">UI/UX Design</button>
                 </div>
-                <div class="about-text">
-                    <h1>Muhammad Fawwaz Rayyan Khalish</h1>
-                    <h3>I'm a Junior Software Engineer @NexTeen living in South Tangerang, Indonesia 🇮🇩.</h3>
-                    <p style="font-size: 1.1em;">
-                        Co-Chief Executive Officer of @NexTeen | Full Stack Engineer | Silver Medal in the Indonesian Science Olympiad Mathematics organized by HIMA Physic Gajah Mada University.
+
+                <div id="programming" class="tab-content cert-tab-content">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 15px;">
+                            Certified JavaScript Developer (2024) - LPK Code Academy
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Fokus pada ES6+, asynchronous programming, dan arsitektur modular JavaScript untuk aplikasi skala besar.</p>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            React Advanced Concepts (2023) - Udemy
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Mempelajari Hooks kustom, Context API, performa (Memo, lazy loading), dan state management menggunakan Redux Toolkit.</p>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            Full-Stack Web Development Bootcamp (2022) - Hacktiv8
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Pelatihan intensif selama 6 bulan yang mencakup MERN Stack, testing, dan deployment dengan CI/CD.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="cloud" class="tab-content cert-tab-content" style="display: none;">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 15px;">
+                            AWS Certified Cloud Practitioner (2024)
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.</p>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            Docker & Kubernetes Essential Training (2023) - LinkedIn Learning
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.</p>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            Linux System Administration (2021) - FreeCodeCamp
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Dasar-dasar sistem operasi Linux, scripting Bash, dan manajemen server dasar.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="design" class="tab-content cert-tab-content" style="display: none;">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 15px;">
+                            UI/UX Design Fundamentals using Figma (2023)
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Membuat prototipe interaktif, mendesain *design system*, dan memastikan konsistensi visual antara desain dan implementasi kode.</p>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            Human-Centered Design (HCD) Specialist (2022)
+                            <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
+
+        <section id="about" class="content-section animate-on-scroll">
+            <h2 class="section-title">02. TENTANG SAYA & KARIR</h2>
+            <div class="about-content">
+                <div class="about-text" style="flex: none; max-width: 100%;">
+                    <p>
+                        Saya, Muhammad Fawwaz, adalah seorang Software Engineer dengan 3 tahun pengalaman dalam membangun aplikasi web yang berorientasi pada kinerja dan pengalaman pengguna. Perjalanan teknis saya dimulai dari HTML/CSS/JS dasar, kemudian fokus pada ekosistem React.js dan pengembangan API dengan Node.js/Express di sisi server.
                     </p>
                     <p>
-                        Saya memiliki minat yang kuat dalam ilmu komputer, dengan fokus pada pengembangan Perangkat Lunak/AI/Cybersecurity/Analisis Data. Berpengalaman menggunakan berbagai bahasa pemrograman seperti Python, Java, dan Swift/Kotlin, serta terbiasa bekerja dengan framework dan alat modern.
+                        Selama karir, saya telah berhasil memimpin inisiatif migrasi dari arsitektur monolitik ke Microservices menggunakan Docker dan Kubernetes, yang menghasilkan peningkatan deployment speed* sebesar 40%. Saya percaya bahwa pengembangan perangkat lunak adalah tentang memecahkan masalah kompleks menjadi solusi elegan yang dapat diskalakan.
                     </p>
-                    
-                    <div style="margin-top: 25px;">
-                        <button id="resume-btn" class="btn-primary"><i class="fas fa-download"></i> Download Resume</button>
-                        <button id="contact-btn" class="btn-secondary"><i class="fas fa-envelope"></i> Hubungi Saya</button>
-                    </div>
-
-                    <div class="social-links" style="margin-top: 20px;">
-                        <a href="https://wa.me/6285719562762" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/websoftindonesia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/wazrynn/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p>
+                        Filosofi saya adalah "Code as Clean as Possible." Saya berpegang teguh pada prinsip-prinsip SOLID dan selalu mengimplementasikan TDD (Test-Driven Development) untuk menjamin kualitas dan daya tahan kode. Saat ini saya bekerja sebagai Senior Full-Stack Developer di Tech Innovate Solutions.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="resume" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>SUMMARY</p>
-                <div class="divider"></div>
-                <h2>Work Experience</h2>
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
+
+        <section id="skills" class="content-section animate-on-scroll">
+            <h2 class="section-title">03. KEAHLIAN TEKNIS</h2>
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn skill-btn active-tab" data-tab="frontend">Front-End</button>
+                    <button class="tab-btn skill-btn" data-tab="backend">Back-End</button>
+                    <button class="tab-btn skill-btn" data-tab="tools">Tools & DevOps</button>
+                </div>
+
+                <div id="frontend" class="tab-content skill-tab-content">
+                    <ul class="skill-list">
+                        <li class="skill-item">HTML5 & CSS3 (Semantic Markup)</li>
+                        <li class="skill-item">JavaScript (ES6+, TypeScript)</li>
+                        <li class="skill-item">**React.js & Redux**</li>
+                        <li class="skill-item">Vue.js (Intermediate)</li>
+                        <li class="skill-item">SASS/LESS</li>
+                        <li class="skill-item">Tailwind CSS & Bootstrap</li>
+                        <li class="skill-item">Web Performance Optimization</li>
+                    </ul>
+                </div>
+
+                <div id="backend" class="tab-content skill-tab-content" style="display: none;">
+                    <ul class="skill-list">
+                        <li class="skill-item">**Node.js & Express**</li>
+                        <li class="skill-item">Python & Django / Flask</li>
+                        <li class="skill-item">PostgreSQL & MySQL</li>
+                        <li class="skill-item">MongoDB & Redis</li>
+                        <li class="skill-item">RESTful APIs & GraphQL</li>
+                        <li class="skill-item">Unit Testing (Jest, Mocha)</li>
+                        <li class="skill-item">Microservices Architecture</li>
+                    </ul>
+                </div>
+
+                <div id="tools" class="tab-content skill-tab-content" style="display: none;">
+                    <ul class="skill-list">
+                        <li class="skill-item">Git & **GitHub Actions (CI/CD)**</li>
+                        <li class="skill-item">**Docker & Kubernetes**</li>
+                        <li class="skill-item">AWS (EC2, S3, RDS, Lambda)</li>
+                        <li class="skill-item">Google Cloud (GKE)</li>
+                        <li class="skill-item">Jira & Trello (Agile/Scrum)</li>
+                        <li class="skill-item">Webpack & Babel</li>
+                        <li class="skill-item">Figma & Sketch (Basic Prototyping)</li>
+                    </ul>
+                </div>
             </div>
-            
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content card">
-                        <h4>Juli 2025 - Sekarang</h4>
-                        <p><strong>Co-Chief Executive Officer & Full Stack Engineer</strong></p>
-                        <p>@NexTeen</p>
-                        <p>Memimpin strategi bisnis dan pengembangan aplikasi penuh, menggunakan MERN Stack dan Swift/Kotlin.</p>
+        </section>
+        
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
+
+        <section id="portfolio" class="content-section">
+            <h2 class="section-title">04. PORTOFOLIO</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active-filter" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="web">Web App</button>
+                <button class="filter-btn" data-filter="mobile">Mobile App</button>
+                <button class="filter-btn" data-filter="tool">Internal Tool</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="project-card animate-on-scroll web">
+                    <h3>Sistem E-Commerce B2B | 🔗 Live Demo</h3>
+                    <p>Platform perdagangan antar perusahaan dengan fitur kustomisasi pesanan dan manajemen inventaris real-time. (Tech: React, Node.js, PostgreSQL)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: Membangun *marketplace yang menargetkan transaksi B2B volume tinggi. Sistem ini menangani otorisasi kompleks berdasarkan peran pembeli dan negosiasi harga.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Multi-tenancy database, custom pricing logic, integrasi payment gateway.</li>
+                            <li>Dampak: Mengurangi waktu pemrosesan pesanan manual hingga 35%.</li>
+                            <li>Peran Saya: Lead Back-End Developer & Database Architect.</li>
+                        </ul>
                     </div>
+                    <span class="toggle-detail" data-target="detail1">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
+
+                <div class="project-card animate-on-scroll mobile">
+                    <h3>Aplikasi Pelacak Kebugaran | 📱 Source Code</h3>
+                    <p>Aplikasi hybrid yang melacak kalori dan langkah harian. Sinkronisasi data ke cloud. (Tech: React Native, Firebase, Context API)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: Aplikasi mobile untuk memotivasi pengguna mencapai target kesehatan. Menggunakan push notification untuk pengingat harian.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Integrasi sensor perangkat (Akselerometer), grafik visualisasi harian, otentikasi sosial.</li>
+                            <li>Pencapaian: Memiliki lebih dari 5.000 pengguna aktif di bulan pertama peluncuran.</li>
+                            <li>Peran Saya: Full-Stack Mobile Developer.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail" data-target="detail2">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
+
+                <div class="project-card animate-on-scroll tool">
+                    <h3>Dashboard Analitik Data | 📊 Internal Project</h3>
+                    <p>Dashboard internal untuk visualisasi data penjualan harian dan prediksi tren masa depan. (Tech: Vue.js, Python/Django, Chart.js)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: Alat penting bagi tim bisnis untuk membuat keputusan data-driven. Data ditarik dari Data Warehouse (Redshift) secara berkala.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Real-time data fetching, Role-Based Access Control (RBAC), custom filtering.</li>
+                            <li>Dampak: Mempersingkat waktu pembuatan laporan mingguan dari 4 jam menjadi 30 menit.</li>
+                            <li>Peran Saya: Front-End Developer & Data Visualization Lead.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail" data-target="detail3">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
                 </div>
                 
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <h4>Oktober 2025 - Sekarang</h4>
-                        <p><strong>Social Media Admin</strong></p>
-                        <p>@Satu Langkah</p>
-                        <p>Mengembangkan dan membangun interaksi sosial di dalam Sosial Media @Satulangkah<p>
+                <div class="project-card animate-on-scroll web">
+                    <h3>Situs Landing Page Perusahaan | 🌐 Live Site</h3>
+                    <p>Situs pemasaran berkecepatan tinggi dengan optimasi SEO. (Tech: Next.js, Tailwind CSS, Vercel)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: Situs statis yang sangat cepat dan dioptimalkan untuk mesin pencari. Dibuat menggunakan SSG (Static Site Generation) untuk performa maksimal.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Dark Mode, kontak form serverless (AWS Lambda), Mobile-first responsive design.</li>
+                            <li>Pencapaian: Mencapai skor Google Lighthouse 98/100 untuk Performance dan SEO.</li>
+                            <li>Peran Saya: Front-End Developer.</li>
+                        </ul>
                     </div>
+                    <span class="toggle-detail" data-target="detail4">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
                 </div>
 
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <h4>April 2025 - Sekarang</h4>
-                        <p><strong>Graphic Design Intern</strong></p>
-                        <p>@Internatioanl Youth Goals</p>
-                        <p>Membuat feed design instagram IYG.</p>
+                <div class="project-card animate-on-scroll tool">
+                    <h3>API Gateway Management | ⚙️ Backend Core</h3>
+                    <p>Pengembangan API Gateway untuk merutekan dan mengamankan Microservices internal. (Tech: GoLang, Kong API Gateway, Kafka)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: Membangun lapisan akses terpusat untuk layanan backend, mengelola otentikasi, rate limiting, dan logging terpusat.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Otorisasi JWT, Load balancing, Event-driven communication (Kafka).</li>
+                            <li>Dampak: Peningkatan keamanan dan konsistensi API; latensi rata-rata turun 15ms.</li>
+                            <li>Peran Saya: Back-End/DevOps Engineer.</li>
+                        </ul>
                     </div>
+                    <span class="toggle-detail" data-target="detail5">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
                 </div>
                 
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <h4>April 2025 - Juli 2025</h4>
-                        <p><strong>Junior Software Engineer</strong></p>
-                        <p>@Bumindo Group</p>
-                        <p>Fokus pada pengembangan Software, Algoritma, AI, dan Struktur Data.</p>
+                <div class="project-card animate-on-scroll web">
+                    <h3>Custom Content Management System (CMS)</h3>
+                    <p>Sistem backend kustom untuk pengelolaan konten multi-bahasa dengan antarmuka yang intuitif. (Tech: PHP/Laravel, Blade, MySQL)</p>
+                    <div class="project-detail-content">
+                        <p>
+                            Deskripsi: CMS yang dirancang spesifik untuk kebutuhan penerbitan konten, dengan fitur drafting dan version control.
+                        </p>
+                        <ul>
+                            <li>Fitur Utama: Editor WYSIWYG, image optimization pipeline, multi-user collaboration.</li>
+                            <li>Dampak: Mengurangi ketergantungan pada CMS pihak ketiga, memberikan kontrol penuh atas data dan fitur.</li>
+                            <li>Peran Saya: Full-Stack Developer.</li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>EDUCATION</p>
-                <div class="divider"></div>
-                <h2>FORMAL EDUCATION</h2>
-            </div>
-
-            <div class="grid-container">
-                <div class="card education-card">
-                    <img src="https://i.pinimg.com/736x/01/0f/e8/010fe8346e2d52a37e0acdb068a22722.jpg" alt="Gunadarma University Image">
-                    <h4>Gunadarma University</h4>
-                    <p>2025 - 2029</p>
-                    <p>Bachelor's Degree in Informatic Engineering</p>
-                    <p>GPA: -</p>
-                </div>
-                <div class="card education-card">
-                    <img src= "https://media.licdn.com/dms/image/v2/D4E2DAQF3yZ4ysiilww/profile-treasury-image-shrink_1920_1920/B4EZqhsY6MKoAc-/0/1763649360736?e=1764255600&v=beta&t=HMBI0KydFFsrQH8d4n0G9id0hCOrizDgNfHLl9LGKno" alt="Masterclass by RevoU Image">
-                    <h4>Muhammadiyah 8 Ciputat High School</h4>
-                    <p>2023 - 2025</p>
-                    <p>Senior High School, Natural Science</p>
-                    <p>GPA: 88/100</p>
-                </div>
-                <div class="card education-card">
-                    <img src= "https://media.licdn.com/dms/image/v2/D4E2DAQEVhj9Vg9QBkg/profile-treasury-image-shrink_800_800/B4EZqmWX_UKoAY-/0/1763727478600?e=1764334800&v=beta&t=CU29v0IevMRCuw2YJHJARyaT-FEcwbHWyX-v3-9-W9M" alt="Masterclass by RevoU Image">
-                    <h4>Ulumul Qur'an Boarding School</h4>
-                    <p>2019 - 2023</p>
-                    <p>Senior High School, Natural Science</p>
-                    <p>GPA: 89/100</p>
-                </div>
-            </div>
-
-        <section id="education" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>EDUCATION</p>
-                <div class="divider"></div>
-                <h2>UNFORMAL EDUCATION</h2>
-            </div> 
-
-            <div class="grid-container">
-                <div class="card education-card">
-                    <img src="https://edufund.co.id/blog/wp-content/uploads/2024/01/Foto-dari-RevoU-1024x598.jpg" alt="Gunadarma University Image">
-                    <h4>Revou Indonesia</h4>
-                    <p>1 Month (Juni 2025)</p>
-                    <p>Course In Software Engineering</p>
-                    <p>GPA: A</p>
-                </div>
-                <div class="card education-card">
-                    <img src= "https://miro.medium.com/v2/resize:fit:1200/1*Lkre5FxhSKaWerZCdprudg.png" alt="Masterclass by RevoU Image">
-                    <h4>My Skill</h4>
-                    <p>Maret 2025 - Sekarang</p>
-                    <p>Couse In Web Development</p>
-                    <p>GPA: Excellent</p>
-                </div>
-                <div class="card education-card">
-                    <img src= "https://www.weblineindia.com/wp-content/uploads/2017/03/full-stack-development-by-weblineindia-2.jpg" alt="Masterclass by RevoU Image">
-                    <h4>Coding Studio</h4>
-                    <p>Juni 2025 - Sekarang</p>
-                    <p>Course In Full Stack Engineer</p>
-                    <p>GPA: Excellent</p>
-                </div>
-            </div>
-    
-    <section id="certifications" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>CERTIFICATIONS</p>
-                <div class="divider"></div>
-                <h2>PROFESSIONAL CERTIFICATIONS</h2>
-            </div>
-            
-            <div id="cert-display-container" style="min-height: 400px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">
+                    <span class="toggle-detail" data-target="detail6">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
                 </div>
 
-            <div class="cert-container" id="cert-thumbnail-container">
-                <div class="card cert-card active-thumb" data-cert-id="cert-hmd" 
-                    data-src="https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU" 
-                    data-title="HMD Mathematic Competition" 
-                    data-org="HIMA Physic Gajah Mada University">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU" alt="HMD Cert">
-                    <p>Intern Graphic Design at IYG</p>
-                </div>
-                <div class="card cert-card" data-cert-id="cert-linkedin" 
-                    data-src="https://media.licdn.com/dms/image/v2/D4E2DAQHXDx4IJtMHhw/profile-treasury-document-cover-images_480/B4EZcMr6GNHQAw-/0/1748264527842?e=1764334800&v=beta&t=r_GvgnpU-Nxv2HL4PT8TpkgpJ3Swpimu5CEvWsYa1Uk" 
-                    data-title="React.js Essential Training" 
-                    data-org="LinkedIn Learning">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E2DAQHXDx4IJtMHhw/profile-treasury-document-cover-images_480/B4EZcMr6GNHQAw-/0/1748264527842?e=1764334800&v=beta&t=r_GvgnpU-Nxv2HL4PT8TpkgpJ3Swpimu5CEvWsYa1Uk" alt="LinkedIn Cert">
-                    <p>HMD Mathematic Certificate {Grade : B}</p>
-                </div>
-                <div class="card cert-card" data-cert-id="cert-apple" 
-                    data-src="https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1764334800&v=beta&t=yrt0Po-2d7eau1MabOnGnppIhSkSXfbu9qcvJ_5Xz2c" 
-                    data-title="iOS App Development with SwiftUI" 
-                    data-org="Apple Developer Academy">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1764334800&v=beta&t=yrt0Po-2d7eau1MabOnGnppIhSkSXfbu9qcvJ_5Xz2c" alt="Apple Cert">
-                    <p>Certified: Software Engineer by RevoU</p>
-                </div>
-                <div class="card cert-card" data-cert-id="cert-bangkit" 
-                    data-src="https://media.licdn.com/dms/image/v2/D4E2DAQH5wLAgIp1QKw/profile-treasury-document-cover-images_480/B4EZehZo3FHIAw-/0/1750759549855?e=1764334800&v=beta&t=95lFrW7RQUuon8csjlVdHXjnapT-Jpv1kFtO-XAwIts" 
-                    data-title="Mobile Development Path" 
-                    data-org="Bangkit Academy (Google, GoTo, Traveloka)">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E2DAQH5wLAgIp1QKw/profile-treasury-document-cover-images_480/B4EZehZo3FHIAw-/0/1750759549855?e=1764334800&v=beta&t=95lFrW7RQUuon8csjlVdHXjnapT-Jpv1kFtO-XAwIts" alt="Bangkit Cert">
-                    <p>Programming Using JavaScript</p>
-                </div>
             </div>
+        </section>
 
-            <div class="section-title">
-                <h2 style="margin-top: 40px;">TECHNOLOGIES</h2>
-                <div class="divider"></div>
-            </div>
-            
-            <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); text-align: center; margin-top: 30px;">
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-react" style="color: #61DAFB; font-size: 3em;"></i><p>React</p></div>
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-js-square" style="color: #F7DF1E; font-size: 3em;"></i><p>JavaScript</p></div>
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-html5" style="color: #E34F26; font-size: 3em;"></i><p>HTML5</p></div>
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-css3-alt" style="color: #1572B6; font-size: 3em;"></i><p>CSS3</p></div>
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fab fa-github" style="color: #fff; font-size: 3em;"></i><p>GitHub</p></div>
-                <div class="card tech-icon" style="padding: 20px 10px; box-shadow: none;"><i class="fas fa-database" style="color: #4DB33D; font-size: 3em;"></i><p>MongoDB</p></div>
-            </div>
-        </div>
-    </section>
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
 
-    <section id="portfolio" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>PORTFOLIO</p>
-                <div class="divider"></div>
-                <h2>PROJECTS</h2>
-            </div>
-
-            <div class="portfolio-filter">
-                <button class="filter-btn active" data-filter="all">ALL</button>
-                <button class="filter-btn" data-filter="ios">iOS</button>
-                <button class="filter-btn" data-filter="android">ANDROID</button>
-                <button class="filter-btn" data-filter="web">WEB/DESKTOP</button>
-            </div>
-
-            <div class="grid-container" id="portfolio-grid">
-                <div class="card project-card" data-category="ios">
-                    <img src="https://i.ibb.co/GdkzH6G/pixshoot.jpg" alt="Pixshoot Project">
-                    <div class="project-info">
-                        <h4>Pixshoot</h4>
-                        <p>Mobile Application | Design | Platform: iOS</p>
-                    </div>
-                </div>
-                <div class="card project-card" data-category="ios">
-                    <img src="https://i.ibb.co/80Y5F6N/cimi-house.jpg" alt="Find Cimi's House Project">
-                    <div class="project-info">
-                        <h4>Find Cimi's House</h4>
-                        <p>Mobile Application | Design | Platform: iOS</p>
-                    </div>
-                </div>
-                <div class="card project-card" data-category="ios">
-                    <img src="https://i.ibb.co/F8W2g0S/cognify.jpg" alt="Cognify Project">
-                    <div class="project-info">
-                        <h4>Cognify</h4>
-                        <p>Mobile Application | Design | Platform: SwiftUI</p>
-                    </div>
-                </div>
-                <div class="card project-card" data-category="ios">
-                    <img src="https://i.ibb.co/311H3gJ/toolis.jpg" alt="Toolis Project">
-                    <div class="project-info">
-                        <h4>Toolis</h4>
-                        <p>Mobile Application | Design | Platform: iOS</p>
-                    </div>
-                </div>
-                <div class="card project-card" data-category="android">
-                    <img src="https://i.ibb.co/w43Qj1b/fits.jpg" alt="FITS Project">
-                    <div class="project-info">
-                        <h4>FITS</h4>
-                        <p>Mobile Application | Platform: Android</p>
-                    </div>
-                </div>
-                <div class="card project-card" data-category="web">
-                    <img src="https://i.ibb.co/72g7j9g/makassar-web.jpg" alt="Makassar Tourist Web Project">
-                    <div class="project-info">
-                        <h4>Makassar Tourist Web</h4>
-                        <p>Web | Essays</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="animated-section">
-        <div class="container">
-            <div class="section-title">
-                <p>CONTACT</p>
-                <div class="divider"></div>
-                <h2>CONTACT ME</h2>
-            </div>
-            
-            <div class="contact-info-grid">
-                <div class="contact-item card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <h4>Current Address</h4>
-                        <p>South Tangerang, Indonesia</p>
-                    </div>
-                </div>
-                <div class="contact-item card">
-                    <i class="fab fa-linkedin"></i>
-                    <div>
-                        <h4>LinkedIn</h4>
-                        <p>M. Fawwaz Rayyan Khalish</p>
-                    </div>
-                </div>
-                <div class="contact-item card">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h4>Email Me</h4>
-                        <p>novalrayan97@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-item card">
-                    <i class="fab fa-whatsapp"></i>
-                    <div>
-                        <h4>WhatsApp</h4>
-                        <p>+62 857 1956 2762</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="form-message"></div> 
-            <form class="contact-form" id="contact-form">
-                <div class="name-email-row">
-                    <input type="text" id="contact-name" placeholder="Your Name" required>
-                    <input type="email" id="contact-email" placeholder="Your Email" required>
-                </div>
-                <input type="text" id="contact-subject" placeholder="Subject" required>
-                <textarea id="contact-message" placeholder="Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
+        <section id="contact" class="content-section animate-on-scroll">
+            <h2 class="section-title">05. HUBUNGI SAYA</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Nama Lengkap Anda" required>
+                <input type="email" id="email" placeholder="Email Anda" required>
+                <input type="text" id="subject" placeholder="Subjek Pesan" required>
+                <textarea id="message" placeholder="Pesan Anda" required></textarea>
+                
+                <p class="error-message" id="form-error" style="display: none;">Mohon lengkapi semua kolom dengan benar.</p>
+                <button type="submit" class="submit-btn">Kirim Pesan <i class="fas fa-paper-plane"></i></button>
+                <p class="success-message" id="form-success" style="display: none;">Pesan Anda telah berhasil dikirim!</p>
             </form>
-        </div>
-    </section>
+        </section>
+    </main>
     
-    <footer id="footer">
-        <div class="container">
-            <h3>M.Fawwaz</h3>
-            <p>"My commitment is to create digital solutions that are functional, scalable, and useful for users."</p>
-            <div class="copyright">
-                &copy; Copyright <strong><span>M.Fawwaz</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                Designed and Developed by Muhammad Fawwaz Rayyan Khalish
-            </div>
-        </div>
+    <button id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-rocket"></i>
+    </button>
+
+    <footer>
+        <p class="footer-motto">
+            "My commitment is to create digital solutions that are functional, scalable, and useful for users."
+        </p>
+        <p class="footer-copy">
+            © Copyright M.Fawwaz. All Rights Reserved. <br> Designed and Developed by <span>Muhammad Fawwaz Rayyan Khalish</span>.
+        </p>
     </footer>
-    
+
     <script>
-        
-        // Data Sertifikat
-        const certData = {
-            'cert-hmd': {
-                src: "https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1764216000&v=beta&t=Pwjvu7ZmmvxJVu23vGgJmvDe0tkl-fFGVQEOuz54XQU",
-                title: "International Youth Goals Intern",
-                org: "International Youth Goals"
-            },
-            'cert-linkedin': {
-                src: "https://media.licdn.com/dms/image/v2/D4E2DAQHXDx4IJtMHhw/profile-treasury-document-cover-images_480/B4EZcMr6GNHQAw-/0/1748264527842?e=1764334800&v=beta&t=r_GvgnpU-Nxv2HL4PT8TpkgpJ3Swpimu5CEvWsYa1Uk",
-                title: "HMD Mathematic Certificate {Grade : B}",
-                org: "Universitas Indonesia"
-            },
-            'cert-apple': {
-                src: "https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1764334800&v=beta&t=yrt0Po-2d7eau1MabOnGnppIhSkSXfbu9qcvJ_5Xz2c",
-                title: "Certified: Software Engineer by RevoU",
-                org: "RevoU Indonesia"
-            },
-            'cert-bangkit': {
-                src: "https://media.licdn.com/dms/image/v2/D4E2DAQH5wLAgIp1QKw/profile-treasury-document-cover-images_480/B4EZehZo3FHIAw-/0/1750759549855?e=1764334800&v=beta&t=95lFrW7RQUuon8csjlVdHXjnapT-Jpv1kFtO-XAwIts",
-                title: "Programming Using JavaScript",
-                org: "MySkill"
-            }
-        };
-
-        const certDisplayContainer = document.getElementById('cert-display-container');
-        const certThumbnails = document.querySelectorAll('.cert-card');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section[id]');
-        const header = document.getElementById('header');
-        const resumeBtn = document.getElementById('resume-btn');
-        const contactBtn = document.getElementById('contact-btn');
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-
-
-        // --- Fungsionalitas Sertifikat ---
-        function renderMainCert(certId) {
-            const data = certData[certId];
-            if (!data) return;
-
-            // Tambahkan animasi fade-out sebelum mengganti konten
-            certDisplayContainer.innerHTML = `
-                <div class="main-cert-display fade-out">
-                    <img src="${data.src}" alt="${data.title}">
-                    <div class="overlay-info">
-                        <h4>${data.title}</h4>
-                        <p>${data.org}</p>
-                    </div>
-                </div>
-            `;
-
-            // 1. Mobile Menu Toggle
-const mobileMenuToggle = document.createElement('div');
-mobileMenuToggle.className = 'mobile-menu-toggle';
-mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-header.querySelector('.header-content').appendChild(mobileMenuToggle);
-
-const navbar = document.getElementById('navbar');
-mobileMenuToggle.addEventListener('click', () => {
-    navbar.classList.toggle('active');
-    mobileMenuToggle.innerHTML = navbar.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-});
-
-// Tambahkan CSS untuk mobile menu
-const mobileMenuCSS = `
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: block;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        cursor: pointer;
-    }
-    
-    .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: rgba(17, 17, 17, 0.95);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
-    
-    .navbar.active {
-        max-height: 400px;
-    }
-    
-    .navbar ul {
-        flex-direction: column;
-        padding: 20px;
-    }
-    
-    .navbar li {
-        margin: 10px 0;
-    }
-}
-`;
-
-const mobileMenuStyle = document.createElement('style');
-mobileMenuStyle.textContent = mobileMenuCSS;
-document.head.appendChild(mobileMenuStyle);
-
-// 2. Back to Top Button
-const backToTopBtn = document.createElement('button');
-backToTopBtn.id = 'back-to-top';
-backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-document.body.appendChild(backToTopBtn);
-
-// Tambahkan CSS untuk back to top button
-const backToTopCSS = `
-#back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--primary-color);
-    color: #111;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-    z-index: 999;
-}
-
-#back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-#back-to-top:hover {
-    transform: translateY(-5px);
-    background-color: var(--secondary-color);
-}
-`;
-
-const backToTopStyle = document.createElement('style');
-backToTopStyle.textContent = backToTopCSS;
-document.head.appendChild(backToTopStyle);
-
-// Show/hide back to top button based on scroll position
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTopBtn.classList.add('visible');
-    } else {
-        backToTopBtn.classList.remove('visible');
-    }
-});
-
-// Scroll to top when button is clicked
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// 3. Typing Animation for Hero Text
-const heroTitle = document.querySelector('.about-text h1');
-const heroSubtitle = document.querySelector('.about-text h3');
-const originalTitle = heroTitle.textContent;
-const originalSubtitle = heroSubtitle.textContent;
-
-// Reset text
-heroTitle.textContent = '';
-heroSubtitle.textContent = '';
-
-// Typing animation function
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// Start typing animation when page loads
-window.addEventListener('load', () => {
-    typeWriter(heroTitle, originalTitle, 70);
-    setTimeout(() => {
-        typeWriter(heroSubtitle, originalSubtitle, 50);
-    }, originalTitle.length * 70);
-});
-
-// 4. Progress Bars for Skills/Technologies
-const techIcons = document.querySelectorAll('.tech-icon');
-techIcons.forEach(icon => {
-    const techName = icon.querySelector('p').textContent;
-    const progressBar = document.createElement('div');
-    progressBar.className = 'tech-progress';
-    
-    // Set progress percentage based on technology (example values)
-    let progress = 0;
-    switch(techName) {
-        case 'React': progress = 85; break;
-        case 'JavaScript': progress = 90; break;
-        case 'HTML5': progress = 95; break;
-        case 'CSS3': progress = 90; break;
-        case 'GitHub': progress = 80; break;
-        case 'MongoDB': progress = 75; break;
-        default: progress = 70;
-    }
-    
-    progressBar.innerHTML = `
-        <div class="tech-progress-bar" style="width: 0%">
-            <span>${progress}%</span>
-        </div>
-    `;
-    
-    icon.appendChild(progressBar);
-});
-
-// CSS for progress bars
-const progressCSS = `
-.tech-icon {
-    position: relative;
-    padding-bottom: 30px !important;
-}
-
-.tech-progress {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    right: 10px;
-    height: 6px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.tech-progress-bar {
-    height: 100%;
-    background-color: var(--primary-color);
-    border-radius: 3px;
-    transition: width 1.5s ease;
-    position: relative;
-}
-
-.tech-progress-bar span {
-    position: absolute;
-    top: -20px;
-    right: 0;
-    font-size: 0.7rem;
-    color: #ccc;
-}
-`;
-
-const progressStyle = document.createElement('style');
-progressStyle.textContent = progressCSS;
-document.head.appendChild(progressStyle);
-
-// Animate progress bars when they come into view
-const techSection = document.querySelector('#certifications');
-const techObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const progressBars = entry.target.querySelectorAll('.tech-progress-bar');
-            progressBars.forEach(bar => {
-                const width = bar.textContent;
-                bar.style.width = width;
-            });
-            techObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-
-techObserver.observe(techSection);
-
-// 5. Modal/Lightbox for Portfolio Projects
-const portfolioCards = document.querySelectorAll('.project-card');
-portfolioCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const imgSrc = card.querySelector('img').src;
-        const title = card.querySelector('h4').textContent;
-        const description = card.querySelector('p').textContent;
-        
-        // Create modal
-        const modal = document.createElement('div');
-        modal.className = 'project-modal';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <img src="${imgSrc}" alt="${title}">
-                <div class="modal-info">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                    <div class="modal-buttons">
-                        <button class="btn-primary">View Project</button>
-                        <button class="btn-secondary">View Code</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Close modal when clicking X or outside modal
-        const closeModal = () => {
-            modal.remove();
-        };
-        
-        modal.querySelector('.close-modal').addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    });
-});
-
-// CSS for modal
-const modalCSS = `
-.project-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeIn 0.3s forwards;
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-
-.modal-content {
-    position: relative;
-    max-width: 800px;
-    width: 90%;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 255, 128, 0.3);
-    transform: scale(0.8);
-    animation: scaleIn 0.3s forwards;
-}
-
-@keyframes scaleIn {
-    to { transform: scale(1); }
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.modal-content img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: cover;
-}
-
-.modal-info {
-    padding: 20px;
-}
-
-.modal-info h3 {
-    color: var(--primary-color);
-    margin-top: 0;
-}
-
-.modal-buttons {
-    margin-top: 20px;
-}
-`;
-
-const modalStyle = document.createElement('style');
-modalStyle.textContent = modalCSS;
-document.head.appendChild(modalStyle);
-
-// 6. Dark/Light Mode Toggle
-const themeToggle = document.createElement('button');
-themeToggle.id = 'theme-toggle';
-themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-header.querySelector('.header-content').appendChild(themeToggle);
-
-// CSS for theme toggle
-const themeCSS = `
-#theme-toggle {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 20px;
-    transition: transform 0.3s;
-}
-
-#theme-toggle:hover {
-    transform: scale(1.1);
-}
-
-body.light-mode {
-    background-color: #f8f9fa;
-    color: #333;
-}
-
-body.light-mode #header {
-    background-color: rgba(255, 255, 255, 0.95);
-}
-
-body.light-mode .card {
-    background-color: #fff;
-    color: #333;
-}
-
-body.light-mode .navbar a {
-    color: #333;
-}
-
-body.light-mode .about-text h1,
-body.light-mode .about-text h3 {
-    color: #333;
-}
-
-body.light-mode .about-text p {
-    color: #555;
-}
-
-body.light-mode .project-info {
-    background-color: #fff;
-}
-
-body.light-mode .modal-content {
-    background-color: #fff;
-}
-`;
-
-const themeStyle = document.createElement('style');
-themeStyle.textContent = themeCSS;
-document.head.appendChild(themeStyle);
-
-// Toggle theme
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const icon = themeToggle.querySelector('i');
-    if (document.body.classList.contains('light-mode')) {
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
-    }
-    
-    // Save theme preference to localStorage
-    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-});
-
-// Load saved theme preference
-if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light-mode');
-    themeToggle.querySelector('i').className = 'fas fa-sun';
-}
+        document.addEventListener('DOMContentLoaded', () => {
             
-            // Hapus fade-out dan tambahkan fade-in setelah sedikit delay
-            setTimeout(() => {
-                const display = certDisplayContainer.querySelector('.main-cert-display');
-                if (display) {
-                    display.classList.remove('fade-out');
-                    display.classList.add('fade-in');
+            // ------------------------------------
+            // 1. Typing Effect (Home Section)
+            // ------------------------------------
+            const typingTextElement = document.getElementById('typing-text');
+            typingTextElement.textContent = ""; 
+            const phrases = [
+                "Full-Stack Developer...", 
+                "Inovator Digital...", 
+                "Pencipta Solusi Web.",
+                "Eksplorator Teknologi."
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                const displayedText = isDeleting
+                    ? currentPhrase.substring(0, charIndex - 1)
+                    : currentPhrase.substring(0, charIndex + 1);
+
+                typingTextElement.textContent = displayedText;
+                
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(() => type(), 1500);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(() => type(), 500);
+                } else {
+                    charIndex += isDeleting ? -1 : 1;
+                    const speed = isDeleting ? 50 : 100;
+                    setTimeout(() => type(), speed);
                 }
-            }, 50); // Delay kecil untuk memicu transisi
-        }
+            }
+            setTimeout(() => {
+                type();
+            }, 1000); 
 
-        function handleCertClick(event) {
-            const card = event.currentTarget;
-            const certId = card.getAttribute('data-cert-id');
+            // ------------------------------------
+            // 2. Tab Switching (Skills & Certifications)
+            // ------------------------------------
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const certContents = document.querySelectorAll('.cert-tab-content');
+            const skillContents = document.querySelectorAll('.skill-tab-content'); 
 
-            // Hapus kelas active dari semua thumbnail
-            certThumbnails.forEach(t => t.classList.remove('active-thumb'));
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+                    const parentSection = button.closest('section').id;
 
-            // Tambahkan kelas active ke thumbnail yang diklik
-            card.classList.add('active-thumb');
-
-            // Render sertifikat utama
-            renderMainCert(certId);
-        }
-
-        // Event listener untuk thumbnail sertifikat
-        certThumbnails.forEach(card => {
-            card.addEventListener('click', handleCertClick);
-        });
-
-        // Tampilkan sertifikat pertama saat halaman dimuat
-        if (certThumbnails.length > 0) {
-            const firstCertId = certThumbnails[0].getAttribute('data-cert-id');
-            renderMainCert(firstCertId);
-        }
-
-        // --- Fungsionalitas Filter Portfolio ---
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const portfolioGrid = document.getElementById('portfolio-grid');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-
-                // Hapus active dari semua tombol dan tambahkan ke tombol yang diklik
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Filter proyek
-                const projectCards = portfolioGrid.querySelectorAll('.project-card');
-                projectCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
+                    button.closest('.tab-buttons').querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
                     
-                    // Gunakan setTimeout dengan delay untuk transisi yang lebih halus
-                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                    
-                    if (filter === 'all' || category === filter) {
-                        card.classList.remove('hidden');
-                        card.style.opacity = 1;
-                        card.style.transform = 'scale(1)';
-                    } else {
+                    if (parentSection === 'certifications') {
+                        certContents.forEach(content => content.style.display = 'none');
+                    } else if (parentSection === 'skills') {
+                        skillContents.forEach(content => content.style.display = 'none');
+                    }
+
+                    document.getElementById(targetTab).style.display = 'block';
+                    button.classList.add('active-tab');
+                });
+            });
+
+            // Ensure initial state is correct for Certs and Skills
+            if (document.querySelector('#certifications .cert-btn')) {
+                document.querySelector('#certifications .cert-btn').classList.add('active-tab');
+                document.querySelector('#programming').style.display = 'block';
+            }
+            
+            if (document.querySelector('#skills .skill-btn')) {
+                document.querySelector('#skills .skill-btn').classList.add('active-tab');
+                document.querySelector('#frontend').style.display = 'block';
+            }
+
+
+            // ------------------------------------
+            // 3. Project Filtering (Portfolio Section)
+            // ------------------------------------
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Initial setting for animation on scroll
+            projectCards.forEach(card => {
+                // Ensure initial display is set correctly for filtering logic
+                card.style.display = 'block'; 
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+            });
+
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.dataset.filter;
+
+                    filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                    button.classList.add('active-filter');
+
+                    projectCards.forEach(card => {
+                        // Hide all first
                         card.style.opacity = 0;
-                        card.style.transform = 'scale(0.8)';
-                        // Sembunyikan setelah transisi selesai
+                        card.style.transform = 'translateY(20px)';
+                        card.style.display = 'none';
+                        
+                        // Then show filtered ones with a slight delay for transition
                         setTimeout(() => {
-                            card.classList.add('hidden');
-                        }, 300); 
+                            if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.style.opacity = 1;
+                                    card.style.transform = 'translateY(0)';
+                                }, 50); 
+                            }
+                        }, 300);
+                    });
+                });
+            });
+
+            // -----------------------------------------------
+            // ⭐️ INTERAKSI 1: Expandable Project Detail
+            // -----------------------------------------------
+            const toggleDetails = document.querySelectorAll('.toggle-detail');
+
+            toggleDetails.forEach(toggler => {
+                toggler.addEventListener('click', () => {
+                    const card = toggler.closest('.project-card');
+                    
+                    card.classList.toggle('expanded');
+                    
+                    const isExpanded = card.classList.contains('expanded');
+                    if (isExpanded) {
+                        toggler.innerHTML = 'Tutup Detail <i class="fas fa-chevron-up"></i>';
+                    } else {
+                        toggler.innerHTML = 'Detail Selengkapnya <i class="fas fa-chevron-down"></i>';
                     }
                 });
             });
-        });
 
-        // --- Fungsionalitas Kontak dan Tombol Cepat ---
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            formMessage.classList.remove('success', 'error');
-            formMessage.style.display = 'block';
 
-            // Simulasi pengiriman form
-            // Di lingkungan nyata, Anda akan menggunakan AJAX (fetch/XMLHttpRequest) di sini.
-            
-            setTimeout(() => {
-                const name = document.getElementById('contact-name').value;
-                const email = document.getElementById('contact-email').value;
-                
-                if (name && email) {
-                    formMessage.classList.add('success');
-                    formMessage.innerHTML = `<i class="fas fa-check-circle"></i> Pesan Anda telah terkirim, ${name}! Saya akan segera membalas.`;
-                    contactForm.reset();
-                } else {
-                    formMessage.classList.add('error');
-                    formMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> Harap lengkapi semua bidang yang wajib diisi.`;
-                }
+            // -----------------------------------------------------------------
+            // ⭐️ INTERAKSI 2: Dynamic Neon Hover (Name Text to Photo Glow)
+            // -----------------------------------------------------------------
+            const heroNameText = document.getElementById('hero-name-text');
+            const profilePicture = document.getElementById('profile-picture');
 
-                // Animasi fade out pesan setelah 5 detik
-                setTimeout(() => {
-                    formMessage.style.opacity = 0;
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                        formMessage.style.opacity = 1; // Reset opacity
-                    }, 500);
-                }, 5000);
-
-            }, 500);
-        });
-
-        // Tombol cepat "Download Resume" (sudah ada href-nya di HTML, ini untuk tombol di About)
-        resumeBtn.addEventListener('click', () => {
-            const resumeLink = document.querySelector('.download-link');
-            if (resumeLink) {
-                window.open(resumeLink.href, '_blank');
-            }
-        });
-
-        // Tombol cepat "Hubungi Saya"
-        contactBtn.addEventListener('click', () => {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        
-        // --- Interaksi Scroll (Header dan Active Nav Link) ---
-        window.addEventListener('scroll', () => {
-            // Animasi Header
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            // Active Nav Link saat Scroll
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - header.offsetHeight - 50; // Sesuaikan offset
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
+            heroNameText.addEventListener('mouseover', () => {
+                profilePicture.classList.add('glow');
             });
 
-            navLinks.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
+            heroNameText.addEventListener('mouseout', () => {
+                profilePicture.classList.remove('glow');
             });
-            
-            // Animasi Section saat Scroll (Reveal Animation)
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
 
-            const observer = new IntersectionObserver((entries, observer) => {
+
+            // ------------------------------------
+            // 4. Scroll Fade-In Animation
+            // ------------------------------------
+            const scrollElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        // Animasi tambahan untuk elemen di dalamnya
-                        if (entry.target.id === 'resume') {
-                             // Animasi Timeline
-                            const timelineItems = entry.target.querySelectorAll('.timeline-item');
-                            timelineItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add('animate');
-                                }, index * 200); // Delay 200ms per item
-                            });
-                        }
-                        
-                        // Animasi Section Title
-                        const sectionTitle = entry.target.querySelector('.section-title');
-                        if (sectionTitle) {
-                             sectionTitle.classList.add('animate');
-                        }
-                        
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
                         observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, {
+                threshold: 0.1 
+            });
 
-            document.querySelectorAll('.animated-section').forEach(section => {
-                observer.observe(section);
+            scrollElements.forEach(element => {
+                // Exclude elements handled by specific animations (like slide-in-text and typing-text)
+                if (!element.querySelector('.slide-in-text') && element.id !== 'typing-text') {
+                    observer.observe(element);
+                } else {
+                    // For the hero section elements, let the initial CSS/JS handle the visibility
+                    if (!element.classList.contains('slide-in-text')) {
+                        element.style.opacity = 1; 
+                        element.style.transform = 'translateY(0)';
+                    }
+                }
+            });
+
+            // ------------------------------------
+            // 5. Form Validation & Submission (Contact Section)
+            // ------------------------------------
+            const contactForm = document.getElementById('contact-form');
+            const formError = document.getElementById('form-error');
+            const formSuccess = document.getElementById('form-success');
+
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                formError.style.display = 'none';
+                formSuccess.style.display = 'none';
+
+                let isValid = true;
+                const email = document.getElementById('email').value.trim();
+
+                if (!document.getElementById('name').value.trim() || 
+                    !email || 
+                    !document.getElementById('subject').value.trim() || 
+                    !document.getElementById('message').value.trim()) 
+                {
+                    isValid = false;
+                }
+
+                if (isValid && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    formError.style.display = 'block';
+                } else {
+                    console.log('Form Submitted: Success');
+                    
+                    formSuccess.style.display = 'block';
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                }
             });
             
-        });
-        
-        // Panggil saat dimuat untuk memeriksa posisi awal
-        window.dispatchEvent(new Event('scroll'));
+            // ------------------------------------
+            // 6. Active Nav Link on Scroll
+            // ------------------------------------
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
 
+            window.addEventListener('scroll', () => {
+                let current = 'home';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    // Mengurangi offset agar link aktif lebih cepat
+                    if (window.scrollY >= sectionTop - 150) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href').includes(current)) {
+                        a.classList.add('active');
+                    }
+                });
+            });
+            
+            // ------------------------------------
+            // 7. Scroll To Top Button
+            // ------------------------------------
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+            window.onscroll = function() {
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // -----------------------------------------------
+            // ⭐️ INTERAKSI 3: Theme Toggle
+            // -----------------------------------------------
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            let isPurpleTheme = false;
+
+            themeToggleBtn.addEventListener('click', () => {
+                isPurpleTheme = !isPurpleTheme;
+
+                if (isPurpleTheme) {
+                    // TEMA PURPLE/VIOLET
+                    body.classList.add('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-toggle-on"></i>'; 
+                    localStorage.setItem('theme', 'purple');
+                } else {
+                    // TEMA BLUE/CYAN (Default)
+                    body.classList.remove('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i>'; 
+                    localStorage.setItem('theme', 'blue');
+                }
+            });
+            
+            // Muat tema yang tersimpan
+            const savedTheme = localStorage.getItem('theme') || 'blue';
+            if (savedTheme === 'purple') {
+                // Gunakan setTimeout kecil untuk memastikan DOM sudah siap saat trigger klik
+                setTimeout(() => {
+                    if (!body.classList.contains('theme-purple')) {
+                         themeToggleBtn.click(); 
+                    }
+                }, 10);
+            } else {
+                themeToggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i>'; 
+            }
+
+        });
     </script>
+
 </body>
 </html>
