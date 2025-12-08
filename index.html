@@ -438,6 +438,120 @@
             color: var(--accent-color);
             font-weight: bold;
         }
+        /* ================================================= */
+/* RESPONSIVE VERSION — MOBILE VIEW */
+/* ================================================= */
+@media (max-width: 768px) {
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        display: none; /* Sembunyikan menu besar */
+    }
+
+    /* Theme toggle lebih kecil */
+    #theme-toggle {
+        top: 15px;
+        right: 20px;
+        width: 32px;
+        height: 32px;
+        font-size: 1em;
+    }
+
+    /* ================= HERO ================= */
+    .hero h1 {
+        font-size: 2.2em;
+        padding: 0 10px;
+    }
+
+    .profile-picture {
+        width: 110px;
+        height: 110px;
+    }
+
+    #typing-text {
+        font-size: 1.2em;
+    }
+
+    .profile-bio {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+
+    .social-links a {
+        font-size: 1.8em;
+        margin: 0 10px;
+    }
+
+    /* ================= SECTION TITLE ================= */
+    .section-title {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    /* ================= TABS ================= */
+    .tab-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tab-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    /* ================= ABOUT ================= */
+    .about-text {
+        padding: 0 10px;
+        font-size: 1em;
+        line-height: 1.7;
+    }
+
+    /* ================= PORTFOLIO ================= */
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* 1 kolom saja */
+        gap: 20px;
+    }
+
+    .project-card {
+        padding: 15px;
+    }
+
+    /* ================= CONTACT FORM ================= */
+    #contact-form {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    #contact-form input,
+    #contact-form textarea {
+        font-size: 0.95em;
+        padding: 12px;
+    }
+
+    .submit-btn {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+        padding: 25px 10px;
+    }
+
+    .footer-motto {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+
+    .footer-copy {
+        font-size: 0.75em;
+    }
+}
 
     </style>
 </head>
