@@ -228,6 +228,64 @@
         }
         
         /* ================================================= */
+        /* ABOUT EDUCATION SECTION */
+        /* ================================================= */
+        .education-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .education-item {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            background-color: rgba(5, 5, 5, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .education-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 10px var(--main-color);
+            flex-shrink: 0;
+        }
+
+        .education-details h3 {
+            color: var(--accent-color);
+            margin: 0 0 5px 0;
+            font-size: 1.5em;
+        }
+
+        .education-details .school-name {
+            font-size: 1.2em;
+            color: var(--main-color);
+            margin: 0 0 5px 0;
+        }
+
+        .education-details .period {
+            font-style: italic;
+            color: #888;
+            margin: 0 0 10px 0;
+        }
+
+        .education-details p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ================================================= */
         /* TAB CONTENT (SKILLS & CERTS) */
         /* ================================================= */
         .tabs-container {
@@ -438,121 +496,220 @@
             color: var(--accent-color);
             font-weight: bold;
         }
+        
         /* ================================================= */
-/* RESPONSIVE VERSION — MOBILE VIEW */
-/* ================================================= */
-@media (max-width: 768px) {
+        /* CERTIFICATE MODAL STYLES */
+        /* ================================================= */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .certificate-modal-content {
+            background-color: #050505;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--main-color);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px var(--main-color);
+            position: relative;
+        }
+        
+        .certificate-close {
+            color: var(--accent-color);
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .certificate-close:hover {
+            color: var(--main-color);
+        }
+        
+        .certificate-image {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border: 1px solid var(--main-color);
+        }
+        
+        .certificate-info {
+            color: var(--main-color);
+            margin-top: 15px;
+        }
+        
+        .certificate-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .certificate-info p {
+            margin-bottom: 10px;
+        }
+        
+        .view-certificate-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .view-certificate-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        /* ================================================= */
+        /* RESPONSIVE VERSION — MOBILE VIEW */
+        /* ================================================= */
+        @media (max-width: 768px) {
 
-    /* ================= NAVBAR ================= */
-    .navbar {
-        padding: 10px 20px;
-    }
+            /* ================= NAVBAR ================= */
+            .navbar {
+                padding: 10px 20px;
+            }
 
-    .nav-links {
-        display: none; /* Sembunyikan menu besar */
-    }
+            .nav-links {
+                display: none; /* Sembunyikan menu besar */
+            }
 
-    /* Theme toggle lebih kecil */
-    #theme-toggle {
-        top: 15px;
-        right: 20px;
-        width: 32px;
-        height: 32px;
-        font-size: 1em;
-    }
+            /* Theme toggle lebih kecil */
+            #theme-toggle {
+                top: 15px;
+                right: 20px;
+                width: 32px;
+                height: 32px;
+                font-size: 1em;
+            }
 
-    /* ================= HERO ================= */
-    .hero h1 {
-        font-size: 2.2em;
-        padding: 0 10px;
-    }
+            /* ================= HERO ================= */
+            .hero h1 {
+                font-size: 2.2em;
+                padding: 0 10px;
+            }
 
-    .profile-picture {
-        width: 110px;
-        height: 110px;
-    }
+            .profile-picture {
+                width: 110px;
+                height: 110px;
+            }
 
-    #typing-text {
-        font-size: 1.2em;
-    }
+            #typing-text {
+                font-size: 1.2em;
+            }
 
-    .profile-bio {
-        font-size: 1em;
-        padding: 0 10px;
-    }
+            .profile-bio {
+                font-size: 1em;
+                padding: 0 10px;
+            }
 
-    .social-links a {
-        font-size: 1.8em;
-        margin: 0 10px;
-    }
+            .social-links a {
+                font-size: 1.8em;
+                margin: 0 10px;
+            }
 
-    /* ================= SECTION TITLE ================= */
-    .section-title {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
+            /* ================= SECTION TITLE ================= */
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+            
+            /* ================= ABOUT EDUCATION ================= */
+            .education-item {
+                flex-direction: column;
+                text-align: center;
+            }
 
-    /* ================= TABS ================= */
-    .tab-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
+            .education-item img {
+                width: 100px;
+                height: 100px;
+            }
 
-    .tab-btn {
-        width: 100%;
-        padding: 12px 20px;
-        font-size: 1em;
-    }
+            /* ================= TABS ================= */
+            .tab-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-    /* ================= ABOUT ================= */
-    .about-text {
-        padding: 0 10px;
-        font-size: 1em;
-        line-height: 1.7;
-    }
+            .tab-btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 1em;
+            }
 
-    /* ================= PORTFOLIO ================= */
-    .portfolio-grid {
-        grid-template-columns: 1fr; /* 1 kolom saja */
-        gap: 20px;
-    }
+            /* ================= ABOUT ================= */
+            .about-text {
+                padding: 0 10px;
+                font-size: 1em;
+                line-height: 1.7;
+            }
 
-    .project-card {
-        padding: 15px;
-    }
+            /* ================= PORTFOLIO ================= */
+            .portfolio-grid {
+                grid-template-columns: 1fr; /* 1 kolom saja */
+                gap: 20px;
+            }
 
-    /* ================= CONTACT FORM ================= */
-    #contact-form {
-        width: 100%;
-        padding: 0 10px;
-    }
+            .project-card {
+                padding: 15px;
+            }
 
-    #contact-form input,
-    #contact-form textarea {
-        font-size: 0.95em;
-        padding: 12px;
-    }
+            /* ================= CONTACT FORM ================= */
+            #contact-form {
+                width: 100%;
+                padding: 0 10px;
+            }
 
-    .submit-btn {
-        padding: 12px;
-        font-size: 1em;
-    }
+            #contact-form input,
+            #contact-form textarea {
+                font-size: 0.95em;
+                padding: 12px;
+            }
 
-    /* ================= FOOTER ================= */
-    footer {
-        padding: 25px 10px;
-    }
+            .submit-btn {
+                padding: 12px;
+                font-size: 1em;
+            }
 
-    .footer-motto {
-        font-size: 1em;
-        padding: 0 10px;
-    }
+            /* ================= FOOTER ================= */
+            footer {
+                padding: 25px 10px;
+            }
 
-    .footer-copy {
-        font-size: 0.75em;
-    }
-}
+            .footer-motto {
+                font-size: 1em;
+                padding: 0 10px;              
+            }
 
+            .footer-copy {
+                font-size: 0.75em;
+            }
+            
+            /* ================= CERTIFICATE MODAL ================= */
+            .certificate-modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
     </style>
 </head>
 <body class="theme-blue">
@@ -563,6 +720,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about-education" class="nav-link">About</a></li>
             <li><a href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" target="_blank" class="nav-link">Resume</a></li>
             <li><a href="#certifications" class="nav-link">Certifications</a></li>
             <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -602,6 +760,33 @@
             </section>
 
         <hr style="border-color: rgba(0, 191, 255, 0.2);">
+        
+        <!-- NEW SECTION: ABOUT EDUCATION -->
+        <section id="about-education" class="content-section animate-on-scroll">
+            <h2 class="section-title">ABOUT MY EDUCATION</h2>
+            <div class="education-container">
+                <div class="education-item">
+                    <img src="https://via.placeholder.com/120x120/000080/FFFFFF?text=University" alt="Universitas Logo">
+                    <div class="education-details">
+                        <h3>Sarjana Komputer</h3>
+                        <p class="school-name">Universitas Indonesia</p>
+                        <p class="period">2018 - 2022</p>
+                        <p>Fokus pada pengembangan perangkat lunak, kecerdasan buatan, dan sistem terdistribusi. Terlibat dalam beberapa proyek penelitian di bidang machine learning.</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <img src="https://via.placeholder.com/120x120/000080/FFFFFF?text=High+School" alt="High School Logo">
+                    <div class="education-details">
+                        <h3>IPA (Ilmu Pengetahuan Alam)</h3>
+                        <p class="school-name">SMAN 1 Jakarta</p>
+                        <p class="period">2015 - 2018</p>
+                        <p>Aktif dalam klub sains dan olimpiade komputer. Mengembangkan minat mendalam dalam pemrograman dan teknologi sejak usia dini.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border-color: rgba(0, 191, 255, 0.2);">
 
         <section id="certifications" class="content-section animate-on-scroll">
             <h2 class="section-title">01. CERTIFICATIONS & TRAINING</h2>
@@ -618,14 +803,17 @@
                         <li style="margin-bottom: 15px;">
                             Certified JavaScript Developer (2024) - LPK Code Academy
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Fokus pada ES6+, asynchronous programming, dan arsitektur modular JavaScript untuk aplikasi skala besar.</p>
+                            <button class="view-certificate-btn" data-certificate="javascript-dev">Lihat Sertifikat</button>
                         </li>
                         <li style="margin-bottom: 15px;">
                             React Advanced Concepts (2023) - Udemy
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Mempelajari Hooks kustom, Context API, performa (Memo, lazy loading), dan state management menggunakan Redux Toolkit.</p>
+                            <button class="view-certificate-btn" data-certificate="react-advanced">Lihat Sertifikat</button>
                         </li>
                         <li style="margin-bottom: 15px;">
                             Full-Stack Web Development Bootcamp (2022) - Hacktiv8
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Pelatihan intensif selama 6 bulan yang mencakup MERN Stack, testing, dan deployment dengan CI/CD.</p>
+                            <button class="view-certificate-btn" data-certificate="fullstack-bootcamp">Lihat Sertifikat</button>
                         </li>
                     </ul>
                 </div>
@@ -635,14 +823,17 @@
                         <li style="margin-bottom: 15px;">
                             AWS Certified Cloud Practitioner (2024)
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.</p>
+                            <button class="view-certificate-btn" data-certificate="aws-practitioner">Lihat Sertifikat</button>
                         </li>
                         <li style="margin-bottom: 15px;">
                             Docker & Kubernetes Essential Training (2023) - LinkedIn Learning
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.</p>
+                            <button class="view-certificate-btn" data-certificate="docker-k8s">Lihat Sertifikat</button>
                         </li>
                         <li style="margin-bottom: 15px;">
                             Linux System Administration (2021) - FreeCodeCamp
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Dasar-dasar sistem operasi Linux, scripting Bash, dan manajemen server dasar.</p>
+                            <button class="view-certificate-btn" data-certificate="linux-admin">Lihat Sertifikat</button>
                         </li>
                     </ul>
                 </div>
@@ -652,10 +843,12 @@
                         <li style="margin-bottom: 15px;">
                             UI/UX Design Fundamentals using Figma (2023)
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Membuat prototipe interaktif, mendesain *design system*, dan memastikan konsistensi visual antara desain dan implementasi kode.</p>
+                            <button class="view-certificate-btn" data-certificate="figma-fundamentals">Lihat Sertifikat</button>
                         </li>
                         <li style="margin-bottom: 15px;">
                             Human-Centered Design (HCD) Specialist (2022)
                             <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.</p>
+                            <button class="view-certificate-btn" data-certificate="hcd-specialist">Lihat Sertifikat</button>
                         </li>
                     </ul>
                 </div>
@@ -870,6 +1063,20 @@
             © Copyright M.Fawwaz. All Rights Reserved. <br> Designed and Developed by <span>Muhammad Fawwaz Rayyan Khalish</span>.
         </p>
     </footer>
+    
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <span class="certificate-close">&times;</span>
+            <img id="certificateImage" class="certificate-image" src="" alt="Certificate">
+            <div class="certificate-info">
+                <h3 id="certificateTitle"></h3>
+                <p id="certificateDescription"></p>
+                <p id="certificateDate"></p>
+                <p id="certificateIssuer"></p>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1181,7 +1388,112 @@
             } else {
                 themeToggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i>'; 
             }
-
+            
+            // -----------------------------------------------
+            // ⭐️ INTERAKSI 4: Certificate Modal
+            // -----------------------------------------------
+            const certificateModal = document.getElementById('certificateModal');
+            const certificateImage = document.getElementById('certificateImage');
+            const certificateTitle = document.getElementById('certificateTitle');
+            const certificateDescription = document.getElementById('certificateDescription');
+            const certificateDate = document.getElementById('certificateDate');
+            const certificateIssuer = document.getElementById('certificateIssuer');
+            const closeModal = document.querySelector('.certificate-close');
+            
+            // Certificate data
+            const certificateData = {
+                'javascript-dev': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=JavaScript+Developer+Certificate',
+                    title: 'Certified JavaScript Developer',
+                    description: 'Fokus pada ES6+, asynchronous programming, dan arsitektur modular JavaScript untuk aplikasi skala besar.',
+                    date: 'Diterbitkan: Januari 2024',
+                    issuer: 'LPK Code Academy'
+                },
+                'react-advanced': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=React+Advanced+Concepts+Certificate',
+                    title: 'React Advanced Concepts',
+                    description: 'Mempelajari Hooks kustom, Context API, performa (Memo, lazy loading), dan state management menggunakan Redux Toolkit.',
+                    date: 'Diterbitkan: Oktober 2023',
+                    issuer: 'Udemy'
+                },
+                'fullstack-bootcamp': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Full-Stack+Web+Development+Bootcamp+Certificate',
+                    title: 'Full-Stack Web Development Bootcamp',
+                    description: 'Pelatihan intensif selama 6 bulan yang mencakup MERN Stack, testing, dan deployment dengan CI/CD.',
+                    date: 'Diterbitkan: Juni 2022',
+                    issuer: 'Hacktiv8'
+                },
+                'aws-practitioner': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=AWS+Certified+Cloud+Practitioner+Certificate',
+                    title: 'AWS Certified Cloud Practitioner',
+                    description: 'Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.',
+                    date: 'Diterbitkan: Maret 2024',
+                    issuer: 'Amazon Web Services'
+                },
+                'docker-k8s': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Docker+and+Kubernetes+Essential+Training+Certificate',
+                    title: 'Docker & Kubernetes Essential Training',
+                    description: 'Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.',
+                    date: 'Diterbitkan: September 2023',
+                    issuer: 'LinkedIn Learning'
+                },
+                'linux-admin': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Linux+System+Administration+Certificate',
+                    title: 'Linux System Administration',
+                    description: 'Dasar-dasar sistem operasi Linux, scripting Bash, dan manajemen server dasar.',
+                    date: 'Diterbitkan: November 2021',
+                    issuer: 'FreeCodeCamp'
+                },
+                'figma-fundamentals': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=UI%2FUX+Design+Fundamentals+using+Figma+Certificate',
+                    title: 'UI/UX Design Fundamentals using Figma',
+                    description: 'Membuat prototipe interaktif, mendesain design system, dan memastikan konsistensi visual antara desain dan implementasi kode.',
+                    date: 'Diterbitkan: Juli 2023',
+                    issuer: 'Figma Academy'
+                },
+                'hcd-specialist': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Human-Centered+Design+Specialist+Certificate',
+                    title: 'Human-Centered Design (HCD) Specialist',
+                    description: 'Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.',
+                    date: 'Diterbitkan: April 2022',
+                    issuer: 'Interaction Design Foundation'
+                }
+            };
+            
+            // View certificate buttons
+            const viewCertificateBtns = document.querySelectorAll('.view-certificate-btn');
+            
+            viewCertificateBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const certificateId = button.dataset.certificate;
+                    const cert = certificateData[certificateId];
+                    
+                    if (cert) {
+                        certificateImage.src = cert.image;
+                        certificateTitle.textContent = cert.title;
+                        certificateDescription.textContent = cert.description;
+                        certificateDate.textContent = cert.date;
+                        certificateIssuer.textContent = `Penerbit: ${cert.issuer}`;
+                        
+                        certificateModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                    }
+                });
+            });
+            
+            // Close modal when clicking on X
+            closeModal.addEventListener('click', () => {
+                certificateModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling again
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target === certificateModal) {
+                    certificateModal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Enable scrolling again
+                }
+            });
         });
     </script>
 
