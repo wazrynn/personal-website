@@ -710,6 +710,34 @@
                 margin: 10% auto;
             }
         }
+        /* ================================================= */
+        /* BACKGROUND IMAGE SETUP */
+        /* ================================================= */
+        body {
+            font-family: 'Consolas', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color); 
+            
+            /* Tambahkan Baris Berikut: */
+            background-image: 
+                linear-gradient(rgba(144, 161, 144, 0.693), rgba(195, 190, 190, 0.85)), /* Overlay Gelap */
+                url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Gambar Kodingan */
+            background-attachment: fixed; /* Background tetap saat di-scroll */
+            background-size: cover;
+            background-position: center;
+            
+            color: var(--main-color);
+            scroll-behavior: smooth;
+            transition: all 0.5s ease;
+        }
+
+        /* Tambahkan efek transparansi pada section agar background terlihat */
+        .content-section, .hero {
+            background-color: rgba(0, 0, 0, 0.4); /* Transparansi halus */
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body class="theme-blue">
