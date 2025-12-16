@@ -739,6 +739,35 @@
             margin-bottom: 20px;
         }
         @media (max-width: 768px) {
+   body {
+    font-family: 'Consolas', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color); 
+    
+    /* Background Image dengan Overlay */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+        url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    
+    background-attachment: fixed; /* Efek melayang saat scroll */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    color: var(--main-color);
+    scroll-behavior: smooth;
+    transition: all 0.5s ease;
+}
+    /* Memberikan latar belakang sedikit lebih gelap pada section agar teks tidak tabrakan */
+    .content-section, .hero {
+        background-color: rgba(0, 0, 0, 0.6);
+        margin: 10px;
+        padding: 40px 15px;
+        border-radius: 10px;
+    }
+}
+@media (max-width: 768px) {
     body {
         /* Mematikan 'fixed' di HP untuk performa lebih ringan & menghindari bug posisi */
         background-attachment: scroll; 
@@ -748,7 +777,7 @@
         
         /* Mempertebal overlay agar teks di HP lebih mudah dibaca */
         background-image: 
-            linear-gradient((rgba(144, 161, 144, 0.693), rgba(195, 190, 190, 0.85)),)), 
+            linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
             url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     }
 
