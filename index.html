@@ -738,6 +738,28 @@
             border-radius: 15px;
             margin-bottom: 20px;
         }
+        @media (max-width: 768px) {
+    body {
+        /* Mematikan 'fixed' di HP untuk performa lebih ringan & menghindari bug posisi */
+        background-attachment: scroll; 
+        
+        /* Mengatur posisi agar kodingan tetap terlihat di tengah layar kecil */
+        background-position: 30% center; 
+        
+        /* Mempertebal overlay agar teks di HP lebih mudah dibaca */
+        background-image: 
+            linear-gradient((rgba(144, 161, 144, 0.693), rgba(195, 190, 190, 0.85)),)), 
+            url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    }
+
+    /* Memberikan latar belakang sedikit lebih gelap pada section agar teks tidak tabrakan */
+    .content-section, .hero {
+        background-color: rgba(0, 0, 0, 0.6);
+        margin: 10px;
+        padding: 40px 15px;
+        border-radius: 10px;
+    }
+}
     </style>
 </head>
 <body class="theme-blue">
