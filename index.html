@@ -232,54 +232,123 @@
         }
 
         /* ================================================= */
-        /* EDUCATION SECTION */
+        /* EDUCATION SECTION - IMPROVED */
         /* ================================================= */
         .education-container {
             display: grid;
-            gap: 30px;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .education-item {
             display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 30px;
-            padding: 30px;
-            background: rgba(10, 10, 10, 0.8);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            padding: 35px;
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .education-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.3);
             border-color: var(--accent-color);
         }
 
+        .education-item:hover::before {
+            opacity: 1;
+        }
+
+        .education-image-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .education-item img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid var(--main-color);
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            border-radius: 15px;
+            border: 3px solid var(--main-color);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 191, 255, 0.2);
+        }
+
+        .education-item:hover img {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 30px rgba(0, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .education-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
         }
 
         .education-details h3 {
             color: var(--accent-color);
-            font-size: 1.4em;
-            margin-bottom: 10px;
+            font-size: 1.6em;
+            margin-bottom: 8px;
+            text-shadow: var(--glow-shadow);
+            font-weight: bold;
         }
 
         .education-details .school-name {
-            font-size: 1.1em;
+            font-size: 1.3em;
             color: var(--main-color);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .education-details .period {
             font-style: italic;
-            color: #888;
+            color: #aaa;
             margin-bottom: 15px;
+            font-size: 1.1em;
+            padding: 5px 15px;
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .education-details p {
+            line-height: 1.7;
+            color: #ddd;
+            font-size: 1.05em;
+        }
+
+        /* Education Icons */
+        .education-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+            color: var(--accent-color);
+            opacity: 0.7;
         }
 
         /* ================================================= */
@@ -742,10 +811,26 @@
                 font-size: 2em;
             }
 
+            /* Education Mobile Responsive */
             .education-item {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 20px;
+                gap: 25px;
+                padding: 25px;
+            }
+
+            .education-item img {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+            }
+
+            .education-details {
+                text-align: center;
+            }
+
+            .education-details .period {
+                margin: 0 auto 15px;
             }
 
             .tab-buttons {
@@ -798,6 +883,11 @@
 
             .content-section {
                 padding: 30px 15px;
+            }
+
+            .education-item img {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -875,26 +965,35 @@
             </div>
         </section>
 
-        <!-- About Education Section -->
+        <!-- About Education Section - IMPROVED -->
         <section id="about-education" class="content-section animate-on-scroll">
             <h2 class="section-title">ABOUT MY EDUCATION</h2>
             <div class="education-container">
                 <div class="education-item">
-                    <img src="https://www.gunadarma.ac.id/wp-content/uploads/2024/03/logo-universitas-gunadarma-warna.png" alt="Universitas Logo">
+                    <i class="fas fa-graduation-cap education-icon"></i>
+                    <div class="education-image-container">
+                        <img src="https://www.gunadarma.ac.id/wp-content/uploads/2024/03/logo-universitas-gunadarma-warna.png" 
+                             alt="Logo Universitas Gunadarma">
+                    </div>
                     <div class="education-details">
                         <h3>Program Studi S1 Teknik Informatika</h3>
                         <p class="school-name">Universitas Gunadarma</p>
                         <p class="period">2025 - 2029 (Insya Allah)</p>
-                        <p>Fokus pada pengembangan perangkat lunak, kecerdasan buatan, dan sistem terdistribusi. Terlibat dalam beberapa proyek penelitian di bidang machine learning.</p>
+                        <p>Fokus pada pengembangan perangkat lunak, kecerdasan buatan, dan sistem terdistribusi. Terlibat dalam beberapa proyek penelitian di bidang machine learning dan pengembangan aplikasi berbasis web modern.</p>
                     </div>
                 </div>
+                
                 <div class="education-item">
-                    <img src="https://media.licdn.com/dms/image/v2/D560BAQEZhHnG5O9d3A/company-logo_200_200/company-logo_200_200/0/1689378768324?e=2147483647&v=beta&t=w6e8fOBGcE4Kpa9qgms0yP42JVHAcLE-POFBpWzmcag" alt="High School Logo">
+                    <i class="fas fa-school education-icon"></i>
+                    <div class="education-image-container">
+                        <img src="https://media.licdn.com/dms/image/v2/D560BAQEZhHnG5O9d3A/company-logo_200_200/company-logo_200_200/0/1689378768324?e=2147483647&v=beta&t=w6e8fOBGcE4Kpa9qgms0yP42JVHAcLE-POFBpWzmcag" 
+                             alt="Logo SMA Muhammadiyah 8 Ciputat">
+                    </div>
                     <div class="education-details">
                         <h3>IPA (Ilmu Pengetahuan Alam)</h3>
                         <p class="school-name">SMA Muhammadiyah 8 Ciputat</p>
                         <p class="period">2023 - 2025</p>
-                        <p>Aktif dalam klub sains dan olimpiade komputer. Mengembangkan minat mendalam dalam pemrograman dan teknologi sejak usia dini.</p>
+                        <p>Aktif dalam klub sains dan olimpiade komputer. Mengembangkan minat mendalam dalam pemrograman dan teknologi sejak usia dini. Meraih prestasi dalam berbagai kompetisi teknologi tingkat regional.</p>
                     </div>
                 </div>
             </div>
@@ -965,7 +1064,7 @@
                         <li style="margin-bottom: 20px;">
                             <strong>Human-Centered Design (HCD) Specialist (2022)</strong>
                             <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
-                                Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.
+                                Fokus pada metodologi riset pengguna, wawancara, dan iterasi design berdasarkan kebutuhan nyata pengguna.
                             </p>
                             <button class="view-certificate-btn" data-certificate="hcd-specialist">Lihat Sertifikat</button>
                         </li>
