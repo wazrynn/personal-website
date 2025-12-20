@@ -763,24 +763,31 @@
 }
 @media (max-width: 768px) {
     body {
-        /* Mematikan 'fixed' di HP untuk performa lebih ringan & menghindari bug posisi */
-        background-attachment: scroll; 
+        /* Hilangkan fixed sepenuhnya untuk performa optimal */
+        background-attachment: scroll !important;
         
-        /* Mengatur posisi agar kodingan tetap terlihat di tengah layar kecil */
-        background-position: 30% center; 
-        
-        /* Mempertebal overlay agar teks di HP lebih mudah dibaca */
+        /* Overlay LEBIH TEBAL untuk readability mobile */
         background-image: 
-            linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+            linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)),
             url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        
+        /* Posisi gambar optimal untuk portrait mobile */
+        background-position: center 20% !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+        /* Pastikan teks tetap kontras tinggi */
+        color: var(--main-color) !important;
     }
-
-    /* Memberikan latar belakang sedikit lebih gelap pada section agar teks tidak tabrakan */
+    
+    /* Section overlay juga diperkuat */
     .content-section, .hero {
-        background-color: rgba(0, 0, 0, 0.6);
-        margin: 10px;
-        padding: 40px 15px;
-        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.75) !important;
+        backdrop-filter: blur(2px);
+        margin: 8px 12px;
+        padding: 35px 15px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 191, 255, 0.2);
     }
 }
     </style>
