@@ -1,1118 +1,1584 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>wazrynn.blog</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<style>
-/* ============================
-   BASE STYLES & COLOR PALETTE
-   ============================ */
-:root {
-  --bg-color: #000000;
-  --main-color: #00BFFF; /* Neon Biru */
-  --accent-color: #00FFFF; /* Neon Cyan */
-  --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wazrynn.blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ================================================= */
+        /* BASE STYLES & COLOR PALETTE */
+        /* ================================================= */
+        :root {
+            --bg-color: #000000;
+            --main-color: #00BFFF;
+            --accent-color: #00FFFF;
+            --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+            --card-bg: rgba(5, 5, 5, 0.9);
+            --border-color: rgba(0, 191, 255, 0.3);
+        }
 
-/* Tema Ungu (Purple) */
-.theme-purple {
-  --main-color: #A020F0;
-  --accent-color: #EE82EE;
-  --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
-}
+        .theme-purple {
+            --main-color: #A020F0;
+            --accent-color: #EE82EE;
+            --glow-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+        }
 
-body {
-  font-family: 'Consolas', monospace;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  background-image: 
-    linear-gradient(rgba(144, 161, 144, 0.693), rgba(195, 190, 190, 0.85)),
-    url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  color: var(--main-color);
-  scroll-behavior: smooth;
-  transition: all 0.5s ease;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Efek Neon Glowing pada Teks & Elemen */
-h1, h2, h3, .logo, .nav-links a, .section-title {
-  text-shadow: var(--glow-shadow);
-}
+        body {
+            font-family: 'Consolas', monospace;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: var(--main-color);
+            scroll-behavior: smooth;
+            transition: all 0.5s ease;
+            line-height: 1.6;
+        }
 
-/* Containers & Section */
-.content-section, .hero {
-  padding: 80px 20px;
-  max-width: 1200px;
-  margin: 0 auto 40px auto;
-  border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.4);
-}
+        /* ================================================= */
+        /* NAVBAR */
+        /* ================================================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 40px;
+            box-shadow: 0 2px 20px rgba(0, 191, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
 
-/* Judul Section */
-.section-title {
-  text-align: center;
-  font-size: 3em;
-  margin-bottom: 50px;
-  color: var(--accent-color);
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 10px;
-}
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: var(--glow-shadow);
+        }
 
-/* ============================
-   NAVBAR STYLES
-   ============================ */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(10, 10, 10, 0.9);
-  padding: 15px 40px;
-  box-shadow: 0 0 10px var(--main-color);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid var(--main-color);
-  transition: all 0.5s ease;
-}
-.logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: var(--accent-color);
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-.nav-links li {
-  margin-left: 30px;
-}
-.nav-links a {
-  color: var(--main-color);
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: all 0.3s ease;
-}
-.nav-links a:hover, .nav-links a.active {
-  color: var(--accent-color);
-  text-shadow: 0 0 15px var(--accent-color);
-}
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
 
-/* Theme Toggle Button */
-#theme-toggle {
-  position: absolute;
-  top: 25px;
-  right: 40px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--main-color);
-  color: var(--bg-color);
-  border: none;
-  cursor: pointer;
-  box-shadow: var(--glow-shadow);
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2em;
-}
-#theme-toggle:hover {
-  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-}
+        .nav-links a {
+            color: var(--main-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-/* ============================
-   HOME / HERO SECTION
-   ============================ */
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  text-align: center;
-}
-.hero h1 {
-  font-size: 4em;
-  margin: 0 0 10px 0;
-  color: var(--accent-color);
-  overflow: hidden;
-}
-#typing-text {
-  color: var(--main-color);
-  min-height: 50px;
-  font-size: 2em;
-  border-right: 4px solid var(--main-color);
-  animation: blink-caret 0.75s step-end infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  display: inline-block;
-}
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: var(--main-color); }
-}
-.profile-picture {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 20px 0;
-  border: 3px solid var(--main-color);
-  box-shadow: 0 0 10px var(--main-color), 0 0 20px var(--accent-color);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.profile-picture.glow {
-  box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--main-color);
-  border-color: var(--accent-color);
-}
-.profile-bio {
-  max-width: 800px;
-  margin-top: 30px;
-  font-size: 1.2em;
-  line-height: 1.8;
-  opacity: 0;
-  transform: translateY(20px);
-}
-.social-links {
-  margin-top: 30px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s, transform 1s;
-}
-.social-links a {
-  color: var(--main-color);
-  font-size: 2.5em;
-  margin: 0 15px;
-  transition: color 0.3s, text-shadow 0.3s;
-  text-shadow: var(--glow-shadow);
-}
-.social-links a:hover {
-  color: var(--accent-color);
-  text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-  transform: scale(1.1);
-}
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+            background: rgba(0, 191, 255, 0.1);
+            text-shadow: var(--glow-shadow);
+        }
 
-/* Slide-in Animasi Teks */
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-.slide-in-text {
-  display: inline-block;
-  opacity: 0;
-  animation: slideInFromLeft 1s ease-out forwards;
-  animation-delay: 0.5s;
-}
+        #theme-toggle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--main-color);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--glow-shadow);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
 
-/* ============================
-   About & Education
-   ============================ */
-.education-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-.education-item {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding: 20px;
-  border: 1px solid rgba(0, 191, 255, 0.3);
-  border-radius: 8px;
-  background-color: rgba(5, 5, 5, 0.7);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.education-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px var(--accent-color);
-}
-.education-item img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid var(--main-color);
-  box-shadow: 0 0 10px var(--main-color);
-}
-.education-details h3 {
-  color: var(--accent-color);
-  margin: 0 0 5px 0;
-  font-size: 1.5em;
-}
-.school-name {
-  font-size: 1.2em;
-  color: var(--main-color);
-  margin: 0 0 5px 0;
-}
-.period {
-  font-style: italic;
-  color: #888;
-  margin: 0 0 10px 0;
-}
-.education-details p {
-  margin: 0;
-  line-height: 1.6;
-}
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
 
-/* ============================
-   Tabs & Content (Skills & Certs)
-   ============================ */
-.tabs-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  border-bottom: 1px solid var(--main-color);
-}
-.tab-btn {
-  background-color: #111;
-  color: var(--main-color);
-  border: none;
-  padding: 15px 30px;
-  cursor: pointer;
-  font-size: 1.1em;
-  transition: all 0.3s;
-}
-.tab-btn:hover {
-  background-color: #333;
-}
-.active-tab {
-  background-color: var(--main-color);
-  color: var(--bg-color);
-  font-weight: bold;
-  box-shadow: 0 0 10px var(--main-color);
-}
-.tab-content {
-  padding: 20px;
-  border: 1px solid var(--main-color);
-  background-color: #050505;
-  min-height: 150px;
-}
-.skill-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.skill-item {
-  background-color: #111;
-  padding: 10px 15px;
-  border: 1px dashed var(--accent-color);
-  border-radius: 5px;
-  font-size: 1em;
-  transition: transform 0.2s;
-}
-.skill-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--glow-shadow);
-}
+        /* ================================================= */
+        /* SECTIONS & CONTAINERS */
+        /* ================================================= */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
 
-/* ============================
-   Portfolio Section
-   ============================ */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-.project-card {
-  background-color: #0d0d0d;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
-  transition: transform 0.3s ease, opacity 0.5s ease;
-  border: 1px solid var(--main-color);
-  opacity: 0;
-  transform: translateY(20px);
-}
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px var(--accent-color);
-}
-/* Detail proyek yang tersembunyi */
-.project-detail-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-  border-top: 1px dashed rgba(0, 191, 255, 0.3);
-  margin-top: 15px;
-}
-.project-card.expanded .project-detail-content {
-  max-height: 500px;
-  padding-top: 15px;
-}
-.toggle-detail {
-  display: block;
-  text-align: right;
-  cursor: pointer;
-  color: var(--accent-color);
-  font-weight: bold;
-  margin-top: 10px;
-  transition: color 0.3s;
-}
-.toggle-detail i {
-  transition: transform 0.3s;
-  margin-left: 5px;
-}
-.toggle-detail:hover {
-  color: var(--main-color);
-}
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: var(--accent-color);
+            text-shadow: var(--glow-shadow);
+            position: relative;
+        }
 
-/* ============================
-   Contact Form
-   ============================ */
-#contact-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-#contact-form input,
-#contact-form textarea {
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid var(--main-color);
-  background-color: #111;
-  color: var(--main-color);
-  font-size: 1em;
-}
-.submit-btn {
-  background-color: var(--main-color);
-  color: var(--bg-color);
-  padding: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-  border: none;
-  border-radius: 5px;
-}
-.submit-btn:hover {
-  background-color: var(--accent-color);
-  box-shadow: var(--glow-shadow);
-}
-.error-message {
-  color: #ff0000;
-}
-.success-message {
-  color: var(--accent-color);
-}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
 
-/* ============================
-   Scroll To Top Button
-   ============================ */
-#scrollToTopBtn {
-  display: none;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: var(--main-color);
-  color: var(--bg-color);
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 50%;
-  font-size: 1.2em;
-  box-shadow: var(--glow-shadow);
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-#scrollToTopBtn:hover {
-  background-color: var(--accent-color);
-  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-}
+        /* ================================================= */
+        /* HERO SECTION */
+        /* ================================================= */
+        .hero {
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            margin: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
 
-/* ============================
-   Footer
-   ============================ */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #050505;
-  margin-top: 40px;
-  border-top: 3px double var(--main-color);
-  color: var(--main-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.footer-motto {
-  font-style: italic;
-  color: var(--accent-color);
-  text-shadow: var(--glow-shadow);
-  margin-bottom: 20px;
-  max-width: 800px;
-  line-height: 1.6;
-  font-size: 1.1em;
-}
-.footer-copy {
-  border-top: 1px solid rgba(0, 191, 255, 0.2);
-  padding-top: 15px;
-  font-size: 0.85em;
-  width: 100%;
-}
-.footer-copy span {
-  color: var(--accent-color);
-  font-weight: bold;
-}
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: var(--glow-shadow);
+        }
 
-/* ============================
-   Certificate Modal
-   ============================ */
-.certificate-modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-.certificate-modal-content {
-  background-color: #050505;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid var(--main-color);
-  width: 90%;
-  max-width: 800px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px var(--main-color);
-  position: relative;
-}
-.certificate-close {
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 35px;
-  font-weight: bold;
-  color: var(--accent-color);
-  cursor: pointer;
-}
-.certificate-close:hover {
-  color: var(--main-color);
-}
-.certificate-image {
-  width: 100%;
-  max-height: 70vh;
-  object-fit: contain;
-  margin-bottom: 15px;
-  border: 1px solid var(--main-color);
-}
-.certificate-info {
-  color: var(--main-color);
-  margin-top: 15px;
-}
-.certificate-info h3 {
-  color: var(--accent-color);
-  margin-bottom: 10px;
-}
-.certificate-info p {
-  margin-bottom: 10px;
-}
-.view-certificate-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: transparent;
-  color: var(--accent-color);
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9em;
-}
-.view-certificate-btn:hover {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-  box-shadow: 0 0 10px var(--accent-color);
-}
+        .profile-picture {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 30px 0;
+            border: 4px solid var(--main-color);
+            box-shadow: 0 0 30px var(--main-color);
+            transition: all 0.3s ease;
+        }
 
-/* ============================
-   Responsiveness
-   ============================ */
-@media(max-width: 768px) {
-  /* Navbar */
-  .navbar {
-    padding: 10px 20px;
-  }
-  .nav-links {
-    display: none;
-  }
-  #theme-toggle {
-    top: 15px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    font-size: 1em;
-  }
+        .profile-picture.glow {
+            box-shadow: 0 0 40px var(--accent-color);
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
 
-  /* Hero text */
-  .hero h1 {
-    font-size: 2.2em;
-    padding: 0 10px;
-  }
+        #typing-text {
+            color: var(--main-color);
+            font-size: 1.8em;
+            min-height: 60px;
+            border-right: 3px solid var(--main-color);
+            animation: blink-caret 0.75s step-end infinite;
+            margin-bottom: 30px;
+        }
 
-  /* Profile Image */
-  .profile-picture {
-    width: 110px;
-    height: 110px;
-  }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--main-color); }
+        }
 
-  /* Typing Text */
-  #typing-text {
-    font-size: 1.2em;
-  }
+        .profile-bio {
+            max-width: 800px;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
 
-  /* About & Education */
-  .education-item {
-    flex-direction: column;
-    text-align: center;
-  }
-  .education-item img {
-    width: 100px;
-    height: 100px;
-  }
+        .social-links {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
 
-  /* Tabs & Buttons */
-  .tab-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .tab-btn {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1em;
-  }
+        .social-links a {
+            color: var(--main-color);
+            font-size: 2.5em;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.1);
+        }
 
-  /* Portfolio */
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+        }
 
-  /* Contact Form */
-  #contact-form {
-    width: 100%;
-    padding: 0 10px;
-  }
-  #contact-form input,
-  #contact-form textarea {
-    font-size: 0.95em;
-    padding: 12px;
-  }
-  .submit-btn {
-    padding: 12px;
-    font-size: 1em;
-  }
+        /* ================================================= */
+        /* EDUCATION SECTION */
+        /* ================================================= */
+        .education-container {
+            display: grid;
+            gap: 30px;
+        }
 
-  /* Footer */
-  footer {
-    padding: 25px 10px;
-  }
-  .footer-motto {
-    font-size: 1em;
-    padding: 0 10px;
-  }
-  .footer-copy {
-    font-size: 0.75em;
-  }
+        .education-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 30px;
+            padding: 30px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
 
-  /* Certificate Modal */
-  .certificate-modal-content {
-    width: 95%;
-    margin: 10% auto;
-  }
-}
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+            border-color: var(--accent-color);
+        }
 
-/* Additional styles for preloader & animations as needed */
-#preloader {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--bg-color);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease-out;
-}
-.loader-container {
-  text-align: center;
-  max-width: 400px;
-}
-.neon-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.neon-loader i {
-  font-size: 4rem;
-  color: var(--accent-color);
-  animation: pulse 1.5s ease-in-out infinite;
-  text-shadow: var(--glow-shadow);
-}
-.loader-text {
-  font-size: 1.2rem;
-  color: var(--main-color);
-  text-shadow: var(--glow-shadow);
-  letter-spacing: 2px;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-.progress-bar {
-  width: 200px;
-  height: 4px;
-  background: rgba(0, 191, 255, 0.2);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--main-color), var(--accent-color));
-  width: 0%;
-  border-radius: 2px;
-  animation: progress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  box-shadow: 0 0 10px var(--main-color);
-}
-@keyframes progress {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-</style>
+        .education-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--main-color);
+        }
+
+        .education-details h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .education-details .school-name {
+            font-size: 1.1em;
+            color: var(--main-color);
+            margin-bottom: 5px;
+        }
+
+        .education-details .period {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        /* ================================================= */
+        /* TABS */
+        /* ================================================= */
+        .tabs-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: rgba(20, 20, 20, 0.8);
+            color: var(--main-color);
+            border: 1px solid var(--border-color);
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(0, 191, 255, 0.1);
+            border-color: var(--main-color);
+        }
+
+        .tab-btn.active-tab {
+            background: var(--main-color);
+            color: var(--bg-color);
+            box-shadow: var(--glow-shadow);
+        }
+
+        .tab-content {
+            padding: 30px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            min-height: 200px;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 15px 20px;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        /* ================================================= */
+        /* PORTFOLIO */
+        /* ================================================= */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(20, 20, 20, 0.8);
+            color: var(--main-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active-filter {
+            background: var(--main-color);
+            color: var(--bg-color);
+            box-shadow: var(--glow-shadow);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .project-detail-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            border-top: 1px dashed var(--border-color);
+            margin-top: 15px;
+        }
+
+        .project-card.expanded .project-detail-content {
+            max-height: 500px;
+            padding-top: 20px;
+        }
+
+        .toggle-detail {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .toggle-detail:hover {
+            color: var(--main-color);
+            text-shadow: var(--glow-shadow);
+        }
+
+        /* ================================================= */
+        /* CONTACT FORM */
+        /* ================================================= */
+        #contact-form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: rgba(20, 20, 20, 0.8);
+            color: var(--main-color);
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--main-color);
+            color: var(--bg-color);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-color);
+            box-shadow: var(--glow-shadow);
+            transform: translateY(-2px);
+        }
+
+        /* ================================================= */
+        /* SCROLL TO TOP */
+        /* ================================================= */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            background: var(--main-color);
+            color: var(--bg-color);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            box-shadow: var(--glow-shadow);
+            transition: all 0.3s;
+        }
+
+        #scrollToTopBtn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* ================================================= */
+        /* FOOTER */
+        /* ================================================= */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(5, 5, 5, 0.9);
+            margin-top: 40px;
+            border-top: 3px solid var(--main-color);
+            color: var(--main-color);
+        }
+
+        .footer-motto {
+            font-style: italic;
+            color: var(--accent-color);
+            text-shadow: var(--glow-shadow);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-copy {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .footer-copy span {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* ================================================= */
+        /* CERTIFICATE MODAL */
+        /* ================================================= */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .certificate-modal-content {
+            background: var(--card-bg);
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid var(--main-color);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--main-color);
+            position: relative;
+        }
+
+        .certificate-close {
+            color: var(--accent-color);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .certificate-close:hover {
+            color: var(--main-color);
+            transform: scale(1.2);
+        }
+
+        .certificate-image {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .view-certificate-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .view-certificate-btn:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: var(--glow-shadow);
+        }
+
+        /* ================================================= */
+        /* PRELOADER */
+        /* ================================================= */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
+        }
+
+        .loader-container {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .neon-loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .neon-loader i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            animation: pulse 1.5s ease-in-out infinite;
+            text-shadow: var(--glow-shadow);
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            color: var(--main-color);
+            text-shadow: var(--glow-shadow);
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: rgba(0, 191, 255, 0.2);
+            border-radius: 3px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+            width: 0%;
+            border-radius: 3px;
+            animation: progress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            box-shadow: 0 0 10px var(--main-color);
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ================================================= */
+        /* ANIMATIONS */
+        /* ================================================= */
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .slide-in-text {
+            display: inline-block;
+            opacity: 0;
+            animation: slideInFromLeft 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================= */
+        /* RESPONSIVE DESIGN */
+        /* ================================================= */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            #theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+                padding: 0 10px;
+            }
+
+            .profile-picture {
+                width: 140px;
+                height: 140px;
+            }
+
+            #typing-text {
+                font-size: 1.4em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .education-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .social-links a {
+                font-size: 2em;
+            }
+
+            .content-section {
+                margin: 10px;
+                padding: 40px 20px;
+            }
+
+            body {
+                background-attachment: scroll;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)),
+                                url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+            }
+
+            #typing-text {
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 30px 15px;
+            }
+        }
+    </style>
 </head>
 <body class="theme-blue">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="neon-loader">
+                <i class="fas fa-terminal"></i>
+                <span class="loader-text">Initializing Portfolio...</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
 
-<!-- ============================
-     NAVBAR
-     ============================ -->
-<nav class="navbar">
-  <div class="logo">
-    <i class="fas fa-terminal"></i> M.Fawwaz Rayyan K
-  </div>
-  <ul class="nav-links">
-    <li><a href="#home" class="nav-link active">Home</a></li>
-    <li><a href="#about-education" class="nav-link">About</a></li>
-    <li><a href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" target="_blank" class="nav-link">Resume</a></li>
-    <li><a href="#certifications" class="nav-link">Certifications</a></li>
-    <li><a href="#skills" class="nav-link">Skills</a></li>
-    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-    <li><a href="#contact" class="nav-link">Contact</a></li>
-  </ul>
-  <button id="theme-toggle" title="Ubah Tema Neon"><i class="fas fa-palette"></i></button>
-</nav>
-<hr style="border-color: rgba(0, 191, 255, 0.2);" />
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-terminal"></i> M.Fawwaz Rayyan K
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about-education" class="nav-link">About</a></li>
+            <li><a href="https://drive.google.com/file/d/1_ugV6kCT2iur8c1yk1T9LI64B8V0kEBI/view" target="_blank" class="nav-link">Resume</a></li>
+            <li><a href="#certifications" class="nav-link">Certifications</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" title="Ubah Tema Neon">
+            <i class="fas fa-palette"></i>
+        </button>
+    </nav>
 
-<!-- ============================
-     MAIN CONTENT
-     ============================ -->
-<main>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero" style="opacity: 0; visibility: hidden;">
+            <h1 class="animate-on-scroll">
+                <span class="slide-in-text" id="hero-name-text">
+                    HALO, SAYA <span style="color: var(--accent-color);">Muhammad Fawwaz Rayyan Khalish</span>
+                </span>
+            </h1>
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQH8eSAWJeQCKQ/profile-displayphoto-scale_400_400/B56ZsvYJ2iHsAg-/0/1766026420246?e=1767830400&v=beta&t=R0NF4L_nfAJ6bj7B5nJsLfKPSNZo4JKBFTYZyFWS6Xg" 
+                 alt="Foto Profile Muhammad Fawwaz Rayyan Khalish" 
+                 class="profile-picture animate-on-scroll" 
+                 id="profile-picture">
+            <p id="typing-text"></p>
+            <p class="profile-bio animate-on-scroll">
+                Seorang pengembang dengan fokus pada menciptakan solusi web yang efisien dan interaktif. 
+                Saya senang bereksplorasi di antara desain front-end yang menarik dan arsitektur back-end yang kuat. 
+                Prinsip utama saya adalah simplicity, scalability, and performance.
+            </p>
+            <div class="social-links animate-on-scroll">
+                <a href="https://github.com/websoftindonesia" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/wazrynn" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6285719562762" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.tiktok.com/@wazryn_" target="_blank" title="Tiktok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://linktr.ee/wazrynn" target="_blank" title="Link">
+                    <i class="fas fa-link"></i>
+                </a>
+            </div>
+        </section>
 
-<!-- ============================
-     HERO SECTION
-     ============================ -->
-<section id="home" class="hero" style="opacity: 0; visibility: hidden;">
-  <h1 class="animate-on-scroll">
-    <span class="slide-in-text" id="hero-name-text">HALO, SAYA <span style="color: var(--accent-color);">Muhammad Fawwaz Rayyan Khalish</span></span>
-  </h1>
-  <img src="https://media.licdn.com/dms/image/v2/D5603AQH8eSAWJeQCKQ/profile-displayphoto-scale_400_400/B56ZsvYJ2iHsAg-/0/1766026420246?e=1767830400&v=beta&t=R0NF4L_nfAJ6bj7B5nJsLfKPSNZo4JKBFTYZyFWS6Xg" 
-       alt="Foto Profile Muhammad Fawwaz Rayyan Khalish" 
-       class="profile-picture animate-on-scroll" id="profile-picture" />
-  <p id="typing-text"></p>
-  <p class="profile-bio animate-on-scroll">
-    Seorang pengembang dengan fokus pada menciptakan solusi web yang efisien dan interaktif. Saya senang bereksplorasi di antara desain front-end yang menarik dan arsitektur back-end yang kuat. Prinsip utama saya adalah simplicity, scalability, and performance.
-  </p>
-  <div class="social-links animate-on-scroll">
-    <a href="https://github.com/websoftindonesia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://www.instagram.com/wazrynn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://api.whatsapp.com/send?phone=6285719562762" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.tiktok.com/@wazryn_" target="_blank" title="Tiktok"><i class="fab fa-tiktok"></i></a>
-    <a href="https://linktr.ee/wazrynn" target="_blank" title="Link"><i class="fab fa-link"></i></a>
-  </div>
-</section>
+        <!-- About Education Section -->
+        <section id="about-education" class="content-section animate-on-scroll">
+            <h2 class="section-title">ABOUT MY EDUCATION</h2>
+            <div class="education-container">
+                <div class="education-item">
+                    <img src="https://www.gunadarma.ac.id/wp-content/uploads/2024/03/logo-universitas-gunadarma-warna.png" alt="Universitas Logo">
+                    <div class="education-details">
+                        <h3>Program Studi S1 Teknik Informatika</h3>
+                        <p class="school-name">Universitas Gunadarma</p>
+                        <p class="period">2025 - 2029 (Insya Allah)</p>
+                        <p>Fokus pada pengembangan perangkat lunak, kecerdasan buatan, dan sistem terdistribusi. Terlibat dalam beberapa proyek penelitian di bidang machine learning.</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <img src="https://media.licdn.com/dms/image/v2/D560BAQEZhHnG5O9d3A/company-logo_200_200/company-logo_200_200/0/1689378768324?e=2147483647&v=beta&t=w6e8fOBGcE4Kpa9qgms0yP42JVHAcLE-POFBpWzmcag" alt="High School Logo">
+                    <div class="education-details">
+                        <h3>IPA (Ilmu Pengetahuan Alam)</h3>
+                        <p class="school-name">SMA Muhammadiyah 8 Ciputat</p>
+                        <p class="period">2023 - 2025</p>
+                        <p>Aktif dalam klub sains dan olimpiade komputer. Mengembangkan minat mendalam dalam pemrograman dan teknologi sejak usia dini.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- ============================
-     About Education
-     ============================ -->
-<section id="about-education" class="content-section animate-on-scroll">
-  <h2 class="section-title">ABOUT MY EDUCATION</h2>
-  <div class="education-container">
-    <div class="education-item">
-      <img src="https://www.gunadarma.ac.id/wp-content/uploads/2024/03/logo-universitas-gunadarma-warna.png" alt="Universitas Logo" />
-      <div class="education-details">
-        <h3>Program Studi S1 Teknik Informatika</h3>
-        <p class="school-name">Universitas Gunadarma</p>
-        <p class="period">2025 - 2029(Insya Allah)</p>
-        <p>Fokus pada pengembangan perangkat lunak, kecerdasan buatan, dan sistem terdistribusi. Terlibat dalam beberapa proyek penelitian di bidang machine learning.</p>
-      </div>
-    </div>
-    <div class="education-item">
-      <img src="https://media.licdn.com/dms/image/v2/D560BAQEZhHnG5O9d3A/company-logo_200_200/company-logo_200_200/0/1689378768324?e=2147483647&v=beta&t=w6e8fOBGcE4Kpa9qgms0yP42JVHAcLE-POFBpWzmcag" alt="High School Logo" />
-      <div class="education-details">
-        <h3>IPA (Ilmu Pengetahuan Alam)</h3>
-        <p class="school-name">SMA Muhammadiyah 8 Ciputat</p>
-        <p class="period">2023 - 2025</p>
-        <p>Aktif dalam klub sains dan olimpiade komputer. Mengembangkan minat mendalam dalam pemrograman dan teknologi sejak usia dini.</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Certifications Section -->
+        <section id="certifications" class="content-section animate-on-scroll">
+            <h2 class="section-title">01. CERTIFICATIONS & TRAINING</h2>
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn cert-btn active-tab" data-tab="programming">Programming</button>
+                    <button class="tab-btn cert-btn" data-tab="cloud">Cloud & DevOps</button>
+                    <button class="tab-btn cert-btn" data-tab="design">UI/UX Design</button>
+                </div>
+                <div id="programming" class="tab-content cert-tab-content">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 20px;">
+                            <strong>Certificate Internship Of Graphic Design (2025) - International Youth Goals</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Responsible for creating compelling visual concepts to convey messages or information effectively through visual media. 
+                                Graphic designers work with various design elements such as typography, color, images, illustrations, and layouts.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="javascript-dev">Lihat Sertifikat</button>
+                        </li>
+                        <li style="margin-bottom: 20px;">
+                            <strong>Certified: Software Engineer (2025) - RevoU</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Learned about methods and basics of software engineering including HTML, CSS, JavaScript, GitHub, and Version Control System.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="react-advanced">Lihat Sertifikat</button>
+                        </li>
+                        <li style="margin-bottom: 20px;">
+                            <strong>Programming in HTML5 (2025) - MySkill</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="fullstack-bootcamp">Lihat Sertifikat</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="cloud" class="tab-content cert-tab-content" style="display: none;">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 20px;">
+                            <strong>AWS Certified Cloud Practitioner (2024)</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="aws-practitioner">Lihat Sertifikat</button>
+                        </li>
+                        <li style="margin-bottom: 20px;">
+                            <strong>Docker & Kubernetes Essential Training (2023) - LinkedIn Learning</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="docker-k8s">Lihat Sertifikat</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="design" class="tab-content cert-tab-content" style="display: none;">
+                    <ul class="skill-list" style="display: block; text-align: left;">
+                        <li style="margin-bottom: 20px;">
+                            <strong>UI/UX Design Fundamentals using Figma (2023)</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Membuat prototipe interaktif, mendesain design system, dan memastikan konsistensi visual antara desain dan implementasi kode.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="figma-fundamentals">Lihat Sertifikat</button>
+                        </li>
+                        <li style="margin-bottom: 20px;">
+                            <strong>Human-Centered Design (HCD) Specialist (2022)</strong>
+                            <p style="font-size: 0.9em; margin-top: 8px; color: var(--accent-color);">
+                                Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.
+                            </p>
+                            <button class="view-certificate-btn" data-certificate="hcd-specialist">Lihat Sertifikat</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- ============================
-     Certifications
-     ============================ -->
-<section id="certifications" class="content-section animate-on-scroll">
-  <h2 class="section-title">01. CERTIFICATIONS & TRAINING</h2>
-  <div class="tabs-container">
-    <div class="tab-buttons">
-      <button class="tab-btn cert-btn active-tab" data-tab="programming">Programming</button>
-      <button class="tab-btn cert-btn" data-tab="cloud">Cloud & DevOps</button>
-      <button class="tab-btn cert-btn" data-tab="design">UI/UX Design</button>
-    </div>
-    <div id="programming" class="tab-content cert-tab-content">
-      <ul class="skill-list">
-        <li>
-          Certificate Internship Of Graphic Design (2025) - International Youth Goals
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            responsible for creating compelling visual concepts to convey messages or information effectively through visual media. Graphic designers work with various design elements such as typography, color, images, illustrations, and layouts to produce consistent and communicative visual materials.
-          </p>
-          <button class="view-certificate-btn" data-certificate="javascript-dev">Lihat Sertifikat</button>
-        </li>
-        <li>
-          Certified: Software Engineer (2025) - RevoU
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            I learned about the methods and basics of software engineering which I can say are easy to learn, and the materials studied in this course include:- HTML- CSS- JAVA SCRIPT- GITHUB- VERSION CONTROL SYSTEM.
-          </p>
-          <button class="view-certificate-btn" data-certificate="react-advanced">Lihat Sertifikat</button>
-        </li>
-        <li>
-          Programming in HTML5 (2025) - MySkill
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar.
-          </p>
-          <button class="view-certificate-btn" data-certificate="fullstack-bootcamp">Lihat Sertifikat</button>
-        </li>
-      </ul>
-    </div>
-    <div id="cloud" class="tab-content cert-tab-content" style="display: none;">
-      <ul class="skill-list">
-        <li>
-          AWS Certified Cloud Practitioner (2024)
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.
-          </p>
-          <button class="view-certificate-btn" data-certificate="aws-practitioner">Lihat Sertifikat</button>
-        </li>
-        <li>
-          Docker & Kubernetes Essential Training (2023) - LinkedIn Learning
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.
-          </p>
-          <button class="view-certificate-btn" data-certificate="docker-k8s">Lihat Sertifikat</button>
-        </li>
-        <li>
-          Programming in HTML5 (2025) - MySkill
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar.
-          </p>
-          <button class="view-certificate-btn" data-certificate="linux-admin">Lihat Sertifikat</button>
-        </li>
-      </ul>
-    </div>
-    <div id="design" class="tab-content cert-tab-content" style="display: none;">
-      <ul class="skill-list">
-        <li>
-          UI/UX Design Fundamentals using Figma (2023)
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Membuat prototipe interaktif, mendesain *design system*, dan memastikan konsistensi visual antara desain dan implementasi kode.
-          </p>
-          <button class="view-certificate-btn" data-certificate="figma-fundamentals">Lihat Sertifikat</button>
-        </li>
-        <li>
-          Human-Centered Design (HCD) Specialist (2022)
-          <p style="font-size: 0.9em; margin-top: 5px; color: var(--accent-color);">
-            Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.
-          </p>
-          <button class="view-certificate-btn" data-certificate="hcd-specialist">Lihat Sertifikat</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+        <!-- About Section -->
+        <section id="about" class="content-section animate-on-scroll">
+            <h2 class="section-title">02. TENTANG SAYA & KARIR</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Saya, Muhammad Fawwaz, adalah seorang Software Engineer dengan 3 tahun pengalaman dalam membangun aplikasi web yang berorientasi pada kinerja dan pengalaman pengguna. Perjalanan teknis saya dimulai dari HTML/CSS/JS dasar, kemudian fokus pada ekosistem React.js dan pengembangan API dengan Node.js/Express di sisi server.</p>
+                    
+                    <p>Selama karir, saya telah berhasil memimpin inisiatif migrasi dari arsitektur monolitik ke Microservices menggunakan Docker dan Kubernetes, yang menghasilkan peningkatan deployment speed sebesar 40%. Saya percaya bahwa pengembangan perangkat lunak adalah tentang memecahkan masalah kompleks menjadi solusi elegan yang dapat diskalakan.</p>
+                    
+                    <p>Filosofi saya adalah "Code as Clean as Possible." Saya berpegang teguh pada prinsip-prinsip SOLID dan selalu mengimplementasikan TDD (Test-Driven Development) untuk menjamin kualitas dan daya tahan kode. Saat ini saya bekerja sebagai Senior Full-Stack Developer di Tech Innovate Solutions.</p>
+                </div>
+            </div>
+        </section>
 
-<!-- ============================
-     Tentang Saya & Karir
-     ============================ -->
-<section id="about" class="content-section animate-on-scroll">
-  <h2 class="section-title">02. TENTANG SAYA & KARIR</h2>
-  <div class="about-content">
-    <div class="about-text">
-      <p>
-        Saya, Muhammad Fawwaz, adalah seorang Software Engineer dengan 3 tahun pengalaman dalam membangun aplikasi web yang berorientasi pada kinerja dan pengalaman pengguna. Perjalanan teknis saya dimulai dari HTML/CSS/JS dasar, kemudian fokus pada ekosistem React.js dan pengembangan API dengan Node.js/Express di sisi server.
-      </p>
-      <p>
-        Selama karir, saya telah berhasil memimpin inisiatif migrasi dari arsitektur monolitik ke Microservices menggunakan Docker dan Kubernetes, yang menghasilkan peningkatan deployment speed* sebesar 40%. Saya percaya bahwa pengembangan perangkat lunak adalah tentang memecahkan masalah kompleks menjadi solusi elegan yang dapat diskalakan.
-      </p>
-      <p>
-        Filosofi saya adalah "Code as Clean as Possible." Saya berpegang teguh pada prinsip-prinsip SOLID dan selalu mengimplementasikan TDD (Test-Driven Development) untuk menjamin kualitas dan daya tahan kode. Saat ini saya bekerja sebagai Senior Full-Stack Developer di Tech Innovate Solutions.
-      </p>
-    </div>
-  </div>
-</section>
+        <!-- Skills Section -->
+        <section id="skills" class="content-section animate-on-scroll">
+            <h2 class="section-title">03. KEAHLIAN TEKNIS</h2>
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn skill-btn active-tab" data-tab="frontend">Front-End</button>
+                    <button class="tab-btn skill-btn" data-tab="backend">Back-End</button>
+                    <button class="tab-btn skill-btn" data-tab="tools">Tools & DevOps</button>
+                </div>
+                <div id="frontend" class="tab-content skill-tab-content">
+                    <ul class="skill-list">
+                        <li class="skill-item">HTML5 & CSS3 (Semantic Markup)</li>
+                        <li class="skill-item">JavaScript (ES6+, TypeScript)</li>
+                        <li class="skill-item">React.js & Redux</li>
+                        <li class="skill-item">Vue.js (Intermediate)</li>
+                        <li class="skill-item">SASS/LESS</li>
+                        <li class="skill-item">Tailwind CSS & Bootstrap</li>
+                        <li class="skill-item">Web Performance Optimization</li>
+                    </ul>
+                </div>
+                <div id="backend" class="tab-content skill-tab-content" style="display: none;">
+                    <ul class="skill-list">
+                        <li class="skill-item">Node.js & Express</li>
+                        <li class="skill-item">Python & Django / Flask</li>
+                        <li class="skill-item">PostgreSQL & MySQL</li>
+                        <li class="skill-item">MongoDB & Redis</li>
+                        <li class="skill-item">RESTful APIs & GraphQL</li>
+                        <li class="skill-item">Unit Testing (Jest, Mocha)</li>
+                        <li class="skill-item">Microservices Architecture</li>
+                    </ul>
+                </div>
+                <div id="tools" class="tab-content skill-tab-content" style="display: none;">
+                    <ul class="skill-list">
+                        <li class="skill-item">Git & GitHub Actions (CI/CD)</li>
+                        <li class="skill-item">Docker & Kubernetes</li>
+                        <li class="skill-item">AWS (EC2, S3, RDS, Lambda)</li>
+                        <li class="skill-item">Google Cloud (GKE)</li>
+                        <li class="skill-item">Jira & Trello (Agile/Scrum)</li>
+                        <li class="skill-item">Webpack & Babel</li>
+                        <li class="skill-item">Figma & Sketch (Basic Prototyping)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- ============================
-     Keahlian Teknis
-     ============================ -->
-<section id="skills" class="content-section animate-on-scroll">
-  <h2 class="section-title">03. KEAHLIAN TEKNIS</h2>
-  <div class="tabs-container">
-    <div class="tab-buttons">
-      <button class="tab-btn skill-btn active-tab" data-tab="frontend">Front-End</button>
-      <button class="tab-btn skill-btn" data-tab="backend">Back-End</button>
-      <button class="tab-btn skill-btn" data-tab="tools">Tools & DevOps</button>
-    </div>
-    <div id="frontend" class="tab-content skill-tab-content">
-      <ul class="skill-list">
-        <li class="skill-item">HTML5 & CSS3 (Semantic Markup)</li>
-        <li class="skill-item">JavaScript (ES6+, TypeScript)</li>
-        <li class="skill-item">React.js & Redux</li>
-        <li class="skill-item">Vue.js (Intermediate)</li>
-        <li class="skill-item">SASS/LESS</li>
-        <li class="skill-item">Tailwind CSS & Bootstrap</li>
-        <li class="skill-item">Web Performance Optimization</li>
-      </ul>
-    </div>
-    <div id="backend" class="tab-content skill-tab-content" style="display: none;">
-      <ul class="skill-list">
-        <li class="skill-item">Node.js & Express</li>
-        <li class="skill-item">Python & Django / Flask</li>
-        <li class="skill-item">PostgreSQL & MySQL</li>
-        <li class="skill-item">MongoDB & Redis</li>
-        <li class="skill-item">RESTful APIs & GraphQL</li>
-        <li class="skill-item">Unit Testing (Jest, Mocha)</li>
-        <li class="skill-item">Microservices Architecture</li>
-      </ul>
-    </div>
-    <div id="tools" class="tab-content skill-tab-content" style="display: none;">
-      <ul class="skill-list">
-        <li class="skill-item">Git & GitHub Actions (CI/CD)</li>
-        <li class="skill-item">Docker & Kubernetes</li>
-        <li class="skill-item">AWS (EC2, S3, RDS, Lambda)</li>
-        <li class="skill-item">Google Cloud (GKE)</li>
-        <li class="skill-item">Jira & Trello (Agile/Scrum)</li>
-        <li class="skill-item">Webpack & Babel</li>
-        <li class="skill-item">Figma & Sketch (Basic Prototyping)</li>
-      </ul>
-    </div>
-  </div>
-</section>
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="content-section">
+            <h2 class="section-title">04. PORTOFOLIO</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active-filter" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="web">Web App</button>
+                <button class="filter-btn" data-filter="mobile">Mobile App</button>
+                <button class="filter-btn" data-filter="tool">Internal Tool</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="project-card animate-on-scroll web">
+                    <h3>Sistem E-Commerce B2B | 🔗 Live Demo</h3>
+                    <p>Platform perdagangan antar perusahaan dengan fitur kustomisasi pesanan dan manajemen inventaris real-time. (Tech: React, Node.js, PostgreSQL)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: Membangun marketplace yang menargetkan transaksi B2B volume tinggi. Sistem ini menangani otorisasi kompleks berdasarkan peran pembeli dan negosiasi harga.</p>
+                        <ul>
+                            <li>Fitur Utama: Multi-tenancy database, custom pricing logic, integrasi payment gateway.</li>
+                            <li>Dampak: Mengurangi waktu pemrosesan pesanan manual hingga 35%.</li>
+                            <li>Peran Saya: Lead Back-End Developer & Database Architect.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
 
-<!-- ============================
-     Portfolio
-     ============================ -->
-<section id="portfolio" class="content-section">
-<h2 class="section-title">04. PORTOFOLIO</h2>
-<div class="filter-buttons">
-  <button class="filter-btn active-filter" data-filter="all">Semua</button>
-  <button class="filter-btn" data-filter="web">Web App</button>
-  <button class="filter-btn" data-filter="mobile">Mobile App</button>
-  <button class="filter-btn" data-filter="tool">Internal Tool</button>
-</div>
-<div class="portfolio-grid">
-  <!-- Proyek 1 -->
-  <div class="project-card animate-on-scroll web">
-    <h3>Sistem E-Commerce B2B | 🔗 Live Demo</h3>
-    <p>Platform perdagangan antar perusahaan dengan fitur kustomisasi pesanan dan manajemen inventaris real-time. (Tech: React, Node.js, PostgreSQL)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: Membangun *marketplace yang menargetkan transaksi B2B volume tinggi. Sistem ini menangani otorisasi kompleks berdasarkan peran pembeli dan negosiasi harga.</p>
-      <ul>
-        <li>Fitur Utama: Multi-tenancy database, custom pricing logic, integrasi payment gateway.</li>
-        <li>Dampak: Mengurangi waktu pemrosesan pesanan manual hingga 35%.</li>
-        <li>Peran Saya: Lead Back-End Developer & Database Architect.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail1">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-  <!-- Proyek 2 -->
-  <div class="project-card animate-on-scroll mobile">
-    <h3>Aplikasi Pelacak Kebugaran | 📱 Source Code</h3>
-    <p>Aplikasi hybrid yang melacak kalori dan langkah harian. Sinkronisasi data ke cloud. (Tech: React Native, Firebase, Context API)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: Aplikasi mobile untuk memotivasi pengguna mencapai target kesehatan. Menggunakan push notification untuk pengingat harian.</p>
-      <ul>
-        <li>Fitur Utama: Integrasi sensor perangkat (Akselerometer), grafik visualisasi harian, otentikasi sosial.</li>
-        <li>Pencapaian: Memiliki lebih dari 5.000 pengguna aktif di bulan pertama peluncuran.</li>
-        <li>Peran Saya: Full-Stack Mobile Developer.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail2">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-  <!-- Proyek 3 -->
-  <div class="project-card animate-on-scroll tool">
-    <h3>Dashboard Analitik Data | 📊 Internal Project</h3>
-    <p>Dashboard internal untuk visualisasi data penjualan harian dan prediksi tren masa depan. (Tech: Vue.js, Python/Django, Chart.js)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: Alat penting bagi tim bisnis untuk membuat keputusan data-driven. Data ditarik dari Data Warehouse (Redshift) secara berkala.</p>
-      <ul>
-        <li>Fitur Utama: Real-time data fetching, Role-Based Access Control (RBAC), custom filtering.</li>
-        <li>Dampak: Mempersingkat waktu pembuatan laporan mingguan dari 4 jam menjadi 30 menit.</li>
-        <li>Peran Saya: Front-End Developer & Data Visualization Lead.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail3">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-  <!-- Proyek 4 -->
-  <div class="project-card animate-on-scroll web">
-    <h3>Situs Landing Page Perusahaan | 🌐 Live Site</h3>
-    <p>Situs pemasaran berkecepatan tinggi dengan optimasi SEO. (Tech: Next.js, Tailwind CSS, Vercel)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: Situs statis yang sangat cepat dan dioptimalkan untuk mesin pencari. Dibuat menggunakan SSG (Static Site Generation) untuk performa maksimal.</p>
-      <ul>
-        <li>Fitur Utama: Dark Mode, kontak form serverless (AWS Lambda), Mobile-first responsive design.</li>
-        <li>Pencapaian: Mencapai skor Google Lighthouse 98/100 untuk Performance dan SEO.</li>
-        <li>Peran Saya: Front-End Developer.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail4">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-  <!-- Proyek 5 -->
-  <div class="project-card animate-on-scroll tool">
-    <h3>API Gateway Management | ⚙️ Backend Core</h3>
-    <p>Pengembangan API Gateway untuk merutekan dan mengamankan Microservices internal. (Tech: GoLang, Kong API Gateway, Kafka)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: Membangun lapisan akses terpusat untuk layanan backend, mengelola otentikasi, rate limiting, dan logging terpusat.</p>
-      <ul>
-        <li>Fitur Utama: Otorisasi JWT, Load balancing, Event-driven communication (Kafka).</li>
-        <li>Dampak: Peningkatan keamanan dan konsistensi API; latensi rata-rata turun 15ms.</li>
-        <li>Peran Saya: Back-End/DevOps Engineer.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail5">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-  <!-- Proyek 6 -->
-  <div class="project-card animate-on-scroll web">
-    <h3>Custom Content Management System (CMS)</h3>
-    <p>Sistem backend kustom untuk pengelolaan konten multi-bahasa dengan antarmuka yang intuitif. (Tech: PHP/Laravel, Blade, MySQL)</p>
-    <div class="project-detail-content">
-      <p>Deskripsi: CMS yang dirancang spesifik untuk kebutuhan penerbitan konten, dengan fitur drafting dan version control.</p>
-      <ul>
-        <li>Fitur Utama: Editor WYSIWYG, image optimization pipeline, multi-user collaboration.</li>
-        <li>Dampak: Mengurangi ketergantungan pada CMS pihak ketiga, memberikan kontrol penuh atas data dan fitur.</li>
-        <li>Peran Saya: Full-Stack Developer.</li>
-      </ul>
-    </div>
-    <span class="toggle-detail" data-target="detail6">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
-  </div>
-</div>
-</section>
+                <div class="project-card animate-on-scroll mobile">
+                    <h3>Aplikasi Pelacak Kebugaran | 📱 Source Code</h3>
+                    <p>Aplikasi hybrid yang melacak kalori dan langkah harian. Sinkronisasi data ke cloud. (Tech: React Native, Firebase, Context API)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: Aplikasi mobile untuk memotivasi pengguna mencapai target kesehatan. Menggunakan push notification untuk pengingat harian.</p>
+                        <ul>
+                            <li>Fitur Utama: Integrasi sensor perangkat (Akselerometer), grafik visualisasi harian, otentikasi sosial.</li>
+                            <li>Pencapaian: Memiliki lebih dari 5.000 pengguna aktif di bulan pertama peluncuran.</li>
+                            <li>Peran Saya: Full-Stack Mobile Developer.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
 
-<!-- ============================
-     Hubungi Saya (Contact)
-     ============================ -->
-<section id="contact" class="content-section animate-on-scroll">
-<h2 class="section-title">05. HUBUNGI SAYA</h2>
-<form id="contact-form">
-  <input type="text" id="name" placeholder="Nama Lengkap Anda" required />
-  <input type="email" id="email" placeholder="Email Anda" required />
-  <input type="text" id="subject" placeholder="Subjek Pesan" required />
-  <textarea id="message" placeholder="Pesan Anda" required></textarea>
-  <p class="error-message" id="form-error" style="display: none;">Mohon lengkapi semua kolom dengan benar.</p>
-  <button type="submit" class="submit-btn">Kirim Pesan <i class="fas fa-paper-plane"></i></button>
-  <p class="success-message" id="form-success" style="display: none;">Pesan Anda telah berhasil dikirim!</p>
-</form>
-</section>
+                <div class="project-card animate-on-scroll tool">
+                    <h3>Dashboard Analitik Data | 📊 Internal Project</h3>
+                    <p>Dashboard internal untuk visualisasi data penjualan harian dan prediksi tren masa depan. (Tech: Vue.js, Python/Django, Chart.js)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: Alat penting bagi tim bisnis untuk membuat keputusan data-driven. Data ditarik dari Data Warehouse (Redshift) secara berkala.</p>
+                        <ul>
+                            <li>Fitur Utama: Real-time data fetching, Role-Based Access Control (RBAC), custom filtering.</li>
+                            <li>Dampak: Mempersingkat waktu pembuatan laporan mingguan dari 4 jam menjadi 30 menit.</li>
+                            <li>Peran Saya: Front-End Developer & Data Visualization Lead.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
 
-</main>
+                <div class="project-card animate-on-scroll web">
+                    <h3>Situs Landing Page Perusahaan | 🌐 Live Site</h3>
+                    <p>Situs pemasaran berkecepatan tinggi dengan optimasi SEO. (Tech: Next.js, Tailwind CSS, Vercel)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: Situs statis yang sangat cepat dan dioptimalkan untuk mesin pencari. Dibuat menggunakan SSG (Static Site Generation) untuk performa maksimal.</p>
+                        <ul>
+                            <li>Fitur Utama: Dark Mode, kontak form serverless (AWS Lambda), Mobile-first responsive design.</li>
+                            <li>Pencapaian: Mencapai skor Google Lighthouse 98/100 untuk Performance dan SEO.</li>
+                            <li>Peran Saya: Front-End Developer.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
 
-<!-- ============================
-     Scroll To Top Button
-     ============================ -->
-<button id="scrollToTopBtn" title="Go to top"><i class="fas fa-rocket"></i></button>
+                <div class="project-card animate-on-scroll tool">
+                    <h3>API Gateway Management | ⚙️ Backend Core</h3>
+                    <p>Pengembangan API Gateway untuk merutekan dan mengamankan Microservices internal. (Tech: GoLang, Kong API Gateway, Kafka)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: Membangun lapisan akses terpusat untuk layanan backend, mengelola otentikasi, rate limiting, dan logging terpusat.</p>
+                        <ul>
+                            <li>Fitur Utama: Otorisasi JWT, Load balancing, Event-driven communication (Kafka).</li>
+                            <li>Dampak: Peningkatan keamanan dan konsistensi API; latensi rata-rata turun 15ms.</li>
+                            <li>Peran Saya: Back-End/DevOps Engineer.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
 
-<!-- ============================
-     Footer
-     ============================ -->
-<footer>
-  <p class="footer-motto">
-    "My commitment is to create digital solutions that are functional, scalable, and useful for users."
-  </p>
-  <p class="footer-copy">
-    © Copyright M.Fawwaz. All Rights Reserved. <br />
-    Designed and Developed by <span>Muhammad Fawwaz Rayyan Khalish</span>.
-  </p>
-</footer>
+                <div class="project-card animate-on-scroll web">
+                    <h3>Custom Content Management System (CMS)</h3>
+                    <p>Sistem backend kustom untuk pengelolaan konten multi-bahasa dengan antarmuka yang intuitif. (Tech: PHP/Laravel, Blade, MySQL)</p>
+                    <div class="project-detail-content">
+                        <p>Deskripsi: CMS yang dirancang spesifik untuk kebutuhan penerbitan konten, dengan fitur drafting dan version control.</p>
+                        <ul>
+                            <li>Fitur Utama: Editor WYSIWYG, image optimization pipeline, multi-user collaboration.</li>
+                            <li>Dampak: Mengurangi ketergantungan pada CMS pihak ketiga, memberikan kontrol penuh atas data dan fitur.</li>
+                            <li>Peran Saya: Full-Stack Developer.</li>
+                        </ul>
+                    </div>
+                    <span class="toggle-detail">Detail Selengkapnya <i class="fas fa-chevron-down"></i></span>
+                </div>
+            </div>
+        </section>
 
-<!-- ============================
-     Certificate Modal
-     ============================ -->
-<div id="certificateModal" class="certificate-modal">
-  <div class="certificate-modal-content">
-    <span class="certificate-close">&times;</span>
-    <img id="certificateImage" class="certificate-image" src="" alt="Certificate" />
-    <div class="certificate-info">
-      <h3 id="certificateTitle"></h3>
-      <p id="certificateDescription"></p>
-      <p id="certificateDate"></p>
-      <p id="certificateIssuer"></p>
+        <!-- Contact Section -->
+        <section id="contact" class="content-section animate-on-scroll">
+            <h2 class="section-title">05. HUBUNGI SAYA</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Nama Lengkap Anda" required>
+                <input type="email" id="email" placeholder="Email Anda" required>
+                <input type="text" id="subject" placeholder="Subjek Pesan" required>
+                <textarea id="message" placeholder="Pesan Anda" rows="6" required></textarea>
+                <p class="error-message" id="form-error" style="display: none;">Mohon lengkapi semua kolom dengan benar.</p>
+                <button type="submit" class="submit-btn">
+                    Kirim Pesan <i class="fas fa-paper-plane"></i>
+                </button>
+                <p class="success-message" id="form-success" style="display: none;">Pesan Anda telah berhasil dikirim!</p>
+            </form>
+        </section>
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-rocket"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-motto">
+            "My commitment is to create digital solutions that are functional, scalable, and useful for users."
+        </p>
+        <p class="footer-copy">
+            © Copyright M.Fawwaz. All Rights Reserved. <br>
+            Designed and Developed by <span>Muhammad Fawwaz Rayyan Khalish</span>.
+        </p>
+    </footer>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <span class="certificate-close">&times;</span>
+            <img id="certificateImage" class="certificate-image" src="" alt="Certificate">
+            <div class="certificate-info">
+                <h3 id="certificateTitle"></h3>
+                <p id="certificateDescription"></p>
+                <p id="certificateDate"></p>
+                <p id="certificateIssuer"></p>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<!-- ============================
-     Preloader
-     ============================ -->
-<div id="preloader">
-  <div class="loader-container">
-    <div class="neon-loader">
-      <i class="fas fa-terminal"></i>
-      <span class="loader-text">Initializing Portfolio...</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
-  </div>
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            const hero = document.querySelector('.hero');
+            
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    hero.style.opacity = '1';
+                    hero.style.visibility = 'visible';
+                    initHeroAnimations();
+                }, 800);
+            }, 3200);
 
-<!-- ============================
-     Scripts
-     ============================ -->
-<script>
-/* JavaScript code yang sudah ada (pembersihan dan penataan ulang) */
-document.addEventListener('DOMContentLoaded', () => {
-  // Script yang sudah Anda berikan sebelumnya...
-  // (Kode lengkap dari script sebelumnya akan ditempatkan di sini)
+            // Initialize hero animations
+            function initHeroAnimations() {
+                // Typing effect
+                const typingTextElement = document.getElementById('typing-text');
+                const phrases = [
+                    "Full-Stack Developer...",
+                    "Inovator Digital...",
+                    "Pencipta Solusi Web...",
+                    "Eksplorator Teknologi..."
+                ];
+                let phraseIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+
+                function type() {
+                    const currentPhrase = phrases[phraseIndex];
+                    const displayedText = isDeleting 
+                        ? currentPhrase.substring(0, charIndex - 1)
+                        : currentPhrase.substring(0, charIndex + 1);
+                    
+                    typingTextElement.textContent = displayedText;
+
+                    if (!isDeleting && charIndex === currentPhrase.length) {
+                        isDeleting = true;
+                        setTimeout(() => type(), 1500);
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        setTimeout(() => type(), 500);
+                    } else {
+                        charIndex += isDeleting ? -1 : 1;
+                        const speed = isDeleting ? 50 : 100;
+                        setTimeout(() => type(), speed);
+                    }
+                }
+
+                setTimeout(() => type(), 1000);
+
+                // Animate other hero elements
+                setTimeout(() => {
+                    document.querySelector('.profile-bio').style.opacity = '1';
+                    document.querySelector('.profile-bio').style.transform = 'translateY(0)';
+                }, 2000);
+
+                setTimeout(() => {
+                    document.querySelector('.social-links').style.opacity = '1';
+                    document.querySelector('.social-links').style.transform = 'translateY(0)';
+                }, 2500);
+            }
+
+            // Tab switching
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+                    const parentSection = button.closest('section').id;
+                    
+                    // Remove active class from all buttons in this section
+                    button.closest('.tab-buttons').querySelectorAll('.tab-btn').forEach(btn => 
+                        btn.classList.remove('active-tab')
+                    );
+                    
+                    // Hide all tab contents in this section
+                    const tabContents = button.closest('section').querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.style.display = 'none');
+                    
+                    // Show target tab and activate button
+                    document.getElementById(targetTab).style.display = 'block';
+                    button.classList.add('active-tab');
+                });
+            });
+
+            // Portfolio filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.dataset.filter;
+                    
+                    filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                    button.classList.add('active-filter');
+
+                    projectCards.forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        
+                        setTimeout(() => {
+                            if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, 50);
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                });
+            });
+
+            // Project detail toggle
+            const toggleDetails = document.querySelectorAll('.toggle-detail');
+            toggleDetails.forEach(toggler => {
+                toggler.addEventListener('click', () => {
+                    const card = toggler.closest('.project-card');
+                    card.classList.toggle('expanded');
+                    
+                    const isExpanded = card.classList.contains('expanded');
+                    toggler.innerHTML = isExpanded 
+                        ? 'Tutup Detail <i class="fas fa-chevron-up"></i>'
+                        : 'Detail Selengkapnya <i class="fas fa-chevron-down"></i>';
+                });
+            });
+
+            // Scroll animations
+            const scrollElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            scrollElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Active nav link on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = 'home';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = 'block';
+                } else {
+                    scrollToTopBtn.style.display = 'none';
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Theme toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+            let isPurpleTheme = false;
+
+            themeToggleBtn.addEventListener('click', () => {
+                isPurpleTheme = !isPurpleTheme;
+                if (isPurpleTheme) {
+                    body.classList.add('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-toggle-on"></i>';
+                    localStorage.setItem('theme', 'purple');
+                } else {
+                    body.classList.remove('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i>';
+                    localStorage.setItem('theme', 'blue');
+                }
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'blue';
+            if (savedTheme === 'purple') {
+                setTimeout(() => {
+                    if (!body.classList.contains('theme-purple')) {
+                        themeToggleBtn.click();
+                    }
+                }, 10);
+            }
+
+            // Profile picture glow effect
+            const heroNameText = document.getElementById('hero-name-text');
+            const profilePicture = document.getElementById('profile-picture');
+
+            heroNameText.addEventListener('mouseover', () => {
+                profilePicture.classList.add('glow');
+            });
+
+            heroNameText.addEventListener('mouseout', () => {
+                profilePicture.classList.remove('glow');
+            });
+
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            const formError = document.getElementById('form-error');
+            const formSuccess = document.getElementById('form-success');
+
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                formError.style.display = 'none';
+                formSuccess.style.display = 'none';
+                
+                let isValid = true;
+                const email = document.getElementById('email').value.trim();
+                
+                if (!document.getElementById('name').value.trim() || 
+                    !email || 
+                    !document.getElementById('subject').value.trim() || 
+                    !document.getElementById('message').value.trim()) {
+                    isValid = false;
+                }
+                
+                if (isValid && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    isValid = false;
+                }
+                
+                if (!isValid) {
+                    formError.style.display = 'block';
+                } else {
+                    formSuccess.style.display = 'block';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Certificate modal
+            const certificateModal = document.getElementById('certificateModal');
+            const certificateImage = document.getElementById('certificateImage');
+            const certificateTitle = document.getElementById('certificateTitle');
+            const certificateDescription = document.getElementById('certificateDescription');
+            const certificateDate = document.getElementById('certificateDate');
+            const certificateIssuer = document.getElementById('certificateIssuer');
+            const closeModal = document.querySelector('.certificate-close');
+
+            const certificateData = {
+                'javascript-dev': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1766840400&v=beta&t=WsGDYse7kcXp5IUQT4W-9utrw3KGwDKqYixpG8effW8',
+                    title: 'Certified Internship Of Graphic Design',
+                    description: 'Responsible for creating compelling visual concepts to convey messages or information effectively through visual media.',
+                    date: 'Diterbitkan: September 2025',
+                    issuer: 'International Youth Goals'
+                },
+                'react-advanced': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1766840400&v=beta&t=e8MS8Aqz5F_mo1y1HlhYXddJtoVJL3r-spgQIurlswM',
+                    title: 'Certified: Software Engineer',
+                    description: 'I learned about the methods and basics of software engineering which I can say are easy to learn, and the materials studied in this course include:- HTML- CSS- JAVA SCRIPT- GITHUB- VERSION CONTROL SYSTEM.',
+                    date: 'Diterbitkan: Juni 2025',
+                    issuer: 'RevoU'
+                },
+                'fullstack-bootcamp': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHGL8LsuZHcCg/profile-treasury-document-cover-images_480/B4EZfEyaNfG4A0-/0/1751353246783?e=1766840400&v=beta&t=MBiSdIIwuHM0hYVOSQjan4mqIJozAqfXsMkM290SYp4',
+                    title: 'Programming in HTML5',
+                    description: 'Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar..',
+                    date: 'Diterbitkan: Juli 2025',
+                    issuer: 'MySkill'
+                },
+                'aws-practitioner': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=AWS+Certified+Cloud+Practitioner+Certificate',
+                    title: 'AWS Certified Cloud Practitioner',
+                    description: 'Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.',
+                    date: 'Diterbitkan: Maret 2024',
+                    issuer: 'Amazon Web Services'
+                },
+                'docker-k8s': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Docker+and+Kubernetes+Essential+Training+Certificate',
+                    title: 'Docker & Kubernetes Essential Training',
+                    description: 'Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.',
+                    date: 'Diterbitkan: September 2023',
+                    issuer: 'LinkedIn Learning'
+                },
+                'linux-admin': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Linux+System+Administration+Certificate',
+                    title: 'Linux System Administration',
+                    description: 'Dasar-dasar sistem operasi Linux, scripting Bash, dan manajemen server dasar.',
+                    date: 'Diterbitkan: November 2021',
+                    issuer: 'FreeCodeCamp'
+                },
+                'figma-fundamentals': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=UI%2FUX+Design+Fundamentals+using+Figma+Certificate',
+                    title: 'UI/UX Design Fundamentals using Figma',
+                    description: 'Membuat prototipe interaktif, mendesain design system, dan memastikan konsistensi visual antara desain dan implementasi kode.',
+                    date: 'Diterbitkan: Juli 2023',
+                    issuer: 'Figma Academy'
+                },
+                'hcd-specialist': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Human-Centered+Design+Specialist+Certificate',
+                    title: 'Human-Centered Design (HCD) Specialist',
+                    description: 'Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.',
+                    date: 'Diterbitkan: April 2022',
+                    issuer: 'Interaction Design Foundation'
+                }
+            };
+            
+            // View certificate buttons
+            const viewCertificateBtns = document.querySelectorAll('.view-certificate-btn');
+            
+            viewCertificateBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const certificateId = button.dataset.certificate;
+                    const cert = certificateData[certificateId];
+                    
+                    if (cert) {
+                        certificateImage.src = cert.image;
+                        certificateTitle.textContent = cert.title;
+                        certificateDescription.textContent = cert.description;
+                        certificateDate.textContent = cert.date;
+                        certificateIssuer.textContent = `Penerbit: ${cert.issuer}`;
+                        
+                        certificateModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                    }
+                });
+            });
+            
+            // Close modal when clicking on X
+            closeModal.addEventListener('click', () => {
+                certificateModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling again
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target === certificateModal) {
+                    certificateModal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Enable scrolling again
+                }
+            });
+        });
+        // TAMBAHKAN DI AWAL SCRIPT (setelah DOM ready)
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const preloader = document.getElementById('preloader');
+    const hero = document.querySelector('.hero');
+    const progressFill = document.querySelector('.progress-fill');
+    
+    // 1. Tunggu progress bar selesai (3s)
+    setTimeout(() => {
+        // 2. Fade out preloader
+        preloader.style.opacity = '0';
+        
+        // 3. Setelah preloader hilang, tampilkan hero
+        setTimeout(() => {
+            preloader.style.display = 'none';
+            hero.classList.add('fade-in');
+            
+            // 4. Trigger semua animasi hero (typing, slide-in, etc)
+            initHeroAnimations();
+            
+        }, 800); // Durasi fade out
+        
+    }, 3200); // Durasi progress bar
+    
+    // Sisanya script lama (typing, scroll observer, etc)
+    // ...
 });
 
-// Fungsi inisialisasi animasi hero dan lainnya
+// Fungsi untuk inisialisasi animasi hero
 function initHeroAnimations() {
-  // Inisialisasi animasi hero
-  // ...
+    // Typing effect
+    typeWriter();
+    
+    // Slide-in text
+    document.querySelector('.slide-text').style.animationPlayState = 'running';
+    
+    // Observer untuk scroll animations
+    initScrollAnimations();
 }
-</script>
+    </script>
+
 </body>
 </html>
