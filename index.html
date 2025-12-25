@@ -164,6 +164,10 @@ body {
     font-weight: 600;
     transition: all 0.2s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
 }
 
 .nav-item:hover,
@@ -182,6 +186,41 @@ body {
     height: 3px;
     background: var(--main-color);
     border-radius: 2px;
+}
+
+.nav-item i {
+    font-size: 20px;
+}
+
+.nav-item-text {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Tooltip for navbar items */
+.nav-item::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: var(--card-bg);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1002;
+}
+
+.nav-item:hover::before {
+    opacity: 1;
+    visibility: visible;
+    bottom: -40px;
 }
 
 .navbar-right {
@@ -203,6 +242,7 @@ body {
     color: var(--text-primary);
     font-size: 20px;
     transition: all 0.2s ease;
+    position: relative;
 }
 
 .icon-button:hover {
@@ -216,6 +256,77 @@ body {
 
 .theme-toggle:hover {
     background: var(--facebook-dark-blue);
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: var(--hover-bg);
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 18px;
+}
+
+.mobile-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    z-index: 999;
+}
+
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+    background: var(--hover-bg);
+    color: var(--main-color);
+}
+
+.mobile-nav-item:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav-item i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+.mobile-nav-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mobile-nav-title {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.mobile-nav-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
 /* ================================================= */
@@ -896,9 +1007,6 @@ footer {
 /* ================================================= */
 /* PRELOADER */
 /* ================================================= */
-/* ================================================= */
-/* PRELOADER */
-/* ================================================= */
 #preloader {
     position: fixed;
     top: 0;
@@ -981,8 +1089,188 @@ footer {
     100% { width: 100%; }
 }
 
-/* Responsive adjustments for mobile */
+/* ================================================= */
+/* ANIMATIONS */
+/* ================================================= */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================= */
+/* RESPONSIVE DESIGN */
+/* ================================================= */
+@media (max-width: 1024px) {
+    .search-box {
+        width: 200px;
+    }
+    
+    .navbar-center {
+        gap: 4px;
+    }
+    
+    .nav-item {
+        padding: 10px 12px;
+    }
+    
+    .content-section {
+        margin: 15px;
+        padding: 28px 18px;
+    }
+}
+
 @media (max-width: 768px) {
+    .navbar {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    
+    .navbar-center {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .search-box {
+        width: 180px;
+        font-size: 14px;
+    }
+    
+    .logo {
+        font-size: 1.5em;
+    }
+    
+    .hero {
+        min-height: 70vh;
+        margin: 10px;
+        padding: 30px 15px;
+    }
+    
+    .hero h1 {
+        font-size: 2.2em;
+        padding: 0 10px;
+        line-height: 1.2;
+    }
+    
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-width: 4px;
+    }
+    
+    #typing-text {
+        font-size: 1.3em;
+        min-height: 40px;
+    }
+    
+    .profile-bio {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 24px;
+    }
+    
+    .education-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 20px;
+    }
+    
+    .education-item img {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+    }
+    
+    .tab-buttons {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    
+    .skill-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .skill-item {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .project-card {
+        padding: 20px;
+    }
+    
+    .filter-buttons {
+        gap: 6px;
+        margin-bottom: 24px;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .social-links {
+        gap: 12px;
+    }
+    
+    .social-links a {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+    
+    .content-section {
+        margin: 10px;
+        padding: 24px 16px;
+    }
+    
+    .chat-container {
+        width: 300px;
+        height: 450px;
+        bottom: 70px;
+        right: 10px;
+    }
+    
+    .chat-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    #scrollToTopBtn {
+        bottom: 90px;
+        right: 20px;
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    /* Responsive adjustments for mobile */
     .name-logo {
         font-size: 2rem;
         letter-spacing: 1px;
@@ -998,6 +1286,122 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .navbar {
+        padding: 6px 10px;
+    }
+    
+    .search-container {
+        margin-left: 8px;
+    }
+    
+    .search-box {
+        width: 140px;
+        padding: 6px 10px 6px 30px;
+        font-size: 13px;
+    }
+    
+    .logo {
+        font-size: 1.3em;
+    }
+    
+    .hero h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+        border-width: 3px;
+    }
+    
+    #typing-text {
+        font-size: 1.1em;
+        min-height: 35px;
+    }
+    
+    .profile-bio {
+        font-size: 0.95em;
+        margin-bottom: 24px;
+    }
+    
+    .section-title {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    
+    .content-section {
+        padding: 20px 12px;
+        margin: 8px;
+    }
+    
+    .education-item {
+        padding: 16px;
+    }
+    
+    .education-item img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .education-details h3 {
+        font-size: 1.1em;
+    }
+    
+    .education-details .school-name {
+        font-size: 1em;
+    }
+    
+    .tab-content {
+        padding: 16px;
+    }
+    
+    .project-card {
+        padding: 16px;
+    }
+    
+    .project-card h3 {
+        font-size: 1.1em;
+    }
+    
+    #contact-form {
+        max-width: 100%;
+    }
+    
+    #contact-form input,
+    #contact-form textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .submit-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .chat-container {
+        width: 280px;
+        height: 400px;
+        right: 5px;
+    }
+    
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .footer-motto {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+    
+    .footer-copy {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+    
+    /* Mobile preloader adjustments */
     .name-logo {
         font-size: 1.6rem;
         letter-spacing: 0.5px;
@@ -1010,22 +1414,49 @@ footer {
     .progress-bar {
         width: 200px;
     }
+    
+    .loader-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 1.6em;
+    }
+    
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .search-box {
+        width: 120px;
+    }
+    
+    .name-logo {
+        font-size: 1.4rem;
+    }
+    
+    .progress-bar {
+        width: 180px;
+    }
 }
     </style>
 </head>
 <body>
-   <!-- Preloader -->
-<div id="preloader">
-    <div class="loader-container">
-        <div class="facebook-loader">
-            <div class="name-logo">M. Fawwaz Rayyan Khalish</div>
-            <span class="loader-text">Loading Portfolio...</span>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="facebook-loader">
+                <div class="name-logo">M. Fawwaz Rayyan Khalish</div>
+                <span class="loader-text">Loading Portfolio...</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Facebook-style Navigation -->
     <nav class="navbar">
@@ -1041,30 +1472,77 @@ footer {
         </div>
         
         <div class="navbar-center">
-            <a href="#home" class="nav-item active">
+            <a href="#home" class="nav-item active" data-tooltip="Home - Welcome page">
                 <i class="fas fa-home"></i>
+                <span class="nav-item-text">Home</span>
             </a>
-            <a href="#about-education" class="nav-item">
+            <a href="#about-education" class="nav-item" data-tooltip="About - Education & Background">
                 <i class="fas fa-user"></i>
+                <span class="nav-item-text">About</span>
             </a>
-            <a href="#skills" class="nav-item">
+            <a href="#skills" class="nav-item" data-tooltip="Skills - Technical expertise">
                 <i class="fas fa-cogs"></i>
+                <span class="nav-item-text">Skills</span>
             </a>
-            <a href="#portfolio" class="nav-item">
+            <a href="#portfolio" class="nav-item" data-tooltip="Portfolio - My projects">
                 <i class="fas fa-briefcase"></i>
+                <span class="nav-item-text">Portfolio</span>
             </a>
-            <a href="#contact" class="nav-item">
+            <a href="#contact" class="nav-item" data-tooltip="Contact - Get in touch">
                 <i class="fas fa-envelope"></i>
+                <span class="nav-item-text">Contact</span>
             </a>
         </div>
         
         <div class="navbar-right">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <button class="icon-button theme-toggle" id="themeToggle" title="Toggle Dark Mode">
                 <i class="fas fa-moon"></i>
             </button>
-            <button class="icon-button">
+            <button class="icon-button" title="Notifications">
                 <i class="fas fa-bell"></i>
             </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#home" class="mobile-nav-item active">
+                <i class="fas fa-home"></i>
+                <div class="mobile-nav-text">
+                    <span class="mobile-nav-title">Home</span>
+                    <span class="mobile-nav-desc">Welcome page & introduction</span>
+                </div>
+            </a>
+            <a href="#about-education" class="mobile-nav-item">
+                <i class="fas fa-user"></i>
+                <div class="mobile-nav-text">
+                    <span class="mobile-nav-title">About</span>
+                    <span class="mobile-nav-desc">Education & background</span>
+                </div>
+            </a>
+            <a href="#skills" class="mobile-nav-item">
+                <i class="fas fa-cogs"></i>
+                <div class="mobile-nav-text">
+                    <span class="mobile-nav-title">Skills</span>
+                    <span class="mobile-nav-desc">Technical expertise</span>
+                </div>
+            </a>
+            <a href="#portfolio" class="mobile-nav-item">
+                <i class="fas fa-briefcase"></i>
+                <div class="mobile-nav-text">
+                    <span class="mobile-nav-title">Portfolio</span>
+                    <span class="mobile-nav-desc">My projects & work</span>
+                </div>
+            </a>
+            <a href="#contact" class="mobile-nav-item">
+                <i class="fas fa-envelope"></i>
+                <div class="mobile-nav-text">
+                    <span class="mobile-nav-title">Contact</span>
+                    <span class="mobile-nav-desc">Get in touch with me</span>
+                </div>
+            </a>
         </div>
     </nav>
 
@@ -1331,6 +1809,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
 
     // ================================================= 
+    // MOBILE MENU TOGGLE
+    // =================================================
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    let mobileMenuOpen = false;
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuOpen = !mobileMenuOpen;
+        if (mobileMenuOpen) {
+            mobileNav.classList.add('active');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            mobileNav.classList.remove('active');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // Close mobile menu when clicking on nav items
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    mobileNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            mobileMenuOpen = false;
+            mobileNav.classList.remove('active');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            
+            // Update active state
+            mobileNavItems.forEach(navItem => navItem.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+
+    // ================================================= 
     // SEARCH FUNCTIONALITY
     // =================================================
     const searchInput = document.getElementById('searchInput');
@@ -1437,7 +1947,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ================================================= 
-    // TAB SWITCHING
+        // TAB SWITCHING
     // =================================================
     const tabButtons = document.querySelectorAll('.tab-btn');
     tabButtons.forEach(button => {
@@ -1540,7 +2050,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Update desktop nav
         navItems.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+
+        // Update mobile nav
+        mobileNavItems.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
@@ -1732,8 +2251,83 @@ document.addEventListener('DOMContentLoaded', function() {
         chatInput.style.height = Math.min(chatInput.scrollHeight, 80) + 'px';
     });
 
-    console.log('🚀 Facebook-themed Portfolio loaded successfully!');
+    // ================================================= 
+    // SMOOTH SCROLLING FOR NAV LINKS
+    // =================================================
+    const allNavLinks = document.querySelectorAll('.nav-item, .mobile-nav-item');
+    allNavLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // ================================================= 
+    // CLOSE MOBILE MENU ON OUTSIDE CLICK
+    // =================================================
+    document.addEventListener('click', (e) => {
+        if (mobileMenuOpen && !e.target.closest('.navbar')) {
+            mobileMenuOpen = false;
+            mobileNav.classList.remove('active');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // ================================================= 
+    // PERFORMANCE OPTIMIZATION
+    // =================================================
+    // Lazy load images
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+
+    // ================================================= 
+    // ACCESSIBILITY IMPROVEMENTS
+    // =================================================
+    // Keyboard navigation for mobile menu
+    mobileMenuToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            mobileMenuToggle.click();
+        }
+    });
+
+    // Focus management for chat
+    chatToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            chatToggle.click();
+        }
+    });
+
+    // ================================================= 
+    // CONSOLE LOG
+    // =================================================
+    console.log('🚀 Facebook-themed Portfolio with enhanced mobile experience loaded successfully!');
+    console.log('📱 Mobile-optimized navigation and responsive design active');
+    console.log('🔍 Search functionality enabled');
+    console.log('💬 Chat system ready');
+    console.log('🌙 Dark/Light theme toggle available');
 });
     </script>
 </body>
 </html>
+
