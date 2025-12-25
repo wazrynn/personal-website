@@ -548,6 +548,391 @@
         }
 
         /* ================================================= */
+        /* LIVE CHAT WIDGET */
+        /* ================================================= */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1500;
+            font-family: 'Consolas', monospace;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: var(--bg-color);
+            box-shadow: var(--glow-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-toggle::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: conic-gradient(var(--main-color), var(--accent-color), var(--main-color));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--accent-color);
+        }
+
+        .chat-notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: white;
+            animation: pulse-notification 2s infinite;
+        }
+
+        @keyframes pulse-notification {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .chat-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--main-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.8) translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chat-container.active {
+            display: flex;
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+            color: var(--bg-color);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--main-color);
+            font-size: 1.2em;
+        }
+
+        .chat-status {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-name {
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .chat-online {
+            font-size: 0.8em;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-online 2s infinite;
+        }
+
+        @keyframes pulse-online {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: var(--bg-color);
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .chat-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--main-color);
+            border-radius: 3px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            animation: slideInMessage 0.3s ease;
+        }
+
+        @keyframes slideInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--main-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-color);
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--accent-color);
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--main-color);
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .message.user .message-content {
+            background: var(--main-color);
+            color: var(--bg-color);
+            border-color: var(--main-color);
+        }
+
+        .message-time {
+            font-size: 0.7em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .typing-indicator.active {
+            opacity: 1;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--main-color);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .chat-input-container {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 12px 15px;
+            color: var(--main-color);
+            font-size: 0.9em;
+            resize: none;
+            max-height: 80px;
+            min-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        .chat-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--main-color);
+            border: none;
+            color: var(--bg-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .chat-send:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+            box-shadow: var(--glow-shadow);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply {
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--main-color);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-reply:hover {
+            background: var(--main-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+        /* ================================================= */
         /* SCROLL TO TOP */
         /* ================================================= */
         #scrollToTopBtn {
@@ -811,7 +1196,6 @@
                 font-size: 2em;
             }
 
-            /* Education Mobile Responsive */
             .education-item {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -856,6 +1240,20 @@
                 padding: 40px 20px;
             }
 
+            /* Chat Widget Mobile */
+            .chat-container {
+                width: 300px;
+                height: 450px;
+                bottom: 70px;
+                right: 10px;
+            }
+
+            .chat-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+            }
+
             body {
                 background-attachment: scroll;
                 background-image: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)),
@@ -888,6 +1286,13 @@
             .education-item img {
                 width: 100px;
                 height: 100px;
+            }
+
+            /* Chat Widget Extra Small Mobile */
+            .chat-container {
+                width: 280px;
+                height: 400px;
+                right: 5px;
             }
         }
     </style>
@@ -965,7 +1370,7 @@
             </div>
         </section>
 
-        <!-- About Education Section - IMPROVED -->
+        <!-- About Education Section -->
         <section id="about-education" class="content-section animate-on-scroll">
             <h2 class="section-title">ABOUT MY EDUCATION</h2>
             <div class="education-container">
@@ -1205,7 +1610,7 @@
                         <p>Deskripsi: Membangun lapisan akses terpusat untuk layanan backend, mengelola otentikasi, rate limiting, dan logging terpusat.</p>
                         <ul>
                             <li>Fitur Utama: Otorisasi JWT, Load balancing, Event-driven communication (Kafka).</li>
-                            <li>Dampak: Peningkatan keamanan dan konsistensi API; latensi rata-rata turun 15ms.</li>
+                                                        <li>Dampak: Peningkatan keamanan dan konsistensi API; latensi rata-rata turun 15ms.</li>
                             <li>Peran Saya: Back-End/DevOps Engineer.</li>
                         </ul>
                     </div>
@@ -1245,6 +1650,72 @@
         </section>
     </main>
 
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comments"></i>
+            <div class="chat-notification" id="chatNotification">1</div>
+        </button>
+        
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="chat-status">
+                        <div class="chat-name">Fawwaz Assistant</div>
+                        <div class="chat-online">
+                            <div class="online-dot"></div>
+                            Online
+                        </div>
+                    </div>
+                </div>
+                <button class="chat-close" id="chatClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        Halo! 👋 Selamat datang di portfolio saya. Saya adalah asisten virtual Fawwaz. Ada yang bisa saya bantu?
+                        <div class="message-time">Baru saja</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="quick-replies" id="quickReplies">
+                    <div class="quick-reply" data-message="Halo!">👋 Halo!</div>
+                    <div class="quick-reply" data-message="Ceritakan tentang pengalaman kerja">💼 Pengalaman</div>
+                    <div class="quick-reply" data-message="Apa keahlian teknis Anda?">🛠️ Skills</div>
+                    <div class="quick-reply" data-message="Bagaimana cara menghubungi Anda?">📞 Kontak</div>
+                </div>
+                <div class="chat-input-wrapper">
+                    <textarea class="chat-input" id="chatInput" placeholder="Ketik pesan Anda..." rows="1"></textarea>
+                    <button class="chat-send" id="chatSend">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">
         <i class="fas fa-rocket"></i>
@@ -1277,668 +1748,553 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // ================================================= 
-    // FLOATING PARTICLES SYSTEM
-    // =================================================
-    function createFloatingParticles() {
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 50;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            particlesContainer.appendChild(particle);
-        }
-    }
-
-    // ================================================= 
-    // ENHANCED PRELOADER WITH PROGRESS
-    // =================================================
-    const preloader = document.getElementById('preloader');
-    const hero = document.querySelector('.hero');
-    const progressFill = document.querySelector('.progress-fill');
-    const loaderText = document.querySelector('.loader-text');
-    
-    const loadingTexts = [
-        'Initializing Portfolio...',
-        'Loading Components...',
-        'Setting up Animations...',
-        'Almost Ready...',
-        'Welcome!'
-    ];
-    
-    let textIndex = 0;
-    const textInterval = setInterval(() => {
-        if (textIndex < loadingTexts.length - 1) {
-            loaderText.textContent = loadingTexts[textIndex];
-            textIndex++;
-        } else {
-            clearInterval(textInterval);
-        }
-    }, 600);
-
-    setTimeout(() => {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-            hero.style.opacity = '1';
-            hero.style.visibility = 'visible';
-            initHeroAnimations();
-            createFloatingParticles();
-        }, 800);
-    }, 3200);
-
-    // ================================================= 
-    // ENHANCED HERO ANIMATIONS
-    // =================================================
-    function initHeroAnimations() {
-        // Enhanced Typing Effect
-        const typingTextElement = document.getElementById('typing-text');
-        const phrases = [
-            "Full-Stack Developer...",
-            "Inovator Digital...",
-            "Pencipta Solusi Web...",
-            "Eksplorator Teknologi...",
-            "Problem Solver...",
-            "Creative Coder..."
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[phraseIndex];
-            const displayedText = isDeleting 
-                ? currentPhrase.substring(0, charIndex - 1)
-                : currentPhrase.substring(0, charIndex + 1);
+            // ================================================= 
+            // PRELOADER
+            // =================================================
+            const preloader = document.getElementById('preloader');
+            const hero = document.querySelector('.hero');
             
-            typingTextElement.textContent = displayedText;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(() => type(), 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(() => type(), 500);
-            } else {
-                charIndex += isDeleting ? -1 : 1;
-                const speed = isDeleting ? 30 : Math.random() * 100 + 50;
-                setTimeout(() => type(), speed);
-            }
-        }
-
-        setTimeout(() => type(), 1000);
-
-        // Staggered animations for hero elements
-        const animationElements = [
-            { element: '.profile-bio', delay: 2000 },
-            { element: '.social-links', delay: 2500 }
-        ];
-
-        animationElements.forEach(({ element, delay }) => {
             setTimeout(() => {
-                const el = document.querySelector(element);
-                if (el) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }
-            }, delay);
-        });
-    }
-
-    // ================================================= 
-    // ENHANCED NAVBAR INTERACTIONS
-    // =================================================
-    const navbar = document.getElementById('navbar');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        
-        // Navbar background change on scroll
-        if (currentScrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        // Hide/show navbar on scroll direction
-        if (currentScrollY > lastScrollY && currentScrollY > 200) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollY = currentScrollY;
-    });
-
-    // Logo click to scroll to top
-    window.scrollToTop = function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    // ================================================= 
-    // ENHANCED TAB SWITCHING WITH ANIMATIONS
-    // =================================================
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.dataset.tab;
-            const parentSection = button.closest('section');
-            
-            // Remove active class from all buttons in this section
-            parentSection.querySelectorAll('.tab-btn').forEach(btn => 
-                btn.classList.remove('active-tab')
-            );
-            
-            // Hide all tab contents with animation
-            const tabContents = parentSection.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-                content.style.display = 'none';
-            });
-            
-            // Show target tab with animation
-            const targetContent = document.getElementById(targetTab);
-            if (targetContent) {
-                targetContent.style.display = 'block';
+                preloader.style.opacity = '0';
                 setTimeout(() => {
-                    targetContent.classList.add('active');
-                }, 50);
-            }
-            
-            button.classList.add('active-tab');
-        });
-    });
+                    preloader.style.display = 'none';
+                    hero.style.opacity = '1';
+                    hero.style.visibility = 'visible';
+                    initHeroAnimations();
+                }, 800);
+            }, 3200);
 
-    // ================================================= 
-    // ENHANCED PORTFOLIO FILTERING
-    // =================================================
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+            // ================================================= 
+            // HERO ANIMATIONS
+            // =================================================
+            function initHeroAnimations() {
+                const typingTextElement = document.getElementById('typing-text');
+                const phrases = [
+                    "Full-Stack Developer...",
+                    "Inovator Digital...",
+                    "Pencipta Solusi Web...",
+                    "Eksplorator Teknologi..."
+                ];
+                let phraseIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filterValue = button.dataset.filter;
-            
-            filterButtons.forEach(btn => btn.classList.remove('active-filter'));
-            button.classList.add('active-filter');
+                function type() {
+                    const currentPhrase = phrases[phraseIndex];
+                    const displayedText = isDeleting 
+                        ? currentPhrase.substring(0, charIndex - 1)
+                        : currentPhrase.substring(0, charIndex + 1);
+                    
+                    typingTextElement.textContent = displayedText;
 
-            projectCards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px) scale(0.9)';
-                
-                setTimeout(() => {
-                    if (filterValue === 'all' || card.classList.contains(filterValue)) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0) scale(1)';
-                        }, index * 100); // Staggered animation
+                    if (!isDeleting && charIndex === currentPhrase.length) {
+                        isDeleting = true;
+                        setTimeout(() => type(), 1500);
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        setTimeout(() => type(), 500);
                     } else {
-                        card.style.display = 'none';
+                        charIndex += isDeleting ? -1 : 1;
+                        const speed = isDeleting ? 50 : 100;
+                        setTimeout(() => type(), speed);
                     }
-                }, 300);
-            });
-        });
-    });
+                }
 
-    // ================================================= 
-    // PROJECT CARD INTERACTIONS
-    // =================================================
-    const toggleDetails = document.querySelectorAll('.toggle-detail');
-    toggleDetails.forEach(toggler => {
-        toggler.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const card = toggler.closest('.project-card');
-            const isExpanded = card.classList.contains('expanded');
-            
-            // Close all other expanded cards
-            document.querySelectorAll('.project-card.expanded').forEach(expandedCard => {
-                if (expandedCard !== card) {
-                    expandedCard.classList.remove('expanded');
-                    const otherToggler = expandedCard.querySelector('.toggle-detail');
-                    otherToggler.innerHTML = 'Detail Selengkapnya <i class="fas fa-chevron-down"></i>';
+                setTimeout(() => type(), 1000);
+
+                setTimeout(() => {
+                    document.querySelector('.profile-bio').style.opacity = '1';
+                    document.querySelector('.profile-bio').style.transform = 'translateY(0)';
+                }, 2000);
+
+                setTimeout(() => {
+                    document.querySelector('.social-links').style.opacity = '1';
+                    document.querySelector('.social-links').style.transform = 'translateY(0)';
+                }, 2500);
+            }
+
+            // ================================================= 
+            // TAB SWITCHING
+            // =================================================
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+                    const parentSection = button.closest('section').id;
+                    
+                    button.closest('.tab-buttons').querySelectorAll('.tab-btn').forEach(btn => 
+                        btn.classList.remove('active-tab')
+                    );
+                    
+                    const tabContents = button.closest('section').querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.style.display = 'none');
+                    
+                    document.getElementById(targetTab).style.display = 'block';
+                    button.classList.add('active-tab');
+                });
+            });
+
+            // ================================================= 
+            // PORTFOLIO FILTERING
+            // =================================================
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.dataset.filter;
+                    
+                    filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                    button.classList.add('active-filter');
+
+                    projectCards.forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        
+                        setTimeout(() => {
+                            if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, 50);
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                });
+            });
+
+            // ================================================= 
+            // PROJECT DETAIL TOGGLE
+            // =================================================
+            const toggleDetails = document.querySelectorAll('.toggle-detail');
+            toggleDetails.forEach(toggler => {
+                toggler.addEventListener('click', () => {
+                    const card = toggler.closest('.project-card');
+                    card.classList.toggle('expanded');
+                    
+                    const isExpanded = card.classList.contains('expanded');
+                    toggler.innerHTML = isExpanded 
+                        ? 'Tutup Detail <i class="fas fa-chevron-up"></i>'
+                        : 'Detail Selengkapnya <i class="fas fa-chevron-down"></i>';
+                });
+            });
+
+            // ================================================= 
+            // SCROLL ANIMATIONS
+            // =================================================
+            const scrollElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            scrollElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // ================================================= 
+            // ACTIVE NAV LINK
+            // =================================================
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = 'home';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // ================================================= 
+            // SCROLL TO TOP
+            // =================================================
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = 'block';
+                } else {
+                    scrollToTopBtn.style.display = 'none';
                 }
             });
-            
-            card.classList.toggle('expanded');
-            toggler.innerHTML = isExpanded 
-                ? 'Detail Selengkapnya <i class="fas fa-chevron-down"></i>'
-                : 'Tutup Detail <i class="fas fa-chevron-up"></i>';
-        });
-    });
 
-    // ================================================= 
-    // ENHANCED SCROLL ANIMATIONS
-    // =================================================
-    const scrollElements = document.querySelectorAll('.animate-on-scroll');
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
+            // ================================================= 
+            // THEME TOGGLE
+            // =================================================
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+            let isPurpleTheme = false;
+
+            themeToggleBtn.addEventListener('click', () => {
+                isPurpleTheme = !isPurpleTheme;
+                if (isPurpleTheme) {
+                    body.classList.add('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('theme', 'purple');
+                } else {
+                    body.classList.remove('theme-purple');
+                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('theme', 'blue');
+                }
+            });
+
+            const savedTheme = localStorage.getItem('theme') || 'blue';
+            if (savedTheme === 'purple') {
                 setTimeout(() => {
-                    entry.target.classList.add('visible');
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100); // Staggered animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    scrollElements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // ================================================= 
-    // ACTIVE NAV LINK WITH SMOOTH TRANSITIONS
-    // =================================================
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-        let current = 'home';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // ================================================= 
-    // ENHANCED SCROLL TO TOP BUTTON
-    // =================================================
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    let scrollProgress = 0;
-
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        scrollProgress = (scrollTop / docHeight) * 100;
-
-        if (scrollTop > 300) {
-            scrollToTopBtn.style.display = 'block';
-            scrollToTopBtn.style.background = `conic-gradient(var(--accent-color) ${scrollProgress * 3.6}deg, var(--main-color) 0deg)`;
-        } else {
-            scrollToTopBtn.style.display = 'none';
-        }
-    });
-
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // ================================================= 
-    // ENHANCED THEME TOGGLE
-    // =================================================
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    let isPurpleTheme = false;
-
-    themeToggleBtn.addEventListener('click', () => {
-        isPurpleTheme = !isPurpleTheme;
-        
-        // Add transition class
-        body.style.transition = 'all 0.5s ease';
-        
-        if (isPurpleTheme) {
-            body.classList.add('theme-purple');
-            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', 'purple');
-            showNotification('Tema Purple diaktifkan! 🟣');
-        } else {
-            body.classList.remove('theme-purple');
-            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            localStorage.setItem('theme', 'blue');
-            showNotification('Tema Blue diaktifkan! 🔵');
-        }
-        
-        // Remove transition after animation
-        setTimeout(() => {
-            body.style.transition = '';
-        }, 500);
-    });
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'blue';
-    if (savedTheme === 'purple') {
-        setTimeout(() => {
-            if (!body.classList.contains('theme-purple')) {
-                themeToggleBtn.click();
-            }
-        }, 10);
-    } else {
-        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
-    // ================================================= 
-    // NOTIFICATION SYSTEM
-    // =================================================
-    function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            color: var(--accent-color);
-            padding: 15px 20px;
-            border-radius: 10px;
-            border: 1px solid var(--accent-color);
-            box-shadow: var(--glow-shadow);
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(400px)';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
-    }
-
-    // ================================================= 
-    // ENHANCED PROFILE PICTURE INTERACTIONS
-    // =================================================
-    const heroNameText = document.getElementById('hero-name-text');
-    const profilePicture = document.getElementById('profile-picture');
-    let clickCount = 0;
-
-    heroNameText.addEventListener('mouseover', () => {
-        profilePicture.classList.add('glow');
-    });
-
-    heroNameText.addEventListener('mouseout', () => {
-        profilePicture.classList.remove('glow');
-    });
-
-    // Easter egg: Multiple clicks on profile picture
-    profilePicture.addEventListener('click', () => {
-        clickCount++;
-        profilePicture.style.transform = `scale(1.1) rotate(${clickCount * 45}deg)`;
-        
-        setTimeout(() => {
-            profilePicture.style.transform = '';
-        }, 300);
-
-        if (clickCount >= 5) {
-            showNotification('🎉 Easter Egg Found! You\'re persistent!', 'success');
-            clickCount = 0;
-        }
-    });
-
-    // ================================================= 
-    // ENHANCED CONTACT FORM
-    // =================================================
-    const contactForm = document.getElementById('contact-form');
-    const formError = document.getElementById('form-error');
-    const formSuccess = document.getElementById('form-success');
-    const formInputs = contactForm.querySelectorAll('input, textarea');
-
-    // Real-time validation
-    formInputs.forEach(input => {
-        input.addEventListener('input', () => {
-            validateField(input);
-        });
-
-        input.addEventListener('focus', () => {
-            input.style.transform = 'scale(1.02)';
-            input.style.boxShadow = '0 0 20px rgba(0, 191, 255, 0.3)';
-        });
-
-        input.addEventListener('blur', () => {
-            input.style.transform = '';
-            input.style.boxShadow = '';
-        });
-    });
-
-    function validateField(field) {
-        const value = field.value.trim();
-        let isValid = true;
-
-        if (field.type === 'email') {
-            isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        } else {
-            isValid = value.length > 0;
-        }
-
-        field.style.borderColor = isValid ? 'var(--accent-color)' : '#ff4444';
-        return isValid;
-    }
-
-    contactForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        formError.style.display = 'none';
-        formSuccess.style.display = 'none';
-        
-        let isValid = true;
-        formInputs.forEach(input => {
-            if (!validateField(input)) {
-                isValid = false;
-            }
-        });
-        
-        if (!isValid) {
-            formError.style.display = 'block';
-            formError.textContent = 'Mohon lengkapi semua kolom dengan benar.';
-            showNotification('Form tidak valid! ❌', 'error');
-        } else {
-            // Simulate form submission
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                formSuccess.style.display = 'block';
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                showNotification('Pesan berhasil dikirim! ✅', 'success');
-                
-                setTimeout(() => {
-                    formSuccess.style.display = 'none';
-                }, 5000);
-            }, 2000);
-        }
-    });
-
-    // ================================================= 
-    // ENHANCED CERTIFICATE MODAL
-    // =================================================
-    const certificateModal = document.getElementById('certificateModal');
-    const certificateImage = document.getElementById('certificateImage');
-    const certificateTitle = document.getElementById('certificateTitle');
-    const certificateDescription = document.getElementById('certificateDescription');
-    const certificateDate = document.getElementById('certificateDate');
-    const certificateIssuer = document.getElementById('certificateIssuer');
-    const closeModal = document.querySelector('.certificate-close');
-
-    const certificateData = {
-        'javascript-dev': {
-            image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1766840400&v=beta&t=WsGDYse7kcXp5IUQT4W-9utrw3KGwDKqYixpG8effW8',
-            title: 'Certified Internship Of Graphic Design',
-            description: 'Responsible for creating compelling visual concepts to convey messages or information effectively through visual media.',
-            date: 'Diterbitkan: September 2025',
-            issuer: 'International Youth Goals'
-        },
-        'react-advanced': {
-            image: 'https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1766840400&v=beta&t=e8MS8Aqz5F_mo1y1HlhYXddJtoVJL3r-spgQIurlswM',
-            title: 'Certified: Software Engineer',
-            description: 'I learned about the methods and basics of software engineering including HTML, CSS, JavaScript, GitHub, and Version Control System.',
-            date: 'Diterbitkan: Juni 2025',
-            issuer: 'RevoU'
-        },
-        'fullstack-bootcamp': {
-            image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHGL8LsuZHcCg/profile-treasury-document-cover-images_480/B4EZfEyaNfG4A0-/0/1751353246783?e=1766840400&v=beta&t=MBiSdIIwuHM0hYVOSQjan4mqIJozAqfXsMkM290SYp4',
-            title: 'Programming in HTML5',
-            description: 'Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar.',
-            date: 'Diterbitkan: Juli 2025',
-            issuer: 'MySkill'
-        },
-        'aws-practitioner': {
-            image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=AWS+Certified+Cloud+Practitioner+Certificate',
-            title: 'AWS Certified Cloud Practitioner',
-            description: 'Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.',
-            date: 'Diterbitkan: Maret 2024',
-            issuer: 'Amazon Web Services'
-        },
-        'docker-k8s': {
-            image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Docker+and+Kubernetes+Essential+Training+Certificate',
-            title: 'Docker & Kubernetes Essential Training',
-            description: 'Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.',
-            date: 'Diterbitkan: September 2023',
-            issuer: 'LinkedIn Learning'
-        },
-        'figma-fundamentals': {
-            image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=UI%2FUX+Design+Fundamentals+using+Figma+Certificate',
-            title: 'UI/UX Design Fundamentals using Figma',
-            description: 'Membuat prototipe interaktif, mendesain design system, dan memastikan konsistensi visual antara desain dan implementasi kode.',
-            date: 'Diterbitkan: Juli 2023',
-            issuer: 'Figma Academy'
-        },
-        'hcd-specialist': {
-            image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Human-Centered+Design+Specialist+Certificate',
-            title: 'Human-Centered Design (HCD) Specialist',
-            description: 'Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.',
-            date: 'Diterbitkan: April 2022',
-            issuer: 'Interaction Design Foundation'
-        }
-    };
-
-    // View certificate buttons
-    const viewCertificateBtns = document.querySelectorAll('.view-certificate-btn');
-    viewCertificateBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            const certificateId = button.dataset.certificate;
-            const cert = certificateData[certificateId];
-            
-            if (cert) {
-                certificateImage.src = cert.image;
-                certificateTitle.textContent = cert.title;
-                certificateDescription.textContent = cert.description;
-                certificateDate.textContent = cert.date;
-                certificateIssuer.textContent = `Penerbit: ${cert.issuer}`;
-                
-                certificateModal.style.display = 'block';
-                setTimeout(() => {
-                    certificateModal.classList.add('show');
+                    if (!body.classList.contains('theme-purple')) {
+                        themeToggleBtn.click();
+                    }
                 }, 10);
-                
-                document.body.style.overflow = 'hidden';
             }
+
+            // ================================================= 
+            // PROFILE PICTURE INTERACTIONS
+            // =================================================
+            const heroNameText = document.getElementById('hero-name-text');
+            const profilePicture = document.getElementById('profile-picture');
+
+            heroNameText.addEventListener('mouseover', () => {
+                profilePicture.classList.add('glow');
+            });
+
+            heroNameText.addEventListener('mouseout', () => {
+                profilePicture.classList.remove('glow');
+            });
+
+            // ================================================= 
+            // CONTACT FORM
+            // =================================================
+            const contactForm = document.getElementById('contact-form');
+            const formError = document.getElementById('form-error');
+            const formSuccess = document.getElementById('form-success');
+
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                formError.style.display = 'none';
+                formSuccess.style.display = 'none';
+                
+                let isValid = true;
+                const email = document.getElementById('email').value.trim();
+                
+                if (!document.getElementById('name').value.trim() || 
+                    !email || 
+                    !document.getElementById('subject').value.trim() || 
+                    !document.getElementById('message').value.trim()) {
+                    isValid = false;
+                }
+                
+                if (isValid && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    isValid = false;
+                }
+                
+                if (!isValid) {
+                    formError.style.display = 'block';
+                } else {
+                    formSuccess.style.display = 'block';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // ================================================= 
+            // LIVE CHAT SYSTEM
+            // =================================================
+            const chatToggle = document.getElementById('chatToggle');
+            const chatContainer = document.getElementById('chatContainer');
+            const chatClose = document.getElementById('chatClose');
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const chatSend = document.getElementById('chatSend');
+            const typingIndicator = document.getElementById('typingIndicator');
+            const quickReplies = document.querySelectorAll('.quick-reply');
+            const chatNotification = document.getElementById('chatNotification');
+
+            let chatOpen = false;
+            let messageCount = 0;
+
+            // Chat responses database
+            const chatResponses = {
+                'halo': [
+                    'Halo! Senang bertemu dengan Anda! 😊',
+                    'Hai! Ada yang bisa saya bantu hari ini?',
+                    'Halo! Selamat datang di portfolio Fawwaz!'
+                ],
+                'pengalaman': [
+                    'Fawwaz memiliki 3 tahun pengalaman sebagai Software Engineer. Dia ahli dalam React.js, Node.js, dan pengembangan full-stack! 💻',
+                    'Pengalaman Fawwaz meliputi migrasi arsitektur monolitik ke Microservices dengan Docker dan Kubernetes, meningkatkan deployment speed 40%! 🚀'
+                ],
+                'skills': [
+                    'Keahlian teknis Fawwaz meliputi:\n• Front-end: React.js, Vue.js, HTML5, CSS3\n• Back-end: Node.js, Python, PostgreSQL\n• DevOps: Docker, Kubernetes, AWS ⚡',
+                    'Fawwaz menguasai berbagai teknologi modern untuk pengembangan web full-stack! 🛠️'
+                ],
+                'kontak': [
+                    'Anda bisa menghubungi Fawwaz melalui:\n📧 Email: Form kontak di bawah\n💼 LinkedIn: linkedin.com/in/m-fawwaz-rayyan-khalish-982b3832b/\n📱 WhatsApp: +62 857-1956-2762',
+                    'Fawwaz selalu terbuka untuk diskusi proyek atau kolaborasi! Jangan ragu untuk menghubungi! 📞'
+                ],
+                'proyek': [
+                    'Beberapa proyek unggulan Fawwaz:\n🛒 E-Commerce B2B Platform\n📱 Aplikasi Pelacak Kebugaran\n📊 Dashboard Analitik Data\n🌐 Landing Page Perusahaan',
+                    'Setiap proyek Fawwaz fokus pada performa, skalabilitas, dan pengalaman pengguna yang optimal! ✨'
+                ],
+                'pendidikan': [
+                    'Fawwaz sedang menempuh S1 Teknik Informatika di Universitas Gunadarma (2025-2029) dan lulusan SMA Muhammadiyah 8 Ciputat jurusan IPA! 🎓',
+                    'Dia aktif dalam penelitian machine learning dan pengembangan aplikasi web modern! 📚'
+                ],
+                'default': [
+                    'Maaf, saya tidak sepenuhnya memahami pertanyaan Anda. Bisa Anda jelaskan lebih detail? 🤔',
+                    'Hmm, bisa Anda coba pertanyaan lain? Saya siap membantu dengan informasi tentang Fawwaz! 💭',
+                    'Saya masih belajar! Coba tanyakan tentang pengalaman, skills, atau kontak Fawwaz? 🤖'
+                ]
+            };
+
+            // Toggle chat
+            chatToggle.addEventListener('click', () => {
+                chatOpen = !chatOpen;
+                if (chatOpen) {
+                    chatContainer.classList.add('active');
+                    chatInput.focus();
+                    chatNotification.style.display = 'none';
+                } else {
+                    chatContainer.classList.remove('active');
+                }
+            });
+
+            chatClose.addEventListener('click', () => {
+                chatOpen = false;
+                chatContainer.classList.remove('active');
+            });
+
+            // Send message function
+            function sendMessage(message, isUser = true) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user' : ''}`;
+                
+                const time = new Date().toLocaleTimeString('id-ID', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-${isUser ? 'user' : 'robot'}"></i>
+                    </div>
+                    <div class="message-content">
+                        ${message}
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                messageCount++;
+            }
+
+            // Get bot response
+            function getBotResponse(userMessage) {
+                const message = userMessage.toLowerCase();
+                
+                if (message.includes('halo') || message.includes('hai') || message.includes('hello')) {
+                    return getRandomResponse('halo');
+                } else if (message.includes('pengalaman') || message.includes('kerja') || message.includes('karir')) {
+                    return getRandomResponse('pengalaman');
+                } else if (message.includes('skill') || message.includes('keahlian') || message.includes('teknologi')) {
+                    return getRandomResponse('skills');
+                } else if (message.includes('kontak') || message.includes('hubungi') || message.includes('email')) {
+                    return getRandomResponse('kontak');
+                } else if (message.includes('proyek') || message.includes('portfolio') || message.includes('karya')) {
+                    return getRandomResponse('proyek');
+                } else if (message.includes('pendidikan') || message.includes('kuliah') || message.includes('sekolah')) {
+                    return getRandomResponse('pendidikan');
+                } else {
+                    return getRandomResponse('default');
+                }
+            }
+
+            function getRandomResponse(category) {
+                const responses = chatResponses[category];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+
+            // Show typing indicator
+            function showTyping() {
+                typingIndicator.classList.add('active');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function hideTyping() {
+                typingIndicator.classList.remove('active');
+            }
+
+            // Handle message sending
+            function handleSendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    sendMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Show typing indicator
+                    showTyping();
+                    
+                    // Simulate bot response delay
+                    setTimeout(() => {
+                        hideTyping();
+                        const botResponse = getBotResponse(message);
+                        sendMessage(botResponse, false);
+                    }, 1000 + Math.random() * 2000);
+                }
+            }
+
+            // Event listeners for chat
+            chatSend.addEventListener('click', handleSendMessage);
+            
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                }
+            });
+
+            // Auto-resize textarea
+            chatInput.addEventListener('input', () => {
+                chatInput.style.height = 'auto';
+                chatInput.style.height = Math.min(chatInput.scrollHeight, 80) + 'px';
+            });
+
+            // Quick replies
+            quickReplies.forEach(reply => {
+                reply.addEventListener('click', () => {
+                    const message = reply.dataset.message;
+                    chatInput.value = message;
+                    handleSendMessage();
+                });
+            });
+
+            // Show notification after some time
+            setTimeout(() => {
+                if (!chatOpen) {
+                    chatNotification.style.display = 'flex';
+                }
+            }, 10000);
+
+            // ================================================= 
+            // CERTIFICATE MODAL
+            // =================================================
+            const certificateModal = document.getElementById('certificateModal');
+            const certificateImage = document.getElementById('certificateImage');
+            const certificateTitle = document.getElementById('certificateTitle');
+            const certificateDescription = document.getElementById('certificateDescription');
+            const certificateDate = document.getElementById('certificateDate');
+            const certificateIssuer = document.getElementById('certificateIssuer');
+            const closeModal = document.querySelector('.certificate-close');
+
+            const certificateData = {
+                'javascript-dev': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHJ6cWdsoOsHw/profile-treasury-document-cover-images_480/B4EZkEh_8WIMBQ-/0/1756717649849?e=1766840400&v=beta&t=WsGDYse7kcXp5IUQT4W-9utrw3KGwDKqYixpG8effW8',
+                    title: 'Certified Internship Of Graphic Design',
+                    description: 'Responsible for creating compelling visual concepts to convey messages or information effectively through visual media.',
+                    date: 'Diterbitkan: September 2025',
+                    issuer: 'International Youth Goals'
+                },
+                'react-advanced': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQEIc2KwhA2MLg/profile-treasury-document-cover-images_480/B4EZeR33mgHwA0-/0/1750499033105?e=1766840400&v=beta&t=e8MS8Aqz5F_mo1y1HlhYXddJtoVJL3r-spgQIurlswM',
+                    title: 'Certified: Software Engineer',
+                    description: 'I learned about the methods and basics of software engineering including HTML, CSS, JavaScript, GitHub, and Version Control System.',
+                    date: 'Diterbitkan: Juni 2025',
+                    issuer: 'RevoU'
+                },
+                'fullstack-bootcamp': {
+                    image: 'https://media.licdn.com/dms/image/v2/D4E2DAQHGL8LsuZHcCg/profile-treasury-document-cover-images_480/B4EZfEyaNfG4A0-/0/1751353246783?e=1766840400&v=beta&t=MBiSdIIwuHM0hYVOSQjan4mqIJozAqfXsMkM290SYp4',
+                    title: 'Programming in HTML5',
+                    description: 'Dasar-dasar Sistem Pemrograman, Bahasa Markup HTML dasar dan manajemen server dasar.',
+                    date: 'Diterbitkan: Juli 2025',
+                    issuer: 'MySkill'
+                },
+                'aws-practitioner': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=AWS+Certified+Cloud+Practitioner+Certificate',
+                    title: 'AWS Certified Cloud Practitioner',
+                    description: 'Memahami konsep dasar AWS, keamanan, arsitektur, dan layanan inti seperti EC2, S3, dan Lambda.',
+                    date: 'Diterbitkan: Maret 2024',
+                    issuer: 'Amazon Web Services'
+                },
+                'docker-k8s': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Docker+and+Kubernetes+Essential+Training+Certificate',
+                    title: 'Docker & Kubernetes Essential Training',
+                    description: 'Menguasai containerization, manajemen orkestrasi, dan deployment aplikasi menggunakan Docker Compose dan K8s.',
+                    date: 'Diterbitkan: September 2023',
+                    issuer: 'LinkedIn Learning'
+                },
+                'figma-fundamentals': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=UI%2FUX+Design+Fundamentals+using+Figma+Certificate',
+                    title: 'UI/UX Design Fundamentals using Figma',
+                    description: 'Membuat prototipe interaktif, mendesain design system, dan memastikan konsistensi visual antara desain dan implementasi kode.',
+                    date: 'Diterbitkan: Juli 2023',
+                    issuer: 'Figma Academy'
+                },
+                'hcd-specialist': {
+                    image: 'https://via.placeholder.com/800x600/000080/FFFFFF?text=Human-Centered+Design+Specialist+Certificate',
+                    title: 'Human-Centered Design (HCD) Specialist',
+                    description: 'Fokus pada metodologi riset pengguna, wawancara, dan iterasi desain berdasarkan kebutuhan nyata pengguna.',
+                    date: 'Diterbitkan: April 2022',
+                    issuer: 'Interaction Design Foundation'
+                }
+            };
+
+            const viewCertificateBtns = document.querySelectorAll('.view-certificate-btn');
+            viewCertificateBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const certificateId = button.dataset.certificate;
+                    const cert = certificateData[certificateId];
+                    if (cert) {
+                        certificateImage.src = cert.image;
+                        certificateTitle.textContent = cert.title;
+                        certificateDescription.textContent = cert.description;
+                        certificateDate.textContent = cert.date;
+                        certificateIssuer.textContent = `Penerbit: ${cert.issuer}`;
+                        certificateModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                certificateModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === certificateModal) {
+                    certificateModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            console.log('🚀 Portfolio dengan Live Chat berhasil dimuat!');
         });
-    });
-
-    // Close modal functions
-    function closeCertificateModal() {
-        certificateModal.classList.remove('show');
-        setTimeout(() => {
-            certificateModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-
-    closeModal.addEventListener('click', closeCertificateModal);
-
-    window.addEventListener('click', (event) => {
-        if (event.target === certificateModal) {
-            closeCertificateModal();
-        }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && certificateModal.style.display === 'block') {
-            closeCertificateModal();
-        }
-    });
-
-    // ================================================= 
-    // SKILL ITEMS INTERACTION
-    // =================================================
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const skillName = item.textContent;
-            showNotification(`Skill: ${skillName} 💪`, 'info');
-        });
-    });
-
-    // ================================================= 
-    // EDUCATION ITEMS INTERACTION
-    // =================================================
-    const educationItems = document.querySelectorAll('.education-item');
-    educationItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const schoolName = item.querySelector('.school-name').textContent;
-            showNotification(`Pendidikan: ${schoolName} 🎓`, 'info');
-        });
-    });
-
-    // ================================================= 
-    // PERFORMANCE MONITORING
-    // =================================================
-    let performanceData = {
-        loadTime: 0,
-        scrollEvents: 0,
-        clickEvents: 0
-    };
-
-    window.addEventListener('load', () => {
-        performanceData.loadTime = performance.now();
-        console.log(`Portfolio loaded in ${performanceData.loadTime.toFixed(2)}ms`);
-    });
-
-    document.addEventListener('scroll', () => {
-        performanceData.scrollEvents++;
-    });
-
-    document.addEventListener('click', () => {
-        performanceData.clickEvents++;
-    });
-
-    // ================================================= 
-    // INITIALIZE ALL SYSTEMS
-    // =================================================
-    console.log('🚀 Portfolio JavaScript initialized successfully!');
-    console.log('✨ All interactive features are now active');
-    
-    // Show welcome message after everything loads
-    setTimeout(() => {
-        showNotification('Selamat datang di portfolio saya! 👋', 'success');
-    }, 4000);
-});
     </script>
 </body>
 </html>
