@@ -134,14 +134,14 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-color); color: var
             <span class="loading-dot">.</span>
             <span class="loading-dot">.</span>
         </div>
-        <div class="loader-logo">M.Fawwaz</div>
+        <div class="loader-logo">Welcome</div>
         <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
 </div>
 
 <nav class="navbar">
     <div class="navbar-left">
-        <a href="#home" class="logo"><i class="fas fa-code"></i> M.Fawwaz</a>
+        <a href="#home" class="logo"><i class="fas fa-code"></i> M.Fawwaz Rayyan K</a>
         <div class="search-container">
             <input type="text" class="search-box" placeholder="Search..." id="searchInput">
             <i class="fas fa-search search-icon"></i>
@@ -231,7 +231,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-color); color: var
             <a href="https://api.whatsapp.com/send?phone=6285719562762" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.tiktok.com/@wazryn_" target="_blank" class="social-link" title="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
-        <a href="file:///C:/Users/Pongo/OneDrive/Documents/Muhammad%20Fawwaz%20Rayyan%20Khalish_CV_2.pdf" download class="download-resume-btn"><i class="fas fa-download"></i> Download Resume</a>
+        <a href="resume.pdf" download class="download-resume-btn"><i class="fas fa-download"></i> Download Resume</a>
     </div>
     <div class="scroll-indicator"><span>Scroll</span><div class="scroll-mouse"><div class="scroll-wheel"></div></div></div>
 </section>
@@ -556,6 +556,152 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-color); color: var
             </div>
             <div class="project-footer"><button class="toggle-btn">Show Details <i class="fas fa-chevron-down"></i></button></div>
         </div>
+    </div>
+</section>
+
+<style>
+/* INSTAGRAM FEED */
+.instagram-section { background: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.instagram-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.instagram-card { position: relative; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 1; background: var(--hover-bg); border: 1px solid var(--border-color); transition: all 0.4s; cursor: pointer; }
+.instagram-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+.instagram-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.instagram-card:hover img { transform: scale(1.1); }
+.instagram-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+.instagram-card:hover .instagram-overlay { opacity: 1; }
+.instagram-caption { color: white; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px; }
+.instagram-stats { display: flex; gap: 16px; color: white; font-size: 13px; }
+.instagram-stats span { display: flex; align-items: center; gap: 5px; }
+.instagram-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary); background: linear-gradient(135deg, var(--hover-bg) 0%, var(--card-bg) 100%); }
+.instagram-placeholder i { font-size: 48px; margin-bottom: 12px; background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.instagram-placeholder p { font-size: 14px; font-weight: 500; }
+.instagram-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: none; border-radius: var(--radius-full); color: white; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow-lg); }
+.instagram-follow-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(225, 48, 108, 0.4); }
+.instagram-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+.instagram-profile { display: flex; align-items: center; gap: 16px; }
+.instagram-avatar { width: 70px; height: 70px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.instagram-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--card-bg); }
+.instagram-info h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.instagram-info p { font-size: 13px; color: var(--text-secondary); }
+@media (max-width: 768px) {
+    .instagram-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .instagram-header { flex-direction: column; text-align: center; }
+    .instagram-profile { flex-direction: column; }
+    .instagram-follow-btn { width: 100%; justify-content: center; }
+}
+@media (max-width: 480px) {
+    .instagram-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .instagram-card { border-radius: var(--radius-lg); }
+    .instagram-overlay { padding: 12px; }
+    .instagram-caption { font-size: 11px; }
+    .instagram-stats { font-size: 11px; gap: 10px; }
+}
+</style>
+
+<section id="instagram" class="content-section instagram-section">
+    <div class="section-header animate-on-scroll">
+        <span class="section-badge"><i class="fab fa-instagram"></i> Instagram</span>
+        <h2 class="section-title">Latest Posts</h2>
+        <p class="section-subtitle">Follow my journey on Instagram</p>
+    </div>
+    <div class="instagram-header animate-on-scroll">
+        <div class="instagram-profile">
+            <div class="instagram-avatar">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQHJ7mK-gzf0BQ/profile-displayphoto-scale_400_400/B56ZtLKOvPHsAg-/0/1766492532250?e=1767830400&v=beta&t=k5LfMMo-mAMLVWQeKTut3D0yH6pxgMRm1gECsi80wXE" alt="Profile">
+            </div>
+            <div class="instagram-info">
+                <h4>@wazrynn</h4>
+                <p>Developer • Creator • Tech Enthusiast</p>
+            </div>
+        </div>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-follow-btn">
+            <i class="fab fa-instagram"></i> Follow on Instagram
+        </a>
+    </div>
+    <div class="instagram-grid">
+        <a href="https://www.instagram.com/p/DRMMB_wEp8N/" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>Latest Post</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">Check out my latest work! 🚀</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>Coding Vibes</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">Coding session vibes 💻</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>New Project</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">New project coming soon! ✨</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>Behind Scenes</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">Behind the scenes 🎬</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>Tech Life</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">Tech life 🔥</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-card animate-on-scroll">
+            <div class="instagram-placeholder">
+                <i class="fab fa-instagram"></i>
+                <p>Stay Creative</p>
+            </div>
+            <div class="instagram-overlay">
+                <p class="instagram-caption">Stay creative! 🎨</p>
+                <div class="instagram-stats">
+                    <span><i class="fas fa-heart"></i> Like</span>
+                    <span><i class="fas fa-comment"></i> Comment</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div style="text-align: center; margin-top: 40px;" class="animate-on-scroll">
+        <a href="https://www.instagram.com/wazrynn" target="_blank" class="instagram-follow-btn">
+            <i class="fab fa-instagram"></i> View More on Instagram
+        </a>
     </div>
 </section>
 
