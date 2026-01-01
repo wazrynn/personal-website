@@ -3225,5 +3225,525 @@ function createParticle(x, y) {
 console.log('✨ Animations & Interactions loaded!');
 console.log('🎮 Try the Konami Code: ↑↑↓↓←→←→BA');
 </script>
+<style>
+/* ===== SEARCH BOX MOBILE FIX ===== */
+
+/* Desktop - Search tetap di navbar */
+@media (min-width: 769px) {
+    .search-container {
+        position: relative;
+        max-width: 220px;
+        flex: 1;
+    }
+}
+
+/* Mobile - Search yang lebih baik */
+@media (max-width: 768px) {
+    /* Sembunyikan search di navbar untuk mobile */
+    .navbar .search-container {
+        display: none;
+    }
+    
+    /* Tambahkan tombol search di navbar */
+    .mobile-search-toggle {
+        display: flex !important;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--hover-bg);
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+    .mobile-search-toggle:hover {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--main-color);
+    }
+    
+    /* Mobile Search Overlay */
+    .mobile-search-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+    .mobile-search-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Mobile Search Container */
+    .mobile-search-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        padding: 16px;
+        z-index: 2001;
+        transform: translateY(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    .mobile-search-container.active {
+        transform: translateY(0);
+    }
+    
+    /* Mobile Search Header */
+    .mobile-search-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .mobile-search-back {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--hover-bg);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 18px;
+        transition: all 0.3s;
+        flex-shrink: 0;
+    }
+    .mobile-search-back:hover {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--main-color);
+    }
+    
+    /* Mobile Search Input */
+    .mobile-search-input-wrapper {
+        flex: 1;
+        position: relative;
+    }
+    
+    .mobile-search-input {
+        width: 100%;
+        padding: 14px 18px 14px 48px;
+        border: 2px solid var(--border-color);
+        border-radius: 16px;
+        background: var(--bg-color);
+        color: var(--text-primary);
+        font-size: 16px;
+        font-family: inherit;
+        outline: none;
+        transition: all 0.3s;
+    }
+    .mobile-search-input:focus {
+        border-color: var(--main-color);
+        background: var(--card-bg);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+    .mobile-search-input::placeholder {
+        color: var(--text-secondary);
+    }
+    
+    .mobile-search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        font-size: 16px;
+        pointer-events: none;
+    }
+    
+    .mobile-search-clear {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--hover-bg);
+        border: none;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        font-size: 12px;
+        transition: all 0.3s;
+    }
+    .mobile-search-clear.visible {
+        display: flex;
+    }
+    .mobile-search-clear:hover {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+    
+    /* Mobile Search Results */
+    .mobile-search-results {
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+        padding-top: 8px;
+    }
+    
+    .mobile-search-results::-webkit-scrollbar {
+        width: 4px;
+    }
+    .mobile-search-results::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .mobile-search-results::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+    }
+    
+    /* Search Result Item - Mobile */
+    .mobile-result-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 4px;
+    }
+    .mobile-result-item:hover,
+    .mobile-result-item:active {
+        background: var(--hover-bg);
+    }
+    
+    .mobile-result-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    
+    .mobile-result-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .mobile-result-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 15px;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .mobile-result-desc {
+        font-size: 13px;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .mobile-result-arrow {
+        color: var(--text-secondary);
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    
+    /* No Results */
+    .mobile-no-results {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-secondary);
+    }
+    .mobile-no-results i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.5;
+    }
+    .mobile-no-results p {
+        font-size: 15px;
+    }
+    
+    /* Recent Searches */
+    .mobile-recent-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 16px;
+        margin-bottom: 8px;
+    }
+    .mobile-recent-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .mobile-recent-clear {
+        font-size: 12px;
+        color: var(--main-color);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    
+    /* Quick Links */
+    .mobile-quick-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 16px;
+    }
+    .mobile-quick-link {
+        padding: 8px 16px;
+        background: var(--hover-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .mobile-quick-link:hover {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: var(--main-color);
+        color: var(--main-color);
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .mobile-search-container {
+        padding: 12px;
+    }
+    .mobile-search-input {
+        padding: 12px 16px 12px 44px;
+        font-size: 15px;
+    }
+    .mobile-result-item {
+        padding: 12px 14px;
+    }
+    .mobile-result-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .mobile-result-title {
+        font-size: 14px;
+    }
+    .mobile-result-desc {
+        font-size: 12px;
+    }
+}
+</style>
+
+<!-- HTML - Tambahkan setelah navbar -->
+<!-- Mobile Search Toggle Button - Tambahkan di .navbar-right sebelum theme toggle -->
+<button class="mobile-search-toggle" id="mobileSearchToggle" style="display: none;">
+    <i class="fas fa-search"></i>
+</button>
+
+<!-- Mobile Search Overlay & Container -->
+<div class="mobile-search-overlay" id="mobileSearchOverlay"></div>
+<div class="mobile-search-container" id="mobileSearchContainer">
+    <div class="mobile-search-header">
+        <button class="mobile-search-back" id="mobileSearchBack">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="mobile-search-input-wrapper">
+            <i class="fas fa-search mobile-search-icon"></i>
+            <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Cari di portfolio..." autocomplete="off">
+            <button class="mobile-search-clear" id="mobileSearchClear">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="mobile-search-results" id="mobileSearchResults">
+        <!-- Quick Links (shown when empty) -->
+        <div class="mobile-quick-section" id="mobileQuickSection">
+            <div class="mobile-recent-header">
+                <span class="mobile-recent-title">Pencarian Cepat</span>
+            </div>
+            <div class="mobile-quick-links">
+                <button class="mobile-quick-link" data-search="Skills">💻 Skills</button>
+                <button class="mobile-quick-link" data-search="Portfolio">🚀 Portfolio</button>
+                <button class="mobile-quick-link" data-search="Contact">📧 Contact</button>
+                <button class="mobile-quick-link" data-search="Experience">💼 Experience</button>
+                <button class="mobile-quick-link" data-search="Education">🎓 Education</button>
+            </div>
+        </div>
+        
+        <!-- Results will be inserted here -->
+        <div id="mobileResultsList"></div>
+    </div>
+</div>
+
+<script>
+// ===== MOBILE SEARCH FUNCTIONALITY =====
+
+const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+const mobileSearchContainer = document.getElementById('mobileSearchContainer');
+const mobileSearchBack = document.getElementById('mobileSearchBack');
+const mobileSearchInput = document.getElementById('mobileSearchInput');
+const mobileSearchClear = document.getElementById('mobileSearchClear');
+const mobileResultsList = document.getElementById('mobileResultsList');
+const mobileQuickSection = document.getElementById('mobileQuickSection');
+
+// Search Data
+const mobileSearchData = [
+    { title: 'Home', desc: 'Halaman utama', icon: 'fa-home', section: 'home' },
+    { title: 'About Me', desc: 'Tentang saya', icon: 'fa-user', section: 'about-education' },
+    { title: 'Education', desc: 'Riwayat pendidikan', icon: 'fa-graduation-cap', section: 'about-education' },
+    { title: 'Skills', desc: 'Keahlian teknis', icon: 'fa-code', section: 'skills' },
+    { title: 'Experience', desc: 'Pengalaman kerja', icon: 'fa-briefcase', section: 'experience' },
+    { title: 'Portfolio', desc: 'Proyek-proyek saya', icon: 'fa-folder-open', section: 'portfolio' },
+    { title: 'Contact', desc: 'Hubungi saya', icon: 'fa-envelope', section: 'contact' },
+    { title: 'Instagram', desc: 'Media sosial', icon: 'fa-instagram', section: 'instagram' },
+    { title: 'React.js', desc: 'Front-end framework', icon: 'fa-react', section: 'skills' },
+    { title: 'Node.js', desc: 'Back-end runtime', icon: 'fa-node-js', section: 'skills' },
+    { title: 'Python', desc: 'Programming language', icon: 'fa-python', section: 'skills' },
+    { title: 'E-Commerce', desc: 'Project B2B Platform', icon: 'fa-shopping-cart', section: 'portfolio' },
+    { title: 'Mobile App', desc: 'Fitness Tracker App', icon: 'fa-mobile-alt', section: 'portfolio' },
+    { title: 'Dashboard', desc: 'Analytics Dashboard', icon: 'fa-chart-line', section: 'portfolio' },
+];
+
+// Open Mobile Search
+function openMobileSearch() {
+    mobileSearchOverlay.classList.add('active');
+    mobileSearchContainer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => mobileSearchInput.focus(), 300);
+}
+
+// Close Mobile Search
+function closeMobileSearch() {
+    mobileSearchOverlay.classList.remove('active');
+    mobileSearchContainer.classList.remove('active');
+    document.body.style.overflow = '';
+    mobileSearchInput.value = '';
+    mobileSearchClear.classList.remove('visible');
+    mobileResultsList.innerHTML = '';
+    mobileQuickSection.style.display = 'block';
+}
+
+// Search Function
+function performMobileSearch(query) {
+    if (!query.trim()) {
+        mobileResultsList.innerHTML = '';
+        mobileQuickSection.style.display = 'block';
+        return;
+    }
+    
+    mobileQuickSection.style.display = 'none';
+    
+    const results = mobileSearchData.filter(item => 
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.desc.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    if (results.length === 0) {
+        mobileResultsList.innerHTML = `
+            <div class="mobile-no-results">
+                <i class="fas fa-search"></i>
+                <p>Tidak ada hasil untuk "${query}"</p>
+            </div>
+        `;
+        return;
+    }
+    
+    mobileResultsList.innerHTML = results.map(item => `
+        <div class="mobile-result-item" data-section="${item.section}">
+            <div class="mobile-result-icon">
+                <i class="fas ${item.icon}"></i>
+            </div>
+            <div class="mobile-result-content">
+                <div class="mobile-result-title">${item.title}</div>
+                <div class="mobile-result-desc">${item.desc}</div>
+            </div>
+            <i class="fas fa-chevron-right mobile-result-arrow"></i>
+        </div>
+    `).join('');
+    
+    // Add click handlers
+    mobileResultsList.querySelectorAll('.mobile-result-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const section = item.dataset.section;
+            closeMobileSearch();
+            setTimeout(() => {
+                document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        });
+    });
+}
+
+// Event Listeners
+if (mobileSearchToggle) {
+    mobileSearchToggle.addEventListener('click', openMobileSearch);
+}
+
+if (mobileSearchOverlay) {
+    mobileSearchOverlay.addEventListener('click', closeMobileSearch);
+}
+
+if (mobileSearchBack) {
+    mobileSearchBack.addEventListener('click', closeMobileSearch);
+}
+
+if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', (e) => {
+        const value = e.target.value;
+        mobileSearchClear.classList.toggle('visible', value.length > 0);
+        performMobileSearch(value);
+    });
+    
+    // Close on Escape
+    mobileSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobileSearch();
+    });
+}
+
+if (mobileSearchClear) {
+    mobileSearchClear.addEventListener('click', () => {
+        mobileSearchInput.value = '';
+        mobileSearchClear.classList.remove('visible');
+        mobileResultsList.innerHTML = '';
+        mobileQuickSection.style.display = 'block';
+        mobileSearchInput.focus();
+    });
+}
+
+// Quick Links
+document.querySelectorAll('.mobile-quick-link').forEach(link => {
+    link.addEventListener('click', () => {
+        const searchTerm = link.dataset.search;
+        mobileSearchInput.value = searchTerm;
+        mobileSearchClear.classList.add('visible');
+        performMobileSearch(searchTerm);
+    });
+});
+
+console.log('📱 Mobile Search initialized!');
+</script>
 </body>
 </html>
