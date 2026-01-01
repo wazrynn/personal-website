@@ -2299,30 +2299,931 @@ function showNotification(message, type) {
 }
 </script>
 
-<!-- 
-=====================================
-INSTRUKSI PENERAPAN:
-=====================================
+<style>
+/* ===== 1. CUSTOM CURSOR ===== */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.15s ease, width 0.15s ease, height 0.15s ease;
+    transform: translate(-50%, -50%);
+}
+.custom-cursor.hover {
+    width: 50px;
+    height: 50px;
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-color);
+}
+.custom-cursor.click {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--main-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
 
-1. COPY CSS di atas (bagian <style>) dan PASTE setelah:
-   .theme-dark { ... }
-   
-2. COPY HTML Welcome Screen dan PASTE SEBELUM:
-   <div id="preloader">
+/* ===== 2. MAGNETIC BUTTONS ===== */
+.magnetic-btn {
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.magnetic-btn::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+    transition: opacity 0.3s;
+}
+.magnetic-btn:hover::before {
+    opacity: 1;
+}
 
-3. COPY JavaScript dan INTEGRASIKAN ke dalam:
-   document.addEventListener('DOMContentLoaded', function() { ... }
-   
-4. UBAH bagian preloader di JavaScript dari:
-   setTimeout(() => { preloader.classList.add('hidden'); initTypingAnimation(); }, 2500);
-   
-   MENJADI kode yang ada di komentar /* ... */ di atas
+/* ===== 3. TILT CARD EFFECT ===== */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+.tilt-card:hover {
+    transform: perspective(1000px) rotateX(var(--rotateX)) rotateY(var(--rotateY));
+}
+.tilt-card .tilt-content {
+    transform: translateZ(30px);
+    transition: transform 0.5s ease;
+}
+.tilt-card:hover .tilt-content {
+    transform: translateZ(50px);
+}
+.tilt-card .tilt-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    border-radius: inherit;
+}
+.tilt-card:hover .tilt-shine {
+    opacity: 1;
+}
 
-5. Selesai! Welcome screen akan muncul sebelum loading screen.
-   Data pengunjung disimpan di localStorage sehingga tidak muncul lagi
-   saat kunjungan berikutnya.
-=====================================
--->
+/* ===== 4. TEXT REVEAL ANIMATION ===== */
+.text-reveal {
+    overflow: hidden;
+    display: inline-block;
+}
+.text-reveal span {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s;
+}
+.text-reveal.visible span {
+    transform: translateY(0);
+    opacity: 1;
+}
+.text-reveal span:nth-child(1) { transition-delay: 0.05s; }
+.text-reveal span:nth-child(2) { transition-delay: 0.1s; }
+.text-reveal span:nth-child(3) { transition-delay: 0.15s; }
+.text-reveal span:nth-child(4) { transition-delay: 0.2s; }
+.text-reveal span:nth-child(5) { transition-delay: 0.25s; }
 
+/* ===== 5. GLITCH TEXT EFFECT ===== */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.glitch-text:hover::before {
+    animation: glitch-1 0.3s infinite linear alternate-reverse;
+    color: #ff00ff;
+    opacity: 0.8;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+.glitch-text:hover::after {
+    animation: glitch-2 0.3s infinite linear alternate-reverse;
+    color: #00ffff;
+    opacity: 0.8;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+@keyframes glitch-1 {
+    0% { transform: translate(2px, 0); }
+    100% { transform: translate(-2px, 0); }
+}
+@keyframes glitch-2 {
+    0% { transform: translate(-2px, 0); }
+    100% { transform: translate(2px, 0); }
+}
+
+/* ===== 6. FLOATING ELEMENTS ===== */
+.float-element {
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+.float-element:nth-child(2) { animation-delay: -1s; }
+.float-element:nth-child(3) { animation-delay: -2s; }
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* ===== 7. PARALLAX MOUSE EFFECT ===== */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+.parallax-layer {
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+}
+.parallax-layer-1 { --parallax-speed: 0.02; }
+.parallax-layer-2 { --parallax-speed: 0.04; }
+.parallax-layer-3 { --parallax-speed: 0.06; }
+
+/* ===== 8. RIPPLE EFFECT ===== */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+.ripple-effect .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleAnim 0.6s linear;
+    pointer-events: none;
+}
+@keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* ===== 9. MORPHING SHAPES BACKGROUND ===== */
+.morphing-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+.morph-shape {
+    position: absolute;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    filter: blur(60px);
+    opacity: 0.3;
+    animation: morphShape 15s ease-in-out infinite;
+}
+.morph-shape-1 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.4));
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+.morph-shape-2 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(99, 102, 241, 0.3));
+    bottom: -50px;
+    left: -50px;
+    animation-delay: -5s;
+}
+@keyframes morphShape {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
+    25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; transform: rotate(180deg) scale(1.1); }
+    75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+}
+
+/* ===== 10. SCROLL PROGRESS BAR ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 9999;
+    transition: width 0.1s;
+}
+
+/* ===== 11. HOVER CARD GLOW ===== */
+.glow-card {
+    position: relative;
+    overflow: hidden;
+}
+.glow-card::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.glow-card:hover::before {
+    opacity: 1;
+}
+
+/* ===== 12. TYPEWRITER CURSOR ===== */
+.typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background: var(--main-color);
+    margin-left: 2px;
+    animation: cursorBlink 1s step-end infinite;
+    vertical-align: text-bottom;
+}
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ===== 13. SKILL BAR ANIMATION ===== */
+.skill-bar-animated {
+    height: 8px;
+    background: var(--hover-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+.skill-bar-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skill-bar-animated.visible .skill-bar-fill {
+    width: var(--skill-level, 80%);
+}
+
+/* ===== 14. COUNTER ANIMATION ===== */
+.counter-animated {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===== 15. IMAGE REVEAL ON SCROLL ===== */
+.image-reveal {
+    position: relative;
+    overflow: hidden;
+}
+.image-reveal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    transform: translateX(0);
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.image-reveal.visible::after {
+    transform: translateX(101%);
+}
+.image-reveal img {
+    transform: scale(1.3);
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
+}
+.image-reveal.visible img {
+    transform: scale(1);
+}
+
+/* ===== 16. STAGGERED LIST ANIMATION ===== */
+.stagger-list > * {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+}
+.stagger-list.visible > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-list.visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-list.visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-list.visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-list.visible > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-list.visible > *:nth-child(6) { transition-delay: 0.6s; }
+.stagger-list.visible > * {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===== 17. SHAKE ON HOVER ===== */
+.shake-hover:hover {
+    animation: shakeIt 0.5s ease-in-out;
+}
+@keyframes shakeIt {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px) rotate(-2deg); }
+    40% { transform: translateX(5px) rotate(2deg); }
+    60% { transform: translateX(-3px) rotate(-1deg); }
+    80% { transform: translateX(3px) rotate(1deg); }
+}
+
+/* ===== 18. BOUNCE IN ANIMATION ===== */
+.bounce-in {
+    opacity: 0;
+    transform: scale(0.3);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.bounce-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== 19. GRADIENT BORDER ANIMATION ===== */
+.gradient-border {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+}
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #6366f1);
+    background-size: 300% 300%;
+    border-radius: inherit;
+    z-index: -1;
+    animation: gradientMove 4s ease infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.gradient-border:hover::before {
+    opacity: 1;
+}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== 20. TOOLTIP ANIMATION ===== */
+.tooltip-animated {
+    position: relative;
+}
+.tooltip-animated::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    padding: 8px 14px;
+    background: var(--dark);
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+}
+.tooltip-animated:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-8px);
+}
+
+/* ===== 21. PULSE RING ===== */
+.pulse-ring {
+    position: relative;
+}
+.pulse-ring::before,
+.pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--main-color);
+    border-radius: inherit;
+    opacity: 0;
+}
+.pulse-ring:hover::before {
+    animation: pulseRing 1s ease-out infinite;
+}
+.pulse-ring:hover::after {
+    animation: pulseRing 1s ease-out infinite 0.3s;
+}
+@keyframes pulseRing {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* ===== 22. NEON GLOW TEXT ===== */
+.neon-text {
+    text-shadow: 
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 40px var(--main-color);
+    animation: neonFlicker 2s ease-in-out infinite;
+}
+@keyframes neonFlicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+}
+
+/* ===== 23. CARD FLIP ===== */
+.flip-card {
+    perspective: 1000px;
+    cursor: pointer;
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-xl);
+}
+.flip-card-back {
+    transform: rotateY(180deg);
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* ===== 24. ELASTIC BUTTON ===== */
+.elastic-btn {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.elastic-btn:hover {
+    transform: scale(1.05);
+}
+.elastic-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== 25. WAVE TEXT ===== */
+.wave-text span {
+    display: inline-block;
+    animation: waveText 1s ease-in-out infinite;
+}
+.wave-text span:nth-child(1) { animation-delay: 0s; }
+.wave-text span:nth-child(2) { animation-delay: 0.1s; }
+.wave-text span:nth-child(3) { animation-delay: 0.2s; }
+.wave-text span:nth-child(4) { animation-delay: 0.3s; }
+.wave-text span:nth-child(5) { animation-delay: 0.4s; }
+.wave-text span:nth-child(6) { animation-delay: 0.5s; }
+.wave-text span:nth-child(7) { animation-delay: 0.6s; }
+@keyframes waveText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+</style>
+
+
+<!-- HTML ELEMENTS TO ADD -->
+
+<!-- Scroll Progress Bar - Add after <body> -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Custom Cursor - Add after <body> -->
+<div class="custom-cursor" id="customCursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Morphing Background - Add after <body> -->
+<div class="morphing-bg">
+    <div class="morph-shape morph-shape-1"></div>
+    <div class="morph-shape morph-shape-2"></div>
+</div>
+
+
+<!-- JAVASCRIPT - Add to your script section -->
+<script>
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('customCursor');
+const cursorDot = document.getElementById('cursorDot');
+let cursorX = 0, cursorY = 0;
+let dotX = 0, dotY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+});
+
+function animateCursor() {
+    // Smooth follow for outer cursor
+    const dx = cursorX - dotX;
+    const dy = cursorY - dotY;
+    dotX += dx * 0.15;
+    dotY += dy * 0.15;
+    
+    cursor.style.left = dotX + 'px';
+    cursor.style.top = dotY + 'px';
+    cursorDot.style.left = cursorX + 'px';
+    cursorDot.style.top = cursorY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Cursor hover effect on interactive elements
+document.querySelectorAll('a, button, .project-card, .skill-item, .social-link').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// Cursor click effect
+document.addEventListener('mousedown', () => cursor.classList.add('click'));
+document.addEventListener('mouseup', () => cursor.classList.remove('click'));
+
+// Hide default cursor
+document.body.style.cursor = 'none';
+document.querySelectorAll('a, button').forEach(el => el.style.cursor = 'none');
+
+
+// ===== SCROLL PROGRESS BAR =====
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    scrollProgress.style.width = scrollPercent + '%';
+}, { passive: true });
+
+
+// ===== MAGNETIC BUTTONS =====
+document.querySelectorAll('.magnetic-btn, .social-link, .download-resume-btn').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+    });
+});
+
+
+// ===== TILT CARD EFFECT =====
+document.querySelectorAll('.project-card, .education-card, .experience-content').forEach(card => {
+    card.classList.add('tilt-card');
+    
+    // Add shine element
+    const shine = document.createElement('div');
+    shine.className = 'tilt-shine';
+    card.appendChild(shine);
+    
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        card.style.setProperty('--rotateX', rotateX + 'deg');
+        card.style.setProperty('--rotateY', rotateY + 'deg');
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--rotateX', '0deg');
+        card.style.setProperty('--rotateY', '0deg');
+    });
+});
+
+
+// ===== RIPPLE EFFECT =====
+document.querySelectorAll('.btn, .submit-btn, .tab-btn, .filter-btn').forEach(btn => {
+    btn.classList.add('ripple-effect');
+    
+    btn.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = (e.clientX - rect.left) + 'px';
+        ripple.style.top = (e.clientY - rect.top) + 'px';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+
+// ===== GLOW CARD EFFECT =====
+document.querySelectorAll('.service-card, .team-card').forEach(card => {
+    card.classList.add('glow-card');
+    
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+    });
+});
+
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    function updateCounter() {
+        start += increment;
+        if (start < target) {
+            element.textContent = Math.floor(start) + '+';
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target + '+';
+        }
+    }
+    updateCounter();
+}
+
+// Trigger counter animation on scroll
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-count'));
+            animateCounter(entry.target, target);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+
+// ===== SKILL BAR ANIMATION =====
+const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.skill-bar-animated').forEach(bar => {
+    skillObserver.observe(bar);
+});
+
+
+// ===== IMAGE REVEAL ON SCROLL =====
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.image-reveal').forEach(img => {
+    imageObserver.observe(img);
+});
+
+
+// ===== PARALLAX MOUSE EFFECT =====
+document.querySelectorAll('.parallax-container').forEach(container => {
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        
+        container.querySelectorAll('.parallax-layer').forEach(layer => {
+            const speed = parseFloat(getComputedStyle(layer).getPropertyValue('--parallax-speed')) || 0.02;
+            layer.style.transform = `translate(${x * speed * 100}px, ${y * speed * 100}px)`;
+        });
+    });
+    
+    container.addEventListener('mouseleave', () => {
+        container.querySelectorAll('.parallax-layer').forEach(layer => {
+            layer.style.transform = 'translate(0, 0)';
+        });
+    });
+});
+
+
+// ===== TEXT SCRAMBLE EFFECT =====
+class TextScramble {
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+    
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise(resolve => this.resolve = resolve);
+        this.queue = [];
+        
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+        }
+        
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+    
+    update() {
+        let output = '';
+        let complete = 0;
+        
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.chars[Math.floor(Math.random() * this.chars.length)];
+                    this.queue[i].char = char;
+                }
+                output += `<span style="color: var(--main-color)">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        
+        this.el.innerHTML = output;
+        
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+}
+
+// Apply text scramble to hero title on hover
+const heroTitle = document.querySelector('.hero-title');
+if (heroTitle) {
+    const fx = new TextScramble(heroTitle);
+    const originalText = heroTitle.innerText;
+    
+    heroTitle.addEventListener('mouseenter', () => {
+        fx.setText(originalText);
+    });
+}
+
+
+// ===== SMOOTH SECTION TRANSITIONS =====
+const sections = document.querySelectorAll('section');
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+sections.forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    sectionObserver.observe(section);
+});
+
+
+// ===== EASTER EGG - KONAMI CODE =====
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            // Easter egg activated!
+            document.body.style.animation = 'rainbow 2s linear infinite';
+            showNotification('🎮 Konami Code Activated! You found the easter egg!', 'success');
+            konamiIndex = 0;
+            
+            // Add rainbow animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rainbow {
+                    0% { filter: hue-rotate(0deg); }
+                    100% { filter: hue-rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 5000);
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
+
+
+// ===== TYPING SOUND EFFECT (Optional) =====
+// Uncomment if you want typing sounds
+/*
+const typingSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...');
+document.querySelectorAll('input, textarea').forEach(input => {
+    input.addEventListener('keydown', () => {
+        typingSound.currentTime = 0;
+        typingSound.play();
+    });
+});
+*/
+
+
+// ===== PARTICLE TRAIL ON MOUSE =====
+let particles = [];
+const maxParticles = 20;
+
+document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.7) { // Only create particle 30% of the time
+        createParticle(e.clientX, e.clientY);
+    }
+});
+
+function createParticle(x, y) {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: var(--main-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        left: ${x}px;
+        top: ${y}px;
+        opacity: 1;
+        transition: all 0.5s ease;
+    `;
+    document.body.appendChild(particle);
+    particles.push(particle);
+    
+    // Animate and remove
+    setTimeout(() => {
+        particle.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px) scale(0)`;
+        particle.style.opacity = '0';
+    }, 10);
+    
+    setTimeout(() => {
+        particle.remove();
+        particles = particles.filter(p => p !== particle);
+    }, 500);
+    
+    // Limit particles
+    if (particles.length > maxParticles) {
+        const oldParticle = particles.shift();
+        oldParticle.remove();
+    }
+}
+
+
+console.log('✨ Animations & Interactions loaded!');
+console.log('🎮 Try the Konami Code: ↑↑↓↓←→←→BA');
+</script>
 </body>
 </html>
